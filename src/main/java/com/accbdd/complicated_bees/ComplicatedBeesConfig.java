@@ -1,20 +1,21 @@
 package com.accbdd.complicated_bees;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
-@EventBusSubscriber(modid = ComplicatedBees.MODID, bus = EventBusSubscriber.Bus.MOD)
+// Demonstrates how to use Forge's config APIs
+@Mod.EventBusSubscriber(modid = ComplicatedBees.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ComplicatedBeesConfig
 {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
