@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees;
 
+import com.accbdd.complicated_bees.block.ComplicatedBeesBlocks;
 import com.accbdd.complicated_bees.item.ComplicatedBeesItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +26,8 @@ public class ComplicatedBees
             .icon(() -> ComplicatedBeesItems.BEE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(ComplicatedBeesItems.BEE.get());
+                output.accept(ComplicatedBeesBlocks.BEE_NEST.get());
+                output.accept(ComplicatedBeesItems.SCOOP.get());
             }).build());
 
     public ComplicatedBees(IEventBus modEventBus)
@@ -32,6 +35,7 @@ public class ComplicatedBees
         modEventBus.addListener(this::commonSetup);
 
         ComplicatedBeesItems.ITEMS.register(modEventBus);
+        ComplicatedBeesBlocks.BLOCKS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
     }
 

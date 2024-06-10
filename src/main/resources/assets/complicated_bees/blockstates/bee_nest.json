@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "complicated_bees:block/bee_nest"
+    }
+  }
+}
