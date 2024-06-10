@@ -1,7 +1,9 @@
 {
   "itemGroup.complicated_bees": "Complicated Bees",
 
-  "item.complicated_bees.bee": "Bee",
+  "item.complicated_bees.drone": "Drone",
+  "item.complicated_bees.princess": "Princess",
+  "item.complicated_bees.queen": "Queen",
   "item.complicated_bees.scoop": "Scoop",
   "block.complicated_bees.bee_nest": "Bee Nest"
 }

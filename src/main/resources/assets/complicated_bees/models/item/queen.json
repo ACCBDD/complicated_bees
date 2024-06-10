@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "complicated_bees:item/bee_base",
+    "layer1": "complicated_bees:item/bee_outline",
+    "layer2": "complicated_bees:item/queen_crown"
+  }
+}
