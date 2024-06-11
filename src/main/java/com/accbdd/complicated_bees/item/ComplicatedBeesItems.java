@@ -11,10 +11,10 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 public class ComplicatedBeesItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
-    public static final DeferredItem<Item> DRONE = ITEMS.registerSimpleItem("drone");
-    public static final DeferredItem<Item> PRINCESS = ITEMS.registerSimpleItem("princess");
-    public static final DeferredItem<Item> QUEEN = ITEMS.registerSimpleItem("queen");
-    public static final DeferredItem<Item> SCOOP = ITEMS.registerSimpleItem("scoop");
+    public static final DeferredItem<Item> DRONE = ITEMS.registerItem("drone", Bee::new);
+    public static final DeferredItem<Item> PRINCESS = ITEMS.registerItem("princess", Bee::new);
+    public static final DeferredItem<Item> QUEEN = ITEMS.registerItem("queen", Bee::new);
+    public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
     public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerSimpleBlockItem("bee_nest", ComplicatedBeesBlocks.BEE_NEST);
 
 }

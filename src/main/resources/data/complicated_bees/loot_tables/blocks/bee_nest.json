@@ -5,13 +5,16 @@
       "rolls": 1.0,
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "match_tool",
+          "predicate": {
+            "tag": "complicated_bees:scoop_tool"
+          }
         }
       ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "complicated_bees:bee"
+          "name": "complicated_bees:drone"
         }
       ]
     }
