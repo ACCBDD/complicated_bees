@@ -1,20 +1,26 @@
 package com.accbdd.complicated_bees.genetics;
 
-public class Species {
-    private int color;
-    private String id;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 
-    public Species(String id, int color) {
+import java.util.Optional;
+
+public class Species {
+    private final String id;
+    private final int color;
+    private final Item primaryProduce;
+    private final Item secondaryProduce;
+    private final Item specialtyProduce;
+
+    public Species(String id, int color, ResourceLocation primaryProduce, Optional<ResourceLocation> secondaryProduce, Optional<ResourceLocation> specialtyProduce) {
         this.id = id;
         this.color = color;
-    }
-
-    public Species(String id) {
-        new Species(id,0xFFFFFF);
-    }
-
-    public void setColor(int color) {
-        this.color = color;
+        this.primaryProduce = BuiltInRegistries.ITEM.get(primaryProduce);
+        this.secondaryProduce = secondaryProduce.map(BuiltInRegistries.ITEM::get).orElse(Items.AIR);
+        this.specialtyProduce = specialtyProduce.map(BuiltInRegistries.ITEM::get).orElse(Items.AIR);
     }
 
     public int getColor() {
@@ -25,7 +31,15 @@ public class Species {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Item getPrimaryProduce() {
+        return primaryProduce;
+    }
+
+    public Item getSecondaryProduce() {
+        return secondaryProduce;
+    }
+
+    public Item getSpecialtyProduce() {
+        return specialtyProduce;
     }
 }

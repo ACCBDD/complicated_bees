@@ -8,6 +8,11 @@
 
   "block.complicated_bees.bee_nest": "Bee Nest",
 
-  "species.complicated_bees.builtin:forest": "Forest",
-  "species.complicated_bees.builtin:meadows": "Meadows"
+  "gui.complicated_bees.primary_produce": "Primary Produce",
+  "gui.complicated_bees.secondary_produce": "Secondary Produce",
+  "gui.complicated_bees.specialty_produce": "Specialty Produce",
+
+  "species.complicated_bees.complicated_bees:forest": "Forest",
+  "species.complicated_bees.complicated_bees:meadows": "Meadows",
+  "species.complicated_bees.complicated_bees:noble": "Noble"
 }

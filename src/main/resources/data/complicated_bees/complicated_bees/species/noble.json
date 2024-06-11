@@ -1,0 +1,7 @@
+{
+  "id": "noble",
+  "color": "FFCC00",
+  "primary_produce": "minecraft:arrow",
+  "secondary_produce": "minecraft:iron_ingot",
+  "specialty_produce": "minecraft:diamond"
+}
