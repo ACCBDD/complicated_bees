@@ -21,7 +21,10 @@ public class Bee extends Item {
 
     @Override
     public @NotNull Component getName(ItemStack stack) {
-        return Component.translatable("item.complicated_bees.species." + stack.getOrCreateTag().getInt("color")).append(" ").append(Component.translatable(getDescriptionId()));
+        return Component.translatable("species.complicated_bees." +
+                stack.getOrCreateTag().getInt("color"))
+                .append(" ")
+                .append(Component.translatable(getDescriptionId()));
     }
 
     public static int getItemColor(ItemStack stack, int tintIndex) {
