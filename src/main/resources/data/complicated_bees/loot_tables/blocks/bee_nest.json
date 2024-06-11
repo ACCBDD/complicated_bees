@@ -14,7 +14,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "complicated_bees:drone"
+          "name": "complicated_bees:drone",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{\"species\": \"builtin:meadows\"}"
+            }
+          ]
         }
       ]
     }

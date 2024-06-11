@@ -6,5 +6,8 @@
   "item.complicated_bees.queen": "Queen",
   "item.complicated_bees.scoop": "Scoop",
 
-  "block.complicated_bees.bee_nest": "Bee Nest"
+  "block.complicated_bees.bee_nest": "Bee Nest",
+
+  "species.complicated_bees.builtin:forest": "Forest",
+  "species.complicated_bees.builtin:meadows": "Meadows"
 }
