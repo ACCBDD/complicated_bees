@@ -4,12 +4,13 @@ public class Species {
     private int color;
     private String id;
 
-    public Species(int color) {
+    public Species(String id, int color) {
+        this.id = id;
         this.color = color;
     }
 
-    public Species() {
-        new Species(0xFFFFFF);
+    public Species(String id) {
+        new Species(id,0xFFFFFF);
     }
 
     public void setColor(int color) {

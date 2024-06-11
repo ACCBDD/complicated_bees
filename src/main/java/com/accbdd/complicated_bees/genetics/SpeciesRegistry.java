@@ -18,7 +18,7 @@ public class SpeciesRegistry {
 
     public static final DeferredRegister<Species> SPECIES = DeferredRegister.create(SPECIES_REGISTRY, "builtin");
 
-    public static final Supplier<Species> FOREST = SPECIES.register("forest", () -> new Species(0x03FCE8));
-    public static final Supplier<Species> MEADOWS = SPECIES.register("meadows", () -> new Species(0xFC030F));
+    public static final Supplier<Species> FOREST = SPECIES.register("forest", () -> new Species("forest", 0x03FCE8));
+    public static final Supplier<Species> MEADOWS = SPECIES.register("meadows", () -> new Species("meadows",0xFC030F));
 
 }
