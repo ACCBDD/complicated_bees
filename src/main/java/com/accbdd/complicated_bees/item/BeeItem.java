@@ -17,8 +17,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class Bee extends Item {
-    public Bee(Properties prop) {
+public class BeeItem extends Item {
+    public BeeItem(Properties prop) {
         super(prop);
     }
 
@@ -56,13 +56,13 @@ public class Bee extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level pLevel, @NotNull List<Component> components, @NotNull TooltipFlag isAdvanced) {
         if (Minecraft.getInstance().level != null) {
             Species species = getSpecies(stack);
+            if (species == null)
+                return;
             components.add(Component.translatable("gui.complicated_bees.primary_produce").append(": ").append(species.getPrimaryProduce().getDescription()));
             if (species.getSecondaryProduce() != Items.AIR)
                 components.add(Component.translatable("gui.complicated_bees.secondary_produce").append(": ").append(species.getSecondaryProduce().getDescription()));
             if (species.getSpecialtyProduce() != Items.AIR)
                 components.add(Component.translatable("gui.complicated_bees.specialty_produce").append(": ").append(species.getSpecialtyProduce().getDescription()));
-
-
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);
     }

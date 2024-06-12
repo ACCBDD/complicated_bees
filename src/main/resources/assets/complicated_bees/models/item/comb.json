@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "complicated_bees:item/comb_outer",
+    "layer1": "complicated_bees:item/comb_inner"
+  }
+}

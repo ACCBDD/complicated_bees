@@ -5,12 +5,16 @@
   "item.complicated_bees.princess": "Princess",
   "item.complicated_bees.queen": "Queen",
   "item.complicated_bees.scoop": "Scoop",
+  "item.complicated_bees.comb": "Comb",
 
   "block.complicated_bees.bee_nest": "Bee Nest",
 
   "gui.complicated_bees.primary_produce": "Primary Produce",
   "gui.complicated_bees.secondary_produce": "Secondary Produce",
   "gui.complicated_bees.specialty_produce": "Specialty Produce",
+
+  "comb.complicated_bees.complicated_bees:stringy": "Stringy",
+  "comb.complicated_bees.complicated_bees:juicy": "Juicy",
 
   "species.complicated_bees.complicated_bees:forest": "Forest",
   "species.complicated_bees.complicated_bees:meadows": "Meadows",

@@ -2,10 +2,11 @@ package com.accbdd.complicated_bees;
 
 import com.accbdd.complicated_bees.block.ComplicatedBeesBlocks;
 import com.accbdd.complicated_bees.client.ColorHandlers;
-import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.item.BeeItem;
+import com.accbdd.complicated_bees.item.CombItem;
+import com.accbdd.complicated_bees.registry.CombRegistry;
 import com.accbdd.complicated_bees.registry.ComplicatedBeesCodecs;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
-import com.accbdd.complicated_bees.item.Bee;
 import com.accbdd.complicated_bees.item.ComplicatedBeesItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -35,9 +36,12 @@ public class ComplicatedBees
             .icon(() -> ComplicatedBeesItems.DRONE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().keySet()) {
-                    output.accept(Bee.setSpecies(ComplicatedBeesItems.DRONE.get().getDefaultInstance(), id));
-                    output.accept(Bee.setSpecies(ComplicatedBeesItems.PRINCESS.get().getDefaultInstance(), id));
-                    output.accept(Bee.setSpecies(ComplicatedBeesItems.QUEEN.get().getDefaultInstance(), id));
+                    output.accept(BeeItem.setSpecies(ComplicatedBeesItems.DRONE.get().getDefaultInstance(), id));
+                    output.accept(BeeItem.setSpecies(ComplicatedBeesItems.PRINCESS.get().getDefaultInstance(), id));
+                    output.accept(BeeItem.setSpecies(ComplicatedBeesItems.QUEEN.get().getDefaultInstance(), id));
+                }
+                for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().keySet()) {
+                    output.accept(CombItem.setComb(ComplicatedBeesItems.COMB.get().getDefaultInstance(), id));
                 }
                 output.accept(ComplicatedBeesItems.BEE_NEST.get());
                 output.accept(ComplicatedBeesItems.SCOOP.get());
@@ -60,6 +64,12 @@ public class ComplicatedBees
                 SpeciesRegistry.SPECIES_REGISTRY_KEY,
                 ComplicatedBeesCodecs.SPECIES_CODEC,
                 ComplicatedBeesCodecs.SPECIES_CODEC
+        );
+
+        event.dataPackRegistry(
+                CombRegistry.COMB_REGISTRY_KEY,
+                ComplicatedBeesCodecs.COMB_CODEC,
+                ComplicatedBeesCodecs.COMB_CODEC
         );
     }
 

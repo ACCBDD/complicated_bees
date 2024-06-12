@@ -1,11 +1,11 @@
 package com.accbdd.complicated_bees.registry;
 
+import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 
 public class ComplicatedBeesCodecs {
     //hex string parser
@@ -28,5 +28,15 @@ public class ComplicatedBeesCodecs {
                     ResourceLocation.CODEC.optionalFieldOf("secondary_produce").forGetter((s) -> java.util.Optional.of(new ResourceLocation(s.getSecondaryProduce().toString()))),
                     ResourceLocation.CODEC.optionalFieldOf("specialty_produce").forGetter((s) -> java.util.Optional.of(new ResourceLocation(s.getSpecialtyProduce().toString())))
             ).apply(instance, Species::new)
+    );
+
+    public static final Codec<Comb> COMB_CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    Codec.STRING.fieldOf("id").forGetter(Comb::getId),
+                    HEX_STRING_CODEC.fieldOf("outer_color").forGetter(Comb::getOuterColor),
+                    HEX_STRING_CODEC.fieldOf("inner_color").forGetter(Comb::getInnerColor),
+                    ResourceLocation.CODEC.fieldOf("primary_produce").forGetter((s) -> new ResourceLocation(s.getPrimaryProduce().toString())),
+                    ResourceLocation.CODEC.optionalFieldOf("secondary_produce").forGetter((s) -> java.util.Optional.of(new ResourceLocation(s.getSecondaryProduce().toString())))
+            ).apply(instance, Comb::new)
     );
 }
