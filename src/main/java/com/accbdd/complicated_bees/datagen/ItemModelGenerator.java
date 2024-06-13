@@ -1,0 +1,48 @@
+package com.accbdd.complicated_bees.datagen;
+
+import com.accbdd.complicated_bees.registry.ComplicatedBeesBlocks;
+import com.accbdd.complicated_bees.registry.ComplicatedBeesItems;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+
+import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
+
+public class ItemModelGenerator extends ItemModelProvider {
+    public ItemModelGenerator(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, MODID, existingFileHelper);
+    }
+
+    @Override
+    protected void registerModels() {
+        withExistingParent(ComplicatedBeesBlocks.BEE_NEST.getId().getPath(), modLoc("block/bee_nest"));
+        withExistingParent(ComplicatedBeesBlocks.APIARY.getId().getPath(), modLoc("block/apiary"));
+        basicItem(ComplicatedBeesItems.SCOOP.get());
+        createBeeModel(ComplicatedBeesItems.DRONE.getId());
+        createBeeModel(ComplicatedBeesItems.PRINCESS.getId()).texture("layer2", modLoc("item/princess_crown"));
+        createBeeModel(ComplicatedBeesItems.QUEEN.getId()).texture("layer2", modLoc("item/queen_crown"));
+        createCombModel();
+    }
+
+    private ItemModelBuilder createBeeModel(ResourceLocation bee_type) {
+        ResourceLocation bee_base = modLoc("item/bee_base");
+        ResourceLocation bee_outline = modLoc("item/bee_outline");
+        return getBuilder(bee_type.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", bee_base)
+                .texture("layer1", bee_outline);
+    }
+
+    private void createCombModel() {
+        ResourceLocation comb_outer = modLoc("item/comb_outer");
+        ResourceLocation comb_inner = modLoc("item/comb_inner");
+        ResourceLocation path = modLoc("comb");
+        getBuilder(path.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", comb_outer)
+                .texture("layer1", comb_inner);
+    }
+}

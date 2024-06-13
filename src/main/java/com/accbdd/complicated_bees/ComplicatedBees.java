@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees;
 
+import com.accbdd.complicated_bees.datagen.DataGenerators;
 import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.item.BeeItem;
@@ -52,6 +53,7 @@ public class ComplicatedBees
         modEventBus.addListener(ColorHandlers::registerItemColorHandlers);
         modEventBus.addListener(this::registerRegistries);
         modEventBus.addListener(this::registerCapabilities);
+        modEventBus.addListener(DataGenerators::generate);
 
         ComplicatedBeesItems.ITEMS.register(modEventBus);
         ComplicatedBeesBlocks.BLOCKS.register(modEventBus);
