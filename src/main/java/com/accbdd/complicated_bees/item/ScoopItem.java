@@ -1,7 +1,6 @@
 package com.accbdd.complicated_bees.item;
 
-import com.accbdd.complicated_bees.block.BeeNestBlock;
-import com.accbdd.complicated_bees.block.ComplicatedBeesBlocks;
+import com.accbdd.complicated_bees.registry.ComplicatedBeesBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;

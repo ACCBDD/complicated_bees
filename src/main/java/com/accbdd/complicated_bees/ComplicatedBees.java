@@ -1,13 +1,9 @@
 package com.accbdd.complicated_bees;
 
-import com.accbdd.complicated_bees.block.ComplicatedBeesBlocks;
+import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.CombItem;
-import com.accbdd.complicated_bees.registry.CombRegistry;
-import com.accbdd.complicated_bees.registry.ComplicatedBeesCodecs;
-import com.accbdd.complicated_bees.registry.SpeciesRegistry;
-import com.accbdd.complicated_bees.item.ComplicatedBeesItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
@@ -18,6 +14,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -44,6 +42,7 @@ public class ComplicatedBees
                     output.accept(CombItem.setComb(ComplicatedBeesItems.COMB.get().getDefaultInstance(), id));
                 }
                 output.accept(ComplicatedBeesItems.BEE_NEST.get());
+                output.accept(ComplicatedBeesItems.APIARY.get());
                 output.accept(ComplicatedBeesItems.SCOOP.get());
             }).build());
 
@@ -52,9 +51,12 @@ public class ComplicatedBees
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ColorHandlers::registerItemColorHandlers);
         modEventBus.addListener(this::registerRegistries);
+        modEventBus.addListener(this::registerCapabilities);
 
         ComplicatedBeesItems.ITEMS.register(modEventBus);
         ComplicatedBeesBlocks.BLOCKS.register(modEventBus);
+        ComplicatedBeesBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+
         CREATIVE_MODE_TABS.register(modEventBus);
     }
 
@@ -71,6 +73,11 @@ public class ComplicatedBees
                 ComplicatedBeesCodecs.COMB_CODEC,
                 ComplicatedBeesCodecs.COMB_CODEC
         );
+    }
+
+    @SubscribeEvent
+    public void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ComplicatedBeesBlockEntities.APIARY_ENTITY.get(), (o, direction) -> o.getItemHandler());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

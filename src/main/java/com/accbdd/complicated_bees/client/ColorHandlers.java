@@ -2,7 +2,7 @@ package com.accbdd.complicated_bees.client;
 
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.CombItem;
-import com.accbdd.complicated_bees.item.ComplicatedBeesItems;
+import com.accbdd.complicated_bees.registry.ComplicatedBeesItems;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
