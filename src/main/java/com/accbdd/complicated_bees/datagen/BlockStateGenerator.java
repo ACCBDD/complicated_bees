@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.datagen;
 
-import com.accbdd.complicated_bees.registry.ComplicatedBeesBlocks;
+import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
@@ -17,8 +17,9 @@ public class BlockStateGenerator extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        simpleBlock(ComplicatedBeesBlocks.BEE_NEST.get(), createBeeNestModel());
-        simpleBlock(ComplicatedBeesBlocks.APIARY.get(), createApiaryModel());
+        simpleBlock(BlocksRegistration.BEE_NEST.get(), createBeeNestModel());
+        simpleBlock(BlocksRegistration.APIARY.get(), createApiaryModel());
+        simpleBlock(BlocksRegistration.CENTRIFUGE.get(), createCentrifugeModel());
     }
 
     public BlockModelBuilder createBeeNestModel() {
@@ -35,6 +36,13 @@ public class BlockStateGenerator extends BlockStateProvider {
     public BlockModelBuilder createApiaryModel() {
         String path = "apiary";
         ResourceLocation texture = modLoc("block/bee_nest_bottom");
+
+        return models().cubeAll(path, texture);
+    }
+
+    public BlockModelBuilder createCentrifugeModel() {
+        String path = "centrifuge";
+        ResourceLocation texture = modLoc("block/bee_nest_top");
 
         return models().cubeAll(path, texture);
     }

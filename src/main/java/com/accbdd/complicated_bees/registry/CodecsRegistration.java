@@ -7,7 +7,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 
-public class ComplicatedBeesCodecs {
+public class CodecsRegistration {
     //hex string parser
     public static final Codec<Integer> HEX_STRING_CODEC = Codec.STRING.comapFlatMap(
             str -> {

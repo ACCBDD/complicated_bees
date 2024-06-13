@@ -5,15 +5,20 @@ import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.CombItem;
+import com.accbdd.complicated_bees.screen.CentrifugeScreen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -32,19 +37,20 @@ public class ComplicatedBees
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> BEES_TAB = CREATIVE_MODE_TABS.register("complicated_bees", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.complicated_bees"))
-            .icon(() -> ComplicatedBeesItems.DRONE.get().getDefaultInstance())
+            .icon(() -> ItemsRegistration.DRONE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().keySet()) {
-                    output.accept(BeeItem.setSpecies(ComplicatedBeesItems.DRONE.get().getDefaultInstance(), id));
-                    output.accept(BeeItem.setSpecies(ComplicatedBeesItems.PRINCESS.get().getDefaultInstance(), id));
-                    output.accept(BeeItem.setSpecies(ComplicatedBeesItems.QUEEN.get().getDefaultInstance(), id));
+                    output.accept(BeeItem.setSpecies(ItemsRegistration.DRONE.get().getDefaultInstance(), id));
+                    output.accept(BeeItem.setSpecies(ItemsRegistration.PRINCESS.get().getDefaultInstance(), id));
+                    output.accept(BeeItem.setSpecies(ItemsRegistration.QUEEN.get().getDefaultInstance(), id));
                 }
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().keySet()) {
-                    output.accept(CombItem.setComb(ComplicatedBeesItems.COMB.get().getDefaultInstance(), id));
+                    output.accept(CombItem.setComb(ItemsRegistration.COMB.get().getDefaultInstance(), id));
                 }
-                output.accept(ComplicatedBeesItems.BEE_NEST.get());
-                output.accept(ComplicatedBeesItems.APIARY.get());
-                output.accept(ComplicatedBeesItems.SCOOP.get());
+                output.accept(ItemsRegistration.BEE_NEST.get());
+                output.accept(ItemsRegistration.APIARY.get());
+                output.accept(ItemsRegistration.CENTRIFUGE.get());
+                output.accept(ItemsRegistration.SCOOP.get());
             }).build());
 
     public ComplicatedBees(IEventBus modEventBus)
@@ -55,9 +61,10 @@ public class ComplicatedBees
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener(DataGenerators::generate);
 
-        ComplicatedBeesItems.ITEMS.register(modEventBus);
-        ComplicatedBeesBlocks.BLOCKS.register(modEventBus);
-        ComplicatedBeesBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ItemsRegistration.ITEMS.register(modEventBus);
+        BlocksRegistration.BLOCKS.register(modEventBus);
+        BlockEntitiesRegistration.BLOCK_ENTITIES.register(modEventBus);
+        MenuRegistration.MENU_TYPES.register(modEventBus);
 
         CREATIVE_MODE_TABS.register(modEventBus);
     }
@@ -66,24 +73,45 @@ public class ComplicatedBees
     public void registerRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(
                 SpeciesRegistry.SPECIES_REGISTRY_KEY,
-                ComplicatedBeesCodecs.SPECIES_CODEC,
-                ComplicatedBeesCodecs.SPECIES_CODEC
+                CodecsRegistration.SPECIES_CODEC,
+                CodecsRegistration.SPECIES_CODEC
         );
 
         event.dataPackRegistry(
                 CombRegistry.COMB_REGISTRY_KEY,
-                ComplicatedBeesCodecs.COMB_CODEC,
-                ComplicatedBeesCodecs.COMB_CODEC
+                CodecsRegistration.COMB_CODEC,
+                CodecsRegistration.COMB_CODEC
         );
     }
 
     @SubscribeEvent
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ComplicatedBeesBlockEntities.APIARY_ENTITY.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.APIARY_ENTITY.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getItemHandler().get();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getOutputItemHandler().get();
+            }
+            return o.getInputItemHandler().get();
+        });
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         //setup code
+    }
+
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents
+    {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event)
+        {
+            event.enqueueWork(() -> {
+                MenuScreens.register(MenuRegistration.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
+            });
+        }
     }
 }

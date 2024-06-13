@@ -1,7 +1,7 @@
 package com.accbdd.complicated_bees.datagen;
 
-import com.accbdd.complicated_bees.registry.ComplicatedBeesBlocks;
-import com.accbdd.complicated_bees.registry.ComplicatedBeesItems;
+import com.accbdd.complicated_bees.registry.BlocksRegistration;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
@@ -18,12 +18,13 @@ public class ItemModelGenerator extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(ComplicatedBeesBlocks.BEE_NEST.getId().getPath(), modLoc("block/bee_nest"));
-        withExistingParent(ComplicatedBeesBlocks.APIARY.getId().getPath(), modLoc("block/apiary"));
-        basicItem(ComplicatedBeesItems.SCOOP.get());
-        createBeeModel(ComplicatedBeesItems.DRONE.getId());
-        createBeeModel(ComplicatedBeesItems.PRINCESS.getId()).texture("layer2", modLoc("item/princess_crown"));
-        createBeeModel(ComplicatedBeesItems.QUEEN.getId()).texture("layer2", modLoc("item/queen_crown"));
+        withExistingParent(BlocksRegistration.BEE_NEST.getId().getPath(), modLoc("block/bee_nest"));
+        withExistingParent(BlocksRegistration.APIARY.getId().getPath(), modLoc("block/apiary"));
+        withExistingParent(BlocksRegistration.CENTRIFUGE.getId().getPath(), modLoc("block/centrifuge"));
+        basicItem(ItemsRegistration.SCOOP.get());
+        createBeeModel(ItemsRegistration.DRONE.getId());
+        createBeeModel(ItemsRegistration.PRINCESS.getId()).texture("layer2", modLoc("item/princess_crown"));
+        createBeeModel(ItemsRegistration.QUEEN.getId()).texture("layer2", modLoc("item/queen_crown"));
         createCombModel();
     }
 

@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.item;
 
-import com.accbdd.complicated_bees.registry.ComplicatedBeesBlocks;
+import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,14 +21,14 @@ public class ScoopItem extends Item {
         if (!pLevel.isClientSide && !pState.is(BlockTags.FIRE)) {
             pStack.hurtAndBreak(1, pMiningEntity, (entity) -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
-        return !pState.is(ComplicatedBeesBlocks.BEE_NEST)
+        return !pState.is(BlocksRegistration.BEE_NEST)
                 ? super.mineBlock(pStack, pLevel, pState, pPos, pMiningEntity)
                 : true;
     }
 
     @Override
     public boolean isCorrectToolForDrops(BlockState pBlock) {
-        if (pBlock.is(ComplicatedBeesBlocks.BEE_NEST)) {
+        if (pBlock.is(BlocksRegistration.BEE_NEST)) {
             return true;
         }
         return super.isCorrectToolForDrops(pBlock);

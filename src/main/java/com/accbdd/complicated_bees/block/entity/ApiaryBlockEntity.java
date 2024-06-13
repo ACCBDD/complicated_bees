@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.registry.ComplicatedBeesBlockEntities;
+import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -33,7 +33,7 @@ public class ApiaryBlockEntity extends BlockEntity implements MenuProvider {
     private final Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> items);
 
     public ApiaryBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ComplicatedBeesBlockEntities.APIARY_ENTITY.get(), pPos, pBlockState);
+        super(BlockEntitiesRegistration.APIARY_ENTITY.get(), pPos, pBlockState);
     }
 
     private ItemStackHandler createItemHandler() {

@@ -1,6 +1,7 @@
-// 1.20.4	2024-06-13T11:25:38.5510731	Item Models: complicated_bees
+// 1.20.4	2024-06-13T11:46:32.01143	Item Models: complicated_bees
 6df9d7e396652be82b3c1d200173d889ff220fcc assets/complicated_bees/models/item/apiary.json
 c8862de88ab41c41168edc5e0186979a36e70d47 assets/complicated_bees/models/item/bee_nest.json
+ddd308a0febba5cb812ba9322e3f33922eb2cb7b assets/complicated_bees/models/item/centrifuge.json
 b0ab6f97c112e891c09a3814b16e0f4cbc177253 assets/complicated_bees/models/item/comb.json
 c315c15b95842f658b0db66fabf913b64cbddfaa assets/complicated_bees/models/item/drone.json
 cc0880d191d2a2a930f2cc67020f82c2d9a0d37c assets/complicated_bees/models/item/princess.json

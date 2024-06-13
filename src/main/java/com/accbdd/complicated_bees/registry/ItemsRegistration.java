@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
-public class ComplicatedBeesItems {
+public class ItemsRegistration {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
     public static final DeferredItem<BeeItem> DRONE = ITEMS.registerItem("drone", BeeItem::new);
@@ -18,7 +18,8 @@ public class ComplicatedBeesItems {
     public static final DeferredItem<CombItem> COMB = ITEMS.registerItem("comb", CombItem::new);
     public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
 
-    public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerSimpleBlockItem("bee_nest", ComplicatedBeesBlocks.BEE_NEST);
-    public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", ComplicatedBeesBlocks.APIARY);
+    public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerSimpleBlockItem("bee_nest", BlocksRegistration.BEE_NEST);
+    public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);
+    public static final DeferredItem<BlockItem> CENTRIFUGE = ITEMS.registerSimpleBlockItem("centrifuge", BlocksRegistration.CENTRIFUGE);
 
 }
