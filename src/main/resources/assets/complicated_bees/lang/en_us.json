@@ -8,10 +8,13 @@
   "item.complicated_bees.comb": "Comb",
 
   "block.complicated_bees.bee_nest": "Bee Nest",
+  "block.complicated_bees.apiary": "Apiary",
+  "block.complicated_bees.centrifuge": "Centrifuge",
 
   "gui.complicated_bees.primary_produce": "Primary Produce",
   "gui.complicated_bees.secondary_produce": "Secondary Produce",
   "gui.complicated_bees.specialty_produce": "Specialty Produce",
+  "gui.complicated_bees.centrifuge": "Centrifuge",
 
   "comb.complicated_bees.complicated_bees:stringy": "Stringy",
   "comb.complicated_bees.complicated_bees:juicy": "Juicy",

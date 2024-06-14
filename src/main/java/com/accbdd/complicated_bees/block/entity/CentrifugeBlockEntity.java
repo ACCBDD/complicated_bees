@@ -37,6 +37,11 @@ public class CentrifugeBlockEntity extends BlockEntity {
         public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             return stack;
         }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return false;
+        }
     });
 
     public CentrifugeBlockEntity(BlockPos pos, BlockState blockState) {

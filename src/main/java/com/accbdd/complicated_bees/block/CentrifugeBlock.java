@@ -22,7 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class CentrifugeBlock extends Block implements EntityBlock {
-    public static final String SCREEN_CENTRIFUGE = "gui.screen.centrifuge";
+    public static final String SCREEN_CENTRIFUGE = "gui.complicated_bees.centrifuge";
 
     public CentrifugeBlock() {
         super(Properties.of()

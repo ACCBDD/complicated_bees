@@ -13,7 +13,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu> {
 
     public CentrifugeScreen(CentrifugeMenu container, Inventory inventory, Component title) {
         super(container, inventory, title);
-        this.inventoryLabelY = this.imageHeight - 110;
+        this.inventoryLabelY = this.imageHeight - 94;
     }
 
     @Override
@@ -23,5 +23,10 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu> {
         graphics.blit(GUI, relX, relY, 0, 0, this.imageWidth, this.imageHeight);
     }
 
-    //todo: no item tooltips?? why??
+    @Override
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        renderBg(graphics, partialTick, mouseX, mouseY);
+        super.render(graphics, mouseX, mouseY, partialTick);
+        renderTooltip(graphics, mouseX, mouseY);
+    }
 }

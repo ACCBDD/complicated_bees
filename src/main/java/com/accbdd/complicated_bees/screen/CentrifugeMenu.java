@@ -1,7 +1,6 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity;
-import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import net.minecraft.core.BlockPos;
@@ -28,8 +27,12 @@ public class CentrifugeMenu extends AbstractContainerMenu {
                 addSlot(new SlotItemHandler(centrifuge.getOutputItems(),
                         OUTPUT_SLOT+i,
                         91+(18 * (i % 3)),
-                        17+(18 * (i / 3))
-                ));
+                        17+(18 * (i / 3))) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return false;
+                    }
+                });
             }
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
