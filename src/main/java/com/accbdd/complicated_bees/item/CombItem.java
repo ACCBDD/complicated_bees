@@ -23,7 +23,7 @@ public class CombItem extends Item {
     }
 
     public static Comb getComb(ItemStack stack) {
-        //get species string from nbt, return species from registry
+        //get comb string from nbt, return comb from registry
         return Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString("comb_type")));
     }
 
