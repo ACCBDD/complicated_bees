@@ -22,9 +22,12 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
 
 @Mod(ComplicatedBees.MODID)
@@ -60,6 +63,7 @@ public class ComplicatedBees
         modEventBus.addListener(this::registerRegistries);
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener(DataGenerators::generate);
+        NeoForge.EVENT_BUS.addListener(this::serverStarted);
 
         ItemsRegistration.ITEMS.register(modEventBus);
         BlocksRegistration.BLOCKS.register(modEventBus);
@@ -101,6 +105,12 @@ public class ComplicatedBees
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         //setup code
+    }
+
+    @SubscribeEvent
+    public void serverStarted(ServerStartedEvent event) {
+        LOGGER.info("Registered {} species", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().size());
+        LOGGER.info("Registered {} combs", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().size());
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
