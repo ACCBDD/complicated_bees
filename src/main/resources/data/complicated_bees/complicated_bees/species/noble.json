@@ -1,7 +1,20 @@
 {
   "id": "noble",
   "color": "FFCC00",
-  "primary_produce": "minecraft:arrow",
-  "secondary_produce": "minecraft:iron_ingot",
-  "specialty_produce": "minecraft:diamond"
+  "products": {
+    "primary": {
+      "item": "minecraft:arrow"
+    },
+    "secondary": {
+      "item": "minecraft:iron_ingot"
+    },
+    "secondary_chance": 0.5,
+    "specialty": {
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:juicy"
+      }
+    },
+    "specialty_chance": 0.25
+  }
 }

@@ -1,6 +1,13 @@
 {
   "id": "forest",
   "color": "03FCE8",
-  "primary_produce": "minecraft:stick",
-  "secondary_produce": "minecraft:gold_ingot"
+  "products": {
+    "primary": {
+      "item": "minecraft:stick"
+    },
+    "primary_chance": 0.023,
+    "secondary": {
+      "item": "minecraft:gold_ingot"
+    }
+  }
 }

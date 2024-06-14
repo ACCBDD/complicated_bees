@@ -56,13 +56,16 @@ public class BeeItem extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level pLevel, @NotNull List<Component> components, @NotNull TooltipFlag isAdvanced) {
         if (Minecraft.getInstance().level != null) {
             Species species = getSpecies(stack);
+            ItemStack primary = species.getProducts().getPrimary();
+            ItemStack secondary = species.getProducts().getSecondary();
+            ItemStack specialty = species.getProducts().getSpecialty();
             if (species == null)
                 return;
-            components.add(Component.translatable("gui.complicated_bees.primary_produce").append(": ").append(species.getPrimaryProduce().getDescription()));
-            if (species.getSecondaryProduce() != Items.AIR)
-                components.add(Component.translatable("gui.complicated_bees.secondary_produce").append(": ").append(species.getSecondaryProduce().getDescription()));
-            if (species.getSpecialtyProduce() != Items.AIR)
-                components.add(Component.translatable("gui.complicated_bees.specialty_produce").append(": ").append(species.getSpecialtyProduce().getDescription()));
+            components.add(Component.translatable("gui.complicated_bees.primary_produce").append(": ").append(primary.getHoverName()).append(String.format(" @ %.0f%%", species.getProducts().getPrimaryChance()*100)));
+            if (secondary.getItem() != Items.AIR)
+                components.add(Component.translatable("gui.complicated_bees.secondary_produce").append(": ").append(secondary.getHoverName()).append(String.format(" @ %.0f%%", species.getProducts().getSecondaryChance()*100)));
+            if (specialty.getItem() != Items.AIR)
+                components.add(Component.translatable("gui.complicated_bees.specialty_produce").append(": ").append(specialty.getHoverName()).append(String.format(" @ %.0f%%", species.getProducts().getSpecialtyChance()*100)));
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);
     }

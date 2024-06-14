@@ -2,5 +2,10 @@
   "id": "stringy",
   "outer_color": "22b800",
   "inner_color": "f786dd",
-  "primary_produce": "minecraft:melon"
+  "products": {
+    "primary": {
+      "item": "minecraft:melon"
+    },
+    "primary_chance": 0.7
+  }
 }

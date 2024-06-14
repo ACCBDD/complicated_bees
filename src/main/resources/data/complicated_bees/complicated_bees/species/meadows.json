@@ -1,5 +1,10 @@
 {
   "id": "meadows",
   "color": "FC030F",
-  "primary_produce": "minecraft:apple"
+  "products": {
+    "primary": {
+      "item": "minecraft:apple"
+    },
+    "primary_chance": 0.322
+  }
 }

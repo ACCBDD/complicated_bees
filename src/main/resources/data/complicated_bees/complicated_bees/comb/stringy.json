@@ -2,6 +2,13 @@
   "id": "stringy",
   "outer_color": "917130",
   "inner_color": "e0bd77",
-  "primary_produce": "minecraft:lever",
-  "secondary_produce": "minecraft:string"
+  "products": {
+    "primary": {
+      "item": "minecraft:honey_block"
+    },
+    "primary_chance": 0.25,
+    "secondary": {
+      "item": "minecraft:string"
+    }
+  }
 }

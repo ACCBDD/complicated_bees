@@ -1,14 +1,17 @@
 package com.accbdd.complicated_bees.registry;
 
+import com.accbdd.complicated_bees.genetics.BeeProducts;
 import com.accbdd.complicated_bees.genetics.Comb;
+import com.accbdd.complicated_bees.genetics.CombProducts;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class CodecsRegistration {
-    //hex string parser
+    //hex string parser (no alpha)
     public static final Codec<Integer> HEX_STRING_CODEC = Codec.STRING.comapFlatMap(
             str -> {
                 try {
@@ -20,13 +23,33 @@ public class CodecsRegistration {
             Integer::toHexString
     );
 
+    //BeeProducts parser
+    public static final Codec<BeeProducts> BEE_PRODUCTS_CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("primary").forGetter(BeeProducts::getPrimary),
+                    Codec.FLOAT.optionalFieldOf("primary_chance", 1.0f).forGetter(BeeProducts::getPrimaryChance),
+                    ItemStack.ITEM_WITH_COUNT_CODEC.optionalFieldOf("secondary", Items.AIR.getDefaultInstance()).forGetter(BeeProducts::getSecondary),
+                    Codec.FLOAT.optionalFieldOf("secondary_chance", 1.0f).forGetter(BeeProducts::getSecondaryChance),
+                    ItemStack.ITEM_WITH_COUNT_CODEC.optionalFieldOf("specialty", Items.AIR.getDefaultInstance()).forGetter(BeeProducts::getSpecialty),
+                    Codec.FLOAT.optionalFieldOf("specialty_chance", 1.0f).forGetter(BeeProducts::getSpecialtyChance)
+            ).apply(instance, BeeProducts::new)
+    );
+
+    //CombProducts parser
+    public static final Codec<CombProducts> COMB_PRODUCTS_CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("primary").forGetter(CombProducts::getPrimary),
+                    Codec.FLOAT.optionalFieldOf("primary_chance", 1.0f).forGetter(CombProducts::getPrimaryChance),
+                    ItemStack.ITEM_WITH_COUNT_CODEC.optionalFieldOf("secondary", Items.AIR.getDefaultInstance()).forGetter(CombProducts::getSecondary),
+                    Codec.FLOAT.optionalFieldOf("secondary_chance", 1.0f).forGetter(CombProducts::getSecondaryChance)
+            ).apply(instance, CombProducts::new)
+    );
+
     public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(Species::getId),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
-                    ResourceLocation.CODEC.fieldOf("primary_produce").forGetter((s) -> new ResourceLocation(s.getPrimaryProduce().toString())),
-                    ResourceLocation.CODEC.optionalFieldOf("secondary_produce").forGetter((s) -> java.util.Optional.of(new ResourceLocation(s.getSecondaryProduce().toString()))),
-                    ResourceLocation.CODEC.optionalFieldOf("specialty_produce").forGetter((s) -> java.util.Optional.of(new ResourceLocation(s.getSpecialtyProduce().toString())))
+                    BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts)
             ).apply(instance, Species::new)
     );
 
@@ -35,8 +58,7 @@ public class CodecsRegistration {
                     Codec.STRING.fieldOf("id").forGetter(Comb::getId),
                     HEX_STRING_CODEC.fieldOf("outer_color").forGetter(Comb::getOuterColor),
                     HEX_STRING_CODEC.fieldOf("inner_color").forGetter(Comb::getInnerColor),
-                    ResourceLocation.CODEC.fieldOf("primary_produce").forGetter((s) -> new ResourceLocation(s.getPrimaryProduce().toString())),
-                    ResourceLocation.CODEC.optionalFieldOf("secondary_produce").forGetter((s) -> java.util.Optional.of(new ResourceLocation(s.getSecondaryProduce().toString())))
+                    COMB_PRODUCTS_CODEC.fieldOf("products").forGetter(Comb::getProducts)
             ).apply(instance, Comb::new)
     );
 }

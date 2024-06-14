@@ -2,5 +2,10 @@
   "id": "stringy",
   "outer_color": "e7d46a",
   "inner_color": "fea02b",
-  "primary_produce": "minecraft:honey_block"
+  "products": {
+    "primary": {
+      "item": "minecraft:honey_block"
+    },
+    "primary_chance": 0.25
+  }
 }
