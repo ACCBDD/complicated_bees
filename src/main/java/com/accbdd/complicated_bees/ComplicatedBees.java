@@ -77,14 +77,14 @@ public class ComplicatedBees
     public void registerRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(
                 SpeciesRegistry.SPECIES_REGISTRY_KEY,
-                CodecsRegistration.SPECIES_CODEC,
-                CodecsRegistration.SPECIES_CODEC
+                ComplicatedBeesCodecs.SPECIES_CODEC,
+                ComplicatedBeesCodecs.SPECIES_CODEC
         );
 
         event.dataPackRegistry(
                 CombRegistry.COMB_REGISTRY_KEY,
-                CodecsRegistration.COMB_CODEC,
-                CodecsRegistration.COMB_CODEC
+                ComplicatedBeesCodecs.COMB_CODEC,
+                ComplicatedBeesCodecs.COMB_CODEC
         );
     }
 

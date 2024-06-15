@@ -7,9 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
@@ -17,9 +15,15 @@ import static com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity.*;
 
 public class CentrifugeMenu extends AbstractContainerMenu {
     private final BlockPos pos;
+    private final ContainerData data;
 
     public CentrifugeMenu(int windowId, Player player, BlockPos pos) {
+        this(windowId, player, pos, new SimpleContainerData(2));
+    }
+
+    public CentrifugeMenu(int windowId, Player player, BlockPos pos, ContainerData data) {
         super(MenuRegistration.CENTRIFUGE_MENU.get(), windowId);
+        this.data = data;
         this.pos = pos;
         if (player.level().getBlockEntity(pos) instanceof CentrifugeBlockEntity centrifuge) {
             addSlot(new SlotItemHandler(centrifuge.getInputItems(), INPUT_SLOT, 34, 35));
@@ -36,6 +40,20 @@ public class CentrifugeMenu extends AbstractContainerMenu {
             }
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
+
+        addDataSlots(data);
+    }
+
+    public boolean isCrafting() {
+        return data.get(0) > 0;
+    }
+
+    public int getScaledProgress() {
+        int progress = this.data.get(0);
+        int maxProgress = this.data.get(1);
+        int progressArrowSize = 26;
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {

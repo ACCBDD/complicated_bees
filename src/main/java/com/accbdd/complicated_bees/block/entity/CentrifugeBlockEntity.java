@@ -1,13 +1,17 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +26,10 @@ public class CentrifugeBlockEntity extends BlockEntity {
     public static final String ITEMS_OUTPUT_TAG = "output_items";
 
     public static final int SLOT_COUNT = INPUT_SLOT_COUNT + OUTPUT_SLOT_COUNT;
+
+    private final ContainerData data;
+    private int progress = 0;
+    private int maxProgress = 20;
 
     private final ItemStackHandler inputItems = createItemHandler(INPUT_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
@@ -46,6 +54,29 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     public CentrifugeBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), pos, blockState);
+        this.data = new ContainerData() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> CentrifugeBlockEntity.this.progress;
+                    case 1 -> CentrifugeBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> CentrifugeBlockEntity.this.progress = value;
+                    case 1 -> CentrifugeBlockEntity.this.maxProgress = value;
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
     }
 
     public ItemStackHandler getInputItems() {
@@ -96,6 +127,60 @@ public class CentrifugeBlockEntity extends BlockEntity {
     }
 
     public void tickServer() {
-        //TODO: implement
+        ItemStack stack = this.inputItems.getStackInSlot(INPUT_SLOT);
+        if (hasRecipe(stack)) {
+            increaseCraftingProgress();
+            setChanged();
+
+            if (hasFinished()) {
+                craftItem(stack);
+                resetProgress();
+            }
+        } else {
+            resetProgress();
+        }
+    }
+
+    private void increaseCraftingProgress() {
+        progress++;
+    }
+
+    private void resetProgress() {
+        progress = 0;
+    }
+
+    private boolean hasRecipe(ItemStack stack) {
+        if (stack.is(ItemsRegistration.COMB.get())) {
+            ItemStack primary = CombItem.getComb(stack).getProducts().getPrimary();
+            return canInsertIntoOutput(primary);
+        }
+        return false;
+    }
+
+    private boolean hasFinished() {
+        return progress >= maxProgress;
+    }
+
+    private void craftItem(ItemStack stack) {
+        ItemStack primary = CombItem.getComb(stack).getProducts().getPrimaryResult();
+        ItemStack secondary = CombItem.getComb(stack).getProducts().getSecondaryResult();
+
+        this.inputItems.extractItem(INPUT_SLOT, 1, false);
+        ItemHandlerHelper.insertItem(outputItems, primary, false);
+        ItemHandlerHelper.insertItem(outputItems, secondary, false);
+    }
+
+    private boolean canInsertIntoOutput(ItemStack stack) {
+        boolean canInsert = false;
+        int stackCount = stack.getCount();
+        for (int i = 0; i < OUTPUT_SLOT_COUNT; i++) {
+            stack = this.outputItems.insertItem(i, stack, true);
+            canInsert = canInsert || (stack.getCount() < stackCount);
+        }
+        return canInsert;
+    }
+
+    public ContainerData getData() {
+        return data;
     }
 }

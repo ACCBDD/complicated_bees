@@ -21,6 +21,14 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu> {
         int relX = (this.width - this.imageWidth) / 2;
         int relY = (this.height - this.imageHeight) / 2;
         graphics.blit(GUI, relX, relY, 0, 0, this.imageWidth, this.imageHeight);
+
+        renderProgressArrow(graphics, relX, relY);
+    }
+
+    private void renderProgressArrow(GuiGraphics graphics, int x, int y) {
+        if (menu.isCrafting()) {
+            graphics.blit(GUI, x + 60, y + 35, 176, 0, menu.getScaledProgress(), 18);
+        }
     }
 
     @Override

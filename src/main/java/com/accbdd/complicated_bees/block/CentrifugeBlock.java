@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees.block;
 
 import com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity;
 import com.accbdd.complicated_bees.screen.CentrifugeMenu;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -11,17 +12,18 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CentrifugeBlock extends Block implements EntityBlock {
+public class CentrifugeBlock extends BaseEntityBlock {
     public static final String SCREEN_CENTRIFUGE = "gui.complicated_bees.centrifuge";
 
     public CentrifugeBlock() {
@@ -32,24 +34,20 @@ public class CentrifugeBlock extends Block implements EntityBlock {
                 .sound(SoundType.METAL));
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CentrifugeBlockEntity(pos, state);
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return null;
+    }
+
+    @Override
+    public @NotNull RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        if (pLevel.isClientSide) {
-            return null;
-        } else {
-            return (lvl, pos, st, blockEntity) -> {
-                if (blockEntity instanceof CentrifugeBlockEntity be) {
-                    be.tickServer();
-                }
-            };
-        }
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CentrifugeBlockEntity(pos, state);
     }
 
     @Override
@@ -66,7 +64,7 @@ public class CentrifugeBlock extends Block implements EntityBlock {
                     @Nullable
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player player) {
-                        return new CentrifugeMenu(windowId, player, pos);
+                        return new CentrifugeMenu(windowId, player, pos, ((CentrifugeBlockEntity) be).getData());
                     }
                 };
                 player.openMenu(containerProvider, buf -> buf.writeBlockPos(pos));
@@ -75,5 +73,19 @@ public class CentrifugeBlock extends Block implements EntityBlock {
             }
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        if (level.isClientSide) {
+            return null;
+        } else {
+            return (lvl, pos, st, blockEntity) -> {
+                if (blockEntity instanceof CentrifugeBlockEntity be) {
+                    be.tickServer();
+                }
+            };
+        }
     }
 }

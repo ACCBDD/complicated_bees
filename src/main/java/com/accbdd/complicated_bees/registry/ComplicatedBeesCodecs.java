@@ -10,7 +10,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-public class CodecsRegistration {
+public class ComplicatedBeesCodecs {
     //hex string parser (no alpha)
     public static final Codec<Integer> HEX_STRING_CODEC = Codec.STRING.comapFlatMap(
             str -> {
