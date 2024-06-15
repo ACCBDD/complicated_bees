@@ -11,6 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +26,14 @@ public class CombItem extends Item {
 
     public static Comb getComb(ItemStack stack) {
         //get comb string from nbt, return comb from registry
-        return Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString("comb_type")));
+        if (FMLEnvironment.dist.isClient()) {
+            if (Minecraft.getInstance().getConnection() == null) {
+                return Comb.NULL_COMB;
+            }
+            return Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString("comb_type")));
+        } else {
+            return ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString("comb_type")));
+        }
     }
 
     public static ItemStack setComb(ItemStack stack, ResourceLocation comb) {
@@ -60,8 +69,6 @@ public class CombItem extends Item {
             Comb comb = getComb(stack);
             ItemStack primary = comb.getProducts().getPrimary();
             ItemStack secondary = comb.getProducts().getSecondary();
-            if (comb == null)
-                return;
             components.add(Component.translatable("gui.complicated_bees.primary_produce").append(": ").append(primary.getHoverName()).append(String.format(" @ %.0f%%", comb.getProducts().getPrimaryChance()*100)));
             if (secondary.getItem() != Items.AIR)
                 components.add(Component.translatable("gui.complicated_bees.secondary_produce").append(": ").append(secondary.getHoverName()).append(String.format(" @ %.0f%%", comb.getProducts().getSecondaryChance()*100)));
