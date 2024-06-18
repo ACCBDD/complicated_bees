@@ -1,8 +1,6 @@
 package com.accbdd.complicated_bees.registry;
 
-import com.accbdd.complicated_bees.item.BeeItem;
-import com.accbdd.complicated_bees.item.CombItem;
-import com.accbdd.complicated_bees.item.ScoopItem;
+import com.accbdd.complicated_bees.item.*;
 import net.minecraft.world.item.BlockItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -12,9 +10,9 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 public class ItemsRegistration {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
-    public static final DeferredItem<BeeItem> DRONE = ITEMS.registerItem("drone", BeeItem::new);
-    public static final DeferredItem<BeeItem> PRINCESS = ITEMS.registerItem("princess", BeeItem::new);
-    public static final DeferredItem<BeeItem> QUEEN = ITEMS.registerItem("queen", BeeItem::new);
+    public static final DeferredItem<DroneItem> DRONE = ITEMS.registerItem("drone", DroneItem::new);
+    public static final DeferredItem<PrincessItem> PRINCESS = ITEMS.registerItem("princess", PrincessItem::new);
+    public static final DeferredItem<QueenItem> QUEEN = ITEMS.registerItem("queen", QueenItem::new);
     public static final DeferredItem<CombItem> COMB = ITEMS.registerItem("comb", CombItem::new);
     public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
 

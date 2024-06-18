@@ -5,6 +5,7 @@ import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.CombItem;
+import com.accbdd.complicated_bees.screen.ApiaryScreen;
 import com.accbdd.complicated_bees.screen.CentrifugeScreen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -90,7 +91,15 @@ public class ComplicatedBees
 
     @SubscribeEvent
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.APIARY_ENTITY.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.APIARY_ENTITY.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getItemHandler().get();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getOutputItemHandler().get();
+            }
+            return o.getBeeItemHandler().get();
+        });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (o, direction) -> {
             if (direction == null) {
                 return o.getItemHandler().get();
@@ -121,6 +130,7 @@ public class ComplicatedBees
         {
             event.enqueueWork(() -> {
                 MenuScreens.register(MenuRegistration.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
+                MenuScreens.register(MenuRegistration.APIARY_MENU.get(), ApiaryScreen::new);
             });
         }
     }

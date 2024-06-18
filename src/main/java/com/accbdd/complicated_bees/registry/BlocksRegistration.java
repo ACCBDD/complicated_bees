@@ -18,7 +18,7 @@ public class BlocksRegistration {
             () -> new BeeNestBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEE_NEST)));
 
     public static final DeferredBlock<ApiaryBlock> APIARY = BLOCKS.register("apiary",
-            () -> new ApiaryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEEHIVE)));
+            ApiaryBlock::new);
 
     public static final DeferredBlock<CentrifugeBlock> CENTRIFUGE = BLOCKS.register("centrifuge",
             CentrifugeBlock::new);

@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.registry;
 
+import com.accbdd.complicated_bees.screen.ApiaryMenu;
 import com.accbdd.complicated_bees.screen.CentrifugeMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.MenuType;
@@ -15,4 +16,6 @@ public class MenuRegistration {
 
     public static final Supplier<MenuType<CentrifugeMenu>> CENTRIFUGE_MENU = MENU_TYPES.register("centrifuge",
             () -> IMenuTypeExtension.create((windowId, inv, data) -> new CentrifugeMenu(windowId, inv.player, data.readBlockPos())));
+    public static final Supplier<MenuType<ApiaryMenu>> APIARY_MENU = MENU_TYPES.register("apiary",
+            () -> IMenuTypeExtension.create((windowId, inv, data) -> new ApiaryMenu(windowId, inv.player, data.readBlockPos())));
 }
