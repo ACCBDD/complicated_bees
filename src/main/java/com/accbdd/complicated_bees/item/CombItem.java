@@ -32,12 +32,9 @@ public class CombItem extends Item {
         //get comb string from nbt, return comb from registry
         if (FMLEnvironment.dist.isClient()) {
             if (Minecraft.getInstance().getConnection() == null) {
-                ComplicatedBees.LOGGER.debug("tried accessing null connection!");
                 return Comb.NULL;
             }
-            ComplicatedBees.LOGGER.debug("getting comb for {}, nbt: {}", stack, stack.getOrCreateTag());
             Comb comb = Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(COMB_TYPE_TAG)));
-            ComplicatedBees.LOGGER.debug("comb found was {}", comb);
             return comb;
         } else {
             return ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(COMB_TYPE_TAG)));

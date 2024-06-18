@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.compat.jei;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.item.BeeItem;
@@ -48,7 +47,6 @@ public class ComplicatedBeesJEI implements IModPlugin {
         };
 
         IIngredientSubtypeInterpreter<ItemStack> combInterpreter = (stack, context) -> {
-            ComplicatedBees.LOGGER.debug("interpreting comb {}", stack);
             Lazy<Comb> comb = Lazy.of(() -> CombItem.getComb(stack));
             return comb.get().getId();
         };

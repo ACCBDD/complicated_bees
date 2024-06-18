@@ -1,14 +1,20 @@
 package com.accbdd.complicated_bees.compat.jei;
 
 import com.accbdd.complicated_bees.genetics.Comb;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotView;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -26,7 +32,7 @@ public class CombProductRecipeCategory implements IRecipeCategory<Comb> {
     private static final Component TITLE = Component.translatable("gui.complicated_bees.comb_products");
 
     public final IDrawable ICON = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/item/comb.png"), 0, 0, 16, 16, 16, 16);
-    public final IDrawable BACKGROUND = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/gui/jei/comb_products.png"), 0, 0, 128, 128, 128, 128);
+    public final IDrawable BACKGROUND = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/gui/jei/comb_products.png"), 0, 0, 128, 46, 128, 46);
 
     @Override
     public RecipeType<Comb> getRecipeType() {
@@ -62,5 +68,30 @@ public class CombProductRecipeCategory implements IRecipeCategory<Comb> {
         builder.addSlot(RecipeIngredientRole.OUTPUT, 79, 15)
                 .setSlotName("secondary_output")
                 .addIngredient(VanillaTypes.ITEM_STACK, recipe.getProducts().getSecondary());
+    }
+
+    @Override
+    public void draw(Comb recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+        for (int i = 0; i < recipeSlotsView.getSlotViews(RecipeIngredientRole.OUTPUT).size(); i++) {
+            IRecipeSlotView slot = recipeSlotsView.getSlotViews(RecipeIngredientRole.OUTPUT).get(i);
+            PoseStack poseStack = guiGraphics.pose();
+            if (!slot.isEmpty()) {
+                switch(i) {
+                    case 0:
+                        poseStack.pushPose();
+                        poseStack.scale(0.5f, 0.5f, 2f);
+                        guiGraphics.drawString(Minecraft.getInstance().font, String.format("%.0f%%", recipe.getProducts().getPrimaryChance()*100), (61+(18*i)) * 2, (32)*2, 0xFFFFFF);
+                        poseStack.popPose();
+                        break;
+                    case 1:
+                        poseStack.pushPose();
+                        poseStack.scale(0.5f, 0.5f, 2f);
+                        guiGraphics.drawString(Minecraft.getInstance().font, String.format("%.0f%%", recipe.getProducts().getSecondaryChance()*100), (61+(18*i)) * 2, (32)*2, 0xFFFFFF);
+                        poseStack.popPose();
+                        break;
+                }
+            }
+        }
     }
 }
