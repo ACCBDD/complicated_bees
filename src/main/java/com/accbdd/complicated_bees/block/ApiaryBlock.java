@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.block;
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.screen.ApiaryMenu;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -23,8 +24,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class ApiaryBlock extends BaseEntityBlock {
-    public static final String SCREEN_APIARY = "gui.complicated_bees.centrifuge";
+    public static final String SCREEN_APIARY = "gui.complicated_bees.apiary";
 
     public ApiaryBlock() {
         super(Properties.of()
@@ -61,7 +66,6 @@ public class ApiaryBlock extends BaseEntityBlock {
                         return Component.translatable(SCREEN_APIARY);
                     }
 
-                    @Nullable
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player player) {
                         return new ApiaryMenu(windowId, player, pos, ((ApiaryBlockEntity) be).getData());

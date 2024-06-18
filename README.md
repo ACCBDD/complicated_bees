@@ -5,4 +5,5 @@ Planned features:
 * data-driven species
 * data-driven combs
 * bee effect api
+* frame api
 * jei/emi/rei support
