@@ -6,6 +6,6 @@
     "primary": {
       "item": "minecraft:honey_block"
     },
-    "primary_chance": 0.25
+    "primary_chance": 1
   }
 }
