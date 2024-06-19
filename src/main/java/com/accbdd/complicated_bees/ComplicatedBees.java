@@ -28,6 +28,7 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
 
@@ -62,6 +63,7 @@ public class ComplicatedBees
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ColorHandlers::registerItemColorHandlers);
         modEventBus.addListener(this::registerRegistries);
+        modEventBus.addListener(this::registerDatapackRegistries);
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener(DataGenerators::generate);
         NeoForge.EVENT_BUS.addListener(this::serverStarted);
@@ -75,7 +77,7 @@ public class ComplicatedBees
     }
 
     @SubscribeEvent
-    public void registerRegistries(DataPackRegistryEvent.NewRegistry event) {
+    public void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(
                 SpeciesRegistry.SPECIES_REGISTRY_KEY,
                 ComplicatedBeesCodecs.SPECIES_CODEC,
@@ -87,6 +89,11 @@ public class ComplicatedBees
                 ComplicatedBeesCodecs.COMB_CODEC,
                 ComplicatedBeesCodecs.COMB_CODEC
         );
+    }
+
+    @SubscribeEvent
+    public void registerRegistries(NewRegistryEvent event) {
+        event.register(GeneRegistry.GENE_REGISTRY);
     }
 
     @SubscribeEvent
