@@ -22,18 +22,20 @@ import java.util.Objects;
 
 public class BeeItem extends Item {
 
+    public static final String GENOME = "genome";
+
     public BeeItem(Properties prop) {
         super(prop);
     }
 
     public static Genome getGenome(ItemStack stack) {
-        CompoundTag serializedGenome = stack.getOrCreateTag().getCompound("genome");
+        CompoundTag serializedGenome = stack.getOrCreateTag().getCompound(GENOME);
         return Genome.deserialize(serializedGenome);
     }
 
     public static ItemStack setGenome(ItemStack stack, Genome genome) {
         CompoundTag serializedGenome = Genome.serialize(genome);
-        stack.getOrCreateTag().put("genome", serializedGenome);
+        stack.getOrCreateTag().put(GENOME, serializedGenome);
         return stack;
     }
 

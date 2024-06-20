@@ -52,8 +52,7 @@ public class ComplicatedBeesCodecs {
                     Codec.STRING.fieldOf("id").forGetter(Species::getId),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
-                    //CompoundTag.CODEC.xmap(Genome::deserialize, Genome::serialize).optionalFieldOf("genome", new Genome()).forGetter(Species::getDefaultGenome)
-                    CompoundTag.CODEC.fieldOf("genome").forGetter((species -> Genome.serialize(species.getDefaultGenome())))
+                    CompoundTag.CODEC.optionalFieldOf("genome", Genome.serialize(new Genome())).forGetter((species -> Genome.serialize(species.getDefaultGenome())))
             ).apply(instance, (id, clr, prod, tag) -> new Species(id, clr, prod, tag))
     );
 
