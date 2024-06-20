@@ -1,13 +1,13 @@
 package com.accbdd.complicated_bees;
 
+import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.datagen.DataGenerators;
 import com.accbdd.complicated_bees.genetics.Genome;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
-import com.accbdd.complicated_bees.registry.*;
-import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.CombItem;
+import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.screen.ApiaryScreen;
 import com.accbdd.complicated_bees.screen.CentrifugeScreen;
 import com.mojang.logging.LogUtils;
@@ -19,7 +19,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -36,7 +35,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
-import org.spongepowered.asm.mixin.injection.struct.InjectorGroupInfo;
 
 import java.util.Map;
 
@@ -53,9 +51,9 @@ public class ComplicatedBees
             .icon(() -> ItemsRegistration.DRONE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 for (Map.Entry<ResourceKey<Species>, Species> entry: Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet()) {
-                    output.accept(BeeItem.setGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), new Genome().setGene(new ResourceLocation("complicated_bees:species"), new GeneSpecies(entry.getValue()))));
-                    output.accept(BeeItem.setGenome(ItemsRegistration.PRINCESS.get().getDefaultInstance(), new Genome().setGene(new ResourceLocation("complicated_bees:species"), new GeneSpecies(entry.getValue()))));
-                    output.accept(BeeItem.setGenome(ItemsRegistration.QUEEN.get().getDefaultInstance(), new Genome().setGene(new ResourceLocation("complicated_bees:species"), new GeneSpecies(entry.getValue()))));
+                    output.accept(BeeItem.setGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
+                    output.accept(BeeItem.setGenome(ItemsRegistration.PRINCESS.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
+                    output.accept(BeeItem.setGenome(ItemsRegistration.QUEEN.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
                 }
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().keySet()) {
                     output.accept(CombItem.setComb(ItemsRegistration.COMB.get().getDefaultInstance(), id));

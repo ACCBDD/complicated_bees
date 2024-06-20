@@ -25,7 +25,7 @@ public class GeneSpecies extends Gene {
     }
 
     public static GeneSpecies get(Genome genome) {
-        return genome.getGene(getId()) == null ? new GeneSpecies(Species.INVALID) : (GeneSpecies) genome.getGene(getId());
+        return genome.getGene(getId()) == null ? new GeneSpecies() : (GeneSpecies) genome.getGene(getId());
     }
 
     public static ResourceLocation getId() {

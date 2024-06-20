@@ -1,9 +1,13 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
 import com.accbdd.complicated_bees.genetics.Genome;
+import com.mojang.serialization.Codec;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 
+/**
+ * An abstract class for a Gene representing some arbitrary information.
+ */
 public abstract class Gene {
     /**
      * Returns the version of this gene present in the given genome.
@@ -12,7 +16,7 @@ public abstract class Gene {
      * @return the version of this gene present in the genome
      */
     public static Gene get(Genome genome) {
-        return null;
+        throw new RuntimeException("This needs to be implemented!");
     }
 
     /**
@@ -21,7 +25,7 @@ public abstract class Gene {
      * @return the ResourceLocation of this gene
      */
     public static ResourceLocation getId() {
-        return null;
+        throw new RuntimeException("This needs to be implemented!");
     }
 
     /**

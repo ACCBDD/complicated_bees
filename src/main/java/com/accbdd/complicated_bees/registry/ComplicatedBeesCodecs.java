@@ -1,14 +1,16 @@
 package com.accbdd.complicated_bees.registry;
 
-import com.accbdd.complicated_bees.genetics.BeeProducts;
-import com.accbdd.complicated_bees.genetics.Comb;
-import com.accbdd.complicated_bees.genetics.CombProducts;
-import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.*;
+import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+
+import java.util.Map;
 
 public class ComplicatedBeesCodecs {
     //hex string parser (no alpha)
@@ -49,8 +51,10 @@ public class ComplicatedBeesCodecs {
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(Species::getId),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
-                    BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts)
-            ).apply(instance, Species::new)
+                    BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
+                    //CompoundTag.CODEC.xmap(Genome::deserialize, Genome::serialize).optionalFieldOf("genome", new Genome()).forGetter(Species::getDefaultGenome)
+                    CompoundTag.CODEC.fieldOf("genome").forGetter((species -> Genome.serialize(species.getDefaultGenome())))
+            ).apply(instance, (id, clr, prod, tag) -> new Species(id, clr, prod, tag))
     );
 
     public static final Codec<Comb> COMB_CODEC = RecordCodecBuilder.create(instance ->

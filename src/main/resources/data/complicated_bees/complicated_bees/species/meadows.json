@@ -6,5 +6,8 @@
       "item": "minecraft:apple"
     },
     "primary_chance": 0.322
+  },
+  "genome": {
+    "complicated_bees:lifespan": 105
   }
 }

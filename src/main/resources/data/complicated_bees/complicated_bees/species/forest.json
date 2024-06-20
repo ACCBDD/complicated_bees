@@ -9,5 +9,8 @@
     "secondary": {
       "item": "minecraft:gold_ingot"
     }
+  },
+  "genome": {
+    "complicated_bees:lifespan": 100
   }
 }
