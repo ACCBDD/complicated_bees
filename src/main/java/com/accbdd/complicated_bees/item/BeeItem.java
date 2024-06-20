@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.item;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Genome;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
@@ -78,7 +77,6 @@ public class BeeItem extends Item {
     }
 
     private static ResourceLocation getSpeciesResourceLocation(ItemStack stack) {
-        ComplicatedBees.LOGGER.debug("getting resource location for {}, nbt: {}", stack, stack.getOrCreateTag());
         return Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(GeneSpecies.get(getGenome(stack)).getSpecies());
     }
 }

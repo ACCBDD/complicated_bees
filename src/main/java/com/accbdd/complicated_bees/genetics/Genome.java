@@ -2,7 +2,6 @@ package com.accbdd.complicated_bees.genetics;
 
 import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.gene.Gene;
-import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.registry.GeneRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -19,27 +18,20 @@ public class Genome {
     private Map<ResourceLocation, Gene> genes;
 
     public Genome() {
-        ComplicatedBees.LOGGER.debug("creating blank genome");
         this.genes = new HashMap<>();
         for (Map.Entry<ResourceKey<Gene>, Gene> entry : GeneRegistry.GENE_REGISTRY.entrySet()) {
             genes.put(entry.getKey().location(), GeneRegistry.GENE_REGISTRY.get(entry.getKey()));
-            ComplicatedBees.LOGGER.debug("set gene {} to {}", entry.getKey().location(), genes.get(entry.getKey().location()));
         }
     }
 
     public Genome(CompoundTag genomeAsTag) {
-        ComplicatedBees.LOGGER.debug("creating genome from tag");
         this.genes = new HashMap<>();
         for (Map.Entry<ResourceKey<Gene>, Gene> entry : GeneRegistry.GENE_REGISTRY.entrySet()) {
             ResourceLocation geneLocation = entry.getKey().location();
             if (genomeAsTag.contains(geneLocation.toString())) {
-                ComplicatedBees.LOGGER.debug("gene definition found in tag");
                 genes.put(geneLocation, entry.getValue().deserialize(genomeAsTag.get(geneLocation.toString())));
-                ComplicatedBees.LOGGER.debug("set gene {} to {}", entry.getKey().location(), genes.get(entry.getKey().location()));
             } else {
-                ComplicatedBees.LOGGER.debug("gene defiinition not found in tag");
                 genes.put(entry.getKey().location(), GeneRegistry.GENE_REGISTRY.get(entry.getKey()));
-                ComplicatedBees.LOGGER.debug("set gene {} to {}", entry.getKey().location(), genes.get(entry.getKey().location()));
             }
         }
     }
