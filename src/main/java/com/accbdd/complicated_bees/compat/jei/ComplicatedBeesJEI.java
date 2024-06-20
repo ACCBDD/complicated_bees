@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees.compat.jei;
 
 import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.CombRegistry;
@@ -42,7 +43,7 @@ public class ComplicatedBeesJEI implements IModPlugin {
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
         IIngredientSubtypeInterpreter<ItemStack> speciesInterpreter = (stack, context) -> {
-            Lazy<Species> species = Lazy.of(() -> BeeItem.getSpecies(stack));
+            Lazy<Species> species = Lazy.of(() -> GeneSpecies.get(BeeItem.getGenome(stack)).getSpecies());
             return species.get().getId();
         };
 

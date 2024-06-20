@@ -1,9 +1,12 @@
 package com.accbdd.complicated_bees.item;
 
+import com.accbdd.complicated_bees.genetics.Genome;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -11,8 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,40 +22,32 @@ import java.util.Objects;
 
 public class BeeItem extends Item {
 
-    public static final String SPECIES_TAG = "species";
-
     public BeeItem(Properties prop) {
         super(prop);
     }
 
-    public static Species getSpecies(ItemStack stack) {
-        //get species string from nbt, return species from registry
-        if (FMLEnvironment.dist.isClient()) {
-            if (Minecraft.getInstance().getConnection() == null) {
-                return Species.NULL;
-            }
-            return Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(SPECIES_TAG)));
-        } else {
-            return ServerLifecycleHooks.getCurrentServer().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(SPECIES_TAG)));
-        }
+    public static Genome getGenome(ItemStack stack) {
+        CompoundTag serializedGenome = stack.getOrCreateTag().getCompound("genome");
+        return Genome.deserialize(serializedGenome);
     }
 
-    public static ItemStack setSpecies(ItemStack stack, ResourceLocation species) {
-        stack.getOrCreateTag().putString(SPECIES_TAG, species.toString());
+    public static ItemStack setGenome(ItemStack stack, Genome genome) {
+        CompoundTag serializedGenome = Genome.serialize(genome);
+        stack.getOrCreateTag().put("genome", serializedGenome);
         return stack;
     }
 
     @Override
     public @NotNull Component getName(ItemStack stack) {
         return Component.translatable("species.complicated_bees." +
-                stack.getOrCreateTag().getString(SPECIES_TAG))
+                getSpeciesResourceLocation(stack).toString())
                 .append(" ")
                 .append(Component.translatable(getDescriptionId()));
     }
 
     public static int getItemColor(ItemStack stack, int tintIndex) {
         if (tintIndex == 1) {
-            ResourceLocation speciesLocation = ResourceLocation.tryParse(stack.getOrCreateTag().getString(SPECIES_TAG));
+            ResourceLocation speciesLocation = getSpeciesResourceLocation(stack);
             Registry<Species> registry = Objects.requireNonNull(Minecraft.getInstance().getConnection()).registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get();
             if (speciesLocation != null) {
                 return registry.containsKey(speciesLocation) ? Objects.requireNonNull(registry.get(speciesLocation)).getColor() : 0xFFFFFF;
@@ -66,8 +59,11 @@ public class BeeItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level pLevel, @NotNull List<Component> components, @NotNull TooltipFlag isAdvanced) {
-        if (Minecraft.getInstance().level != null) {
-            Species species = getSpecies(stack);
+        GeneSpecies geneSpecies = GeneSpecies.get(getGenome(stack));
+        if (geneSpecies == null) {
+            components.add(Component.literal("INVALID ITEM"));
+        } else if (Minecraft.getInstance().level != null) {
+            Species species = geneSpecies.getSpecies();
             ItemStack primary = species.getProducts().getPrimary();
             ItemStack secondary = species.getProducts().getSecondary();
             ItemStack specialty = species.getProducts().getSpecialty();
@@ -78,5 +74,9 @@ public class BeeItem extends Item {
                 components.add(Component.translatable("gui.complicated_bees.specialty_produce").append(": ").append(specialty.getHoverName()).append(String.format(" @ %.0f%%", species.getProducts().getSpecialtyChance()*100)));
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);
+    }
+
+    private static ResourceLocation getSpeciesResourceLocation(ItemStack stack) {
+        return Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(GeneSpecies.get(getGenome(stack)).getSpecies());
     }
 }

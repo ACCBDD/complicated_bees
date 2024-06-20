@@ -19,5 +19,5 @@ public class GeneRegistry {
             .create();
 
     public static final DeferredRegister<Gene> GENES = DeferredRegister.create(GENE_REGISTRY, MODID);
-    public static final Supplier<GeneSpecies> SPECIES_GENE = GENES.register(GeneSpecies.TAG, () -> new GeneSpecies(Species.NULL));
+    public static final Supplier<GeneSpecies> SPECIES_GENE = GENES.register(GeneSpecies.TAG, () -> new GeneSpecies());
 }

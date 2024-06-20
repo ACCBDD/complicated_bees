@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.block.entity;
 
 import com.accbdd.complicated_bees.genetics.BeeProducts;
+import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.DroneItem;
 import com.accbdd.complicated_bees.item.PrincessItem;
@@ -187,7 +188,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public void generateProduce(ItemStack stack) {
-        BeeProducts products = BeeItem.getSpecies(stack).getProducts();
+        BeeProducts products = GeneSpecies.get(BeeItem.getGenome(stack)).getSpecies().getProducts();
         ItemStack primary = products.getPrimaryResult();
         ItemStack secondary = products.getSecondaryResult();
         ItemStack specialty = products.getSpecialtyResult();

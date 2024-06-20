@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.genetics;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.Random;
 
@@ -8,6 +9,8 @@ public class BeeProducts {
     private final ItemStack primary, secondary, specialty;
     private final float primary_chance, secondary_chance, specialty_chance;
     private static final Random rand = new Random();
+
+    public static final BeeProducts EMPTY = new BeeProducts(Items.AIR.getDefaultInstance(), 0, Items.AIR.getDefaultInstance(), 0, Items.AIR.getDefaultInstance(), 0);
 
     public BeeProducts(ItemStack primary, float primary_chance, ItemStack secondary, float secondary_chance, ItemStack specialty, float specialty_chance) {
         this.primary = primary;
