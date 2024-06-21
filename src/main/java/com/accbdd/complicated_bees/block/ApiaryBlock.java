@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.screen.ApiaryMenu;
 import com.mojang.serialization.MapCodec;

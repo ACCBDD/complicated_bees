@@ -1,6 +1,6 @@
 {
-  "id": "noble",
-  "color": "FFCC00",
+  "id": "desert",
+  "color": "FFE49C",
   "products": {
     "primary": {
       "item": "minecraft:arrow"
@@ -16,5 +16,8 @@
       }
     },
     "specialty_chance": 0.25
+  },
+  "genome": {
+    "complicated_bees:temperature": "hOt"
   }
 }

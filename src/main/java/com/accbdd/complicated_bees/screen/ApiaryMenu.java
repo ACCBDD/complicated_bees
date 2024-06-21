@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 import static com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity.*;
@@ -29,13 +30,13 @@ public class ApiaryMenu extends AbstractContainerMenu {
             addSlot(new SlotItemHandler(apiary.getBeeItems(), BEE_SLOT, 29, 38));
             addSlot(new SlotItemHandler(apiary.getBeeItems(), BEE_SLOT+1, 29, 63));
 
-            addSlot(new SlotItemHandler(apiary.getOutputItems(), OUTPUT_SLOT, 115, 51));
-            addSlot(new SlotItemHandler(apiary.getOutputItems(), OUTPUT_SLOT+1, 115, 26));
-            addSlot(new SlotItemHandler(apiary.getOutputItems(), OUTPUT_SLOT+2, 137, 39));
-            addSlot(new SlotItemHandler(apiary.getOutputItems(), OUTPUT_SLOT+3, 137, 64));
-            addSlot(new SlotItemHandler(apiary.getOutputItems(), OUTPUT_SLOT+4, 115, 76));
-            addSlot(new SlotItemHandler(apiary.getOutputItems(), OUTPUT_SLOT+5, 93, 64));
-            addSlot(new SlotItemHandler(apiary.getOutputItems(), OUTPUT_SLOT+6, 93, 39));
+            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT, 115, 51));
+            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+1, 115, 26));
+            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+2, 137, 39));
+            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+3, 137, 64));
+            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+4, 115, 76));
+            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+5, 93, 64));
+            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+6, 93, 39));
 
             addSlot(new SlotItemHandler(apiary.getFrameItems(), FRAME_SLOT, 65, 23));
             addSlot(new SlotItemHandler(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51));
@@ -44,6 +45,15 @@ public class ApiaryMenu extends AbstractContainerMenu {
         layoutPlayerInventorySlots(player.getInventory(), 8, 105);
 
         addDataSlots(data);
+    }
+
+    private Slot createOutputSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
+        return new SlotItemHandler(handler, index, xPos, yPos) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+        };
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {

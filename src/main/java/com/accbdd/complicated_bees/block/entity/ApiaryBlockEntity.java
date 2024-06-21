@@ -1,7 +1,11 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.BeeProducts;
+import com.accbdd.complicated_bees.genetics.Genome;
+import com.accbdd.complicated_bees.genetics.gene.EnumTemperature;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
+import com.accbdd.complicated_bees.genetics.gene.GeneTemperature;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.DroneItem;
 import com.accbdd.complicated_bees.item.PrincessItem;
@@ -13,6 +17,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.BiomeManager;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -38,6 +43,8 @@ public class ApiaryBlockEntity extends BlockEntity {
     private final ContainerData data;
     private int breedingProgress = 0;
     private int maxBreedingProgress = 40;
+
+    private EnumTemperature temperature = null;
 
     private final ItemStackHandler beeItems = createItemHandler(BEE_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
@@ -181,9 +188,12 @@ public class ApiaryBlockEntity extends BlockEntity {
         if (level.getGameTime() % 20 == 0) {
             ItemStack stack = beeItems.getStackInSlot(0);
             if (stack.getItem() instanceof QueenItem) {
-                generateProduce(stack);
+                if (queenSatisfied(stack))
+                    generateProduce(stack);
             }
             //todo: implement breeding
+            //todo: check surroundings
+            //todo: tick down life of bee (tick up?)
         }
     }
 
@@ -196,5 +206,16 @@ public class ApiaryBlockEntity extends BlockEntity {
         ItemHandlerHelper.insertItem(outputItems, primary, false);
         ItemHandlerHelper.insertItem(outputItems, secondary, false);
         ItemHandlerHelper.insertItem(outputItems, specialty, false);
+    }
+
+    public boolean queenSatisfied(ItemStack queen) {
+        if (this.temperature == null) {
+            if (getLevel() == null) {
+                return false;
+            }
+            this.temperature = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
+        }
+        Genome genome = BeeItem.getGenome(queen);
+        return GeneTemperature.get(genome).getTemperature() == this.temperature;
     }
 }

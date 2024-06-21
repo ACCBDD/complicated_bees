@@ -5,9 +5,13 @@ import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
+
+import java.util.logging.Level;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -34,7 +38,8 @@ public class GeneSpecies extends Gene {
 
     @Override
     public StringTag serialize() {
-        return StringTag.valueOf(Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(this.species).toString());
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return StringTag.valueOf(registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(this.species).toString());
     }
 
     @Override

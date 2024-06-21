@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.registry;
 import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.GeneLifespan;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
+import com.accbdd.complicated_bees.genetics.gene.GeneTemperature;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,4 +23,5 @@ public class GeneRegistry {
     public static final DeferredRegister<Gene> GENES = DeferredRegister.create(GENE_REGISTRY, MODID);
     public static final Supplier<GeneSpecies> SPECIES_GENE = GENES.register(GeneSpecies.TAG, () -> new GeneSpecies());
     public static final Supplier<GeneLifespan> LIFESPAN_GENE = GENES.register(GeneLifespan.TAG, () -> new GeneLifespan());
+    public static final Supplier<GeneTemperature> TEMPERATURE_GENE = GENES.register(GeneTemperature.TAG, () -> new GeneTemperature());
 }
