@@ -3,13 +3,9 @@ package com.accbdd.complicated_bees.genetics.gene;
 import com.accbdd.complicated_bees.ComplicatedBees;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public enum EnumTemperature {
     FROZEN("Frozen"),
@@ -53,25 +49,19 @@ public enum EnumTemperature {
     }
 
     public static EnumTemperature getFromString(String str) {
-        switch (str.toLowerCase()) {
-            case "hellish":
-                return HELLISH;
-            case "hot":
-                return HOT;
-            case "warm":
-                return WARM;
-            case "normal":
-                return NORMAL;
-            case "cold":
-                return COLD;
-            case "icy":
-                return ICY;
-            case "frozen":
-                return FROZEN;
-            default:
+        return switch (str.toLowerCase()) {
+            case "hellish" -> HELLISH;
+            case "hot" -> HOT;
+            case "warm" -> WARM;
+            case "normal" -> NORMAL;
+            case "cold" -> COLD;
+            case "icy" -> ICY;
+            case "frozen" -> FROZEN;
+            default -> {
                 ComplicatedBees.LOGGER.warn("tried to convert unknown string {} to temperature; returning normal", str);
-                return NORMAL;
-        }
+                yield NORMAL;
+            }
+        };
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.BeeProducts;
 import com.accbdd.complicated_bees.genetics.Genome;
-import com.accbdd.complicated_bees.genetics.gene.EnumTemperature;
-import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
-import com.accbdd.complicated_bees.genetics.gene.GeneTemperature;
+import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.DroneItem;
 import com.accbdd.complicated_bees.item.PrincessItem;
@@ -17,7 +14,6 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.BiomeManager;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -45,6 +41,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     private int maxBreedingProgress = 40;
 
     private EnumTemperature temperature = null;
+    private EnumHumidity humidity = null;
 
     private final ItemStackHandler beeItems = createItemHandler(BEE_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
@@ -215,7 +212,13 @@ public class ApiaryBlockEntity extends BlockEntity {
             }
             this.temperature = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
         }
+        if (this.humidity == null) {
+            if (getLevel() == null) {
+                return false;
+            }
+            this.humidity = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
+        }
         Genome genome = BeeItem.getGenome(queen);
-        return GeneTemperature.get(genome).getTemperature() == this.temperature;
+        return (GeneTemperature.get(genome).getTemperature() == this.temperature) && (GeneHumidity.get(genome).getHumidity() == this.humidity);
     }
 }
