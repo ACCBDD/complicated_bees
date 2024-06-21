@@ -1,6 +1,5 @@
 {
-  "id": "desert",
-  "color": "FFE49C",
+  "color": "ffedbd",
   "products": {
     "primary": {
       "item": "minecraft:arrow"

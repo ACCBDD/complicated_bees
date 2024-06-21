@@ -19,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class BeeItem extends Item {
 
@@ -42,7 +43,7 @@ public class BeeItem extends Item {
     @Override
     public @NotNull Component getName(ItemStack stack) {
         return Component.translatable("species.complicated_bees." +
-                getSpeciesResourceLocation(stack).toString())
+                (getSpeciesResourceLocation(stack) == null ? "invalid" : getSpeciesResourceLocation(stack).toString()))
                 .append(" ")
                 .append(Component.translatable(getDescriptionId()));
     }
@@ -63,7 +64,11 @@ public class BeeItem extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level pLevel, @NotNull List<Component> components, @NotNull TooltipFlag isAdvanced) {
         GeneSpecies geneSpecies = GeneSpecies.get(getGenome(stack));
         if (geneSpecies == null) {
+            //broken nbt
             components.add(Component.literal("INVALID ITEM"));
+        } else if (geneSpecies.getSpecies() == null) {
+            //species doesn't exist in registry
+            components.add(Component.literal("INVALID SPECIES"));
         } else if (Minecraft.getInstance().level != null) {
             Species species = geneSpecies.getSpecies();
             ItemStack primary = species.getProducts().getPrimary();

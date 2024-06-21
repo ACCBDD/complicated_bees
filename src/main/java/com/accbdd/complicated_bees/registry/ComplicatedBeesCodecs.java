@@ -49,11 +49,10 @@ public class ComplicatedBeesCodecs {
 
     public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.STRING.fieldOf("id").forGetter(Species::getId),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
                     CompoundTag.CODEC.optionalFieldOf("genome", Genome.serialize(new Genome())).forGetter((species -> Genome.serialize(species.getDefaultGenome())))
-            ).apply(instance, (id, clr, prod, tag) -> new Species(id, clr, prod, tag))
+            ).apply(instance, Species::new)
     );
 
     public static final Codec<Comb> COMB_CODEC = RecordCodecBuilder.create(instance ->
