@@ -19,25 +19,33 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class BeeItem extends Item {
 
-    public static final String GENOME = "genome";
+    public static final String GENOME_TAG = "genome";
+    public static final String AGE_TAG = "bee_age";
 
     public BeeItem(Properties prop) {
         super(prop);
     }
 
     public static Genome getGenome(ItemStack stack) {
-        CompoundTag serializedGenome = stack.getOrCreateTag().getCompound(GENOME);
+        CompoundTag serializedGenome = stack.getOrCreateTag().getCompound(GENOME_TAG);
         return Genome.deserialize(serializedGenome);
     }
 
     public static ItemStack setGenome(ItemStack stack, Genome genome) {
         CompoundTag serializedGenome = Genome.serialize(genome);
-        stack.getOrCreateTag().put(GENOME, serializedGenome);
+        stack.getOrCreateTag().put(GENOME_TAG, serializedGenome);
         return stack;
+    }
+
+    public static int getAge(ItemStack stack) {
+        return stack.getOrCreateTag().getInt(AGE_TAG);
+    }
+
+    public static void setAge(ItemStack stack, int age) {
+        stack.getOrCreateTag().putInt(AGE_TAG, age);
     }
 
     @Override

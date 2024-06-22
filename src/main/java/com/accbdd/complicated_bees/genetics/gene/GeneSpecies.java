@@ -44,7 +44,8 @@ public class GeneSpecies extends Gene {
 
     @Override
     public Gene deserialize(Tag tag) {
-        Registry<Species> registry = Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get();
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        Registry<Species> registry = registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get();
 
         return new GeneSpecies(registry.get(ResourceLocation.tryParse(tag.getAsString())));
     }
