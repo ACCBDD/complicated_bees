@@ -1,7 +1,9 @@
 package com.accbdd.complicated_bees.screen;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -123,5 +125,20 @@ public class ApiaryMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(player.level(), pos), player, BlocksRegistration.APIARY.get());
+    }
+
+    public boolean hasQueen() {
+        ItemStack item = getSlot(0).getItem();
+        return item.getItem() == ItemsRegistration.QUEEN.get();
+    }
+
+    public int getScaledProgress(int progress, int maxProgress) {
+        int barHeight = 45;
+        int i = maxProgress != 0 && progress != 0 ? progress * barHeight / maxProgress : 0;
+        return i;
+    }
+
+    public ItemStack getQueen() {
+        return getSlot(0).getItem();
     }
 }

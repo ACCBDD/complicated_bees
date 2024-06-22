@@ -185,12 +185,13 @@ public class ApiaryBlockEntity extends BlockEntity {
         if (level.getGameTime() % 20 == 0) {
             ItemStack stack = beeItems.getStackInSlot(0);
             if (stack.getItem() instanceof QueenItem) {
-                if (queenSatisfied(stack))
+                if (queenSatisfied(stack)) {
+                    ageQueen(stack);
                     generateProduce(stack);
+                }
             }
             //todo: implement breeding
             //todo: check surroundings
-            //todo: tick down life of bee (tick up?)
         }
     }
 
@@ -220,5 +221,12 @@ public class ApiaryBlockEntity extends BlockEntity {
         }
         Genome genome = BeeItem.getGenome(queen);
         return (GeneTemperature.get(genome).getTemperature() == this.temperature) && (GeneHumidity.get(genome).getHumidity() == this.humidity);
+    }
+
+    public void ageQueen(ItemStack queen) {
+        BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
+        if (BeeItem.getAge(queen) >= GeneLifespan.get(BeeItem.getGenome(queen)).getLifespan()) {
+            beeItems.extractItem(BEE_SLOT, 1, false);
+        }
     }
 }

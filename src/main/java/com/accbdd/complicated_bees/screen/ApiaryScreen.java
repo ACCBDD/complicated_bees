@@ -1,5 +1,10 @@
 package com.accbdd.complicated_bees.screen;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
+import com.accbdd.complicated_bees.genetics.gene.GeneLifespan;
+import com.accbdd.complicated_bees.item.BeeItem;
+import com.accbdd.complicated_bees.item.QueenItem;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -18,10 +23,12 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
     }
 
     @Override
-    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
         int relX = (this.width - this.imageWidth) / 2;
         int relY = (this.height - this.imageHeight) / 2;
         graphics.blit(GUI, relX, relY, 0, 0, this.imageWidth, this.imageHeight);
+
+        renderStatusBar(graphics, relX, relY);
     }
 
     @Override
@@ -29,5 +36,18 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
         renderBg(graphics, partialTick, mouseX, mouseY);
         super.render(graphics, mouseX, mouseY, partialTick);
         renderTooltip(graphics, mouseX, mouseY);
+    }
+
+    public void renderStatusBar(GuiGraphics graphics, int x, int y) {
+        if (menu.hasQueen()) {
+            int progress = menu.getScaledProgress(BeeItem.getAge(menu.getQueen()), GeneLifespan.get(BeeItem.getGenome(menu.getQueen())).getLifespan());
+            graphics.blit(GUI,
+                    x + 18,
+                    y + 36 + progress,
+                    179,
+                    progress,
+                    3,
+                    45 - progress);
+        }
     }
 }
