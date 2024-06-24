@@ -8,12 +8,13 @@ import net.minecraft.nbt.Tag;
  */
 public interface IGene<T> {
     /**
-     * Returns the value of this gene
-     *
      * @return the value of this gene
      */
     T get();
 
+    /**
+     * @return whether this gene is dominant
+     */
     boolean isDominant();
 
     /**
