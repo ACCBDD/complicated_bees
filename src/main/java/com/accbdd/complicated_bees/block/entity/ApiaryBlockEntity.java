@@ -217,15 +217,9 @@ public class ApiaryBlockEntity extends BlockEntity {
             }
             this.temperature = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
         }
-        if (this.humidity == null) {
-            if (getLevel() == null) {
-                return false;
-            }
-            this.humidity = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
-        }
         Genome genome = GenomeHelper.getGenome(queen, true);
         return (((GeneTemperature)genome.getGene(GeneTemperature.ID)).get() == this.temperature
-                && ((GeneHumidity)genome.getGene(GeneHumidity.ID)).get() == this.humidity);
+                && ((GeneHumidity)genome.getGene(GeneHumidity.ID)).withinTolerance(getHumidity()));
     }
 
     public void ageQueen(ItemStack queen) {
@@ -234,5 +228,15 @@ public class ApiaryBlockEntity extends BlockEntity {
             beeItems.extractItem(BEE_SLOT, 1, false);
             setChanged();
         }
+    }
+
+    public EnumHumidity getHumidity() {
+        if (this.humidity == null) {
+            if (getLevel() == null) {
+                return null;
+            }
+            this.humidity = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
+        }
+        return this.humidity;
     }
 }

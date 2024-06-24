@@ -8,13 +8,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 
 public enum EnumTemperature {
-    FROZEN("Frozen"),
-    ICY("Icy"),
-    COLD("Cold"),
-    NORMAL("Normal"),
-    WARM("Warm"),
-    HOT("Hot"),
-    HELLISH("Hellish");
+    FROZEN("frozen"),
+    ICY("icy"),
+    COLD("cold"),
+    NORMAL("normal"),
+    WARM("warm"),
+    HOT("hot"),
+    HELLISH("hellish");
 
     public static final EnumTemperature[] VALUES = values();
 
