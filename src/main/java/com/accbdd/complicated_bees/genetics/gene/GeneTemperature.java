@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
-import com.accbdd.complicated_bees.genetics.Genome;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 

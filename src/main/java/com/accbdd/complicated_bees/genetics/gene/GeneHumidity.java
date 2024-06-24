@@ -1,9 +1,7 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
-import com.accbdd.complicated_bees.genetics.Genome;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;

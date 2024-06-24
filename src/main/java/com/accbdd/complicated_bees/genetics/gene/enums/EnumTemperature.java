@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.genetics.gene;
+package com.accbdd.complicated_bees.genetics.gene.enums;
 
 import com.accbdd.complicated_bees.ComplicatedBees;
 import net.minecraft.core.BlockPos;

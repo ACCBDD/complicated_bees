@@ -1,10 +1,11 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.BeeProducts;
 import com.accbdd.complicated_bees.genetics.Genome;
 import com.accbdd.complicated_bees.genetics.GenomeHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.DroneItem;
 import com.accbdd.complicated_bees.item.PrincessItem;
