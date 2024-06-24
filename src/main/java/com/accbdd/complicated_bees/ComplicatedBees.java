@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees;
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.datagen.DataGenerators;
 import com.accbdd.complicated_bees.genetics.Genome;
+import com.accbdd.complicated_bees.genetics.GenomeHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.item.BeeItem;
@@ -51,9 +52,9 @@ public class ComplicatedBees
             .icon(() -> ItemsRegistration.DRONE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 for (Map.Entry<ResourceKey<Species>, Species> entry: Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet()) {
-                    output.accept(BeeItem.setGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
-                    output.accept(BeeItem.setGenome(ItemsRegistration.PRINCESS.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
-                    output.accept(BeeItem.setGenome(ItemsRegistration.QUEEN.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
+                    output.accept(GenomeHelper.setBothGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
+                    output.accept(GenomeHelper.setBothGenome(ItemsRegistration.PRINCESS.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
+                    output.accept(GenomeHelper.setBothGenome(ItemsRegistration.QUEEN.get().getDefaultInstance(), entry.getValue().getDefaultGenome()));
                 }
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().keySet()) {
                     output.accept(CombItem.setComb(ItemsRegistration.COMB.get().getDefaultInstance(), id));

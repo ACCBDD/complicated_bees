@@ -51,7 +51,7 @@ public class ComplicatedBeesCodecs {
             instance.group(
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
-                    CompoundTag.CODEC.optionalFieldOf("genome", Genome.serialize(new Genome())).forGetter((species -> Genome.serialize(species.getDefaultGenome())))
+                    CompoundTag.CODEC.optionalFieldOf("genome", new Genome().serialize()).forGetter((species -> species.getDefaultGenome().serialize()))
             ).apply(instance, Species::new)
     );
 

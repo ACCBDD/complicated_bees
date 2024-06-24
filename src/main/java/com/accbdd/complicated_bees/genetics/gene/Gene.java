@@ -1,43 +1,47 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
-import com.accbdd.complicated_bees.genetics.Genome;
-import com.mojang.serialization.Codec;
-import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.nbt.ByteTag;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.StringTag;
 
-/**
- * An abstract class for a Gene representing some arbitrary information.
- */
-public abstract class Gene {
-    /**
-     * Returns the version of this gene present in the given genome.
-     *
-     * @param genome a genome
-     * @return the version of this gene present in the genome
-     */
-    public static Gene get(Genome genome) {
-        throw new RuntimeException("This needs to be implemented!");
+import java.util.function.Supplier;
+
+public class Gene<T> implements IGene<T> {
+    public static String DATA = "data";
+    public static String DOMINANT = "dominant";
+
+    private final boolean dominant;
+    final T geneData;
+
+    public Gene(T geneData) {
+        this(geneData, true);
     }
 
-    /**
-     * Gets the ResourceLocation of this gene, used in serialization and registry lookups.
-     *
-     * @return the ResourceLocation of this gene
-     */
-    public static ResourceLocation getId() {
-        throw new RuntimeException("This needs to be implemented!");
+    public Gene(T geneData, boolean dominant) {
+        this.geneData = geneData;
+        this.dominant = dominant;
     }
 
-    /**
-     * Serializes this gene into an NBT tag.
-     * @return a serialized version of this gene
-     */
-    public abstract Tag serialize();
+    @Override
+    public T get() {
+        return geneData;
+    }
 
-    /**
-     * Creates a deserialized gene from a serialized NBT tag.
-     * @param tag the serialized version of the data this gene stores
-     * @return a deserialized version of this gene from the specified tag
-     */
-    public abstract Gene deserialize(Tag tag);
+    @Override
+    public boolean isDominant() {
+        return this.dominant;
+    }
+
+    @Override
+    public CompoundTag serialize() {
+        CompoundTag tag = new CompoundTag();
+        tag.put(DATA, StringTag.valueOf(geneData.toString()));
+        tag.put(DOMINANT, ByteTag.valueOf(dominant));
+        return tag;
+    }
+
+    @Override
+    public Gene<T> deserialize(CompoundTag tag) {
+        return new Gene<T>((T) tag.getString(DATA), tag.getBoolean(DOMINANT));
+    }
 }

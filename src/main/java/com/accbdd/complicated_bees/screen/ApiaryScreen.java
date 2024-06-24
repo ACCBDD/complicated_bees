@@ -1,15 +1,15 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.ComplicatedBees;
+import com.accbdd.complicated_bees.genetics.GenomeHelper;
 import com.accbdd.complicated_bees.genetics.gene.GeneLifespan;
 import com.accbdd.complicated_bees.item.BeeItem;
-import com.accbdd.complicated_bees.item.QueenItem;
-import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -40,7 +40,9 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
 
     public void renderStatusBar(GuiGraphics graphics, int x, int y) {
         if (menu.hasQueen()) {
-            int progress = menu.getScaledProgress(BeeItem.getAge(menu.getQueen()), GeneLifespan.get(BeeItem.getGenome(menu.getQueen())).getLifespan());
+            ItemStack queen = menu.getQueen();
+            int lifespan = (int) GenomeHelper.getGenome(queen, true).getGene(GeneLifespan.ID).get();
+            int progress = menu.getScaledProgress(BeeItem.getAge(queen), lifespan);
             graphics.blit(GUI,
                     x + 18,
                     y + 36 + progress,

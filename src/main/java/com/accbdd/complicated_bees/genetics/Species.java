@@ -21,12 +21,12 @@ public class Species {
     public Species(int color, BeeProducts products, Genome defaultGenome) {
         this.color = color;
         this.products = products;
-        this.defaultGenome = defaultGenome.setGene(GeneSpecies.getId(), new GeneSpecies(this));
+        this.defaultGenome = defaultGenome.setGene(GeneSpecies.ID, new GeneSpecies(this));
     }
 
     public Species(int color, BeeProducts products, CompoundTag defaultGenomeAsTag) {
         this(color, products, new Genome(defaultGenomeAsTag));
-        ComplicatedBees.LOGGER.debug("creating new species using genome from compoundtag");
+        ComplicatedBees.LOGGER.debug("creating new species using genome from compoundtag: {}", defaultGenomeAsTag);
     }
 
     public int getColor() {

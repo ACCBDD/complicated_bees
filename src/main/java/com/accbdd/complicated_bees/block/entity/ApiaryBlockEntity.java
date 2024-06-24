@@ -1,7 +1,9 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.BeeProducts;
 import com.accbdd.complicated_bees.genetics.Genome;
+import com.accbdd.complicated_bees.genetics.GenomeHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.DroneItem;
@@ -50,7 +52,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     private final Lazy<IItemHandler> itemHandler = Lazy.of(() -> new CombinedInvWrapper(beeItems, outputItems, frameItems));
     private final Lazy<IItemHandler> beeItemHandler = Lazy.of(() -> new AdaptedItemHandler(beeItems) {
         @Override
-        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             return ItemStack.EMPTY;
         }
 
@@ -74,7 +76,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     });
     private final Lazy<IItemHandler> outputItemHandler = Lazy.of(() -> new AdaptedItemHandler(outputItems) {
         @Override
-        public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             return stack;
         }
 
@@ -196,7 +198,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public void generateProduce(ItemStack stack) {
-        BeeProducts products = GeneSpecies.get(BeeItem.getGenome(stack)).getSpecies().getProducts();
+        BeeProducts products = ((GeneSpecies) GenomeHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
         ItemStack primary = products.getPrimaryResult();
         ItemStack secondary = products.getSecondaryResult();
         ItemStack specialty = products.getSpecialtyResult();
@@ -204,6 +206,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         ItemHandlerHelper.insertItem(outputItems, primary, false);
         ItemHandlerHelper.insertItem(outputItems, secondary, false);
         ItemHandlerHelper.insertItem(outputItems, specialty, false);
+        setChanged();
     }
 
     public boolean queenSatisfied(ItemStack queen) {
@@ -219,14 +222,16 @@ public class ApiaryBlockEntity extends BlockEntity {
             }
             this.humidity = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
         }
-        Genome genome = BeeItem.getGenome(queen);
-        return (GeneTemperature.get(genome).getTemperature() == this.temperature) && (GeneHumidity.get(genome).getHumidity() == this.humidity);
+        Genome genome = GenomeHelper.getGenome(queen, true);
+        return (((GeneTemperature)genome.getGene(GeneTemperature.ID)).get() == this.temperature
+                && ((GeneHumidity)genome.getGene(GeneHumidity.ID)).get() == this.humidity);
     }
 
     public void ageQueen(ItemStack queen) {
         BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
-        if (BeeItem.getAge(queen) >= GeneLifespan.get(BeeItem.getGenome(queen)).getLifespan()) {
+        if (BeeItem.getAge(queen) >= (int) GenomeHelper.getGeneValue(queen, GeneLifespan.ID, true)) {
             beeItems.extractItem(BEE_SLOT, 1, false);
+            setChanged();
         }
     }
 }

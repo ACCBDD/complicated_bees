@@ -1,48 +1,27 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
 import com.accbdd.complicated_bees.genetics.Genome;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
-public class GeneHumidity extends Gene {
+public class GeneHumidity extends Gene<EnumHumidity> {
     public static final String TAG = "humidity";
-
-    private EnumHumidity humidity;
+    public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneHumidity() {
         this(EnumHumidity.NORMAL);
     }
 
     public GeneHumidity(EnumHumidity humidity) {
-        this.humidity = humidity;
-    }
-
-    public static GeneHumidity get(Genome genome) {
-        return genome.getGene(getId()) == null ? new GeneHumidity() : (GeneHumidity) genome.getGene(getId());
-    }
-
-    public static ResourceLocation getId() {
-        return new ResourceLocation(MODID, TAG);
+        super(humidity);
     }
 
     @Override
-    public StringTag serialize() {
-        return StringTag.valueOf(this.humidity.name);
-    }
-
-    @Override
-    public Gene deserialize(Tag tag) {
-        return new GeneHumidity(EnumHumidity.getFromString(tag.getAsString()));
-    }
-
-    public EnumHumidity getHumidity() {
-        return this.humidity;
-    }
-
-    public void setHumidity(EnumHumidity humidity) {
-        this.humidity = humidity;
+    public GeneHumidity deserialize(CompoundTag tag) {
+        return new GeneHumidity(EnumHumidity.getFromString(tag.getString(DATA)));
     }
 }

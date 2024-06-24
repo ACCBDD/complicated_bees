@@ -7,6 +7,8 @@
     "primary_chance": 0.322
   },
   "genome": {
-    "complicated_bees:lifespan": 105
+    "complicated_bees:lifespan": {
+      "data": 105
+    }
   }
 }

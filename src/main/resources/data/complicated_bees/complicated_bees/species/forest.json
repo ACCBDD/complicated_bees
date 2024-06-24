@@ -10,6 +10,8 @@
     }
   },
   "genome": {
-    "complicated_bees:lifespan": 100
+    "complicated_bees:lifespan": {
+      "data": 100
+    }
   }
 }
