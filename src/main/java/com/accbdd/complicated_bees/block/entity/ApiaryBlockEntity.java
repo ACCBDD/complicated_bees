@@ -211,14 +211,9 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public boolean queenSatisfied(ItemStack queen) {
-        if (this.temperature == null) {
-            if (getLevel() == null) {
-                return false;
-            }
-            this.temperature = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
-        }
+
         Genome genome = GenomeHelper.getGenome(queen, true);
-        return (((GeneTemperature)genome.getGene(GeneTemperature.ID)).get() == this.temperature
+        return (((GeneTemperature)genome.getGene(GeneTemperature.ID)).withinTolerance(getTemperature())
                 && ((GeneHumidity)genome.getGene(GeneHumidity.ID)).withinTolerance(getHumidity()));
     }
 
@@ -238,5 +233,15 @@ public class ApiaryBlockEntity extends BlockEntity {
             this.humidity = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
         }
         return this.humidity;
+    }
+
+    public EnumTemperature getTemperature() {
+        if (this.temperature == null) {
+            if (getLevel() == null) {
+                return null;
+            }
+            this.temperature = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
+        }
+        return this.temperature;
     }
 }
