@@ -7,9 +7,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 
 public enum EnumHumidity {
-    WET("wet"),
+    DRY("dry"),
     NORMAL("normal"),
-    DRY("dry");
+    WET("wet");
+
 
     public static final EnumHumidity[] VALUES = values();
 

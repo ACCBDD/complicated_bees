@@ -51,8 +51,8 @@ public enum EnumTolerance {
             case "DOWN_2" -> DOWN_2;
             case "DOWN_1" -> DOWN_1;
             default -> {
-                ComplicatedBees.LOGGER.warn("tried to convert unknown string {} to tolerance; returning both_1", str);
-                yield BOTH_1;
+                ComplicatedBees.LOGGER.warn("tried to convert unknown string {} to tolerance; returning NONE", str);
+                yield NONE;
             }
         };
     }

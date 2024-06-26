@@ -18,10 +18,12 @@
   },
   "genome": {
     "complicated_bees:temperature": {
-      "data": "hOt"
+      "data": "hOt",
+      "tolerance": "down_1"
     },
     "complicated_bees:humidity": {
-      "data": "drY"
+      "data": "drY",
+      "tolerance": "uP_2"
     }
   }
 }

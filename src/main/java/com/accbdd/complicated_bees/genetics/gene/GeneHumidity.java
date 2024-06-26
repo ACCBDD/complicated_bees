@@ -16,7 +16,7 @@ public class GeneHumidity extends GeneTolerant<EnumHumidity> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneHumidity() {
-        this(EnumHumidity.NORMAL, EnumTolerance.BOTH_1);
+        this(EnumHumidity.NORMAL, EnumTolerance.NONE);
     }
 
     public GeneHumidity(EnumHumidity enumHumidity, EnumTolerance enumTolerance) {

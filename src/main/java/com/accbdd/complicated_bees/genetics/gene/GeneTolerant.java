@@ -11,7 +11,7 @@ public abstract class GeneTolerant<T extends Enum<T>> extends Gene<T> {
     private final EnumTolerance tolerance;
 
     public GeneTolerant(T geneData) {
-        this(geneData, EnumTolerance.BOTH_1);
+        this(geneData, EnumTolerance.NONE);
     }
 
     public GeneTolerant(T data, EnumTolerance tolerance) {
