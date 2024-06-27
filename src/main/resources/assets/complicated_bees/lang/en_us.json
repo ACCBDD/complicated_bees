@@ -6,6 +6,7 @@
   "item.complicated_bees.queen": "Queen",
   "item.complicated_bees.scoop": "Scoop",
   "item.complicated_bees.comb": "Comb",
+  "item.complicated_bees.meter": "Meter",
 
   "block.complicated_bees.bee_nest": "Bee Nest",
   "block.complicated_bees.apiary": "Apiary",
@@ -17,6 +18,20 @@
   "gui.complicated_bees.centrifuge": "Centrifuge",
   "gui.complicated_bees.apiary": "Apiary",
   "gui.complicated_bees.comb_products": "Comb Products",
+  "gui.complicated_bees.humidity_label": "Humidity",
+  "gui.complicated_bees.temperature_label": "Temperature",
+
+  "gui.complicated_bees.humidity.wet": "Wet",
+  "gui.complicated_bees.humidity.normal": "Normal",
+  "gui.complicated_bees.humidity.dry": "Dry",
+
+  "gui.complicated_bees.temperature.frozen": "Frozen",
+  "gui.complicated_bees.temperature.icy": "Icy",
+  "gui.complicated_bees.temperature.cold": "Cold",
+  "gui.complicated_bees.temperature.normal": "Normal",
+  "gui.complicated_bees.temperature.warm": "Warm",
+  "gui.complicated_bees.temperature.hot": "Hot",
+  "gui.complicated_bees.temperature.hellish": "Hellish",
 
   "jei.complicated_bees.chance": "Chance",
 
