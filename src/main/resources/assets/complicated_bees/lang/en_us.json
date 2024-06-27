@@ -33,6 +33,23 @@
   "gui.complicated_bees.temperature.hot": "Hot",
   "gui.complicated_bees.temperature.hellish": "Hellish",
 
+  "gui.complicated_bees.tolerance.none": "None",
+  "gui.complicated_bees.tolerance.both_5": "Both 5",
+  "gui.complicated_bees.tolerance.both_4": "Both 4",
+  "gui.complicated_bees.tolerance.both_3": "Both 3",
+  "gui.complicated_bees.tolerance.both_2": "Both 2",
+  "gui.complicated_bees.tolerance.both_1": "Both 1",
+  "gui.complicated_bees.tolerance.down_5": "Down 5",
+  "gui.complicated_bees.tolerance.down_4": "Down 4",
+  "gui.complicated_bees.tolerance.down_3": "Down 3",
+  "gui.complicated_bees.tolerance.down_2": "Down 2",
+  "gui.complicated_bees.tolerance.down_1": "Down 1",
+  "gui.complicated_bees.tolerance.up_5": "Up 5",
+  "gui.complicated_bees.tolerance.up_4": "Up 4",
+  "gui.complicated_bees.tolerance.up_3": "Up 3",
+  "gui.complicated_bees.tolerance.up_2": "Up 2",
+  "gui.complicated_bees.tolerance.up_1": "Up 1",
+
   "jei.complicated_bees.chance": "Chance",
 
   "comb.complicated_bees.complicated_bees:stringy": "Stringy",

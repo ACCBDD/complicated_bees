@@ -6,8 +6,10 @@ import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneHumidity;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTemperature;
+import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.registry.GeneRegistry;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
@@ -83,15 +85,14 @@ public class BeeItem extends Item {
             components.add(Component.literal("INVALID SPECIES"));
         } else if (Minecraft.getInstance().level != null) {
             Chromosome primary = GeneticHelper.getChromosome(stack, true);
-            Chromosome secondary = GeneticHelper.getChromosome(stack, false);
             components.add(Component.translatable("gui.complicated_bees.humidity_label")
                     .append(": ")
                     .append(((EnumHumidity)primary.getGene(GeneHumidity.ID).get()).getTranslationKey())
-                    .append("/").append(((EnumHumidity)secondary.getGene(GeneHumidity.ID).get()).getTranslationKey()));
+                    .append(" / ").append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey()));
             components.add(Component.translatable("gui.complicated_bees.temperature_label")
                     .append(": ")
                     .append(((EnumTemperature)primary.getGene(GeneTemperature.ID).get()).getTranslationKey())
-                    .append("/").append(((EnumTemperature)secondary.getGene(GeneTemperature.ID).get()).getTranslationKey()));
+                    .append(" / ").append(((GeneTolerant<?>)primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey()));
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);
     }

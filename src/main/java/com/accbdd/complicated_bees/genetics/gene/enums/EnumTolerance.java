@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.genetics.gene.enums;
 
 import com.accbdd.complicated_bees.ComplicatedBees;
+import net.minecraft.network.chat.Component;
 
 public enum EnumTolerance {
     NONE("NONE", 0, 0),
@@ -60,5 +61,9 @@ public enum EnumTolerance {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public Component getTranslationKey() {
+        return Component.translatable("gui.complicated_bees.tolerance." + this.toString().toLowerCase());
     }
 }
