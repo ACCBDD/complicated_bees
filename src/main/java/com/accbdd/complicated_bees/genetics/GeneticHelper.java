@@ -1,7 +1,9 @@
 package com.accbdd.complicated_bees.genetics;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
+import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
@@ -93,6 +95,9 @@ public class GeneticHelper {
 
         for (Map.Entry<ResourceLocation, Gene<?>> entry : first.getGenes().entrySet()) {
             //todo: implement random mutations
+            if (entry.getValue() instanceof GeneTolerant) {
+                //todo: implement mixing tolerances
+            }
             result.setGene(entry.getKey(), rand.nextFloat() < 0.5 ? entry.getValue() :  second.getGene(entry.getKey()));
         }
 
