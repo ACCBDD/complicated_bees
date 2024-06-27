@@ -83,11 +83,35 @@ public class GeneticHelper {
         return !Objects.equals(getChromosome(stack, primary).serialize(), new CompoundTag());
     }
 
-    private static Genome mixGenomes(Genome first, Genome second) {
-        Chromosome chromosome_a = mixChromosomes(first.getPrimary(), second.getPrimary());
-        Chromosome chromosome_b = mixChromosomes(first.getSecondary(), second.getSecondary());
+    private static Genome mixGenomes(Genome left, Genome right) {
+        //todo: THIS IS NOT MENDELIAN - FIX THIS
+        Chromosome chromosome_a = new Chromosome(), chromosome_b = new Chromosome();
 
-        //todo: implement reorganizing based on dominant/recessive
+        for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {
+            ResourceLocation key = entry.getKey();
+            Gene<?> geneA = (rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key);
+            Gene<?> geneB = (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key);
+
+//            if (entry.getValue() instanceof GeneTolerant) {
+//                //mix tolerances as well
+//                geneA = ((GeneTolerant<?>)geneA).setTolerance();
+//                geneB = ((GeneTolerant<?>)geneB).setTolerance();
+//            }
+
+            chromosome_a.setGene(key, geneA);
+            chromosome_b.setGene(key, geneB);
+        }
+
+        //sort genome so that dominant genes are always in a
+        for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {
+            Gene<?> gene = entry.getValue();
+            if (!entry.getValue().isDominant()) {
+                ComplicatedBees.LOGGER.debug("swapping values for {}", entry.getKey());
+                chromosome_a.setGene(entry.getKey(), chromosome_b.getGene(entry.getKey()));
+                chromosome_b.setGene(entry.getKey(), gene);
+            }
+        }
+
         return new Genome(chromosome_a, chromosome_b);
     }
 
@@ -100,7 +124,7 @@ public class GeneticHelper {
             result.setGene(geneType, rand.nextFloat() < 0.5 ? entry.getValue() :  second.getGene(geneType));
             if (entry.getValue() instanceof GeneTolerant) {
                 //mix tolerances as well
-                EnumTolerance tolerance = rand.nextFloat() < 0.5 ? ((GeneTolerant<?>) entry.getValue()).getTolerance() :  ((GeneTolerant<?>)second.getGene(geneType)).getTolerance();
+                EnumTolerance tolerance = rand.nextFloat() < 0.5 ? ((GeneTolerant<?>) entry.getValue()).getTolerance() : ((GeneTolerant<?>)second.getGene(geneType)).getTolerance();
                 result.setGene(geneType, ((GeneTolerant<?>)result.getGene(geneType)).setTolerance(tolerance));
             }
         }

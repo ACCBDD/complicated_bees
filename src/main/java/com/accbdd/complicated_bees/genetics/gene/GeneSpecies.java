@@ -22,8 +22,8 @@ public class GeneSpecies extends Gene<Species> {
         super(Species.INVALID, true);
     }
 
-    public GeneSpecies(Species species) {
-        super(species);
+    public GeneSpecies(Species species, boolean dominant) {
+        super(species, dominant);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class GeneSpecies extends Gene<Species> {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
         Registry<Species> registry = registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get();
 
-        return new GeneSpecies(registry.get(ResourceLocation.tryParse(tag.getString(DATA))));
+        return new GeneSpecies(registry.get(ResourceLocation.tryParse(tag.getString(DATA))), tag.getBoolean(DOMINANT));
     }
 }

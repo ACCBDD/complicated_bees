@@ -45,6 +45,7 @@ public class ComplicatedBeesCodecs {
 
     public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
+                    Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
                     CompoundTag.CODEC.optionalFieldOf("genome", new Chromosome().serialize()).forGetter((species -> species.getDefaultChromosome().serialize()))
