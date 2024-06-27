@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
@@ -94,11 +95,14 @@ public class GeneticHelper {
         Chromosome result = new Chromosome();
 
         for (Map.Entry<ResourceLocation, Gene<?>> entry : first.getGenes().entrySet()) {
+            ResourceLocation geneType = entry.getKey();
             //todo: implement random mutations
+            result.setGene(geneType, rand.nextFloat() < 0.5 ? entry.getValue() :  second.getGene(geneType));
             if (entry.getValue() instanceof GeneTolerant) {
-                //todo: implement mixing tolerances
+                //mix tolerances as well
+                EnumTolerance tolerance = rand.nextFloat() < 0.5 ? ((GeneTolerant<?>) entry.getValue()).getTolerance() :  ((GeneTolerant<?>)second.getGene(geneType)).getTolerance();
+                result.setGene(geneType, ((GeneTolerant<?>)result.getGene(geneType)).setTolerance(tolerance));
             }
-            result.setGene(entry.getKey(), rand.nextFloat() < 0.5 ? entry.getValue() :  second.getGene(entry.getKey()));
         }
 
         return result;

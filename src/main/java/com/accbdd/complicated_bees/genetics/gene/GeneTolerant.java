@@ -8,7 +8,7 @@ import net.minecraft.nbt.StringTag;
 public abstract class GeneTolerant<T extends Enum<T>> extends Gene<T> {
     public static final String TOLERANCE = "tolerance";
 
-    private final EnumTolerance tolerance;
+    private EnumTolerance tolerance;
 
     public GeneTolerant(T geneData) {
         this(geneData, EnumTolerance.NONE);
@@ -21,6 +21,11 @@ public abstract class GeneTolerant<T extends Enum<T>> extends Gene<T> {
 
     public EnumTolerance getTolerance() {
         return tolerance;
+    }
+
+    public GeneTolerant<T> setTolerance(EnumTolerance tolerance) {
+        this.tolerance = tolerance;
+        return this;
     }
 
     public boolean withinTolerance(T condition) {
@@ -39,4 +44,6 @@ public abstract class GeneTolerant<T extends Enum<T>> extends Gene<T> {
 
     @Override
     public abstract GeneTolerant<T> deserialize(CompoundTag tag);
+
+
 }
