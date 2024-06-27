@@ -2,7 +2,7 @@ package com.accbdd.complicated_bees.block.entity;
 
 import com.accbdd.complicated_bees.genetics.BeeProducts;
 import com.accbdd.complicated_bees.genetics.Genome;
-import com.accbdd.complicated_bees.genetics.GenomeHelper;
+import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
@@ -199,7 +199,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public void generateProduce(ItemStack stack) {
-        BeeProducts products = ((GeneSpecies) GenomeHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
+        BeeProducts products = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
         ItemStack primary = products.getPrimaryResult();
         ItemStack secondary = products.getSecondaryResult();
         ItemStack specialty = products.getSpecialtyResult();
@@ -212,14 +212,14 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     public boolean queenSatisfied(ItemStack queen) {
 
-        Genome genome = GenomeHelper.getGenome(queen, true);
+        Genome genome = GeneticHelper.getGenome(queen, true);
         return (((GeneTemperature)genome.getGene(GeneTemperature.ID)).withinTolerance(getTemperature())
                 && ((GeneHumidity)genome.getGene(GeneHumidity.ID)).withinTolerance(getHumidity()));
     }
 
     public void ageQueen(ItemStack queen) {
         BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
-        if (BeeItem.getAge(queen) >= (int) GenomeHelper.getGeneValue(queen, GeneLifespan.ID, true)) {
+        if (BeeItem.getAge(queen) >= (int) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)) {
             beeItems.extractItem(BEE_SLOT, 1, false);
             setChanged();
         }

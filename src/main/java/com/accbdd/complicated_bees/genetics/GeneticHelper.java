@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Objects;
 
-public class GenomeHelper {
+public class GeneticHelper {
     public static final String GENOME_A = "genome_a";
     public static final String GENOME_B = "genome_b";
 
@@ -18,6 +18,12 @@ public class GenomeHelper {
 
     public static ItemStack setGenome(ItemStack stack, Genome genome, boolean primary) {
         stack.getOrCreateTag().put(primary ? GENOME_A : GENOME_B, genome.serialize());
+        return stack;
+    }
+
+    public static ItemStack setGenome(ItemStack stack, Genome genome_a, Genome genome_b) {
+        stack.getOrCreateTag().put(GENOME_A, genome_a.serialize());
+        stack.getOrCreateTag().put(GENOME_B, genome_b.serialize());
         return stack;
     }
 

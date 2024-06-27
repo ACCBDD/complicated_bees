@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.item;
 
-import com.accbdd.complicated_bees.genetics.GenomeHelper;
+import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
@@ -60,7 +60,7 @@ public class BeeItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level pLevel, @NotNull List<Component> components, @NotNull TooltipFlag isAdvanced) {
-        GeneSpecies geneSpecies = (GeneSpecies) GenomeHelper.getGene(stack, new ResourceLocation(MODID, GeneSpecies.TAG), true);
+        GeneSpecies geneSpecies = (GeneSpecies) GeneticHelper.getGene(stack, new ResourceLocation(MODID, GeneSpecies.TAG), true);
         if (geneSpecies == null) {
             //broken nbt
             components.add(Component.literal("INVALID ITEM"));
@@ -82,7 +82,7 @@ public class BeeItem extends Item {
     }
 
     private static ResourceLocation getSpeciesResourceLocation(ItemStack stack) {
-        Species species = ((GeneSpecies) GenomeHelper.getGene(stack, GeneSpecies.ID, true)).get();
+        Species species = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get();
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
         return registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(species);
     }
