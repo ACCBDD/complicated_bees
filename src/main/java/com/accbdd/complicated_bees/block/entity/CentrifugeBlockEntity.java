@@ -131,7 +131,6 @@ public class CentrifugeBlockEntity extends BlockEntity {
         if (hasRecipe(stack)) {
             increaseCraftingProgress();
             setChanged();
-
             if (hasFinished()) {
                 craftItem(stack);
                 resetProgress();

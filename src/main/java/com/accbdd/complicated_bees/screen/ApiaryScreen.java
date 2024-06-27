@@ -40,7 +40,7 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
     public void renderStatusBar(GuiGraphics graphics, int x, int y) {
         if (menu.hasQueen()) {
             ItemStack queen = menu.getQueen();
-            int lifespan = (int) GeneticHelper.getGenome(queen, true).getGene(GeneLifespan.ID).get();
+            int lifespan = (int) GeneticHelper.getChromosome(queen, true).getGene(GeneLifespan.ID).get();
             int progress = menu.getScaledProgress(BeeItem.getAge(queen), lifespan);
             graphics.blit(GUI,
                     x + 18,

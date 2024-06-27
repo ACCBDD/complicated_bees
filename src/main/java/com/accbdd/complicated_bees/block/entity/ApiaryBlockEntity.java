@@ -1,7 +1,8 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.BeeProducts;
-import com.accbdd.complicated_bees.genetics.Genome;
+import com.accbdd.complicated_bees.genetics.Chromosome;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
@@ -11,6 +12,7 @@ import com.accbdd.complicated_bees.item.DroneItem;
 import com.accbdd.complicated_bees.item.PrincessItem;
 import com.accbdd.complicated_bees.item.QueenItem;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.ContainerData;
@@ -185,17 +187,32 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public void tickServer() {
+        ItemStack top_stack = beeItems.getStackInSlot(0);
+        ItemStack bottom_stack = beeItems.getStackInSlot(1);
         if (level.getGameTime() % 20 == 0) {
-            ItemStack stack = beeItems.getStackInSlot(0);
-            if (stack.getItem() instanceof QueenItem) {
-                if (queenSatisfied(stack)) {
-                    ageQueen(stack);
-                    generateProduce(stack);
+            if (top_stack.getItem() instanceof QueenItem) {
+                if (queenSatisfied(top_stack)) {
+                    ageQueen(top_stack);
+                    generateProduce(top_stack);
                 }
             }
-            //todo: implement breeding
-            //todo: check surroundings
         }
+        if (top_stack.getItem() instanceof PrincessItem && bottom_stack.getItem() instanceof DroneItem) {
+            increaseBreedingProgress();
+            if (hasFinished()) {
+                resetBreedingProgress();
+                beeItems.extractItem(1, 1, false);
+                beeItems.setStackInSlot(0, createQueenFromPrincessAndDrone(top_stack, bottom_stack));
+            }
+        }
+    }
+
+    private ItemStack createQueenFromPrincessAndDrone(ItemStack princess, ItemStack drone) {
+        ItemStack queen = new ItemStack(ItemsRegistration.QUEEN.get());
+        GeneticHelper.setGenome(queen, GeneticHelper.getGenome(princess));
+        GeneticHelper.setBred(queen, GeneticHelper.getGenome(drone));
+
+        return queen;
     }
 
     public void generateProduce(ItemStack stack) {
@@ -212,15 +229,18 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     public boolean queenSatisfied(ItemStack queen) {
 
-        Genome genome = GeneticHelper.getGenome(queen, true);
-        return (((GeneTemperature)genome.getGene(GeneTemperature.ID)).withinTolerance(getTemperature())
-                && ((GeneHumidity)genome.getGene(GeneHumidity.ID)).withinTolerance(getHumidity()));
+        Chromosome chromosome = GeneticHelper.getChromosome(queen, true);
+        return (((GeneTemperature) chromosome.getGene(GeneTemperature.ID)).withinTolerance(getTemperature())
+                && ((GeneHumidity) chromosome.getGene(GeneHumidity.ID)).withinTolerance(getHumidity()));
     }
 
     public void ageQueen(ItemStack queen) {
         BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
         if (BeeItem.getAge(queen) >= (int) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)) {
             beeItems.extractItem(BEE_SLOT, 1, false);
+            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromEggs(queen, ItemsRegistration.PRINCESS.get()), false);
+            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromEggs(queen, ItemsRegistration.DRONE.get()), false);
+            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromEggs(queen, ItemsRegistration.DRONE.get()), false);
             setChanged();
         }
     }
@@ -243,5 +263,18 @@ public class ApiaryBlockEntity extends BlockEntity {
             this.temperature = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
         }
         return this.temperature;
+    }
+
+    private void increaseBreedingProgress() {
+        breedingProgress++;
+        setChanged();
+    }
+
+    private boolean hasFinished() {
+        return breedingProgress >= maxBreedingProgress;
+    }
+
+    private void resetBreedingProgress() {
+        breedingProgress = 0;
     }
 }

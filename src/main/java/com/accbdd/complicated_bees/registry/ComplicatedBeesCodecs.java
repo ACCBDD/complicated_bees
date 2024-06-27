@@ -1,16 +1,12 @@
 package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.genetics.*;
-import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-
-import java.util.Map;
 
 public class ComplicatedBeesCodecs {
     //hex string parser (no alpha)
@@ -51,7 +47,7 @@ public class ComplicatedBeesCodecs {
             instance.group(
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
-                    CompoundTag.CODEC.optionalFieldOf("genome", new Genome().serialize()).forGetter((species -> species.getDefaultGenome().serialize()))
+                    CompoundTag.CODEC.optionalFieldOf("genome", new Chromosome().serialize()).forGetter((species -> species.getDefaultChromosome().serialize()))
             ).apply(instance, Species::new)
     );
 

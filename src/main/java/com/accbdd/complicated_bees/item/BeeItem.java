@@ -1,13 +1,20 @@
 package com.accbdd.complicated_bees.item;
 
+import com.accbdd.complicated_bees.genetics.Chromosome;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.gene.GeneHumidity;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
+import com.accbdd.complicated_bees.genetics.gene.GeneTemperature;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
+import com.accbdd.complicated_bees.registry.GeneRegistry;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,20 +47,27 @@ public class BeeItem extends Item {
 
     @Override
     public @NotNull Component getName(ItemStack stack) {
-        return Component.translatable("species.complicated_bees." +
-                (getSpeciesResourceLocation(stack) == null ? "invalid" : getSpeciesResourceLocation(stack).toString()))
-                .append(" ")
-                .append(Component.translatable(getDescriptionId()));
+        Species primary = GeneticHelper.getSpecies(stack, true);
+        Species secondary = GeneticHelper.getSpecies(stack, false);;
+        MutableComponent component = Component.empty();
+
+        component.append(GeneticHelper.getTranslationKey(primary));
+
+        if (!primary.equals(secondary)) {
+            component.append("-").append(GeneticHelper.getTranslationKey(secondary));
+        }
+        component.append(" ").append(Component.translatable(getDescriptionId()));
+
+        return component;
     }
 
     public static int getItemColor(ItemStack stack, int tintIndex) {
         if (tintIndex == 1) {
-            ResourceLocation speciesLocation = getSpeciesResourceLocation(stack);
-            Registry<Species> registry = Objects.requireNonNull(Minecraft.getInstance().getConnection()).registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get();
-            if (speciesLocation != null) {
-                return registry.containsKey(speciesLocation) ? Objects.requireNonNull(registry.get(speciesLocation)).getColor() : 0xFFFFFF;
+            Species species = GeneticHelper.getSpecies(stack, true);
+            if (species != null) {
+                return species.getColor();
             }
-            return 0;
+            return 0xFFFFFF;
         }
         return 0xFFFFFF;
     }
@@ -68,22 +82,17 @@ public class BeeItem extends Item {
             //species doesn't exist in registry
             components.add(Component.literal("INVALID SPECIES"));
         } else if (Minecraft.getInstance().level != null) {
-            Species species = geneSpecies.get();
-            ItemStack primary = species.getProducts().getPrimary();
-            ItemStack secondary = species.getProducts().getSecondary();
-            ItemStack specialty = species.getProducts().getSpecialty();
-            components.add(Component.translatable("gui.complicated_bees.primary_produce").append(": ").append(primary.getHoverName()).append(String.format(" @ %.0f%%", species.getProducts().getPrimaryChance()*100)));
-            if (secondary.getItem() != Items.AIR)
-                components.add(Component.translatable("gui.complicated_bees.secondary_produce").append(": ").append(secondary.getHoverName()).append(String.format(" @ %.0f%%", species.getProducts().getSecondaryChance()*100)));
-            if (specialty.getItem() != Items.AIR)
-                components.add(Component.translatable("gui.complicated_bees.specialty_produce").append(": ").append(specialty.getHoverName()).append(String.format(" @ %.0f%%", species.getProducts().getSpecialtyChance()*100)));
+            Chromosome primary = GeneticHelper.getChromosome(stack, true);
+            Chromosome secondary = GeneticHelper.getChromosome(stack, false);
+            components.add(Component.translatable("gui.complicated_bees.humidity_label")
+                    .append(": ")
+                    .append(((EnumHumidity)primary.getGene(GeneHumidity.ID).get()).getTranslationKey())
+                    .append("/").append(((EnumHumidity)secondary.getGene(GeneHumidity.ID).get()).getTranslationKey()));
+            components.add(Component.translatable("gui.complicated_bees.temperature_label")
+                    .append(": ")
+                    .append(((EnumTemperature)primary.getGene(GeneTemperature.ID).get()).getTranslationKey())
+                    .append("/").append(((EnumTemperature)secondary.getGene(GeneTemperature.ID).get()).getTranslationKey()));
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);
-    }
-
-    private static ResourceLocation getSpeciesResourceLocation(ItemStack stack) {
-        Species species = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get();
-        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
-        return registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(species);
     }
 }

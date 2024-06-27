@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.genetics.gene.enums;
 import com.accbdd.complicated_bees.ComplicatedBees;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 
@@ -53,5 +54,9 @@ public enum EnumHumidity {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public Component getTranslationKey() {
+        return Component.translatable("gui.complicated_bees.humidity." + this.toString());
     }
 }
