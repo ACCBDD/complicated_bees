@@ -84,7 +84,6 @@ public class GeneticHelper {
     }
 
     private static Genome mixGenomes(Genome left, Genome right) {
-        //todo: THIS IS NOT MENDELIAN - FIX THIS
         Chromosome chromosome_a = new Chromosome(), chromosome_b = new Chromosome();
 
         for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {
@@ -92,11 +91,12 @@ public class GeneticHelper {
             Gene<?> geneA = (rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key);
             Gene<?> geneB = (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key);
 
-//            if (entry.getValue() instanceof GeneTolerant) {
-//                //mix tolerances as well
-//                geneA = ((GeneTolerant<?>)geneA).setTolerance();
-//                geneB = ((GeneTolerant<?>)geneB).setTolerance();
-//            }
+            if (entry.getValue() instanceof GeneTolerant) {
+                EnumTolerance toleranceA = ((GeneTolerant<?>)(rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key).get()).getTolerance();
+                EnumTolerance toleranceB = ((GeneTolerant<?>)(rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key).get()).getTolerance();
+                geneA = ((GeneTolerant<?>)geneA).setTolerance(toleranceA);
+                geneB = ((GeneTolerant<?>)geneB).setTolerance(toleranceB);
+            }
 
             chromosome_a.setGene(key, geneA);
             chromosome_b.setGene(key, geneB);
