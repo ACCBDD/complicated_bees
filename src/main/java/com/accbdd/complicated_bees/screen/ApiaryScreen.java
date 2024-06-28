@@ -45,7 +45,7 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
             graphics.blit(GUI,
                     x + 18,
                     y + 36 + progress,
-                    179,
+                    176 + (menu.getData().get(2) * 3),
                     progress,
                     3,
                     45 - progress);
@@ -54,7 +54,7 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
             graphics.blit(GUI,
                     x + 18,
                     y + 81 - progress,
-                    179,
+                    176 + (menu.getData().get(2) * 3),
                     0,
                     3,
                     progress);

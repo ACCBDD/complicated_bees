@@ -44,6 +44,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     private final ContainerData data;
     private int breedingProgress = 0;
     private int maxBreedingProgress = 20;
+    private int barState = 1;
 
     private EnumTemperature temperature = null;
     private EnumHumidity humidity = null;
@@ -104,6 +105,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 return switch (index) {
                     case 0 -> ApiaryBlockEntity.this.breedingProgress;
                     case 1 -> ApiaryBlockEntity.this.maxBreedingProgress;
+                    case 2 -> ApiaryBlockEntity.this.barState;
                     default -> 0;
                 };
             }
@@ -113,12 +115,13 @@ public class ApiaryBlockEntity extends BlockEntity {
                 switch (index) {
                     case 0 -> ApiaryBlockEntity.this.breedingProgress = value;
                     case 1 -> ApiaryBlockEntity.this.maxBreedingProgress = value;
+                    case 2 -> ApiaryBlockEntity.this.barState = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 3;
             }
         };
     }
@@ -192,12 +195,16 @@ public class ApiaryBlockEntity extends BlockEntity {
         if (level.getGameTime() % 20 == 0) {
             if (top_stack.getItem() instanceof QueenItem) {
                 if (queenSatisfied(top_stack)) {
+                    setBarState(1);
                     ageQueen(top_stack);
                     generateProduce(top_stack);
+                } else {
+                    setBarState(2);
                 }
             }
         }
         if (top_stack.getItem() instanceof PrincessItem && bottom_stack.getItem() instanceof DroneItem) {
+            setBarState(1);
             increaseBreedingProgress();
             if (hasFinished()) {
                 resetBreedingProgress();
@@ -278,5 +285,9 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     private void resetBreedingProgress() {
         breedingProgress = 0;
+    }
+
+    private void setBarState(int value) {
+        barState = value;
     }
 }

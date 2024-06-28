@@ -20,7 +20,7 @@ public class ApiaryMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public ApiaryMenu(int windowId, Player player, BlockPos pos) {
-        this(windowId, player, pos, new SimpleContainerData(2));
+        this(windowId, player, pos, new SimpleContainerData(3));
     }
 
     public ApiaryMenu(int windowId, Player player, BlockPos pos, ContainerData data) {
