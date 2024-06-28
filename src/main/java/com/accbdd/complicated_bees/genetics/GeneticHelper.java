@@ -106,9 +106,14 @@ public class GeneticHelper {
         for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {
             Gene<?> gene = entry.getValue();
             if (!entry.getValue().isDominant()) {
-                ComplicatedBees.LOGGER.debug("swapping values for {}", entry.getKey());
                 chromosome_a.setGene(entry.getKey(), chromosome_b.getGene(entry.getKey()));
                 chromosome_b.setGene(entry.getKey(), gene);
+            } else if (chromosome_b.getGene(entry.getKey()).isDominant()) {
+                //both are dominant, random shuffle
+                if (rand.nextFloat() < 0.5) {
+                    chromosome_a.setGene(entry.getKey(), chromosome_b.getGene(entry.getKey()));
+                    chromosome_b.setGene(entry.getKey(), gene);
+                }
             }
         }
 

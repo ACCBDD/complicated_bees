@@ -140,4 +140,12 @@ public class ApiaryMenu extends AbstractContainerMenu {
     public ItemStack getQueen() {
         return getSlot(0).getItem();
     }
+
+    public boolean isBreeding() {
+        return data.get(0) > 0;
+    }
+
+    public ContainerData getData() {
+        return this.data;
+    }
 }

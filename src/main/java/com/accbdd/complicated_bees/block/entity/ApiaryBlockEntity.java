@@ -43,7 +43,7 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     private final ContainerData data;
     private int breedingProgress = 0;
-    private int maxBreedingProgress = 40;
+    private int maxBreedingProgress = 20;
 
     private EnumTemperature temperature = null;
     private EnumHumidity humidity = null;
@@ -204,6 +204,8 @@ public class ApiaryBlockEntity extends BlockEntity {
                 beeItems.extractItem(1, 1, false);
                 beeItems.setStackInSlot(0, createQueenFromPrincessAndDrone(top_stack, bottom_stack));
             }
+        } else {
+            resetBreedingProgress();
         }
     }
 

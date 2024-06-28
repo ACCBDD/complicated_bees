@@ -49,6 +49,15 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
                     progress,
                     3,
                     45 - progress);
+        } else if (menu.isBreeding()) {
+            int progress = menu.getScaledProgress(menu.getData().get(0), menu.getData().get(1));
+            graphics.blit(GUI,
+                    x + 18,
+                    y + 81 - progress,
+                    179,
+                    0,
+                    3,
+                    progress);
         }
     }
 }
