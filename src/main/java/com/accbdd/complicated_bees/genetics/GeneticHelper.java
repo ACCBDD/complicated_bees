@@ -100,7 +100,17 @@ public class GeneticHelper {
                 geneB = ((GeneTolerant<?>)geneB).setTolerance(toleranceB);
             }
 
-            //todo: mutation logic - try to mutate for each chromosome, return default chromosome if mutation successful
+            if (geneEntry.getValue() instanceof GeneSpecies) {
+                Species speciesA = (Species) geneA.get();
+                Species speciesB = (Species) geneB.get();
+                for (Mutation mutation : ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistry.MUTATION_REGISTRY_KEY).get().stream().toList()) {
+                    if ((mutation.getFirstSpecies() == speciesA && mutation.getSecondSpecies() == speciesB) || (mutation.getSecondSpecies() == speciesA && mutation.getFirstSpecies() == speciesB)) {
+                        geneA = (rand.nextFloat() < mutation.getChance() ? ((GeneSpecies)geneA).set(mutation.getResultSpecies()) : geneA);
+                        geneB = (rand.nextFloat() < mutation.getChance() ? ((GeneSpecies)geneB).set(mutation.getResultSpecies()) : geneB);
+                        //todo: default chromosome somehow...
+                    }
+                }
+            }
 
             chromosome_a.setGene(key, geneA);
             chromosome_b.setGene(key, geneB);
@@ -136,5 +146,9 @@ public class GeneticHelper {
             setGenome(result, genome);
         }
         return result;
+    }
+
+    public static void tryMutate(Genome left, Genome right) {
+
     }
 }
