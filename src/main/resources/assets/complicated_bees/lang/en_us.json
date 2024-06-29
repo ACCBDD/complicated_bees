@@ -20,6 +20,10 @@
   "gui.complicated_bees.comb_products": "Comb Products",
   "gui.complicated_bees.humidity_label": "Humidity",
   "gui.complicated_bees.temperature_label": "Temperature",
+  "gui.complicated_bees.humidity_label.short": "H",
+  "gui.complicated_bees.temperature_label.short": "T",
+  "gui.complicated_bees.bee_products": "Bee Products",
+  "gui.complicated_bees.more_info": "<Hold shift for more info>",
 
   "gui.complicated_bees.humidity.wet": "Wet",
   "gui.complicated_bees.humidity.normal": "Normal",
@@ -58,6 +62,5 @@
 
   "species.complicated_bees.complicated_bees:forest": "Forest",
   "species.complicated_bees.complicated_bees:meadows": "Meadows",
-  "species.complicated_bees.complicated_bees:desert": "Desert",
-  "gui.complicated_bees.bee_products": "Bee Products"
+  "species.complicated_bees.complicated_bees:desert": "Desert"
 }

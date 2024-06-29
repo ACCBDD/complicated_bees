@@ -12,7 +12,9 @@ import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.registry.GeneRegistry;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -83,16 +85,22 @@ public class BeeItem extends Item {
         } else if (geneSpecies.get() == null) {
             //species doesn't exist in registry
             components.add(Component.literal("INVALID SPECIES"));
+        } else if (!Screen.hasShiftDown()) {
+            components.add(Component.translatable("gui.complicated_bees.more_info").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         } else if (Minecraft.getInstance().level != null) {
             Chromosome primary = GeneticHelper.getChromosome(stack, true);
-            components.add(Component.translatable("gui.complicated_bees.humidity_label")
-                    .append(": ")
-                    .append(((EnumHumidity)primary.getGene(GeneHumidity.ID).get()).getTranslationKey())
-                    .append(" / ").append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey()));
-            components.add(Component.translatable("gui.complicated_bees.temperature_label")
+            components.add(Component.translatable("gui.complicated_bees.temperature_label.short")
                     .append(": ")
                     .append(((EnumTemperature)primary.getGene(GeneTemperature.ID).get()).getTranslationKey())
-                    .append(" / ").append(((GeneTolerant<?>)primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey()));
+                    .append(" / ")
+                    .append(((GeneTolerant<?>)primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey())
+                    .withStyle(ChatFormatting.GREEN));
+            components.add(Component.translatable("gui.complicated_bees.humidity_label.short")
+                    .append(": ")
+                    .append(((EnumHumidity)primary.getGene(GeneHumidity.ID).get()).getTranslationKey())
+                    .append(" / ")
+                    .append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey())
+                    .withStyle(ChatFormatting.GREEN));
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);
     }
