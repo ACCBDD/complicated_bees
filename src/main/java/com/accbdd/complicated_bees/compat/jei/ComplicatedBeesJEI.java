@@ -7,10 +7,12 @@ import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.CombRegistry;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
@@ -33,18 +35,20 @@ public class ComplicatedBeesJEI implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new CombProductRecipeCategory());
+        registration.addRecipeCategories(new BeeProduceRecipeCategory());
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(CombProductRecipeCategory.TYPE, Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().stream().toList());
+        registration.addRecipes(BeeProduceRecipeCategory.TYPE, Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().stream().toList());
     }
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
         IIngredientSubtypeInterpreter<ItemStack> speciesInterpreter = (stack, context) -> {
             Lazy<Species> species = Lazy.of(() -> ((GeneSpecies) GeneticHelper.getChromosome(stack, true).getGene(GeneSpecies.ID)).get());
-            return species.toString();
+            return Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(species.get()).toString();
         };
 
         IIngredientSubtypeInterpreter<ItemStack> combInterpreter = (stack, context) -> {
@@ -55,6 +59,11 @@ public class ComplicatedBeesJEI implements IModPlugin {
         registration.registerSubtypeInterpreter(ItemsRegistration.QUEEN.get(), speciesInterpreter);
         registration.registerSubtypeInterpreter(ItemsRegistration.PRINCESS.get(), speciesInterpreter);
         registration.registerSubtypeInterpreter(ItemsRegistration.COMB.get(), combInterpreter);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(ItemsRegistration.APIARY.get().getDefaultInstance(), BeeProduceRecipeCategory.TYPE);
     }
 
     public static IDrawable createDrawable(ResourceLocation location, int uOffset, int vOffset, int width, int height, int textureWidth, int textureHeight) {

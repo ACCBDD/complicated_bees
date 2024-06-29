@@ -2,7 +2,13 @@ package com.accbdd.complicated_bees.genetics;
 
 
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Defines the color and products of a bee, as well as the default genes for things like JEI display.
@@ -44,5 +50,18 @@ public class Species {
 
     public Chromosome getDefaultChromosome() {
         return defaultChromosome;
+    }
+
+    public ItemStack toStack(Item item) {
+        ItemStack stack = new ItemStack(item);
+        return GeneticHelper.setGenome(stack, new Genome(getDefaultChromosome(), getDefaultChromosome()));
+    }
+
+    public List<ItemStack> toMembers() {
+        List<ItemStack> members = new ArrayList<>();
+        members.add(this.toStack(ItemsRegistration.QUEEN.get()));
+        members.add(this.toStack(ItemsRegistration.PRINCESS.get()));
+        members.add(this.toStack(ItemsRegistration.DRONE.get()));
+        return members;
     }
 }

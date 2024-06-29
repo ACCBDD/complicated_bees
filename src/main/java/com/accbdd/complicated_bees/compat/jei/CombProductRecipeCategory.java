@@ -50,8 +50,6 @@ public class CombProductRecipeCategory implements IRecipeCategory<Comb> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Comb recipe, IFocusGroup focuses) {
-        builder.setShapeless();
-
         builder.addSlot(RecipeIngredientRole.INPUT, 15, 15)
                 .setSlotName("input_comb")
                 .addIngredient(VanillaTypes.ITEM_STACK, Comb.toStack(recipe));
