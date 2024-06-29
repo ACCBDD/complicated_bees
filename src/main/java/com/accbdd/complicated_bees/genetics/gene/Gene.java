@@ -4,14 +4,12 @@ import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
 
-import java.util.function.Supplier;
-
 public class Gene<T> implements IGene<T> {
     public static String DATA = "data";
     public static String DOMINANT = "dominant";
 
     private final boolean dominant;
-    final T geneData;
+    public T geneData;
 
     public Gene(T geneData) {
         this(geneData, true);
@@ -25,6 +23,12 @@ public class Gene<T> implements IGene<T> {
     @Override
     public T get() {
         return geneData;
+    }
+
+    @Override
+    public Gene<T> set(T value) {
+        this.geneData = value;
+        return this;
     }
 
     @Override

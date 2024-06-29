@@ -95,6 +95,12 @@ public class ComplicatedBees
                 ComplicatedBeesCodecs.COMB_CODEC,
                 ComplicatedBeesCodecs.COMB_CODEC
         );
+
+        event.dataPackRegistry(
+                MutationRegistry.MUTATION_REGISTRY_KEY,
+                ComplicatedBeesCodecs.MUTATION_CODEC,
+                ComplicatedBeesCodecs.MUTATION_CODEC
+        );
     }
 
     @SubscribeEvent
@@ -133,6 +139,7 @@ public class ComplicatedBees
     public void serverStarted(ServerStartedEvent event) {
         LOGGER.info("Registered {} species", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().size());
         LOGGER.info("Registered {} combs", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().size());
+        LOGGER.info("Registered {} mutations", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistry.MUTATION_REGISTRY_KEY).get().size());
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

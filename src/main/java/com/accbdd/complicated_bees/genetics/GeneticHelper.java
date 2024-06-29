@@ -5,11 +5,14 @@ import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
+import com.accbdd.complicated_bees.genetics.mutation.Mutation;
+import com.accbdd.complicated_bees.registry.MutationRegistry;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +25,7 @@ import java.util.Random;
 public class GeneticHelper {
     public static final String GENOME_A = "genome_a";
     public static final String GENOME_B = "genome_b";
-    public static final String BRED = "bred";
+    public static final String MATE = "mate";
     private static final Random rand = new Random();
 
     public static Chromosome getChromosome(ItemStack stack, boolean primary) {
@@ -48,12 +51,11 @@ public class GeneticHelper {
         return stack;
     }
 
-    public static ItemStack setBred(ItemStack stack, Genome genome) {
+    public static void setMate(ItemStack stack, Genome genome) {
         CompoundTag tag = new CompoundTag();
         tag.put(GENOME_A, genome.getPrimary().serialize());
         tag.put(GENOME_B, genome.getSecondary().serialize());
-        stack.getOrCreateTag().put(BRED, tag);
-        return stack;
+        stack.getOrCreateTag().put(MATE, tag);
     }
 
     public static ItemStack setBothGenome(ItemStack stack, Chromosome chromosome) {
@@ -86,17 +88,19 @@ public class GeneticHelper {
     private static Genome mixGenomes(Genome left, Genome right) {
         Chromosome chromosome_a = new Chromosome(), chromosome_b = new Chromosome();
 
-        for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {
-            ResourceLocation key = entry.getKey();
+        for (Map.Entry<ResourceLocation, Gene<?>> geneEntry : chromosome_a.getGenes().entrySet()) {
+            ResourceLocation key = geneEntry.getKey();
             Gene<?> geneA = (rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key);
             Gene<?> geneB = (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key);
 
-            if (entry.getValue() instanceof GeneTolerant) {
+            if (geneEntry.getValue() instanceof GeneTolerant) {
                 EnumTolerance toleranceA = ((GeneTolerant<?>)(rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key)).getTolerance();
                 EnumTolerance toleranceB = ((GeneTolerant<?>)(rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key)).getTolerance();
                 geneA = ((GeneTolerant<?>)geneA).setTolerance(toleranceA);
                 geneB = ((GeneTolerant<?>)geneB).setTolerance(toleranceB);
             }
+
+            //todo: mutation logic - try to mutate for each chromosome, return default chromosome if mutation successful
 
             chromosome_a.setGene(key, geneA);
             chromosome_b.setGene(key, geneB);
@@ -120,26 +124,9 @@ public class GeneticHelper {
         return new Genome(chromosome_a, chromosome_b);
     }
 
-    private static Chromosome mixChromosomes(Chromosome first, Chromosome second) {
-        Chromosome result = new Chromosome();
-
-        for (Map.Entry<ResourceLocation, Gene<?>> entry : first.getGenes().entrySet()) {
-            ResourceLocation geneType = entry.getKey();
-            //todo: implement random mutations
-            result.setGene(geneType, rand.nextFloat() < 0.5 ? entry.getValue() :  second.getGene(geneType));
-            if (entry.getValue() instanceof GeneTolerant) {
-                //mix tolerances as well
-                EnumTolerance tolerance = rand.nextFloat() < 0.5 ? ((GeneTolerant<?>) entry.getValue()).getTolerance() : ((GeneTolerant<?>)second.getGene(geneType)).getTolerance();
-                result.setGene(geneType, ((GeneTolerant<?>)result.getGene(geneType)).setTolerance(tolerance));
-            }
-        }
-
-        return result;
-    }
-
-    public static ItemStack getFromEggs(ItemStack stack, Item resultType) {
+    public static ItemStack getFromMate(ItemStack stack, Item resultType) {
         ItemStack result = new ItemStack(resultType);
-        CompoundTag eggs = stack.getOrCreateTag().getCompound(BRED);
+        CompoundTag eggs = stack.getOrCreateTag().getCompound(MATE);
 
         Genome genome = getGenome(stack);
         Genome bred = new Genome(Chromosome.deserialize(eggs.getCompound(GENOME_A)), Chromosome.deserialize(eggs.getCompound(GENOME_B)));

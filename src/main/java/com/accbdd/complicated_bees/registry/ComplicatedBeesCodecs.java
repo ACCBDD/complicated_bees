@@ -1,14 +1,17 @@
 package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.genetics.*;
+import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class ComplicatedBeesCodecs {
+    //todo: move these into appropriate classes
     //hex string parser (no alpha)
     public static final Codec<Integer> HEX_STRING_CODEC = Codec.STRING.comapFlatMap(
             str -> {
@@ -48,7 +51,7 @@ public class ComplicatedBeesCodecs {
                     Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
-                    CompoundTag.CODEC.optionalFieldOf("genome", new Chromosome().serialize()).forGetter((species -> species.getDefaultChromosome().serialize()))
+                    CompoundTag.CODEC.optionalFieldOf("genome", new Chromosome().serialize()).forGetter(species -> species.getDefaultChromosome().serialize())
             ).apply(instance, Species::new)
     );
 
@@ -59,5 +62,14 @@ public class ComplicatedBeesCodecs {
                     HEX_STRING_CODEC.fieldOf("inner_color").forGetter(Comb::getInnerColor),
                     COMB_PRODUCTS_CODEC.fieldOf("products").forGetter(Comb::getProducts)
             ).apply(instance, Comb::new)
+    );
+
+    public static final Codec<Mutation> MUTATION_CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    ResourceLocation.CODEC.fieldOf("first").forGetter(Mutation::getFirst),
+                    ResourceLocation.CODEC.fieldOf("second").forGetter(Mutation::getSecond),
+                    ResourceLocation.CODEC.fieldOf("result").forGetter(Mutation::getResult),
+                    Codec.FLOAT.fieldOf("chance").forGetter(Mutation::getChance)
+            ).apply(instance, Mutation::new)
     );
 }

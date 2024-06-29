@@ -13,6 +13,11 @@ public interface IGene<T> {
     T get();
 
     /**
+     * sets the value of this gene
+     */
+    IGene<T> set(T value);
+
+    /**
      * @return whether this gene is dominant
      */
     boolean isDominant();

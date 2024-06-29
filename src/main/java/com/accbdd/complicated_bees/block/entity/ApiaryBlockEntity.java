@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.BeeProducts;
 import com.accbdd.complicated_bees.genetics.Chromosome;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
@@ -219,7 +218,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     private ItemStack createQueenFromPrincessAndDrone(ItemStack princess, ItemStack drone) {
         ItemStack queen = new ItemStack(ItemsRegistration.QUEEN.get());
         GeneticHelper.setGenome(queen, GeneticHelper.getGenome(princess));
-        GeneticHelper.setBred(queen, GeneticHelper.getGenome(drone));
+        GeneticHelper.setMate(queen, GeneticHelper.getGenome(drone));
 
         return queen;
     }
@@ -247,9 +246,9 @@ public class ApiaryBlockEntity extends BlockEntity {
         BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
         if (BeeItem.getAge(queen) >= (int) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)) {
             beeItems.extractItem(BEE_SLOT, 1, false);
-            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromEggs(queen, ItemsRegistration.PRINCESS.get()), false);
-            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromEggs(queen, ItemsRegistration.DRONE.get()), false);
-            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromEggs(queen, ItemsRegistration.DRONE.get()), false);
+            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromMate(queen, ItemsRegistration.PRINCESS.get()), false);
+            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()), false);
+            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()), false);
             setChanged();
         }
     }
