@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;

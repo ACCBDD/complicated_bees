@@ -86,7 +86,10 @@ public class GeneticHelper {
     }
 
     private static Genome mixGenomes(Genome left, Genome right) {
-        Chromosome chromosome_a = new Chromosome(), chromosome_b = new Chromosome();
+        Chromosome chromosome_a = new Chromosome();
+        Chromosome chromosome_b = new Chromosome();
+        Chromosome mutated_a = null;
+        Chromosome mutated_b = null;
 
         for (Map.Entry<ResourceLocation, Gene<?>> geneEntry : chromosome_a.getGenes().entrySet()) {
             ResourceLocation key = geneEntry.getKey();
@@ -105,9 +108,8 @@ public class GeneticHelper {
                 Species speciesB = (Species) geneB.get();
                 for (Mutation mutation : ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistry.MUTATION_REGISTRY_KEY).get().stream().toList()) {
                     if ((mutation.getFirstSpecies() == speciesA && mutation.getSecondSpecies() == speciesB) || (mutation.getSecondSpecies() == speciesA && mutation.getFirstSpecies() == speciesB)) {
-                        geneA = (rand.nextFloat() < mutation.getChance() ? ((GeneSpecies)geneA).set(mutation.getResultSpecies()) : geneA);
-                        geneB = (rand.nextFloat() < mutation.getChance() ? ((GeneSpecies)geneB).set(mutation.getResultSpecies()) : geneB);
-                        //todo: default chromosome somehow...
+                        mutated_a = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_a);
+                        mutated_b = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_b);
                     }
                 }
             }
@@ -115,6 +117,10 @@ public class GeneticHelper {
             chromosome_a.setGene(key, geneA);
             chromosome_b.setGene(key, geneB);
         }
+
+        //set default chromosome if mutation found
+        if (mutated_a != null) chromosome_a = mutated_a;
+        if (mutated_b != null) chromosome_b = mutated_b;
 
         //sort genome so that dominant genes are always in a
         for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {

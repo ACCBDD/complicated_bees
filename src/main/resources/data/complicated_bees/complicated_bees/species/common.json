@@ -1,0 +1,30 @@
+{
+  "dominant": false,
+  "color": "c2c2c2",
+  "products": {
+    "primary": {
+      "item": "minecraft:gold_ingot"
+    },
+    "secondary": {
+      "item": "minecraft:gold_nugget"
+    },
+    "secondary_chance": 0.5,
+    "specialty": {
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:stringy"
+      }
+    },
+    "specialty_chance": 0.25
+  },
+  "genome": {
+    "complicated_bees:temperature": {
+      "data": "icy",
+      "tolerance": "up_3"
+    },
+    "complicated_bees:humidity": {
+      "data": "wet",
+      "tolerance": "down_1"
+    }
+  }
+}

@@ -62,5 +62,6 @@
 
   "species.complicated_bees.complicated_bees:forest": "Forest",
   "species.complicated_bees.complicated_bees:meadows": "Meadows",
-  "species.complicated_bees.complicated_bees:desert": "Desert"
+  "species.complicated_bees.complicated_bees:desert": "Desert",
+  "species.complicated_bees.complicated_bees:common": "Common"
 }
