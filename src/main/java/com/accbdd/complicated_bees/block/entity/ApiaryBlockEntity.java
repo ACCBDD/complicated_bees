@@ -14,6 +14,8 @@ import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,7 +28,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Random;
+import java.util.Stack;
 
 public class ApiaryBlockEntity extends BlockEntity {
     public static final int BEE_SLOT = 0;
@@ -42,6 +44,9 @@ public class ApiaryBlockEntity extends BlockEntity {
     public static final String FRAME_SLOT_TAG = "frame_slots";
 
     public static final int SLOT_COUNT = BEE_SLOT_COUNT + OUTPUT_SLOT_COUNT + FRAME_SLOT_COUNT;
+
+    private Stack<ItemStack> outputBuffer = new Stack<>();
+    public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
     private final ContainerData data;
     private int breedingProgress = 0;
@@ -175,6 +180,11 @@ public class ApiaryBlockEntity extends BlockEntity {
         tag.put(ITEMS_BEES_TAG, beeItems.serializeNBT());
         tag.put(ITEMS_OUTPUT_TAG, outputItems.serializeNBT());
         tag.put(FRAME_SLOT_TAG, frameItems.serializeNBT());
+        ListTag bufferTag = new ListTag();
+        for (ItemStack stack : outputBuffer) {
+            bufferTag.add(stack.save(new CompoundTag()));
+        }
+        tag.put(OUTPUT_BUFFER_TAG, bufferTag);
     }
 
     @Override
@@ -189,12 +199,37 @@ public class ApiaryBlockEntity extends BlockEntity {
         if (tag.contains(FRAME_SLOT_TAG)) {
             frameItems.deserializeNBT(tag.getCompound(FRAME_SLOT_TAG));
         }
+        if (tag.contains(OUTPUT_BUFFER_TAG)) {
+            for (Tag itemCompound : tag.getList(OUTPUT_BUFFER_TAG, Tag.TAG_COMPOUND)) {
+                outputBuffer.add(ItemStack.of((CompoundTag) itemCompound));
+            }
+        }
     }
 
     public void tickServer() {
         ItemStack top_stack = beeItems.getStackInSlot(0);
         ItemStack bottom_stack = beeItems.getStackInSlot(1);
-        if (level.getGameTime() % 20 == 0) {
+
+        if (top_stack.getItem() instanceof PrincessItem && bottom_stack.getItem() instanceof DroneItem) {
+            setBarState(1);
+            increaseBreedingProgress();
+            if (hasFinished()) {
+                resetBreedingProgress();
+                beeItems.extractItem(1, 1, false);
+                beeItems.setStackInSlot(0, createQueenFromPrincessAndDrone(top_stack, bottom_stack));
+                if (!queenSatisfied(top_stack)) {
+                    setBarState(2);
+                }
+            }
+        } else {
+            resetBreedingProgress();
+        }
+
+        if (!outputBuffer.empty()) {
+            tryEmptyBuffer();
+        }
+
+        if (level.getGameTime() % 20 == 0 && outputBuffer.empty()) {
             if (top_stack.getItem() instanceof QueenItem) {
                 if (queenSatisfied(top_stack)) {
                     setBarState(1);
@@ -203,18 +238,22 @@ public class ApiaryBlockEntity extends BlockEntity {
                 } else {
                     setBarState(2);
                 }
+            } else {
+                setBarState(2);
             }
         }
-        if (top_stack.getItem() instanceof PrincessItem && bottom_stack.getItem() instanceof DroneItem) {
-            setBarState(1);
-            increaseBreedingProgress();
-            if (hasFinished()) {
-                resetBreedingProgress();
-                beeItems.extractItem(1, 1, false);
-                beeItems.setStackInSlot(0, createQueenFromPrincessAndDrone(top_stack, bottom_stack));
+    }
+
+    private void tryEmptyBuffer() {
+        while (!outputBuffer.empty()) {
+            ItemStack next = outputBuffer.peek();
+            next = ItemHandlerHelper.insertItem(outputItems, next, false);
+            if (next == ItemStack.EMPTY) {
+                outputBuffer.pop();
+            } else {
+                setBarState(2);
+                break;
             }
-        } else {
-            resetBreedingProgress();
         }
     }
 
@@ -229,7 +268,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     public void generateProduce(ItemStack stack) {
         List<BeeProduct> products = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
         for (BeeProduct product : products) {
-            ItemHandlerHelper.insertItem(outputItems, product.getStackResult(), false);
+            outputBuffer.add(product.getStackResult());
         }
         //todo: generate specialty produce
         setChanged();
@@ -246,9 +285,9 @@ public class ApiaryBlockEntity extends BlockEntity {
         BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
         if (BeeItem.getAge(queen) >= (int) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)) {
             beeItems.extractItem(BEE_SLOT, 1, false);
-            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromMate(queen, ItemsRegistration.PRINCESS.get()), false);
-            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()), false);
-            ItemHandlerHelper.insertItem(outputItems, GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()), false);
+            outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.PRINCESS.get()));
+            outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()));
+            outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()));
             setChanged();
         }
     }
