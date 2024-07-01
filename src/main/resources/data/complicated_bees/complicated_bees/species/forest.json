@@ -1,15 +1,15 @@
 {
   "color": "03FCE8",
-  "products": {
-    "primary": {
-      "item": "minecraft:stick"
-    },
-    "primary_chance": 0.023,
-    "secondary": {
+  "products": [
+    {
       "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:apple",
+      "chance": 0.5
     }
-  },
-  "genome": {
+  ],
+  "default_chromosome": {
     "complicated_bees:lifespan": {
       "data": 10
     }

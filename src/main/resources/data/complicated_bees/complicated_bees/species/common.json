@@ -1,23 +1,17 @@
 {
   "dominant": false,
   "color": "c2c2c2",
-  "products": {
-    "primary": {
-      "item": "minecraft:gold_ingot"
+  "products": [
+    {
+      "item": "minecraft:stick",
+      "chance": 0.5
     },
-    "secondary": {
-      "item": "minecraft:gold_nugget"
-    },
-    "secondary_chance": 0.5,
-    "specialty": {
-      "item": "complicated_bees:comb",
-      "nbt": {
-        "comb_type": "complicated_bees:stringy"
-      }
-    },
-    "specialty_chance": 0.25
-  },
-  "genome": {
+    {
+      "item": "minecraft:apple",
+      "chance": 0.5
+    }
+  ],
+  "default_chromosome": {
     "complicated_bees:temperature": {
       "data": "icy",
       "tolerance": "up_3"

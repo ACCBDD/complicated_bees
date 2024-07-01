@@ -1,22 +1,11 @@
 {
   "color": "ffedbd",
-  "products": {
-    "primary": {
+  "products": [
+    {
       "item": "minecraft:arrow"
-    },
-    "secondary": {
-      "item": "minecraft:iron_ingot"
-    },
-    "secondary_chance": 0.5,
-    "specialty": {
-      "item": "complicated_bees:comb",
-      "nbt": {
-        "comb_type": "complicated_bees:juicy"
-      }
-    },
-    "specialty_chance": 0.25
-  },
-  "genome": {
+    }
+  ],
+  "default_chromosome": {
     "complicated_bees:temperature": {
       "data": "hOt",
       "tolerance": "down_1"

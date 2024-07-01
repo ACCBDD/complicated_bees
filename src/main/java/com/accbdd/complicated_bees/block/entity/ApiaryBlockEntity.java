@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.genetics.BeeProducts;
+import com.accbdd.complicated_bees.genetics.BeeProduct;
 import com.accbdd.complicated_bees.genetics.Chromosome;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
@@ -24,6 +24,9 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Random;
 
 public class ApiaryBlockEntity extends BlockEntity {
     public static final int BEE_SLOT = 0;
@@ -224,14 +227,11 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public void generateProduce(ItemStack stack) {
-        BeeProducts products = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
-        ItemStack primary = products.getPrimaryResult();
-        ItemStack secondary = products.getSecondaryResult();
-        ItemStack specialty = products.getSpecialtyResult();
-
-        ItemHandlerHelper.insertItem(outputItems, primary, false);
-        ItemHandlerHelper.insertItem(outputItems, secondary, false);
-        ItemHandlerHelper.insertItem(outputItems, specialty, false);
+        List<BeeProduct> products = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
+        for (BeeProduct product : products) {
+            ItemHandlerHelper.insertItem(outputItems, product.getStackResult(), false);
+        }
+        //todo: generate specialty produce
         setChanged();
     }
 

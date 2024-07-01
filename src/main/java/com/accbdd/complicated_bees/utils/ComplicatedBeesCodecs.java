@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.registry;
+package com.accbdd.complicated_bees.utils;
 
 import com.accbdd.complicated_bees.genetics.*;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
@@ -9,6 +9,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+
+import java.util.ArrayList;
 
 public class ComplicatedBeesCodecs {
     //todo: move these into appropriate classes
@@ -22,18 +24,6 @@ public class ComplicatedBeesCodecs {
                 }
             },
             Integer::toHexString
-    );
-
-    //BeeProducts parser
-    public static final Codec<BeeProducts> BEE_PRODUCTS_CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("primary").forGetter(BeeProducts::getPrimary),
-                    Codec.FLOAT.optionalFieldOf("primary_chance", 1.0f).forGetter(BeeProducts::getPrimaryChance),
-                    ItemStack.ITEM_WITH_COUNT_CODEC.optionalFieldOf("secondary", Items.AIR.getDefaultInstance()).forGetter(BeeProducts::getSecondary),
-                    Codec.FLOAT.optionalFieldOf("secondary_chance", 1.0f).forGetter(BeeProducts::getSecondaryChance),
-                    ItemStack.ITEM_WITH_COUNT_CODEC.optionalFieldOf("specialty", Items.AIR.getDefaultInstance()).forGetter(BeeProducts::getSpecialty),
-                    Codec.FLOAT.optionalFieldOf("specialty_chance", 1.0f).forGetter(BeeProducts::getSpecialtyChance)
-            ).apply(instance, BeeProducts::new)
     );
 
     //CombProducts parser
@@ -50,8 +40,9 @@ public class ComplicatedBeesCodecs {
             instance.group(
                     Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
-                    BEE_PRODUCTS_CODEC.fieldOf("products").forGetter(Species::getProducts),
-                    CompoundTag.CODEC.optionalFieldOf("genome", new Chromosome().serialize()).forGetter(species -> species.getDefaultChromosome().serialize())
+                    BeeProduct.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
+                    BeeProduct.CODEC.listOf().optionalFieldOf("specialty_products", new ArrayList<>()).forGetter(Species::getSpecialtyProducts),
+                    CompoundTag.CODEC.optionalFieldOf("default_chromosome", new Chromosome().serialize()).forGetter(species -> species.getDefaultChromosome().serialize())
             ).apply(instance, Species::new)
     );
 

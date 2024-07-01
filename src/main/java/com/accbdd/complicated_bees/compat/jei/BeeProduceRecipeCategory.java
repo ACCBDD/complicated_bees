@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.compat.jei;
 
+import com.accbdd.complicated_bees.genetics.BeeProduct;
 import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.item.BeeItem;
@@ -16,6 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import java.util.List;
+
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 @MethodsReturnNonnullByDefault
@@ -28,7 +31,7 @@ public class BeeProduceRecipeCategory implements IRecipeCategory<Species> {
     private static final Component TITLE = Component.translatable("gui.complicated_bees.bee_products");
 
     public final IDrawable ICON = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/item/bee.png"), 0, 0, 16, 16, 16, 16);
-    public final IDrawable BACKGROUND = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/gui/jei/bee_products.png"), 0, 0, 128, 46, 128, 46);
+    public final IDrawable BACKGROUND = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/gui/jei/bee_products.png"), 0, 0, 160, 64, 160, 64);
 
     @Override
     public RecipeType<Species> getRecipeType() {
@@ -52,23 +55,17 @@ public class BeeProduceRecipeCategory implements IRecipeCategory<Species> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Species species, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 14, 15)
+        builder.addSlot(RecipeIngredientRole.INPUT, 14, 24)
                 .setSlotName("input_species")
                 .addIngredients(VanillaTypes.ITEM_STACK, species.toMembers());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 65, 15)
-                .setSlotName("primary_output")
-                .addIngredient(VanillaTypes.ITEM_STACK, species.getProducts().getPrimary())
-                .addTooltipCallback(new ChanceTooltipCallback(species.getProducts().getPrimaryChance()));
+        List<BeeProduct> products = species.getProducts();
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 83, 15)
-                .setSlotName("secondary_output")
-                .addIngredient(VanillaTypes.ITEM_STACK, species.getProducts().getSecondary())
-                .addTooltipCallback(new ChanceTooltipCallback(species.getProducts().getSecondaryChance()));
-
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 101, 15)
-                .setSlotName("specialty_output")
-                .addIngredient(VanillaTypes.ITEM_STACK, species.getProducts().getSpecialty())
-                .addTooltipCallback(new ChanceTooltipCallback(species.getProducts().getSpecialtyChance()));
+        for (int i = 0; i < products.size(); i++) {
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 66+(18*i), 14)
+                    .setSlotName("output_"+String.valueOf(i))
+                    .addIngredient(VanillaTypes.ITEM_STACK, products.get(i).getStack())
+                    .addTooltipCallback(new ChanceTooltipCallback(products.get(i).getChance()));
+        }
     }
 }

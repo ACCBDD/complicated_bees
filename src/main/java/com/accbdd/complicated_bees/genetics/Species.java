@@ -15,25 +15,28 @@ import java.util.List;
  */
 public class Species {
     private final int color;
-    private final BeeProducts products;
-    private final Chromosome defaultChromosome;
+    private final List<BeeProduct> products;
+    private final List<BeeProduct> specialty_products;
+    private final Chromosome default_chromosome;
     private final boolean dominant;
 
     public static final Species INVALID = new Species(
             true,
             0,
-            BeeProducts.EMPTY,
+            new ArrayList<>(),
+            new ArrayList<>(),
             new Chromosome());
 
-    public Species(boolean dominant, int color, BeeProducts products, Chromosome defaultChromosome) {
+    public Species(boolean dominant, int color, List<BeeProduct> products, List<BeeProduct> specialtyProducts, Chromosome default_chromosome) {
         this.dominant = dominant;
         this.color = color;
         this.products = products;
-        this.defaultChromosome = defaultChromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
+        this.specialty_products = specialtyProducts;
+        this.default_chromosome = default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
-    public Species(boolean dominant, int color, BeeProducts products, CompoundTag defaultGenomeAsTag) {
-        this(dominant, color, products, new Chromosome(defaultGenomeAsTag));
+    public Species(boolean dominant, int color, List<BeeProduct> products, List<BeeProduct> specialtyProducts, CompoundTag defaultGenomeAsTag) {
+        this(dominant, color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
     }
 
     public boolean isDominant() {
@@ -44,12 +47,16 @@ public class Species {
         return this.color;
     }
 
-    public BeeProducts getProducts() {
+    public List<BeeProduct> getProducts() {
         return products;
     }
 
+    public List<BeeProduct> getSpecialtyProducts() {
+        return specialty_products;
+    }
+
     public Chromosome getDefaultChromosome() {
-        return defaultChromosome;
+        return default_chromosome;
     }
 
     public ItemStack toStack(Item item) {
@@ -64,4 +71,6 @@ public class Species {
         members.add(this.toStack(ItemsRegistration.DRONE.get()));
         return members;
     }
+
+
 }

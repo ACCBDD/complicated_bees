@@ -8,6 +8,7 @@ import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.screen.ApiaryScreen;
 import com.accbdd.complicated_bees.screen.CentrifugeScreen;
+import com.accbdd.complicated_bees.utils.ComplicatedBeesCodecs;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;

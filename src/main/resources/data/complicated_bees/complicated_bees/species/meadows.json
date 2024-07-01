@@ -1,13 +1,15 @@
 {
   "dominant": false,
   "color": "FC030F",
-  "products": {
-    "primary": {
-      "item": "minecraft:apple"
-    },
-    "primary_chance": 0.322
-  },
-  "genome": {
+  "products": [
+    {
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:stringy"
+      }
+    }
+  ],
+  "default_chromosome": {
     "complicated_bees:lifespan": {
       "data": 10
     }
