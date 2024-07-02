@@ -21,8 +21,6 @@ public enum EnumTolerance {
     DOWN_2("DOWN_2", 0, 2),
     DOWN_1("DOWN_1", 0, 1);
 
-    public static final EnumTolerance[] VALUES = values();
-
     public final String name;
     public final int up;
     public final int down;

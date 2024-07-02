@@ -12,9 +12,6 @@ public enum EnumHumidity {
     NORMAL("normal"),
     WET("wet");
 
-
-    public static final EnumHumidity[] VALUES = values();
-
     public final String name;
 
     EnumHumidity(String name) {

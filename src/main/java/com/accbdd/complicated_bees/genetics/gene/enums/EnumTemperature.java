@@ -17,8 +17,6 @@ public enum EnumTemperature {
     HOT("hot"),
     HELLISH("hellish");
 
-    public static final EnumTemperature[] VALUES = values();
-
     public final String name;
 
     EnumTemperature(String name) {
