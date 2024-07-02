@@ -71,6 +71,4 @@ public class Species {
         members.add(this.toStack(ItemsRegistration.DRONE.get()));
         return members;
     }
-
-
 }

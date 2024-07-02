@@ -23,7 +23,7 @@ public class CombProductRecipeCategory implements IRecipeCategory<Comb> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, "jei/comb_product");
     public static final RecipeType<Comb> TYPE = new RecipeType<>(ID, Comb.class);
 
-    private static final Component TITLE = Component.translatable("gui.complicated_bees.comb_products");
+    private static final Component TITLE = Component.translatable("gui.complicated_bees.jei.comb_products");
 
     public final IDrawable ICON = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/item/comb.png"), 0, 0, 16, 16, 16, 16);
     public final IDrawable BACKGROUND = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/gui/jei/comb_products.png"), 0, 0, 128, 46, 128, 46);

@@ -12,17 +12,19 @@
   "block.complicated_bees.apiary": "Apiary",
   "block.complicated_bees.centrifuge": "Centrifuge",
 
+  "gui.complicated_bees.jei.comb_products": "Comb Products",
+  "gui.complicated_bees.jei.bee_products": "Bee Products",
+  "gui.complicated_bees.jei.mutations": "Mutations",
+
   "gui.complicated_bees.primary_produce": "Primary Produce",
   "gui.complicated_bees.secondary_produce": "Secondary Produce",
   "gui.complicated_bees.specialty_produce": "Specialty Produce",
   "gui.complicated_bees.centrifuge": "Centrifuge",
   "gui.complicated_bees.apiary": "Apiary",
-  "gui.complicated_bees.comb_products": "Comb Products",
   "gui.complicated_bees.humidity_label": "Humidity",
   "gui.complicated_bees.temperature_label": "Temperature",
   "gui.complicated_bees.humidity_label.short": "H",
   "gui.complicated_bees.temperature_label.short": "T",
-  "gui.complicated_bees.bee_products": "Bee Products",
   "gui.complicated_bees.more_info": "<Hold shift for more info>",
 
   "gui.complicated_bees.humidity.wet": "Wet",

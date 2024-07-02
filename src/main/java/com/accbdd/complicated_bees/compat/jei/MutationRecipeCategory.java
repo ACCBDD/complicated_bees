@@ -1,0 +1,69 @@
+package com.accbdd.complicated_bees.compat.jei;
+
+import com.accbdd.complicated_bees.genetics.BeeProduct;
+import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.mutation.Mutation;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+
+import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
+
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class MutationRecipeCategory implements IRecipeCategory<Mutation> {
+
+    public static final ResourceLocation ID = new ResourceLocation(MODID, "jei/mutation");
+    public static final RecipeType<Mutation> TYPE = new RecipeType<>(ID, Mutation.class);
+
+    private static final Component TITLE = Component.translatable("gui.complicated_bees.jei.mutations");
+
+    public final IDrawable ICON = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/item/bee.png"), 0, 0, 16, 16, 16, 16);
+    public final IDrawable BACKGROUND = ComplicatedBeesJEI.createDrawable(new ResourceLocation(MODID, "textures/gui/jei/mutations.png"), 0, 0, 128, 32, 128, 32);
+
+    @Override
+    public RecipeType<Mutation> getRecipeType() {
+        return TYPE;
+    }
+
+    @Override
+    public Component getTitle() {
+        return TITLE;
+    }
+
+    @Override
+    public IDrawable getBackground() {
+        return BACKGROUND;
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return ICON;
+    }
+
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder builder, Mutation mutation, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 8, 8)
+                .setSlotName("first_species")
+                .addIngredients(VanillaTypes.ITEM_STACK, mutation.getFirstSpecies().toMembers());
+
+        builder.addSlot(RecipeIngredientRole.INPUT, 51, 8)
+                .setSlotName("second_species")
+                .addIngredients(VanillaTypes.ITEM_STACK, mutation.getSecondSpecies().toMembers());
+
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 8)
+                .setSlotName("output_species")
+                .addIngredients(VanillaTypes.ITEM_STACK, mutation.getResultSpecies().toMembers());
+    }
+}

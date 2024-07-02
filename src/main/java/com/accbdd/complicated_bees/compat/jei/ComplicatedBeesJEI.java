@@ -7,6 +7,7 @@ import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.CombRegistry;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import com.accbdd.complicated_bees.registry.MutationRegistry;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -36,12 +37,14 @@ public class ComplicatedBeesJEI implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new CombProductRecipeCategory());
         registration.addRecipeCategories(new BeeProduceRecipeCategory());
+        registration.addRecipeCategories(new MutationRecipeCategory());
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(CombProductRecipeCategory.TYPE, Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().stream().toList());
         registration.addRecipes(BeeProduceRecipeCategory.TYPE, Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().stream().toList());
+        registration.addRecipes(MutationRecipeCategory.TYPE, Minecraft.getInstance().getConnection().registryAccess().registry(MutationRegistry.MUTATION_REGISTRY_KEY).get().stream().toList());
     }
 
     @Override
@@ -64,6 +67,8 @@ public class ComplicatedBeesJEI implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(ItemsRegistration.APIARY.get().getDefaultInstance(), BeeProduceRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(ItemsRegistration.APIARY.get().getDefaultInstance(), MutationRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(ItemsRegistration.CENTRIFUGE.get().getDefaultInstance(), CombProductRecipeCategory.TYPE);
     }
 
     public static IDrawable createDrawable(ResourceLocation location, int uOffset, int vOffset, int width, int height, int textureWidth, int textureHeight) {
