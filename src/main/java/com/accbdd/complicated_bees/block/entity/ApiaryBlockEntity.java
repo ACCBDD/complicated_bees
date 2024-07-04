@@ -1,7 +1,9 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.BeeProduct;
 import com.accbdd.complicated_bees.genetics.Chromosome;
+import com.accbdd.complicated_bees.genetics.Flower;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
@@ -12,13 +14,16 @@ import com.accbdd.complicated_bees.item.PrincessItem;
 import com.accbdd.complicated_bees.item.QueenItem;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
-import net.minecraft.client.Minecraft;
+import com.accbdd.complicated_bees.utils.BlockPosBoxIterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -28,6 +33,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -46,7 +52,7 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     public static final int SLOT_COUNT = BEE_SLOT_COUNT + OUTPUT_SLOT_COUNT + FRAME_SLOT_COUNT;
 
-    private Stack<ItemStack> outputBuffer = new Stack<>();
+    private final Stack<ItemStack> outputBuffer = new Stack<>();
     public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
     private final ContainerData data;
@@ -54,8 +60,9 @@ public class ApiaryBlockEntity extends BlockEntity {
     private int maxBreedingProgress = 20;
     private int barState = 1;
 
-    private EnumTemperature temperature = null;
-    private EnumHumidity humidity = null;
+    private EnumTemperature temperatureCache = null;
+    private EnumHumidity humidityCache = null;
+    private final List<BlockPos> flowerCache = new ArrayList<>();
 
     private final ItemStackHandler beeItems = createItemHandler(BEE_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
@@ -243,6 +250,10 @@ public class ApiaryBlockEntity extends BlockEntity {
                 setBarState(2);
             }
         }
+
+        if (level.getGameTime() % 200 == 0 && top_stack.getItem() instanceof PrincessItem) {
+            rebuildFlowerCache();
+        }
     }
 
     private void tryEmptyBuffer() {
@@ -294,23 +305,41 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public EnumHumidity getHumidity() {
-        if (this.humidity == null) {
+        if (this.humidityCache == null) {
             if (getLevel() == null) {
                 return null;
             }
-            this.humidity = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
+            this.humidityCache = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
         }
-        return this.humidity;
+        return this.humidityCache;
     }
 
     public EnumTemperature getTemperature() {
-        if (this.temperature == null) {
+        if (this.temperatureCache == null) {
             if (getLevel() == null) {
                 return null;
             }
-            this.temperature = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
+            this.temperatureCache = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
         }
-        return this.temperature;
+        return this.temperatureCache;
+    }
+
+    private void rebuildFlowerCache() {
+        flowerCache.clear();
+
+        //todo: actually implement flower gene
+        List<TagKey<Block>> tag = new ArrayList<>();
+        tag.add(BlockTags.FLOWERS);
+        Flower flower = new Flower(new ArrayList<>(), tag);
+
+        for (BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), 3, 3); it.hasNext(); ) {
+            BlockPos pos = it.next();
+            ComplicatedBees.LOGGER.debug("checking position {}", pos);
+            if (flower.isAcceptable(level.getBlockState(pos))) {
+                flowerCache.add(pos);
+            }
+        }
+        ComplicatedBees.LOGGER.debug("found flowers at {}", flowerCache);
     }
 
     private void increaseBreedingProgress() {
