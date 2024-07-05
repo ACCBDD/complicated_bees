@@ -13,15 +13,15 @@ public class GeneTemperature extends GeneTolerant<EnumTemperature> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneTemperature() {
-        super(EnumTemperature.NORMAL, EnumTolerance.NONE);
+        super(EnumTemperature.NORMAL, EnumTolerance.NONE, true);
     }
 
-    public GeneTemperature(EnumTemperature temperature, EnumTolerance tolerance) {
-        super(temperature, tolerance);
+    public GeneTemperature(EnumTemperature temperature, EnumTolerance tolerance, boolean dominant) {
+        super(temperature, tolerance, dominant);
     }
 
     @Override
     public GeneTolerant<EnumTemperature> deserialize(CompoundTag tag) {
-        return new GeneTemperature(EnumTemperature.getFromString(tag.getString(DATA)), EnumTolerance.getFromString(tag.getString(TOLERANCE)));
+        return new GeneTemperature(EnumTemperature.getFromString(tag.getString(DATA)), EnumTolerance.getFromString(tag.getString(TOLERANCE)), tag.getBoolean(DOMINANT));
     }
 }

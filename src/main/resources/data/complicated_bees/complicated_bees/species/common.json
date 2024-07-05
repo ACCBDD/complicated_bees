@@ -19,6 +19,10 @@
     "complicated_bees:humidity": {
       "data": "wet",
       "tolerance": "down_1"
+    },
+    "complicated_bees:flower": {
+      "data": "complicated_bees:flower",
+      "dominant": false
     }
   }
 }

@@ -48,7 +48,7 @@ public class ApiaryMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
-    private Slot createOutputSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
+    private SlotItemHandler createOutputSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
         return new SlotItemHandler(handler, index, xPos, yPos) {
             @Override
             public boolean mayPlace(ItemStack stack) {
@@ -116,6 +116,7 @@ public class ApiaryMenu extends AbstractContainerMenu {
             }
 
             slot.onTake(player, stack);
+            slot.setChanged();
         }
 
         return itemStack;

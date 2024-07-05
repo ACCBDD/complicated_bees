@@ -102,6 +102,12 @@ public class ComplicatedBees
                 ComplicatedBeesCodecs.MUTATION_CODEC,
                 ComplicatedBeesCodecs.MUTATION_CODEC
         );
+
+        event.dataPackRegistry(
+                FlowerRegistry.FLOWER_REGISTRY_KEY,
+                FlowerRegistry.CODEC,
+                FlowerRegistry.CODEC
+        );
     }
 
     @SubscribeEvent
@@ -141,6 +147,7 @@ public class ComplicatedBees
         LOGGER.info("Registered {} species", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().size());
         LOGGER.info("Registered {} combs", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().size());
         LOGGER.info("Registered {} mutations", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistry.MUTATION_REGISTRY_KEY).get().size());
+        LOGGER.info("Registered {} flowers", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get().size());
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

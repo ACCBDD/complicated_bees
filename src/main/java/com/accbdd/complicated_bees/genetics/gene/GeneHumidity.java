@@ -16,15 +16,15 @@ public class GeneHumidity extends GeneTolerant<EnumHumidity> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneHumidity() {
-        this(EnumHumidity.NORMAL, EnumTolerance.NONE);
+        this(EnumHumidity.NORMAL, EnumTolerance.NONE, true);
     }
 
-    public GeneHumidity(EnumHumidity enumHumidity, EnumTolerance enumTolerance) {
-        super(enumHumidity, enumTolerance);
+    public GeneHumidity(EnumHumidity enumHumidity, EnumTolerance enumTolerance, boolean dominant) {
+        super(enumHumidity, enumTolerance, dominant);
     }
 
     @Override
     public GeneHumidity deserialize(CompoundTag tag) {
-        return new GeneHumidity(EnumHumidity.getFromString(tag.getString(DATA)), EnumTolerance.getFromString(tag.getString(TOLERANCE)));
+        return new GeneHumidity(EnumHumidity.getFromString(tag.getString(DATA)), EnumTolerance.getFromString(tag.getString(TOLERANCE)), tag.getBoolean(DOMINANT));
     }
 }

@@ -11,10 +11,6 @@ public class Gene<T> implements IGene<T> {
     private final boolean dominant;
     public T geneData;
 
-    public Gene(T geneData) {
-        this(geneData, true);
-    }
-
     public Gene(T geneData, boolean dominant) {
         this.geneData = geneData;
         this.dominant = dominant;

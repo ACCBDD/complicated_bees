@@ -25,6 +25,7 @@
   "gui.complicated_bees.temperature_label": "Temperature",
   "gui.complicated_bees.humidity_label.short": "H",
   "gui.complicated_bees.temperature_label.short": "T",
+  "gui.complicated_bees.flower_label": "Flower",
   "gui.complicated_bees.more_info": "<Hold shift for more info>",
 
   "gui.complicated_bees.humidity.wet": "Wet",

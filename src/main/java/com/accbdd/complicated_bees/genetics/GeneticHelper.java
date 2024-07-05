@@ -5,6 +5,7 @@ import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
+import com.accbdd.complicated_bees.registry.FlowerRegistry;
 import com.accbdd.complicated_bees.registry.MutationRegistry;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
@@ -65,6 +66,11 @@ public class GeneticHelper {
     public static Component getTranslationKey(Species species) {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
         return Component.translatable("species.complicated_bees." + registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(species));
+    }
+
+    public static Component getTranslationKey(Flower flower) {
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return Component.translatable("flower.complicated_bees." + registryAccess.registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get().getKey(flower));
     }
 
     public static Gene<?> getGene(ItemStack stack, ResourceLocation id, boolean primary) {

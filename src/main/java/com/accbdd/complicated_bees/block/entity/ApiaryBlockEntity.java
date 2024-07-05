@@ -13,12 +13,14 @@ import com.accbdd.complicated_bees.item.DroneItem;
 import com.accbdd.complicated_bees.item.PrincessItem;
 import com.accbdd.complicated_bees.item.QueenItem;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
+import com.accbdd.complicated_bees.registry.FlowerRegistry;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.utils.BlockPosBoxIterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.ContainerData;
@@ -31,6 +33,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -252,7 +255,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         }
 
         if (level.getGameTime() % 200 == 0 && top_stack.getItem() instanceof PrincessItem) {
-            rebuildFlowerCache();
+            rebuildFlowerCache(top_stack);
         }
     }
 
@@ -262,6 +265,7 @@ public class ApiaryBlockEntity extends BlockEntity {
             next = ItemHandlerHelper.insertItem(outputItems, next, false);
             if (next == ItemStack.EMPTY) {
                 outputBuffer.pop();
+                setChanged();
             } else {
                 setBarState(2);
                 break;
@@ -324,13 +328,16 @@ public class ApiaryBlockEntity extends BlockEntity {
         return this.temperatureCache;
     }
 
-    private void rebuildFlowerCache() {
+    private void rebuildFlowerCache(ItemStack bee) {
         flowerCache.clear();
+        Flower flower = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get()
+                .get(((GeneFlower)GeneticHelper.getGene(bee, GeneFlower.ID, true)).get());
 
-        //todo: actually implement flower gene
-        List<TagKey<Block>> tag = new ArrayList<>();
-        tag.add(BlockTags.FLOWERS);
-        Flower flower = new Flower(new ArrayList<>(), tag);
+        if (flower == null) {
+            flowerCache.add(getBlockPos());
+            ComplicatedBees.LOGGER.debug("no valid flower gene");
+            return;
+        }
 
         for (BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), 3, 3); it.hasNext(); ) {
             BlockPos pos = it.next();
