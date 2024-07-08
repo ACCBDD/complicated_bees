@@ -250,8 +250,6 @@ public class ApiaryBlockEntity extends BlockEntity {
                 } else {
                     setBarState(2);
                 }
-            } else {
-                setBarState(2);
             }
         }
 
