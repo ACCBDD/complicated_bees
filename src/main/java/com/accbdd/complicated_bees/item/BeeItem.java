@@ -87,6 +87,10 @@ public class BeeItem extends Item {
             components.add(Component.translatable("gui.complicated_bees.more_info").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         } else if (Minecraft.getInstance().level != null) {
             Chromosome primary = GeneticHelper.getChromosome(stack, true);
+            components.add(Component.translatable("gui.complicated_bees.lifespan." + primary.getGene(GeneLifespan.ID).get().toString())
+                    .append(" ")
+                    .append(Component.translatable("gui.complicated_bees.lifespan_label"))
+                    .withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("gui.complicated_bees.temperature_label.short")
                     .append(": ")
                     .append(((EnumTemperature)primary.getGene(GeneTemperature.ID).get()).getTranslationKey())
@@ -99,10 +103,8 @@ public class BeeItem extends Item {
                     .append(" / ")
                     .append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
-            components.add(Component.translatable("gui.complicated_bees.flower_label")
-                    .append(": ")
-                    .append(primary.getGene(GeneFlower.ID).get().toString())
-                    .withStyle(ChatFormatting.WHITE));
+            components.add(Component.translatable("flower.complicated_bees." + primary.getGene(GeneFlower.ID).get().toString())
+                    .withStyle(ChatFormatting.GRAY));
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);
     }

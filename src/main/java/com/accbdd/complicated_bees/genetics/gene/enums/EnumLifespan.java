@@ -24,4 +24,9 @@ public enum EnumLifespan {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

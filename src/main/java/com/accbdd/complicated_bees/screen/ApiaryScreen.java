@@ -1,15 +1,22 @@
 package com.accbdd.complicated_bees.screen;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.GeneLifespan;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
 import com.accbdd.complicated_bees.item.BeeItem;
+import com.accbdd.complicated_bees.utils.enums.EnumErrorCodes;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -46,7 +53,7 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
             graphics.blit(GUI,
                     x + 18,
                     y + 36 + progress,
-                    176 + (menu.getData().get(2) * 3),
+                    menu.getData().get(2) > 0 ? 182 : 179,
                     progress,
                     3,
                     45 - progress);
@@ -55,10 +62,36 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
             graphics.blit(GUI,
                     x + 18,
                     y + 81 - progress,
-                    176 + (menu.getData().get(2) * 3),
+                    179,
                     0,
                     3,
                     progress);
+        } else if (menu.getData().get(2) > 0) {
+            graphics.blit(GUI,
+                    x + 18,
+                    y + 36,
+                    182,
+                    0,
+                    3,
+                    45);
         }
+    }
+
+    @Override
+    protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {
+        super.renderTooltip(pGuiGraphics, pX, pY);
+        byte errorFlags = (byte) menu.getData().get(2);
+        int relMouseX = pX - (this.width - this.imageWidth) / 2;
+        int relMouseY = pY - (this.height - this.imageHeight) / 2;
+        if (errorFlags > 0 && (16 < relMouseX) && (relMouseX < 22) && (34 < relMouseY) && (relMouseY < 82)) {
+            List<Component> errors = new ArrayList<>();
+            errors.add(Component.translatable("gui.complicated_bees.error"));
+            for (EnumErrorCodes errorCode : EnumErrorCodes.values()) {
+                if ((errorFlags & errorCode.value) != 0)
+                    errors.add(Component.translatable("gui.complicated_bees.error." + errorCode.name));
+            }
+            pGuiGraphics.renderTooltip(this.font, errors, Optional.empty(), pX, pY);
+        }
+
     }
 }

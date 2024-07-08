@@ -12,6 +12,10 @@
   "default_chromosome": {
     "complicated_bees:lifespan": {
       "data": "shorter"
+    },
+    "complicated_bees:flower": {
+      "data": "complicated_bees:flower",
+      "dominant": false
     }
   }
 }
