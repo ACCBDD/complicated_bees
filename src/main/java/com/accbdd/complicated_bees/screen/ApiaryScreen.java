@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.GeneLifespan;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
 import com.accbdd.complicated_bees.item.BeeItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -40,7 +41,7 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
     public void renderStatusBar(GuiGraphics graphics, int x, int y) {
         if (menu.hasQueen()) {
             ItemStack queen = menu.getQueen();
-            int lifespan = (int) GeneticHelper.getChromosome(queen, true).getGene(GeneLifespan.ID).get();
+            int lifespan = ((EnumLifespan) GeneticHelper.getChromosome(queen, true).getGene(GeneLifespan.ID).get()).value;
             int progress = menu.getScaledProgress(BeeItem.getAge(queen), lifespan);
             graphics.blit(GUI,
                     x + 18,

@@ -7,6 +7,7 @@ import com.accbdd.complicated_bees.genetics.Flower;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.DroneItem;
@@ -299,7 +300,7 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     public void ageQueen(ItemStack queen) {
         BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
-        if (BeeItem.getAge(queen) >= (int) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)) {
+        if (BeeItem.getAge(queen) >= ((EnumLifespan) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)).value) {
             beeItems.extractItem(BEE_SLOT, 1, false);
             outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.PRINCESS.get()));
             outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()));

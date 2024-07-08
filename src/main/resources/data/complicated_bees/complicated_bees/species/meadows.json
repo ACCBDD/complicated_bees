@@ -11,7 +11,7 @@
   ],
   "default_chromosome": {
     "complicated_bees:lifespan": {
-      "data": 10
+      "data": "shorter"
     }
   }
 }
