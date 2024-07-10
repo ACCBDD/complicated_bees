@@ -5,6 +5,8 @@ import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,6 +18,8 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Stack;
+
 public class CentrifugeBlockEntity extends BlockEntity {
     public static final int INPUT_SLOT = 0;
     public static final int INPUT_SLOT_COUNT = 1;
@@ -26,6 +30,9 @@ public class CentrifugeBlockEntity extends BlockEntity {
     public static final String ITEMS_OUTPUT_TAG = "output_items";
 
     public static final int SLOT_COUNT = INPUT_SLOT_COUNT + OUTPUT_SLOT_COUNT;
+
+    private final Stack<ItemStack> outputBuffer = new Stack<>();
+    public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
     private final ContainerData data;
     private int progress = 0;
@@ -113,6 +120,11 @@ public class CentrifugeBlockEntity extends BlockEntity {
         super.saveAdditional(tag);
         tag.put(ITEMS_INPUT_TAG, inputItems.serializeNBT());
         tag.put(ITEMS_OUTPUT_TAG, outputItems.serializeNBT());
+        ListTag bufferTag = new ListTag();
+        for (ItemStack stack : outputBuffer) {
+            bufferTag.add(stack.save(new CompoundTag()));
+        }
+        tag.put(OUTPUT_BUFFER_TAG, bufferTag);
     }
 
     @Override
@@ -123,6 +135,11 @@ public class CentrifugeBlockEntity extends BlockEntity {
         }
         if (tag.contains(ITEMS_OUTPUT_TAG)) {
             outputItems.deserializeNBT(tag.getCompound(ITEMS_OUTPUT_TAG));
+        }
+        if (tag.contains(OUTPUT_BUFFER_TAG)) {
+            for (Tag itemCompound : tag.getList(OUTPUT_BUFFER_TAG, Tag.TAG_COMPOUND)) {
+                outputBuffer.add(ItemStack.of((CompoundTag) itemCompound));
+            }
         }
     }
 
