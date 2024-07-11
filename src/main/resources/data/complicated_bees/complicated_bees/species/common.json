@@ -13,12 +13,12 @@
   ],
   "default_chromosome": {
     "complicated_bees:temperature": {
-      "data": "icy",
-      "tolerance": "up_3"
+      "data": "normal",
+      "tolerance": "both_1"
     },
     "complicated_bees:humidity": {
-      "data": "wet",
-      "tolerance": "down_1"
+      "data": "normal",
+      "tolerance": "none"
     },
     "complicated_bees:flower": {
       "data": "complicated_bees:flower",

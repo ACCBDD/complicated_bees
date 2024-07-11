@@ -13,6 +13,10 @@
     "complicated_bees:lifespan": {
       "data": "shorter"
     },
+    "complicated_bees:temperature": {
+      "data": "normal",
+      "tolerance": "up_1"
+    },
     "complicated_bees:flower": {
       "data": "complicated_bees:flower",
       "dominant": false

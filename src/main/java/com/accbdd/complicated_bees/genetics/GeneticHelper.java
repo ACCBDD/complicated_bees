@@ -157,8 +157,4 @@ public class GeneticHelper {
         }
         return result;
     }
-
-    public static void tryMutate(Genome left, Genome right) {
-
-    }
 }

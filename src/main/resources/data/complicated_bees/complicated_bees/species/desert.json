@@ -7,12 +7,12 @@
   ],
   "default_chromosome": {
     "complicated_bees:temperature": {
-      "data": "hOt",
-      "tolerance": "down_1"
+      "data": "hot",
+      "tolerance": "none"
     },
     "complicated_bees:humidity": {
-      "data": "drY",
-      "tolerance": "uP_2"
+      "data": "dry",
+      "tolerance": "up_1"
     },
     "complicated_bees:flower": {
       "data": "complicated_bees:desert",
