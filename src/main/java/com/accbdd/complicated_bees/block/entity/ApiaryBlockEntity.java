@@ -95,6 +95,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
             return false;
         }
     });
+
     private final Lazy<IItemHandler> outputItemHandler = Lazy.of(() -> new AdaptedItemHandler(outputItems) {
         @Override
         public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
@@ -356,6 +357,10 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
         }
     }
 
+    private void clearFlowerCache() {
+        flowerCache.clear();
+    }
+
     private void increaseBreedingProgress() {
         breedingProgress++;
         setChanged();
@@ -369,12 +374,16 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
         breedingProgress = 0;
     }
 
-    private void addError(EnumErrorCodes error) {
-        barState |= error.value;
+    private void addError(EnumErrorCodes... error) {
+        for (EnumErrorCodes err : error) {
+            barState |= err.value;
+        }
     }
 
-    private void removeError(EnumErrorCodes error) {
-        barState = (byte) (barState & (error.value ^ Byte.MAX_VALUE));
+    private void removeError(EnumErrorCodes... error) {
+        for (EnumErrorCodes err : error) {
+            barState = (byte) (barState & (err.value ^ Byte.MAX_VALUE));
+        }
     }
 
     // -------------------

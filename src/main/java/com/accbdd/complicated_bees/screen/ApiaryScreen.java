@@ -50,13 +50,14 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
             ItemStack queen = menu.getQueen();
             int lifespan = ((EnumLifespan) GeneticHelper.getChromosome(queen, true).getGene(GeneLifespan.ID).get()).value;
             int progress = menu.getScaledProgress(BeeItem.getAge(queen), lifespan);
+            boolean errorStatus = menu.getData().get(2) > 0;
             graphics.blit(GUI,
                     x + 18,
-                    y + 36 + progress,
-                    menu.getData().get(2) > 0 ? 182 : 179,
-                    progress,
+                    y + 36 + (errorStatus ? 0 : progress),
+                    errorStatus ? 182 : 179,
+                    errorStatus ? 0 : progress,
                     3,
-                    45 - progress);
+                    45 - (errorStatus ? 0 : progress));
         } else if (menu.isBreeding()) {
             int progress = menu.getScaledProgress(menu.getData().get(0), menu.getData().get(1));
             graphics.blit(GUI,
@@ -66,14 +67,6 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
                     0,
                     3,
                     progress);
-        } else if (menu.getData().get(2) > 0) {
-            graphics.blit(GUI,
-                    x + 18,
-                    y + 36,
-                    182,
-                    0,
-                    3,
-                    45);
         }
     }
 
@@ -83,7 +76,7 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
         byte errorFlags = (byte) menu.getData().get(2);
         int relMouseX = pX - (this.width - this.imageWidth) / 2;
         int relMouseY = pY - (this.height - this.imageHeight) / 2;
-        if (errorFlags > 0 && (16 < relMouseX) && (relMouseX < 22) && (34 < relMouseY) && (relMouseY < 82)) {
+        if (menu.hasQueen() && errorFlags > 0 && (16 < relMouseX) && (relMouseX < 22) && (34 < relMouseY) && (relMouseY < 82)) {
             List<Component> errors = new ArrayList<>();
             errors.add(Component.translatable("gui.complicated_bees.error"));
             for (EnumErrorCodes errorCode : EnumErrorCodes.values()) {
