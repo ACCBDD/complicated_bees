@@ -55,6 +55,10 @@ public class BeeItem extends Item {
 
         component.append(GeneticHelper.getTranslationKey(primary));
 
+        if (primary == null) {
+            return component;
+        }
+
         if (!primary.equals(secondary)) {
             component.append("-").append(GeneticHelper.getTranslationKey(secondary));
         }

@@ -1,21 +1,40 @@
 package com.accbdd.complicated_bees.block;
 
+import com.accbdd.complicated_bees.block.entity.BeeNestBlockEntity;
+import com.accbdd.complicated_bees.genetics.Species;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.Containers;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class BeeNestBlock extends Block {
-    public BeeNestBlock(Properties prop) {
+public class BeeNestBlock extends BaseEntityBlock {
+    private final Species species;
+
+    public BeeNestBlock(Properties prop, Species species) {
         super(prop.requiresCorrectToolForDrops());
+        this.species = species;
+    }
+
+    public Species getSpecies() {
+        return species;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return null;
     }
 
     @Override
@@ -24,5 +43,17 @@ public class BeeNestBlock extends Block {
             pPlayer.addEffect(new MobEffectInstance(MobEffects.POISON, 100));
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new BeeNestBlockEntity(getSpecies(), pPos, pState);
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        Containers.dropContentsOnDestroy(pState, pNewState, pLevel, pPos);
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
 }

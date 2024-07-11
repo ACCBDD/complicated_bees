@@ -169,7 +169,10 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     private boolean hasRecipe(ItemStack stack) {
         if (stack.is(ItemsRegistration.COMB.get())) {
-            ItemStack primary = CombItem.getComb(stack).getProducts().get(0).getStack();
+            ItemStack primary = ItemStack.EMPTY;
+            if (!CombItem.getComb(stack).getProducts().isEmpty()) {
+                primary = CombItem.getComb(stack).getProducts().get(0).getStack();
+            }
             return canInsertIntoOutput(primary);
         }
         return false;

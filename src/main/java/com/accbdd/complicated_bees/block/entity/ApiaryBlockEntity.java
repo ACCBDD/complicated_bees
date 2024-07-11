@@ -409,7 +409,10 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-        return itemHandler.get().extractItem(pSlot, pAmount, false);
+        ItemStack stack = itemHandler.get().extractItem(pSlot, pAmount, false);
+        if (!stack.isEmpty())
+            setChanged();
+        return stack;
     }
 
     @Override
@@ -420,6 +423,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
         removeItemNoUpdate(pSlot);
+        setChanged();
         itemHandler.get().insertItem(pSlot, pStack, false);
     }
 

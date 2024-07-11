@@ -31,7 +31,11 @@ public class GeneSpecies extends Gene<Species> {
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
-        tag.put(DATA, StringTag.valueOf(registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(this.get()).toString()));
+        if (registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(this.get()) == null) {
+            tag.put(DATA, StringTag.valueOf("complicated_bees:invalid"));
+        } else {
+            tag.put(DATA, StringTag.valueOf(registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(this.get()).toString()));
+        }
         tag.put(DOMINANT, ByteTag.valueOf(this.isDominant()));
         return tag;
     }
