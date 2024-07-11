@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class Species {
     private final int color;
-    private final List<BeeProduct> products;
-    private final List<BeeProduct> specialty_products;
+    private final List<Product> products;
+    private final List<Product> specialty_products;
     private final Chromosome default_chromosome;
     private final boolean dominant;
 
@@ -27,7 +27,7 @@ public class Species {
             new ArrayList<>(),
             new Chromosome());
 
-    public Species(boolean dominant, int color, List<BeeProduct> products, List<BeeProduct> specialtyProducts, Chromosome default_chromosome) {
+    public Species(boolean dominant, int color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
         this.dominant = dominant;
         this.color = color;
         this.products = products;
@@ -35,7 +35,7 @@ public class Species {
         this.default_chromosome = default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
-    public Species(boolean dominant, int color, List<BeeProduct> products, List<BeeProduct> specialtyProducts, CompoundTag defaultGenomeAsTag) {
+    public Species(boolean dominant, int color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
         this(dominant, color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
     }
 
@@ -47,11 +47,11 @@ public class Species {
         return this.color;
     }
 
-    public List<BeeProduct> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public List<BeeProduct> getSpecialtyProducts() {
+    public List<Product> getSpecialtyProducts() {
         return specialty_products;
     }
 

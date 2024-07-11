@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
@@ -18,6 +19,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Stack;
 
 public class CentrifugeBlockEntity extends BlockEntity {
@@ -167,7 +169,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     private boolean hasRecipe(ItemStack stack) {
         if (stack.is(ItemsRegistration.COMB.get())) {
-            ItemStack primary = CombItem.getComb(stack).getProducts().getPrimary();
+            ItemStack primary = CombItem.getComb(stack).getProducts().get(0).getStack();
             return canInsertIntoOutput(primary);
         }
         return false;
@@ -178,12 +180,12 @@ public class CentrifugeBlockEntity extends BlockEntity {
     }
 
     private void craftItem(ItemStack stack) {
-        ItemStack primary = CombItem.getComb(stack).getProducts().getPrimaryResult();
-        ItemStack secondary = CombItem.getComb(stack).getProducts().getSecondaryResult();
-
+        List<Product> products = CombItem.getComb(stack).getProducts();
         this.inputItems.extractItem(INPUT_SLOT, 1, false);
-        ItemHandlerHelper.insertItem(outputItems, primary, false);
-        ItemHandlerHelper.insertItem(outputItems, secondary, false);
+
+        for (Product product : products) {
+            ItemHandlerHelper.insertItem(outputItems, product.getStackResult(), false);
+        }
     }
 
     private boolean canInsertIntoOutput(ItemStack stack) {

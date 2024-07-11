@@ -2,11 +2,10 @@
   "id": "juicy",
   "outer_color": "22b800",
   "inner_color": "f786dd",
-  "products": {
-    "primary": {
+  "products": [
+    {
       "item": "minecraft:melon",
-      "count": 5
-    },
-    "primary_chance": 0.7
-  }
+      "chance": 0.7
+    }
+  ]
 }

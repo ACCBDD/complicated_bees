@@ -2,10 +2,20 @@
   "id": "honey",
   "outer_color": "e7d46a",
   "inner_color": "fea02b",
-  "products": {
-    "primary": {
-      "item": "minecraft:honey_block"
+  "products": [
+    {
+      "item": "minecraft:honey_block",
+      "chance": 1
     },
-    "primary_chance": 1
-  }
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:apple",
+      "chance": 0.5
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ]
 }

@@ -2,13 +2,14 @@
   "id": "stringy",
   "outer_color": "917130",
   "inner_color": "e0bd77",
-  "products": {
-    "primary": {
-      "item": "minecraft:honey_block"
+  "products": [
+    {
+      "item": "minecraft:honey_block",
+      "chance": 0.25
     },
-    "primary_chance": 0.25,
-    "secondary": {
-      "item": "minecraft:string"
+    {
+      "item": "minecraft:string",
+      "chance": 1
     }
-  }
+  ]
 }

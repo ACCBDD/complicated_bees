@@ -1,9 +1,7 @@
 package com.accbdd.complicated_bees.compat.jei;
 
-import com.accbdd.complicated_bees.genetics.BeeProduct;
-import com.accbdd.complicated_bees.genetics.Comb;
+import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
-import com.accbdd.complicated_bees.item.BeeItem;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -59,7 +57,7 @@ public class BeeProduceRecipeCategory implements IRecipeCategory<Species> {
                 .setSlotName("input_species")
                 .addIngredients(VanillaTypes.ITEM_STACK, species.toMembers());
 
-        List<BeeProduct> products = species.getProducts();
+        List<Product> products = species.getProducts();
 
         for (int i = 0; i < products.size(); i++) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 66+(18*i), 14)

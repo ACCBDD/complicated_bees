@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.genetics.BeeProduct;
+import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Chromosome;
 import com.accbdd.complicated_bees.genetics.Flower;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
@@ -273,8 +273,8 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     }
 
     public void generateProduce(ItemStack stack) {
-        List<BeeProduct> products = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
-        for (BeeProduct product : products) {
+        List<Product> products = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
+        for (Product product : products) {
             outputBuffer.add(product.getStackResult());
         }
         //todo: generate specialty produce

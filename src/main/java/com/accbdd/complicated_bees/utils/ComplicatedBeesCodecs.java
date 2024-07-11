@@ -26,33 +26,14 @@ public class ComplicatedBeesCodecs {
             Integer::toHexString
     );
 
-    //CombProducts parser
-    public static final Codec<CombProducts> COMB_PRODUCTS_CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("primary").forGetter(CombProducts::getPrimary),
-                    Codec.FLOAT.optionalFieldOf("primary_chance", 1.0f).forGetter(CombProducts::getPrimaryChance),
-                    ItemStack.ITEM_WITH_COUNT_CODEC.optionalFieldOf("secondary", Items.AIR.getDefaultInstance()).forGetter(CombProducts::getSecondary),
-                    Codec.FLOAT.optionalFieldOf("secondary_chance", 1.0f).forGetter(CombProducts::getSecondaryChance)
-            ).apply(instance, CombProducts::new)
-    );
-
     public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
-                    BeeProduct.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
-                    BeeProduct.CODEC.listOf().optionalFieldOf("specialty_products", new ArrayList<>()).forGetter(Species::getSpecialtyProducts),
+                    Product.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
+                    Product.CODEC.listOf().optionalFieldOf("specialty_products", new ArrayList<>()).forGetter(Species::getSpecialtyProducts),
                     CompoundTag.CODEC.optionalFieldOf("default_chromosome", new Chromosome().serialize()).forGetter(species -> species.getDefaultChromosome().serialize())
             ).apply(instance, Species::new)
-    );
-
-    public static final Codec<Comb> COMB_CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    Codec.STRING.fieldOf("id").forGetter(Comb::getId),
-                    HEX_STRING_CODEC.fieldOf("outer_color").forGetter(Comb::getOuterColor),
-                    HEX_STRING_CODEC.fieldOf("inner_color").forGetter(Comb::getInnerColor),
-                    COMB_PRODUCTS_CODEC.fieldOf("products").forGetter(Comb::getProducts)
-            ).apply(instance, Comb::new)
     );
 
     public static final Codec<Mutation> MUTATION_CODEC = RecordCodecBuilder.create(instance ->

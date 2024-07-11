@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees;
 
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.datagen.DataGenerators;
+import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.item.CombItem;
@@ -93,8 +94,8 @@ public class ComplicatedBees
 
         event.dataPackRegistry(
                 CombRegistry.COMB_REGISTRY_KEY,
-                ComplicatedBeesCodecs.COMB_CODEC,
-                ComplicatedBeesCodecs.COMB_CODEC
+                Comb.CODEC,
+                Comb.CODEC
         );
 
         event.dataPackRegistry(
