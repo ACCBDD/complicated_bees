@@ -21,6 +21,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -37,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class ApiaryBlockEntity extends BlockEntity {
+public class ApiaryBlockEntity extends BlockEntity implements Container {
     public static final int BEE_SLOT = 0;
     public static final int BEE_SLOT_COUNT = 2;
     public static final String ITEMS_BEES_TAG = "bee_items";
@@ -373,5 +375,54 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     private void removeError(EnumErrorCodes error) {
         barState = (byte) (barState & (error.value ^ Byte.MAX_VALUE));
+    }
+
+    // -------------------
+    // container methods
+    @Override
+    public int getContainerSize() {
+        return itemHandler.get().getSlots();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        ItemStack test = ItemStack.EMPTY;
+        for (int i = 0; i < itemHandler.get().getSlots(); i++) {
+            test = itemHandler.get().getStackInSlot(i).isEmpty() ? test : itemHandler.get().getStackInSlot(i);
+        }
+        return (test.isEmpty());
+    }
+
+    @Override
+    public ItemStack getItem(int pSlot) {
+        return itemHandler.get().getStackInSlot(pSlot);
+    }
+
+    @Override
+    public ItemStack removeItem(int pSlot, int pAmount) {
+        return itemHandler.get().extractItem(pSlot, pAmount, false);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int pSlot) {
+        return itemHandler.get().extractItem(pSlot, itemHandler.get().getStackInSlot(pSlot).getCount(), false);
+    }
+
+    @Override
+    public void setItem(int pSlot, ItemStack pStack) {
+        removeItemNoUpdate(pSlot);
+        itemHandler.get().insertItem(pSlot, pStack, false);
+    }
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return true;
+    }
+
+    @Override
+    public void clearContent() {
+        for (int i = 0; i < itemHandler.get().getSlots(); i++) {
+            removeItemNoUpdate(i);
+        }
     }
 }

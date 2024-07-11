@@ -7,9 +7,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -34,10 +32,10 @@ public class ApiaryBlock extends BaseEntityBlock {
 
     public ApiaryBlock() {
         super(Properties.of()
-                .strength(3.5F)
                 .noOcclusion()
                 .requiresCorrectToolForDrops()
-                .sound(SoundType.WOOD));
+                .strength(5, 6)
+                .sound(SoundType.METAL));
     }
 
     @Override
@@ -92,5 +90,11 @@ public class ApiaryBlock extends BaseEntityBlock {
                 }
             };
         }
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        Containers.dropContentsOnDestroy(pState, pNewState, pLevel, pPos);
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
 }
