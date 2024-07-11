@@ -54,7 +54,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
 
     public static final int SLOT_COUNT = BEE_SLOT_COUNT + OUTPUT_SLOT_COUNT + FRAME_SLOT_COUNT;
 
-    private final Stack<ItemStack> outputBuffer = new Stack<>();
+    public final Stack<ItemStack> outputBuffer = new Stack<>();
     public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
     private final ContainerData data;

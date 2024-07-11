@@ -94,6 +94,12 @@ public class ApiaryBlock extends BaseEntityBlock {
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+        if (blockentity instanceof ApiaryBlockEntity) {
+            while (!((ApiaryBlockEntity) blockentity).outputBuffer.empty()) {
+                Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), ((ApiaryBlockEntity) blockentity).outputBuffer.pop());
+            }
+        }
         Containers.dropContentsOnDestroy(pState, pNewState, pLevel, pPos);
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
