@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.datagen;
 
+import com.accbdd.complicated_bees.datagen.loot.BlockLootTables;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;

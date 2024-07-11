@@ -80,6 +80,7 @@ public class ComplicatedBees
         BlockEntitiesRegistration.BLOCK_ENTITIES.register(modEventBus);
         MenuRegistration.MENU_TYPES.register(modEventBus);
         GeneRegistry.GENES.register(modEventBus);
+        LootItemFunctionRegistration.LOOT_ITEM_FUNCTION_REGISTER.register(modEventBus);
 
         CREATIVE_MODE_TABS.register(modEventBus);
     }
