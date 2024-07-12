@@ -19,19 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BeeNestBlock extends BaseEntityBlock {
-    private Species species;
 
     public BeeNestBlock(Properties prop) {
         super(prop.requiresCorrectToolForDrops());
-        this.species = Species.INVALID;
-    }
-
-    public Species getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(Species species) {
-        this.species = species;
     }
 
     @Override
@@ -55,7 +45,7 @@ public class BeeNestBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new BeeNestBlockEntity(getSpecies(), pPos, pState);
+        return new BeeNestBlockEntity(pPos, pState, Species.INVALID);
     }
 
     @Override

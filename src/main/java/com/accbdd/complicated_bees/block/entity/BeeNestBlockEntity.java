@@ -13,6 +13,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -27,24 +29,16 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 public class BeeNestBlockEntity extends BlockEntity {
     private Species species;
 
-    public BeeNestBlockEntity(Species species, BlockPos pPos, BlockState pBlockState) {
+    public BeeNestBlockEntity(BlockPos pPos, BlockState pBlockState, Species species) {
         super(BlockEntitiesRegistration.BEE_NEST_ENTITY.get(), pPos, pBlockState);
-        this.species = species;
-    }
-
-    public Species getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(Species species) {
         this.species = species;
     }
 
     public static int getNestColor(BlockState state, BlockAndTintGetter level, BlockPos pos, int index) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof BeeNestBlockEntity) {
-            //todo why isn't this working??
-            int color = ((BeeNestBlockEntity) be).getSpecies().getColor();
+            Species species = ((BeeNestBlockEntity) be).getSpecies();
+            int color = species == null ? 0 : species.getColor();
             ComplicatedBees.LOGGER.debug("got nest color {} at pos {}", color, pos);
             return color;
         }
@@ -66,5 +60,29 @@ public class BeeNestBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         this.species = SpeciesRegistry.getFromResourceLocation(ResourceLocation.tryParse(tag.getString("species")));
+    }
+
+    public Species getSpecies() {
+        //ComplicatedBees.LOGGER.debug("getting species {}, client: {}", species.getDefaultChromosome().serialize(),getLevel().isClientSide);
+        return species;
+    }
+
+    public void setSpecies(Species species) {
+        this.species = species;
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        load(pkt.getTag());
     }
 }
