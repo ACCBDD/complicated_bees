@@ -33,14 +33,22 @@ public class BeeNestBlockEntity extends BlockEntity {
     }
 
     public Species getSpecies() {
-        ComplicatedBees.LOGGER.debug("got species {}", species.getDefaultChromosome().serialize());
         return species;
     }
 
+    public void setSpecies(Species species) {
+        this.species = species;
+    }
+
     public static int getNestColor(BlockState state, BlockAndTintGetter level, BlockPos pos, int index) {
-        int color = ((BeeNestBlockEntity) level.getBlockEntity(pos)).getSpecies().getColor();
-        ComplicatedBees.LOGGER.debug("got nest color {} at pos {}", color, pos);
-        return color;
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof BeeNestBlockEntity) {
+            //todo why isn't this working??
+            int color = ((BeeNestBlockEntity) be).getSpecies().getColor();
+            ComplicatedBees.LOGGER.debug("got nest color {} at pos {}", color, pos);
+            return color;
+        }
+        return 0xFFFFFF;
     }
 
     @Override

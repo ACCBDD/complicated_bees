@@ -1,44 +1,37 @@
 package com.accbdd.complicated_bees.block;
 
-import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.block.entity.BeeNestBlockEntity;
-import com.accbdd.complicated_bees.genetics.Chromosome;
-import com.accbdd.complicated_bees.genetics.GeneticHelper;
-import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BeeNestBlock extends BaseEntityBlock {
-    private final Species species;
+    private Species species;
 
-    public BeeNestBlock(Properties prop, Species species) {
+    public BeeNestBlock(Properties prop) {
         super(prop.requiresCorrectToolForDrops());
-        this.species = species;
+        this.species = Species.INVALID;
     }
 
     public Species getSpecies() {
         return species;
+    }
+
+    public void setSpecies(Species species) {
+        this.species = species;
     }
 
     @Override

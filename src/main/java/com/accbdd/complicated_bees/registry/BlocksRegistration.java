@@ -16,7 +16,7 @@ public class BlocksRegistration {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
     public static final DeferredBlock<Block> BEE_NEST = BLOCKS.register("bee_nest",
-            () -> new BeeNestBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEE_NEST), Species.INVALID));
+            () -> new BeeNestBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEE_NEST)));
 
     public static final DeferredBlock<ApiaryBlock> APIARY = BLOCKS.register("apiary",
             ApiaryBlock::new);
