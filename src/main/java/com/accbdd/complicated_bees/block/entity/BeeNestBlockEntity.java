@@ -1,27 +1,18 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
-import com.accbdd.complicated_bees.genetics.GeneticHelper;
-import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
-import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
@@ -29,18 +20,14 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 public class BeeNestBlockEntity extends BlockEntity {
     private Species species;
 
-    public BeeNestBlockEntity(BlockPos pPos, BlockState pBlockState, Species species) {
+    public BeeNestBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntitiesRegistration.BEE_NEST_ENTITY.get(), pPos, pBlockState);
-        this.species = species;
     }
 
     public static int getNestColor(BlockState state, BlockAndTintGetter level, BlockPos pos, int index) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof BeeNestBlockEntity) {
-            Species species = ((BeeNestBlockEntity) be).getSpecies();
-            int color = species == null ? 0 : species.getColor();
-            ComplicatedBees.LOGGER.debug("got nest color {} at pos {}", color, pos);
-            return color;
+            return ((BeeNestBlockEntity) be).getSpecies().getColor();
         }
         return 0xFFFFFF;
     }
@@ -64,6 +51,11 @@ public class BeeNestBlockEntity extends BlockEntity {
 
     public Species getSpecies() {
         //ComplicatedBees.LOGGER.debug("getting species {}, client: {}", species.getDefaultChromosome().serialize(),getLevel().isClientSide);
+        if (species == null) {
+            species = Species.INVALID;
+            if (level != null)
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+        }
         return species;
     }
 

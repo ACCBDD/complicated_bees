@@ -15,6 +15,7 @@ public class ColorHandlers {
     public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
         event.register(BeeItem::getItemColor, ItemsRegistration.DRONE, ItemsRegistration.PRINCESS, ItemsRegistration.QUEEN);
         event.register(CombItem::getItemColor, ItemsRegistration.COMB);
+        event.register(BeeNestBlock::getItemColor, ItemsRegistration.BEE_NEST);
     }
 
     @SubscribeEvent

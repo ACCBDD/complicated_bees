@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees;
 
+import com.accbdd.complicated_bees.block.BeeNestBlock;
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.datagen.DataGenerators;
 import com.accbdd.complicated_bees.genetics.Comb;
@@ -50,6 +51,10 @@ public class ComplicatedBees
             .title(Component.translatable("itemGroup.complicated_bees"))
             .icon(() -> ItemsRegistration.DRONE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
+                output.accept(ItemsRegistration.APIARY.get());
+                output.accept(ItemsRegistration.CENTRIFUGE.get());
+                output.accept(ItemsRegistration.SCOOP.get());
+                output.accept(ItemsRegistration.METER.get());
                 for (Map.Entry<ResourceKey<Species>, Species> entry: Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet()) {
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.PRINCESS.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
@@ -58,11 +63,9 @@ public class ComplicatedBees
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().keySet()) {
                     output.accept(CombItem.setComb(ItemsRegistration.COMB.get().getDefaultInstance(), id));
                 }
-                output.accept(ItemsRegistration.BEE_NEST.get());
-                output.accept(ItemsRegistration.APIARY.get());
-                output.accept(ItemsRegistration.CENTRIFUGE.get());
-                output.accept(ItemsRegistration.SCOOP.get());
-                output.accept(ItemsRegistration.METER.get());
+                for (Map.Entry<ResourceKey<Species>, Species> entry: Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet()) {
+                    output.accept(BeeNestBlock.stackNest(ItemsRegistration.BEE_NEST.get().getDefaultInstance(), entry.getValue()));
+                }
             }).build());
 
     public ComplicatedBees(IEventBus modEventBus)

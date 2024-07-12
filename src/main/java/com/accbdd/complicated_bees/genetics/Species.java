@@ -22,7 +22,7 @@ public class Species {
 
     public static final Species INVALID = new Species(
             true,
-            0,
+            0xFFFFFF,
             new ArrayList<>(),
             new ArrayList<>(),
             new Chromosome());

@@ -20,6 +20,6 @@ public class BlockEntitiesRegistration {
     public static final Supplier<BlockEntityType<CentrifugeBlockEntity>> CENTRIFUGE_ENTITY = BLOCK_ENTITIES.register("centrifuge",
             () -> BlockEntityType.Builder.of(CentrifugeBlockEntity::new, BlocksRegistration.CENTRIFUGE.get()).build(null));
     public static final Supplier<BlockEntityType<BeeNestBlockEntity>> BEE_NEST_ENTITY = BLOCK_ENTITIES.register("bee_nest",
-            () -> BlockEntityType.Builder.of((pos, state) -> new BeeNestBlockEntity(pos, state, Species.INVALID), BlocksRegistration.BEE_NEST.get()).build(null));
+            () -> BlockEntityType.Builder.of(BeeNestBlockEntity::new, BlocksRegistration.BEE_NEST.get()).build(null));
 
 }

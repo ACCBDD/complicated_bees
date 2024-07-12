@@ -1,15 +1,21 @@
 package com.accbdd.complicated_bees.block;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.block.entity.BeeNestBlockEntity;
+import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -24,6 +30,26 @@ public class BeeNestBlock extends BaseEntityBlock {
         super(prop.requiresCorrectToolForDrops());
     }
 
+    public static ItemStack stackNest(ItemStack stack, Species species) {
+        CompoundTag tag = stack.getOrCreateTag();
+        CompoundTag data = new CompoundTag();
+        data.putString("species", SpeciesRegistry.getResourceLocation(species).toString());
+        tag.put("BlockEntityTag", data);
+        ComplicatedBees.LOGGER.debug("stack: {}, data: {}", stack, tag);
+        return stack;
+    }
+
+    public static int getItemColor(ItemStack stack, int tintIndex) {
+        if (tintIndex == 1) {
+            Species species = SpeciesRegistry.getFromResourceLocation(ResourceLocation.tryParse(stack.getOrCreateTag().getCompound("BlockEntityTag").getString("species")));
+            if (species != null) {
+                return species.getColor();
+            }
+            return 0;
+        }
+        return 0xFFFFFF;
+    }
+
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return null;
@@ -36,7 +62,7 @@ public class BeeNestBlock extends BaseEntityBlock {
 
     @Override
     public @NotNull BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-        if (!pPlayer.getMainHandItem().is(ItemTags.create(new ResourceLocation("complicated_bees", "scoop_tool")))) {
+        if (!pPlayer.getMainHandItem().is(ItemTags.create(new ResourceLocation("complicated_bees", "scoop_tool"))) && !pPlayer.isInvulnerable()) {
             pPlayer.addEffect(new MobEffectInstance(MobEffects.POISON, 100));
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
@@ -45,7 +71,7 @@ public class BeeNestBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new BeeNestBlockEntity(pPos, pState, Species.INVALID);
+        return new BeeNestBlockEntity(pPos, pState);
     }
 
     @Override
