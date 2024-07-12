@@ -50,11 +50,8 @@ public class BeeNestBlockEntity extends BlockEntity {
     }
 
     public Species getSpecies() {
-        //ComplicatedBees.LOGGER.debug("getting species {}, client: {}", species.getDefaultChromosome().serialize(),getLevel().isClientSide);
         if (species == null) {
             species = Species.INVALID;
-            if (level != null)
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
         }
         return species;
     }
@@ -75,6 +72,8 @@ public class BeeNestBlockEntity extends BlockEntity {
 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        if (level != null)
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_IMMEDIATE);
         load(pkt.getTag());
     }
 }

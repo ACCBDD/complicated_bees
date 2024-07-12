@@ -38,6 +38,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
 
 import java.util.Map;
+import java.util.Set;
 
 @Mod(ComplicatedBees.MODID)
 public class ComplicatedBees
@@ -55,7 +56,8 @@ public class ComplicatedBees
                 output.accept(ItemsRegistration.CENTRIFUGE.get());
                 output.accept(ItemsRegistration.SCOOP.get());
                 output.accept(ItemsRegistration.METER.get());
-                for (Map.Entry<ResourceKey<Species>, Species> entry: Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet()) {
+                Set<Map.Entry<ResourceKey<Species>, Species>> speciesSet = Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet();
+                for (Map.Entry<ResourceKey<Species>, Species> entry : speciesSet) {
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.PRINCESS.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.QUEEN.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
@@ -63,7 +65,7 @@ public class ComplicatedBees
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().keySet()) {
                     output.accept(CombItem.setComb(ItemsRegistration.COMB.get().getDefaultInstance(), id));
                 }
-                for (Map.Entry<ResourceKey<Species>, Species> entry: Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet()) {
+                for (Map.Entry<ResourceKey<Species>, Species> entry: speciesSet) {
                     output.accept(BeeNestBlock.stackNest(ItemsRegistration.BEE_NEST.get().getDefaultInstance(), entry.getValue()));
                 }
             }).build());
