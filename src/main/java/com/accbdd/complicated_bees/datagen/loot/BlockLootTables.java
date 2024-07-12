@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
@@ -45,6 +46,14 @@ public class BlockLootTables extends BlockLootSubProvider {
                         .setRolls(ConstantValue.exactly(1.0f))
                         .add(
                                 LootItem.lootTableItem(ItemsRegistration.PRINCESS).apply(InheritHiveSpeciesFunction.set())
+                        ))
+                .withPool(LootPool.lootPool()
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.create(new ResourceLocation("complicated_bees:scoop_tool")))))
+                        .setRolls(ConstantValue.exactly(1.0f))
+                        .add(
+                                LootItem.lootTableItem(ItemsRegistration.DRONE)
+                                        .apply(InheritHiveSpeciesFunction.set())
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2)))
                         )
                 );
     }

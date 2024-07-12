@@ -48,6 +48,34 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "tag": "complicated_bees:scoop_tool"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "complicated_bees:inherit_hive_species"
+            },
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "complicated_bees:drone"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "complicated_bees:blocks/bee_nest"

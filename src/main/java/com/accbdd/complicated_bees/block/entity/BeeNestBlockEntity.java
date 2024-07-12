@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
@@ -17,11 +18,13 @@ import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
-public class BeeNestBlockEntity extends BlockEntity{
+public class BeeNestBlockEntity extends BlockEntity {
     private Species species;
 
     public BeeNestBlockEntity(Species species, BlockPos pPos, BlockState pBlockState) {
@@ -30,7 +33,14 @@ public class BeeNestBlockEntity extends BlockEntity{
     }
 
     public Species getSpecies() {
+        ComplicatedBees.LOGGER.debug("got species {}", species.getDefaultChromosome().serialize());
         return species;
+    }
+
+    public static int getNestColor(BlockState state, BlockAndTintGetter level, BlockPos pos, int index) {
+        int color = ((BeeNestBlockEntity) level.getBlockEntity(pos)).getSpecies().getColor();
+        ComplicatedBees.LOGGER.debug("got nest color {} at pos {}", color, pos);
+        return color;
     }
 
     @Override

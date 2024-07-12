@@ -69,6 +69,7 @@ public class ComplicatedBees
     {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ColorHandlers::registerItemColorHandlers);
+        modEventBus.addListener(ColorHandlers::registerBlockColorHandlers);
         modEventBus.addListener(this::registerRegistries);
         modEventBus.addListener(this::registerDatapackRegistries);
         modEventBus.addListener(this::registerCapabilities);

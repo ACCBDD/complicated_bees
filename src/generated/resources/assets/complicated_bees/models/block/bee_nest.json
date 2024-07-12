@@ -1,5 +1,45 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "tintindex": 1
+        },
+        "east": {
+          "texture": "#side",
+          "tintindex": 1
+        },
+        "north": {
+          "texture": "#side",
+          "tintindex": 1
+        },
+        "south": {
+          "texture": "#side",
+          "tintindex": 1
+        },
+        "up": {
+          "texture": "#top",
+          "tintindex": 1
+        },
+        "west": {
+          "texture": "#side",
+          "tintindex": 1
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
   "textures": {
     "bottom": "complicated_bees:block/bee_nest_bottom",
     "side": "complicated_bees:block/bee_nest_side",

@@ -7,6 +7,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.util.List;
 import java.util.Random;
 
 public class Product {
@@ -19,7 +20,7 @@ public class Product {
             ).apply(instance, (item, ct, nbt, chance) -> new Product(new ItemStack(item, ct, nbt), chance))
     );
 
-    public static final Product EMPTY = new Product(Items.AIR.getDefaultInstance(), 0);
+    public static final List<Product> EMPTY = List.of(new Product(Items.AIR.getDefaultInstance(), 0));
 
     public static final Random rand = new Random();
 

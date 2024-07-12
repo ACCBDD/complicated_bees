@@ -30,7 +30,15 @@ public class BlockStateGenerator extends BlockStateProvider {
         return models().cubeBottomTop(path,
                 side_texture,
                 bottom_texture,
-                top_texture);
+                top_texture)
+                .element().allFaces((dir, face) -> {
+                    face.tintindex(1);
+                    switch (dir) {
+                        case UP -> face.texture("#top");
+                        case DOWN -> face.texture("#bottom");
+                        default -> face.texture("#side");
+                    }
+                }).end();
     }
 
     public BlockModelBuilder createApiaryModel() {
