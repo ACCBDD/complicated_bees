@@ -6,11 +6,11 @@ import com.accbdd.complicated_bees.datagen.DataGenerators;
 import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.screen.ApiaryScreen;
 import com.accbdd.complicated_bees.screen.CentrifugeScreen;
-import com.accbdd.complicated_bees.utils.ComplicatedBeesCodecs;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -95,8 +95,8 @@ public class ComplicatedBees
     public void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(
                 SpeciesRegistry.SPECIES_REGISTRY_KEY,
-                ComplicatedBeesCodecs.SPECIES_CODEC,
-                ComplicatedBeesCodecs.SPECIES_CODEC
+                Species.SPECIES_CODEC,
+                Species.SPECIES_CODEC
         );
 
         event.dataPackRegistry(
@@ -107,8 +107,8 @@ public class ComplicatedBees
 
         event.dataPackRegistry(
                 MutationRegistry.MUTATION_REGISTRY_KEY,
-                ComplicatedBeesCodecs.MUTATION_CODEC,
-                ComplicatedBeesCodecs.MUTATION_CODEC
+                Mutation.MUTATION_CODEC,
+                Mutation.MUTATION_CODEC
         );
 
         event.dataPackRegistry(

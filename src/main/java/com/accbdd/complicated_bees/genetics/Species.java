@@ -3,12 +3,16 @@ package com.accbdd.complicated_bees.genetics;
 
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.accbdd.complicated_bees.utils.ComplicatedBeesCodecs.HEX_STRING_CODEC;
 
 /**
  * Defines the color and products of a bee, as well as the default genes for things like JEI display.
@@ -26,6 +30,16 @@ public class Species {
             new ArrayList<>(),
             new ArrayList<>(),
             new Chromosome());
+
+    public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
+                    HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
+                    Product.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
+                    Product.CODEC.listOf().optionalFieldOf("specialty_products", new ArrayList<>()).forGetter(Species::getSpecialtyProducts),
+                    CompoundTag.CODEC.optionalFieldOf("default_chromosome", new Chromosome().serialize()).forGetter(species -> species.getDefaultChromosome().serialize())
+            ).apply(instance, Species::new)
+    );
 
     public Species(boolean dominant, int color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
         this.dominant = dominant;

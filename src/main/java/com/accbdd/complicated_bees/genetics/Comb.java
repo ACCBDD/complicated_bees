@@ -1,9 +1,11 @@
 package com.accbdd.complicated_bees.genetics;
 
 import com.accbdd.complicated_bees.item.CombItem;
+import com.accbdd.complicated_bees.registry.CombRegistry;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -17,29 +19,30 @@ import static com.accbdd.complicated_bees.utils.ComplicatedBeesCodecs.HEX_STRING
 public class Comb {
     public static final Codec<Comb> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.STRING.fieldOf("id").forGetter(Comb::getId),
                     HEX_STRING_CODEC.fieldOf("outer_color").forGetter(Comb::getOuterColor),
                     HEX_STRING_CODEC.fieldOf("inner_color").forGetter(Comb::getInnerColor),
                     Product.CODEC.listOf().fieldOf("products").forGetter(Comb::getProducts)
             ).apply(instance, Comb::new)
     );
 
-    private final String id;
     private final int outerColor;
     private final int innerColor;
     private final List<Product> products;
 
-    public static final Comb NULL = new Comb("null", 0, 0, new ArrayList<>());
+    public static final Comb NULL = new Comb(0, 0, new ArrayList<>());
 
-    public Comb(String id, int outerColor, int innerColor, List<Product> products) {
-        this.id = id;
+    public Comb(int outerColor, int innerColor, List<Product> products) {
         this.outerColor = outerColor;
         this.innerColor = innerColor;
         this.products = products;
     }
 
-    public String getId() {
-        return id;
+    public ResourceLocation getId() {
+        try {
+            return Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().getKey(this);
+        } catch (NullPointerException e) {
+            return new ResourceLocation(MODID, "null");
+        }
     }
 
     public int getOuterColor() {
@@ -57,13 +60,13 @@ public class Comb {
     public static ItemStack toStack(Comb comb) {
         ItemStack stack = new ItemStack(ItemsRegistration.COMB.get(), 1);
         CompoundTag tag = new CompoundTag();
-        tag.putString(CombItem.COMB_TYPE_TAG, new ResourceLocation(MODID, comb.id).toString());
+        tag.putString(CombItem.COMB_TYPE_TAG, comb.getId().toString());
         stack.setTag(tag);
         return stack;
     }
 
     @Override
     public String toString() {
-        return this.id;
+        return getId().toString();
     }
 }
