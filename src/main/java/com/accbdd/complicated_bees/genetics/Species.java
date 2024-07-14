@@ -3,11 +3,16 @@ package com.accbdd.complicated_bees.genetics;
 
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +56,11 @@ public class Species {
 
     public Species(boolean dominant, int color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
         this(dominant, color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
+    }
+
+    public static Species getFromResourceLocation(ResourceLocation loc) {
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().get(loc);
     }
 
     public boolean isDominant() {

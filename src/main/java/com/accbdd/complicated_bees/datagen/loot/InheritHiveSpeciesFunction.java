@@ -4,7 +4,7 @@ import com.accbdd.complicated_bees.block.entity.BeeNestBlockEntity;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Genome;
 import com.accbdd.complicated_bees.genetics.Species;
-import com.accbdd.complicated_bees.registry.LootItemFunctionRegistration;
+import com.accbdd.complicated_bees.registry.EsotericRegistration;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +28,7 @@ public class InheritHiveSpeciesFunction extends LootItemConditionalFunction {
 
     @Override
     public LootItemFunctionType getType() {
-        return LootItemFunctionRegistration.INHERIT_HIVE.get();
+        return EsotericRegistration.INHERIT_HIVE.get();
     }
 
     @Override
