@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.datagen.loot;
 
+import com.accbdd.complicated_bees.loot.InheritHiveSpeciesFunction;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.advancements.critereon.ItemPredicate;

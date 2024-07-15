@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.datagen.loot;
+package com.accbdd.complicated_bees.loot;
 
 import com.accbdd.complicated_bees.block.entity.BeeNestBlockEntity;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;

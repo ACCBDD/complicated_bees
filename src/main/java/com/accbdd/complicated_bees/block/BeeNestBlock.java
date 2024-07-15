@@ -27,7 +27,9 @@ import org.jetbrains.annotations.Nullable;
 public class BeeNestBlock extends BaseEntityBlock {
 
     public BeeNestBlock(Properties prop) {
-        super(prop.requiresCorrectToolForDrops());
+        super(prop
+                .requiresCorrectToolForDrops()
+                .lightLevel(state -> 15));
     }
 
     public static ItemStack stackNest(ItemStack stack, Species species) {
