@@ -3,8 +3,8 @@
   "config": {
     "decorators": [
       {
-        "type": "complicated_bees:bee_nest",
-        "probability": 0.5,
+        "type": "complicated_bees:bee_nest_decorator",
+        "probability": 1,
         "species": "complicated_bees:forest"
       }
     ],

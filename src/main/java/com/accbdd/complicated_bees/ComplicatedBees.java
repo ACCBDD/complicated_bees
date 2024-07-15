@@ -88,6 +88,7 @@ public class ComplicatedBees
         GeneRegistry.GENES.register(modEventBus);
         EsotericRegistration.LOOT_ITEM_FUNCTION_REGISTER.register(modEventBus);
         EsotericRegistration.TREE_DECORATOR_REGISTER.register(modEventBus);
+        EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
 
         CREATIVE_MODE_TABS.register(modEventBus);
     }
