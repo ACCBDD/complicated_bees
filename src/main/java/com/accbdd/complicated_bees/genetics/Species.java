@@ -80,7 +80,7 @@ public class Species {
     }
 
     public Chromosome getDefaultChromosome() {
-        return default_chromosome;
+        return default_chromosome.copy();
     }
 
     public ItemStack toStack(Item item) {

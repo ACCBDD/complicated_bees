@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
+import com.accbdd.complicated_bees.utils.enums.EnumErrorCodes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -148,5 +149,9 @@ public class ApiaryMenu extends AbstractContainerMenu {
 
     public ContainerData getData() {
         return this.data;
+    }
+
+    public boolean hasQueue() {
+        return data.get(2) == EnumErrorCodes.OUTPUT_FULL.value;
     }
 }

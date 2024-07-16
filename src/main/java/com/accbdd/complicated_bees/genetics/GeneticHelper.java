@@ -123,8 +123,8 @@ public class GeneticHelper {
         }
 
         //set default chromosome if mutation found
-        if (mutated_a != null) chromosome_a = mutated_a;
-        if (mutated_b != null) chromosome_b = mutated_b;
+        if (mutated_a != null) chromosome_a = mutated_a.copy();
+        if (mutated_b != null) chromosome_b = mutated_b.copy();
 
         //sort genome so that dominant genes are always in a
         for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {

@@ -44,6 +44,10 @@ public class Chromosome {
         return genes;
     }
 
+    public Chromosome copy() {
+        return new Chromosome(this.genes);
+    }
+
     public Chromosome setGenes(Map<ResourceLocation, Gene<?>> genes) {
         this.genes = genes;
         return this;

@@ -67,6 +67,14 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
                     0,
                     3,
                     progress);
+        } else if (menu.hasQueue()) {
+            graphics.blit(GUI,
+                    x + 18,
+                    y + 36,
+                    182,
+                    0,
+                    3,
+                    45);
         }
     }
 
@@ -76,7 +84,7 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
         byte errorFlags = (byte) menu.getData().get(2);
         int relMouseX = pX - (this.width - this.imageWidth) / 2;
         int relMouseY = pY - (this.height - this.imageHeight) / 2;
-        if (menu.hasQueen() && errorFlags > 0 && (16 < relMouseX) && (relMouseX < 22) && (34 < relMouseY) && (relMouseY < 82)) {
+        if (errorFlags > 0 && (16 < relMouseX) && (relMouseX < 22) && (34 < relMouseY) && (relMouseY < 82)) {
             List<Component> errors = new ArrayList<>();
             errors.add(Component.translatable("gui.complicated_bees.error"));
             for (EnumErrorCodes errorCode : EnumErrorCodes.values()) {

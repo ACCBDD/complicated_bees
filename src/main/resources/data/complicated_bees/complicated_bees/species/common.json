@@ -23,6 +23,10 @@
     "complicated_bees:flower": {
       "data": "complicated_bees:flower",
       "dominant": false
+    },
+    "complicated_bees:fertility": {
+      "data": 3,
+      "dominant": false
     }
   }
 }
