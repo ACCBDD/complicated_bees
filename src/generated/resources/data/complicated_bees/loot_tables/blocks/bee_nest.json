@@ -21,6 +21,19 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "species",
+                  "target": "BlockEntityTag.species"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "complicated_bees:bee_nest"
         }
       ],
@@ -30,9 +43,19 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "tag": "complicated_bees:scoop_tool"
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "enchantments": [
+                {
+                  "enchantment": "minecraft:silk_touch",
+                  "levels": {
+                    "min": 1
+                  }
+                }
+              ]
+            }
           }
         }
       ],
@@ -53,9 +76,19 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "tag": "complicated_bees:scoop_tool"
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "enchantments": [
+                {
+                  "enchantment": "minecraft:silk_touch",
+                  "levels": {
+                    "min": 1
+                  }
+                }
+              ]
+            }
           }
         }
       ],
@@ -68,8 +101,17 @@
             },
             {
               "add": false,
-              "count": 2.0,
+              "count": 1.0,
               "function": "minecraft:set_count"
+            },
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "function": "minecraft:apply_bonus",
+              "parameters": {
+                "extra": 1,
+                "probability": 0.5
+              }
             }
           ],
           "name": "complicated_bees:drone"
