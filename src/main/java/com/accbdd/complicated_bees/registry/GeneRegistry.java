@@ -23,4 +23,5 @@ public class GeneRegistry {
     public static final Supplier<GeneTemperature> TEMPERATURE_GENE = GENES.register(GeneTemperature.TAG, GeneTemperature::new);
     public static final Supplier<GeneHumidity> HUMIDITY_GENE = GENES.register(GeneHumidity.TAG, GeneHumidity::new);
     public static final Supplier<GeneFlower> FLOWER_GENE = GENES.register(GeneFlower.TAG, GeneFlower::new);
+    public static final Supplier<GeneFertility> FERTILITY_GENE = GENES.register(GeneFertility.TAG, GeneFertility::new);
 }

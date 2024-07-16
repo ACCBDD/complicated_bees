@@ -312,8 +312,9 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
         if (BeeItem.getAge(queen) >= ((EnumLifespan) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)).value) {
             beeItems.extractItem(BEE_SLOT, 1, false);
             outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.PRINCESS.get()));
-            outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()));
-            outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()));
+            for (int i = 0; i < (int) GeneticHelper.getGeneValue(queen, GeneFertility.ID, true); i++) {
+                outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.DRONE.get()));
+            }
             setChanged();
         }
     }

@@ -11,7 +11,7 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class BlockStateGenerator extends BlockStateProvider {
 
-    public BlockStateGenerator(PackOutput output,  ExistingFileHelper exFileHelper) {
+    public BlockStateGenerator(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, MODID, exFileHelper);
     }
 

@@ -37,7 +37,6 @@ public class BeeNestBlock extends BaseEntityBlock {
         CompoundTag data = new CompoundTag();
         data.putString("species", SpeciesRegistry.getResourceLocation(species).toString());
         tag.put("BlockEntityTag", data);
-        ComplicatedBees.LOGGER.debug("stack: {}, data: {}", stack, tag);
         return stack;
     }
 

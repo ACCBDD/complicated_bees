@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.datagen.loot;
 
+import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
 import com.accbdd.complicated_bees.loot.InheritHiveSpeciesFunction;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
@@ -43,13 +44,13 @@ public class BlockLootTables extends BlockLootSubProvider {
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool().when(HAS_SILK_TOUCH).setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(beehive)))
                 .withPool(LootPool.lootPool()
-                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.create(new ResourceLocation("complicated_bees:scoop_tool")))))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTagGenerator.SCOOP_TOOL)))
                         .setRolls(ConstantValue.exactly(1.0f))
                         .add(
                                 LootItem.lootTableItem(ItemsRegistration.PRINCESS).apply(InheritHiveSpeciesFunction.set())
                         ))
                 .withPool(LootPool.lootPool()
-                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.create(new ResourceLocation("complicated_bees:scoop_tool")))))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTagGenerator.SCOOP_TOOL)))
                         .setRolls(ConstantValue.exactly(1.0f))
                         .add(
                                 LootItem.lootTableItem(ItemsRegistration.DRONE)
