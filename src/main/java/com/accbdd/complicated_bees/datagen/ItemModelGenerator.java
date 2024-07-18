@@ -21,6 +21,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.BEE_NEST.getId().getPath(), modLoc("block/bee_nest"));
         withExistingParent(BlocksRegistration.APIARY.getId().getPath(), modLoc("block/apiary"));
         withExistingParent(BlocksRegistration.CENTRIFUGE.getId().getPath(), modLoc("block/centrifuge"));
+        withExistingParent(BlocksRegistration.GENERATOR.getId().getPath(), modLoc("block/generator"));
         basicItem(ItemsRegistration.SCOOP.get());
         basicItem(ItemsRegistration.METER.get());
         createBeeModel(ItemsRegistration.DRONE.getId());
