@@ -20,5 +20,6 @@ public class ItemsRegistration {
     public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerItem("bee_nest", BeeNestBlockItem::new);
     public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);
     public static final DeferredItem<BlockItem> CENTRIFUGE = ITEMS.registerSimpleBlockItem("centrifuge", BlocksRegistration.CENTRIFUGE);
+    public static final DeferredItem<BlockItem> GENERATOR = ITEMS.registerSimpleBlockItem("generator", BlocksRegistration.GENERATOR);
 
 }

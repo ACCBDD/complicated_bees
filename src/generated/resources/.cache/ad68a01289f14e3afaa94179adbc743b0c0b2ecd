@@ -1,7 +1,10 @@
-// 1.20.4	2024-07-11T17:12:19.5812166	Block States: complicated_bees
+// 1.20.4	2024-07-18T13:04:45.4727568	Block States: complicated_bees
 f96c3049aa45fc2ee1427d6b9010e4d655e13430 assets/complicated_bees/blockstates/apiary.json
 6f082c4f7826e0853af1c6128556032c8325066e assets/complicated_bees/blockstates/bee_nest.json
 bc1ba6ce626972cc9d0aa6a9e2c1143225683932 assets/complicated_bees/blockstates/centrifuge.json
+565deac1d287a925f387a31eedc4cfca02c916bb assets/complicated_bees/blockstates/generator.json
 7eb35cf09a32f8df65270f751756fe834744725b assets/complicated_bees/models/block/apiary.json
 483136423e051bb780b87623d6adab9e6b8281c2 assets/complicated_bees/models/block/bee_nest.json
 deb042d80fa70a61830462d0918f65f570518a5b assets/complicated_bees/models/block/centrifuge.json
+0e148064f0ff4c20f15f22c6183ccb03b29f4a93 assets/complicated_bees/models/block/generator.json
+8cf216f5b48c841ecc870af2ed1909c8e8332320 assets/complicated_bees/models/block/generator_on.json

@@ -19,8 +19,11 @@
   "gui.complicated_bees.primary_produce": "Primary Produce",
   "gui.complicated_bees.secondary_produce": "Secondary Produce",
   "gui.complicated_bees.specialty_produce": "Specialty Produce",
+
   "gui.complicated_bees.centrifuge": "Centrifuge",
   "gui.complicated_bees.apiary": "Apiary",
+  "gui.complicated_bees.generator": "Generator",
+
   "gui.complicated_bees.humidity_label": "Humidity",
   "gui.complicated_bees.temperature_label": "Temperature",
   "gui.complicated_bees.lifespan_label": "Life",

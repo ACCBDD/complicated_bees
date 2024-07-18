@@ -28,6 +28,7 @@ public class BlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(BlocksRegistration.APIARY.get());
         dropSelf(BlocksRegistration.CENTRIFUGE.get());
+        dropSelf(BlocksRegistration.GENERATOR.get());
         this.add(BlocksRegistration.BEE_NEST.get(), nestLootTable(BlocksRegistration.BEE_NEST.get()));
     }
 

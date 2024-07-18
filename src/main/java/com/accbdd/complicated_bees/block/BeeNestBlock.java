@@ -19,17 +19,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BeeNestBlock extends BaseEntityBlock {
 
-    public BeeNestBlock(Properties prop) {
-        super(prop
+    public BeeNestBlock() {
+        super(BlockBehaviour.Properties.of()
                 .requiresCorrectToolForDrops()
-                .lightLevel(state -> 15));
+                .lightLevel(state -> 15)
+                .strength(0.6f)
+                .sound(SoundType.WOOD));
     }
 
     public static ItemStack stackNest(ItemStack stack, Species species) {
