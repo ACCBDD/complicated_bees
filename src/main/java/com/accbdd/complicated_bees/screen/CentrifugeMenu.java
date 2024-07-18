@@ -17,6 +17,8 @@ public class CentrifugeMenu extends AbstractContainerMenu {
     private final BlockPos pos;
     private final ContainerData data;
 
+    private int power;
+
     public CentrifugeMenu(int windowId, Player player, BlockPos pos) {
         this(windowId, player, pos, new SimpleContainerData(2));
     }
@@ -38,6 +40,28 @@ public class CentrifugeMenu extends AbstractContainerMenu {
                     }
                 });
             }
+            addDataSlot(new DataSlot() {
+                @Override
+                public int get() {
+                    return centrifuge.getEnergyHandler().getEnergyStored() & 0xffff;
+                }
+
+                @Override
+                public void set(int pValue) {
+                    CentrifugeMenu.this.power = (CentrifugeMenu.this.power & 0xffff0000) | (pValue & 0xffff);
+                }
+            });
+            addDataSlot(new DataSlot() {
+                @Override
+                public int get() {
+                    return (centrifuge.getEnergyHandler().getEnergyStored() >> 16) & 0xffff;
+                }
+
+                @Override
+                public void set(int pValue) {
+                    CentrifugeMenu.this.power = (CentrifugeMenu.this.power & 0xffff) | ((pValue & 0xffff) << 16);
+                }
+            });
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
 
@@ -48,10 +72,14 @@ public class CentrifugeMenu extends AbstractContainerMenu {
         return data.get(0) > 0;
     }
 
+    public int getPower() {
+        return power;
+    }
+
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 26;
+        int progressArrowSize = 20;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }

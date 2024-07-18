@@ -13,6 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.energy.EnergyStorage;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -36,9 +38,13 @@ public class CentrifugeBlockEntity extends BlockEntity {
     private final Stack<ItemStack> outputBuffer = new Stack<>();
     public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
+    public static final String ENERGY_TAG = "energy";
+    public static final int CAPACITY = 100000;
+    public static final int MAXTRANSFER = 5000;
+
     private final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 20;
+    private int maxProgress = 200;
 
     private final ItemStackHandler inputItems = createItemHandler(INPUT_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
@@ -108,6 +114,30 @@ public class CentrifugeBlockEntity extends BlockEntity {
         return outputItemHandler;
     }
 
+    private final EnergyStorage energy = createEnergyStorage();
+    private final Lazy<IEnergyStorage> energyHandler = Lazy.of(() -> new AdaptedEnergyStorage(energy) {
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            return 0;
+        }
+
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            setChanged();
+            return super.receiveEnergy(maxReceive, simulate);
+        }
+
+        @Override
+        public boolean canExtract() {
+            return false;
+        }
+
+        @Override
+        public boolean canReceive() {
+            return true;
+        }
+    });
+
     private ItemStackHandler createItemHandler(int slots) {
         return new ItemStackHandler(slots) {
             @Override
@@ -117,11 +147,20 @@ public class CentrifugeBlockEntity extends BlockEntity {
         };
     }
 
+    private EnergyStorage createEnergyStorage() {
+        return new EnergyStorage(CAPACITY, MAXTRANSFER, MAXTRANSFER);
+    }
+
+    public IEnergyStorage getEnergyHandler() {
+        return energyHandler.get();
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put(ITEMS_INPUT_TAG, inputItems.serializeNBT());
         tag.put(ITEMS_OUTPUT_TAG, outputItems.serializeNBT());
+        tag.put(ENERGY_TAG, energy.serializeNBT());
         ListTag bufferTag = new ListTag();
         for (ItemStack stack : outputBuffer) {
             bufferTag.add(stack.save(new CompoundTag()));
@@ -143,11 +182,14 @@ public class CentrifugeBlockEntity extends BlockEntity {
                 outputBuffer.add(ItemStack.of((CompoundTag) itemCompound));
             }
         }
+        if (tag.contains(ENERGY_TAG)) {
+            energy.deserializeNBT(tag.get(ENERGY_TAG));
+        }
     }
 
     public void tickServer() {
         ItemStack stack = this.inputItems.getStackInSlot(INPUT_SLOT);
-        if (hasRecipe(stack)) {
+        if (hasRecipe(stack) && energy.getEnergyStored() > 0) {
             increaseCraftingProgress();
             setChanged();
             if (hasFinished()) {
@@ -160,6 +202,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
     }
 
     private void increaseCraftingProgress() {
+        energy.extractEnergy(10, false);
         progress++;
     }
 

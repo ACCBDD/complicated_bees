@@ -147,6 +147,9 @@ public class ComplicatedBees
             }
             return o.getInputItemHandler().get();
         });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getItemHandler());
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
