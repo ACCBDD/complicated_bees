@@ -227,6 +227,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
                 resetBreedingProgress();
                 beeItems.extractItem(1, 1, false);
                 beeItems.setStackInSlot(0, createQueenFromPrincessAndDrone(top_stack, bottom_stack));
+                rebuildFlowerCache(beeItems.getStackInSlot(0));
                 queenSatisfied(top_stack);
             }
         } else {

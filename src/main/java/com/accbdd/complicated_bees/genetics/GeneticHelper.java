@@ -114,6 +114,7 @@ public class GeneticHelper {
                     if ((mutation.getFirstSpecies() == speciesA && mutation.getSecondSpecies() == speciesB) || (mutation.getSecondSpecies() == speciesA && mutation.getFirstSpecies() == speciesB)) {
                         mutated_a = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_a);
                         mutated_b = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_b);
+                        //todo: check for extra mutation conditions
                     }
                 }
             }
@@ -149,9 +150,9 @@ public class GeneticHelper {
         CompoundTag eggs = stack.getOrCreateTag().getCompound(MATE);
 
         Genome genome = getGenome(stack);
-        Genome bred = new Genome(Chromosome.deserialize(eggs.getCompound(CHROMOSOME_A)), Chromosome.deserialize(eggs.getCompound(GENOME_B)));
+        Genome mate = new Genome(Chromosome.deserialize(eggs.getCompound(CHROMOSOME_A)), Chromosome.deserialize(eggs.getCompound(GENOME_B)));
         if (!eggs.equals(new CompoundTag())) {
-            setGenome(result, mixGenomes(genome, bred));
+            setGenome(result, mixGenomes(genome, mate));
         } else {
             setGenome(result, genome);
         }
