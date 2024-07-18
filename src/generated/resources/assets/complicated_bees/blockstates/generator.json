@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "facing=down,powered=false": {
+      "model": "complicated_bees:block/generator",
+      "x": 90
+    },
+    "facing=down,powered=true": {
+      "model": "complicated_bees:block/generator_on",
+      "x": 90
+    },
+    "facing=east,powered=false": {
+      "model": "complicated_bees:block/generator",
+      "y": 90
+    },
+    "facing=east,powered=true": {
+      "model": "complicated_bees:block/generator_on",
+      "y": 90
+    },
+    "facing=north,powered=false": {
+      "model": "complicated_bees:block/generator"
+    },
+    "facing=north,powered=true": {
+      "model": "complicated_bees:block/generator_on"
+    },
+    "facing=south,powered=false": {
+      "model": "complicated_bees:block/generator",
+      "y": 180
+    },
+    "facing=south,powered=true": {
+      "model": "complicated_bees:block/generator_on",
+      "y": 180
+    },
+    "facing=up,powered=false": {
+      "model": "complicated_bees:block/generator",
+      "x": -90
+    },
+    "facing=up,powered=true": {
+      "model": "complicated_bees:block/generator_on",
+      "x": -90
+    },
+    "facing=west,powered=false": {
+      "model": "complicated_bees:block/generator",
+      "y": 270
+    },
+    "facing=west,powered=true": {
+      "model": "complicated_bees:block/generator_on",
+      "y": 270
+    }
+  }
+}
