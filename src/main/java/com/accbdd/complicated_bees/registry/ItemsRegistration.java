@@ -16,6 +16,7 @@ public class ItemsRegistration {
     public static final DeferredItem<CombItem> COMB = ITEMS.registerItem("comb", CombItem::new);
     public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
     public static final DeferredItem<MeterItem> METER = ITEMS.registerItem("meter", MeterItem::new);
+    public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame", FrameItem::new);
 
     public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerItem("bee_nest", BeeNestBlockItem::new);
     public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);

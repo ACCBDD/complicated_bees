@@ -24,6 +24,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.GENERATOR.getId().getPath(), modLoc("block/generator"));
         basicItem(ItemsRegistration.SCOOP.get());
         basicItem(ItemsRegistration.METER.get());
+        basicItem(ItemsRegistration.FRAME.get());
         createBeeModel(ItemsRegistration.DRONE.getId());
         createBeeModel(ItemsRegistration.PRINCESS.getId()).texture("layer2", modLoc("item/princess_crown"));
         createBeeModel(ItemsRegistration.QUEEN.getId()).texture("layer2", modLoc("item/queen_crown"));

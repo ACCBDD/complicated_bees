@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
+import com.accbdd.complicated_bees.item.FrameItem;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
@@ -40,9 +41,9 @@ public class ApiaryMenu extends AbstractContainerMenu {
             addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+5, 93, 64));
             addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+6, 93, 39));
 
-            addSlot(new SlotItemHandler(apiary.getFrameItems(), FRAME_SLOT, 65, 23));
-            addSlot(new SlotItemHandler(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51));
-            addSlot(new SlotItemHandler(apiary.getFrameItems(), FRAME_SLOT+2, 65, 79));
+            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT, 65, 23));
+            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51));
+            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+2, 65, 79));
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 105);
 
@@ -54,6 +55,20 @@ public class ApiaryMenu extends AbstractContainerMenu {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
+            }
+        };
+    }
+
+    private SlotItemHandler createFrameSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
+        return new SlotItemHandler(handler, index, xPos, yPos) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() instanceof FrameItem;
+            }
+
+            @Override
+            public int getMaxStackSize() {
+                return 1;
             }
         };
     }

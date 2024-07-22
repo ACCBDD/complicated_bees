@@ -8,10 +8,7 @@ import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
-import com.accbdd.complicated_bees.item.BeeItem;
-import com.accbdd.complicated_bees.item.DroneItem;
-import com.accbdd.complicated_bees.item.PrincessItem;
-import com.accbdd.complicated_bees.item.QueenItem;
+import com.accbdd.complicated_bees.item.*;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.FlowerRegistry;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
@@ -110,8 +107,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     private final Lazy<IItemHandler> frameItemHandler = Lazy.of(() -> new AdaptedItemHandler(frameItems) {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return super.isItemValid(slot, stack);
-            //TODO: implement only frames allowed
+            return stack.getItem() instanceof FrameItem;
         }
     });
 
