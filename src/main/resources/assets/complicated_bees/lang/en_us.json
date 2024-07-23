@@ -29,6 +29,7 @@
   "gui.complicated_bees.humidity_label": "Humidity",
   "gui.complicated_bees.temperature_label": "Temperature",
   "gui.complicated_bees.lifespan_label": "Life",
+  "gui.complicated_bees.productivity_label": "Worker",
   "gui.complicated_bees.humidity_label.short": "H",
   "gui.complicated_bees.temperature_label.short": "T",
   "gui.complicated_bees.more_info": "<Hold shift for more info>",
@@ -73,7 +74,15 @@
   "gui.complicated_bees.lifespan.average": "Average",
   "gui.complicated_bees.lifespan.long": "Long",
   "gui.complicated_bees.lifespan.longer": "Longer",
-  "gui.complicated_bees.lifespan.ongest": "Lngest",
+  "gui.complicated_bees.lifespan.longest": "Longest",
+
+  "gui.complicated_bees.productivity.slowest": "Slowest",
+  "gui.complicated_bees.productivity.slower": "Slower",
+  "gui.complicated_bees.productivity.slow": "Slow",
+  "gui.complicated_bees.productivity.average": "Average",
+  "gui.complicated_bees.productivity.fast": "Fast",
+  "gui.complicated_bees.productivity.faster": "Faster",
+  "gui.complicated_bees.productivity.fastest": "Fastest",
 
   "jei.complicated_bees.chance": "Chance",
 

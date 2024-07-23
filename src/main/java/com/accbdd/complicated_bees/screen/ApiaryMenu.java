@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
+import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.FrameItem;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
@@ -30,8 +31,12 @@ public class ApiaryMenu extends AbstractContainerMenu {
         this.data = data;
         this.pos = pos;
         if (player.level().getBlockEntity(pos) instanceof ApiaryBlockEntity apiary) {
-            addSlot(new SlotItemHandler(apiary.getBeeItems(), BEE_SLOT, 29, 38));
-            addSlot(new SlotItemHandler(apiary.getBeeItems(), BEE_SLOT+1, 29, 63));
+            addSlot(createBeeSlot(apiary.getBeeItems(), BEE_SLOT, 29, 38));
+            addSlot(createBeeSlot(apiary.getBeeItems(), BEE_SLOT+1, 29, 63));
+
+            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT, 65, 23));
+            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51));
+            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+2, 65, 79));
 
             addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT, 115, 51));
             addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+1, 115, 26));
@@ -40,10 +45,6 @@ public class ApiaryMenu extends AbstractContainerMenu {
             addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+4, 115, 76));
             addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+5, 93, 64));
             addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+6, 93, 39));
-
-            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT, 65, 23));
-            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51));
-            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+2, 65, 79));
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 105);
 
@@ -69,6 +70,15 @@ public class ApiaryMenu extends AbstractContainerMenu {
             @Override
             public int getMaxStackSize() {
                 return 1;
+            }
+        };
+    }
+
+    private SlotItemHandler createBeeSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
+        return new SlotItemHandler(handler, index, xPos, yPos) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() instanceof BeeItem;
             }
         };
     }
@@ -112,13 +122,15 @@ public class ApiaryMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             }
-            if (!this.moveItemStackTo(stack, BEE_SLOT, BEE_SLOT + 2, false)) { //if you can't move the stack to the input
-                if (index < 27 + SLOT_COUNT) { // if the stack is in main inventory, move it to hotbar
-                    if (!this.moveItemStackTo(stack, 27 + SLOT_COUNT, 36 + SLOT_COUNT, false)) {
+            if (!this.moveItemStackTo(stack, 0, 2, false)) { //if you can't move the stack to the bee slots
+                if (this.moveItemStackTo(stack, 2, 5, false)) { //if you can't move the stack to the frame slots
+                    if (index < 27 + SLOT_COUNT) { // if the stack is in main inventory, move it to hotbar
+                        if (!this.moveItemStackTo(stack, 27 + SLOT_COUNT, 36 + SLOT_COUNT, false)) {
+                            return ItemStack.EMPTY;
+                        }
+                    } else if (index < Inventory.INVENTORY_SIZE + SLOT_COUNT && !this.moveItemStackTo(stack, SLOT_COUNT, 27 + SLOT_COUNT, false)) { //if the stack is in hotbar, move it to main inventory
                         return ItemStack.EMPTY;
                     }
-                } else if (index < Inventory.INVENTORY_SIZE + SLOT_COUNT && !this.moveItemStackTo(stack, SLOT_COUNT, 27 + SLOT_COUNT, false)) { //if the stack is in hotbar, move it to main inventory
-                    return ItemStack.EMPTY;
                 }
             }
             if (stack.isEmpty()) {

@@ -6,6 +6,7 @@ import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumProductivity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.registry.GeneRegistry;
@@ -107,6 +108,10 @@ public class BeeItem extends Item {
                     .append(" / ")
                     .append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
+            components.add(((EnumProductivity)primary.getGene(GeneProductivity.ID).get()).getTranslationKey()
+                    .append(" ")
+                    .append(Component.translatable("gui.complicated_bees.productivity_label"))
+                    .withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("flower.complicated_bees." + primary.getGene(GeneFlower.ID).get().toString())
                     .withStyle(ChatFormatting.GRAY));
         }

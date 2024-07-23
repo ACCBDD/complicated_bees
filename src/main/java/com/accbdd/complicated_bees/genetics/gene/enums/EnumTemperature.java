@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.ComplicatedBees;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -68,7 +69,7 @@ public enum EnumTemperature {
         return this.name;
     }
 
-    public Component getTranslationKey() {
+    public MutableComponent getTranslationKey() {
         return Component.translatable("gui.complicated_bees.temperature." + this.toString());
     }
 }
