@@ -40,7 +40,11 @@ public class Product {
         return stack.copy();
     }
 
-    public ItemStack getStackResult() {
-        return rand.nextFloat() < this.getChance() ? this.getStack() : ItemStack.EMPTY;
+    public ItemStack getStackResult(float... modifiers) {
+        float stackChance = this.getChance();
+        for (float modifier : modifiers) {
+            stackChance *= modifier;
+        }
+        return rand.nextFloat() < stackChance ? this.getStack() : ItemStack.EMPTY;
     }
 }

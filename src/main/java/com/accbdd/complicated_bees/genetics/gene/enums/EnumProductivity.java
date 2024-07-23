@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public enum EnumProductivity {
-    SLOWEST("slowest", 0.2f),
+    SLOWEST("slowest", 0.3f),
     SLOWER("slower", 0.5f),
     SLOW("slow", 0.8f),
     AVERAGE("average", 1f),

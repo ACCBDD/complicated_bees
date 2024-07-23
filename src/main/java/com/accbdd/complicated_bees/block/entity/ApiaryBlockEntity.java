@@ -7,6 +7,7 @@ import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
+import com.accbdd.complicated_bees.genetics.gene.enums.EnumProductivity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.item.*;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
@@ -269,10 +270,10 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
         return queen;
     }
 
-    public void generateProduce(ItemStack stack) {
-        List<Product> products = ((GeneSpecies) GeneticHelper.getGene(stack, GeneSpecies.ID, true)).get().getProducts();
+    public void generateProduce(ItemStack bee) {
+        List<Product> products = ((GeneSpecies) GeneticHelper.getGene(bee, GeneSpecies.ID, true)).get().getProducts();
         for (Product product : products) {
-            outputBuffer.add(product.getStackResult());
+            outputBuffer.add(product.getStackResult(((EnumProductivity) GeneticHelper.getGeneValue(bee, GeneProductivity.ID, true)).value));
         }
         //todo: generate specialty produce
         setChanged();

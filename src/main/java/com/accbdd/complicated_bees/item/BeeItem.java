@@ -96,6 +96,10 @@ public class BeeItem extends Item {
                     .append(" ")
                     .append(Component.translatable("gui.complicated_bees.lifespan_label"))
                     .withStyle(ChatFormatting.GRAY));
+            components.add(((EnumProductivity)primary.getGene(GeneProductivity.ID).get()).getTranslationKey()
+                    .append(" ")
+                    .append(Component.translatable("gui.complicated_bees.productivity_label"))
+                    .withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("gui.complicated_bees.temperature_label.short")
                     .append(": ")
                     .append(((EnumTemperature)primary.getGene(GeneTemperature.ID).get()).getTranslationKey())
@@ -108,10 +112,6 @@ public class BeeItem extends Item {
                     .append(" / ")
                     .append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
-            components.add(((EnumProductivity)primary.getGene(GeneProductivity.ID).get()).getTranslationKey()
-                    .append(" ")
-                    .append(Component.translatable("gui.complicated_bees.productivity_label"))
-                    .withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("flower.complicated_bees." + primary.getGene(GeneFlower.ID).get().toString())
                     .withStyle(ChatFormatting.GRAY));
         }
