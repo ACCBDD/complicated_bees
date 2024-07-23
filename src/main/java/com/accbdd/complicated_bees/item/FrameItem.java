@@ -4,6 +4,6 @@ import net.minecraft.world.item.Item;
 
 public class FrameItem extends Item {
     public FrameItem(Properties pProperties) {
-        super(pProperties.durability(50));
+        super(pProperties.stacksTo(1));
     }
 }

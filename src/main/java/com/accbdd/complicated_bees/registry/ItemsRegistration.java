@@ -17,6 +17,14 @@ public class ItemsRegistration {
     public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
     public static final DeferredItem<MeterItem> METER = ITEMS.registerItem("meter", MeterItem::new);
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame", FrameItem::new);
+    public static final DeferredItem<FrameItem> THICK_FRAME = ITEMS.registerItem("thick_frame", FrameItem::new);
+    public static final DeferredItem<FrameItem> COLD_FRAME = ITEMS.registerItem("cold_frame", FrameItem::new);
+    public static final DeferredItem<FrameItem> HOT_FRAME = ITEMS.registerItem("hot_frame", FrameItem::new);
+    public static final DeferredItem<FrameItem> DRY_FRAME = ITEMS.registerItem("dry_frame", FrameItem::new);
+    public static final DeferredItem<FrameItem> MOIST_FRAME = ITEMS.registerItem("moist_frame", FrameItem::new);
+    public static final DeferredItem<FrameItem> DEADLY_FRAME = ITEMS.registerItem("deadly_frame", FrameItem::new);
+    public static final DeferredItem<FrameItem> RESTRICTIVE_FRAME = ITEMS.registerItem("restrictive_frame", FrameItem::new);
+
 
     public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerItem("bee_nest", BeeNestBlockItem::new);
     public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);
