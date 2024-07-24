@@ -53,9 +53,11 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     public static final int CYCLE_LENGTH = 20;
     public static final String CYCLE_TAG = "cycle";
+    public static final int FLOWER_CYCLE_LENGTH = 200;
 
     private final ContainerData data;
     private int cycleProgress = 0;
+    private int flowerCycleProgress = 0;
     private int breedingProgress = 0;
     private int maxBreedingProgress = 20;
     private byte errorState = 0;
@@ -263,9 +265,13 @@ public class ApiaryBlockEntity extends BlockEntity {
             }
         }
 
-        //todo: decouple from world ticks
-        if (level.getGameTime() % 200 == 0 && top_stack.getItem() instanceof QueenItem) {
-            rebuildFlowerCache(top_stack);
+        if (flowerCycleProgress >= FLOWER_CYCLE_LENGTH) {
+            if (top_stack.getItem() instanceof QueenItem) {
+                rebuildFlowerCache(top_stack);
+                flowerCycleProgress = 0;
+            }
+        } else {
+            flowerCycleProgress++;
         }
     }
 
