@@ -263,6 +263,7 @@ public class ApiaryBlockEntity extends BlockEntity {
             }
         }
 
+        //todo: decouple from world ticks
         if (level.getGameTime() % 200 == 0 && top_stack.getItem() instanceof QueenItem) {
             rebuildFlowerCache(top_stack);
         }
