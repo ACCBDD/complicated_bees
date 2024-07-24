@@ -14,10 +14,9 @@ import com.accbdd.complicated_bees.utils.BlockPosBoxIterator;
 import com.accbdd.complicated_bees.utils.enums.EnumErrorCodes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -52,10 +51,14 @@ public class ApiaryBlockEntity extends BlockEntity {
     public final Stack<ItemStack> outputBuffer = new Stack<>();
     public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
+    public static final int CYCLE_LENGTH = 20;
+    public static final String CYCLE_TAG = "cycle";
+
     private final ContainerData data;
+    private int cycleProgress = 0;
     private int breedingProgress = 0;
     private int maxBreedingProgress = 20;
-    private byte barState = 0;
+    private byte errorState = 0;
 
     private EnumTemperature temperatureCache = null;
     private EnumHumidity humidityCache = null;
@@ -99,7 +102,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 return switch (index) {
                     case 0 -> ApiaryBlockEntity.this.breedingProgress;
                     case 1 -> ApiaryBlockEntity.this.maxBreedingProgress;
-                    case 2 -> ApiaryBlockEntity.this.barState;
+                    case 2 -> ApiaryBlockEntity.this.errorState;
                     default -> 0;
                 };
             }
@@ -109,7 +112,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 switch (index) {
                     case 0 -> ApiaryBlockEntity.this.breedingProgress = value;
                     case 1 -> ApiaryBlockEntity.this.maxBreedingProgress = value;
-                    case 2 -> ApiaryBlockEntity.this.barState = (byte) value;
+                    case 2 -> ApiaryBlockEntity.this.errorState = (byte) value;
                 }
             }
 
@@ -198,6 +201,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
+        tag.put(CYCLE_TAG, IntTag.valueOf(cycleProgress));
         tag.put(ITEMS_BEES_TAG, beeItems.serializeNBT());
         tag.put(ITEMS_OUTPUT_TAG, outputItems.serializeNBT());
         tag.put(FRAME_SLOT_TAG, frameItems.serializeNBT());
@@ -211,6 +215,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
+        cycleProgress = tag.getInt(CYCLE_TAG);
         if (tag.contains(ITEMS_BEES_TAG)) {
             beeItems.deserializeNBT(tag.getCompound(ITEMS_BEES_TAG));
         }
@@ -231,6 +236,10 @@ public class ApiaryBlockEntity extends BlockEntity {
         ItemStack top_stack = beeItems.getStackInSlot(0);
         ItemStack bottom_stack = beeItems.getStackInSlot(1);
 
+        if (!outputBuffer.empty()) {
+            tryEmptyBuffer();
+        }
+
         if (top_stack.getItem() instanceof PrincessItem && bottom_stack.getItem() instanceof DroneItem) {
             increaseBreedingProgress();
             if (hasFinished()) {
@@ -244,12 +253,11 @@ public class ApiaryBlockEntity extends BlockEntity {
             resetBreedingProgress();
         }
 
-        if (!outputBuffer.empty()) {
-            tryEmptyBuffer();
-        }
-
-        if (level.getGameTime() % 20 == 0 && outputBuffer.empty()) {
-            if (top_stack.getItem() instanceof QueenItem && queenSatisfied(top_stack)) {
+        if (top_stack.getItem() instanceof QueenItem && queenSatisfied(top_stack)) {
+            if (cycleProgress < CYCLE_LENGTH) {
+                cycleProgress++;
+            } else {
+                cycleProgress = 0;
                 ageQueen(top_stack);
                 generateProduce(top_stack);
             }
@@ -423,13 +431,13 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     private void addError(EnumErrorCodes... error) {
         for (EnumErrorCodes err : error) {
-            barState |= err.value;
+            errorState |= err.value;
         }
     }
 
     private void removeError(EnumErrorCodes... error) {
         for (EnumErrorCodes err : error) {
-            barState = (byte) (barState & (err.value ^ Byte.MAX_VALUE));
+            errorState = (byte) (errorState & (err.value ^ Byte.MAX_VALUE));
         }
     }
 }
