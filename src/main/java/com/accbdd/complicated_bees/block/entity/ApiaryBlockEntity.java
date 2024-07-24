@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.*;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
@@ -35,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class ApiaryBlockEntity extends BlockEntity implements Container {
+public class ApiaryBlockEntity extends BlockEntity {
     public static final int BEE_SLOT = 0;
     public static final int BEE_SLOT_COUNT = 2;
     public static final String ITEMS_BEES_TAG = "bee_items";
@@ -62,7 +61,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     private EnumHumidity humidityCache = null;
     private final List<BlockPos> flowerCache = new ArrayList<>();
 
-    private final ItemStackHandler beeItems = createItemHandler(BEE_SLOT_COUNT);
+    private final ItemStackHandler beeItems = createBeeHandler(BEE_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
     private final ItemStackHandler frameItems = createFrameHandler(FRAME_SLOT_COUNT);
 
@@ -71,25 +70,6 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
         @Override
         public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             return ItemStack.EMPTY;
-        }
-
-        @Override
-        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-            ComplicatedBees.LOGGER.debug("inserting {} into slot {}", stack, slot);
-            return isItemValid(slot, stack) ? super.insertItem(slot, stack, simulate) : stack;
-        }
-
-        @Override
-        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            if (stack.getItem() instanceof BeeItem) {
-                switch (slot) {
-                    case 0:
-                        return (stack.getItem() instanceof QueenItem || stack.getItem() instanceof PrincessItem);
-                    case 1:
-                        return (stack.getItem() instanceof DroneItem);
-                }
-            }
-            return false;
         }
     });
 
@@ -188,6 +168,29 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
                 setChanged();
                 ApiaryBlockEntity.this.humidityCache = null;
                 ApiaryBlockEntity.this.temperatureCache = null;
+            }
+        };
+    }
+
+    private ItemStackHandler createBeeHandler(int slots) {
+        return new ItemStackHandler(slots) {
+            @Override
+            public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+                boolean itemValid = isItemValid(slot, stack);
+                return itemValid ? super.insertItem(slot, stack, simulate) : stack;
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                if (stack.getItem() instanceof BeeItem) {
+                    switch (slot) {
+                        case 0:
+                            return (stack.getItem() instanceof QueenItem || stack.getItem() instanceof PrincessItem);
+                        case 1:
+                            return (stack.getItem() instanceof DroneItem);
+                    }
+                }
+                return false;
             }
         };
     }
@@ -383,7 +386,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     }
 
     private void rebuildFlowerCache(ItemStack bee) {
-        flowerCache.clear();
+        clearFlowerCache();
         Flower flower = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get()
                 .get(((GeneFlower)GeneticHelper.getGene(bee, GeneFlower.ID, true)).get());
 
@@ -427,59 +430,6 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     private void removeError(EnumErrorCodes... error) {
         for (EnumErrorCodes err : error) {
             barState = (byte) (barState & (err.value ^ Byte.MAX_VALUE));
-        }
-    }
-
-    // -------------------
-    // container methods
-    @Override
-    public int getContainerSize() {
-        return itemHandler.get().getSlots();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        ItemStack test = ItemStack.EMPTY;
-        for (int i = 0; i < itemHandler.get().getSlots(); i++) {
-            test = itemHandler.get().getStackInSlot(i).isEmpty() ? test : itemHandler.get().getStackInSlot(i);
-        }
-        return (test.isEmpty());
-    }
-
-    @Override
-    public ItemStack getItem(int pSlot) {
-        return itemHandler.get().getStackInSlot(pSlot);
-    }
-
-    @Override
-    public ItemStack removeItem(int pSlot, int pAmount) {
-        ItemStack stack = itemHandler.get().extractItem(pSlot, pAmount, false);
-        if (!stack.isEmpty())
-            setChanged();
-        return stack;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int pSlot) {
-        return itemHandler.get().extractItem(pSlot, itemHandler.get().getStackInSlot(pSlot).getCount(), false);
-    }
-
-    @Override
-    public void setItem(int pSlot, ItemStack pStack) {
-        removeItemNoUpdate(pSlot);
-        setChanged();
-        itemHandler.get().insertItem(pSlot, pStack, false);
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return true;
-    }
-
-    @Override
-    public void clearContent() {
-        for (int i = 0; i < itemHandler.get().getSlots(); i++) {
-            removeItemNoUpdate(i);
         }
     }
 }

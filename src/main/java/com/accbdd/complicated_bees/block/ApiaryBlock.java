@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -92,12 +93,15 @@ public class ApiaryBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-        if (blockentity instanceof ApiaryBlockEntity) {
-            while (!((ApiaryBlockEntity) blockentity).outputBuffer.empty()) {
-                Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), ((ApiaryBlockEntity) blockentity).outputBuffer.pop());
+        if (blockentity instanceof ApiaryBlockEntity apiary) {
+            while (!apiary.outputBuffer.empty()) {
+                Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), apiary.outputBuffer.pop());
+            }
+            IItemHandler handler = apiary.getItemHandler().get();
+            for (int i = 0; i < handler.getSlots(); i++) {
+                Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), handler.getStackInSlot(i));
             }
         }
-        Containers.dropContentsOnDestroy(pState, pNewState, pLevel, pPos);
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
 }
