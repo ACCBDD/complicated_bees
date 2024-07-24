@@ -8,6 +8,13 @@
   "item.complicated_bees.comb": "Comb",
   "item.complicated_bees.meter": "Meter",
   "item.complicated_bees.frame": "Frame",
+  "item.complicated_bees.thick_frame": "Frame",
+  "item.complicated_bees.cold_frame": "Icy Frame",
+  "item.complicated_bees.hot_frame": "Hot Frame",
+  "item.complicated_bees.dry_frame": "Dry Frame",
+  "item.complicated_bees.moist_frame": "Moist Frame",
+  "item.complicated_bees.deadly_frame": "Deadly Frame",
+  "item.complicated_bees.restrictive_frame": "Restrictive Frame",
 
   "block.complicated_bees.bee_nest": "Bee Nest",
   "block.complicated_bees.apiary": "Apiary",
