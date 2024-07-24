@@ -160,10 +160,9 @@ public class ApiaryMenu extends AbstractContainerMenu {
         return item.getItem() == ItemsRegistration.QUEEN.get();
     }
 
-    public int getScaledProgress(int progress, int maxProgress) {
+    public int getScaledProgress(float progress, int maxProgress) {
         int barHeight = 45;
-        int i = maxProgress != 0 && progress != 0 ? progress * barHeight / maxProgress : 0;
-        return i;
+        return maxProgress != 0 && progress != 0 ? (int) (progress * barHeight / maxProgress) : 0;
     }
 
     public ItemStack getQueen() {

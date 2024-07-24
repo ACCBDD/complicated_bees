@@ -1,9 +1,7 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.genetics.Product;
-import com.accbdd.complicated_bees.genetics.Chromosome;
-import com.accbdd.complicated_bees.genetics.Flower;
-import com.accbdd.complicated_bees.genetics.GeneticHelper;
+import com.accbdd.complicated_bees.ComplicatedBees;
+import com.accbdd.complicated_bees.genetics.*;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
@@ -66,7 +64,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
 
     private final ItemStackHandler beeItems = createItemHandler(BEE_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
-    private final ItemStackHandler frameItems = createItemHandler(FRAME_SLOT_COUNT);
+    private final ItemStackHandler frameItems = createFrameHandler(FRAME_SLOT_COUNT);
 
     private final Lazy<IItemHandler> itemHandler = Lazy.of(() -> new CombinedInvWrapper(beeItems, outputItems, frameItems));
     private final Lazy<IItemHandler> beeItemHandler = Lazy.of(() -> new AdaptedItemHandler(beeItems) {
@@ -77,6 +75,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
 
         @Override
         public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            ComplicatedBees.LOGGER.debug("inserting {} into slot {}", stack, slot);
             return isItemValid(slot, stack) ? super.insertItem(slot, stack, simulate) : stack;
         }
 
@@ -182,6 +181,17 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
         };
     }
 
+    private ItemStackHandler createFrameHandler(int slots) {
+        return new ItemStackHandler(slots) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+                ApiaryBlockEntity.this.humidityCache = null;
+                ApiaryBlockEntity.this.temperatureCache = null;
+            }
+        };
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
@@ -271,6 +281,7 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     }
 
     public void generateProduce(ItemStack bee) {
+        //todo: modify with frames
         List<Product> products = ((GeneSpecies) GeneticHelper.getGene(bee, GeneSpecies.ID, true)).get().getProducts();
         for (Product product : products) {
             outputBuffer.add(product.getStackResult(((EnumProductivity) GeneticHelper.getGeneValue(bee, GeneProductivity.ID, true)).value));
@@ -306,7 +317,12 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
     }
 
     public void ageQueen(ItemStack queen) {
-        BeeItem.setAge(queen, BeeItem.getAge(queen) + 1);
+        float ageFactor = 1;
+        for (BeeHousingModifier mod : getFrameModifiers()) {
+            ageFactor /= mod.getLifespanMod();
+        }
+        BeeItem.setAge(queen, BeeItem.getAge(queen) + ageFactor);
+        damageFrames();
         if (BeeItem.getAge(queen) >= ((EnumLifespan) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)).value) {
             beeItems.extractItem(BEE_SLOT, 1, false);
             outputBuffer.add(GeneticHelper.getFromMate(queen, ItemsRegistration.PRINCESS.get()));
@@ -317,13 +333,36 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
         }
     }
 
+    public List<BeeHousingModifier> getFrameModifiers() {
+        List<BeeHousingModifier> modifiers = new ArrayList<>();
+        for (int i = 0; i < frameItems.getSlots(); i++) {
+            ItemStack item = frameItems.getStackInSlot(i);
+            if (item.getItem() instanceof FrameItem frame)
+                modifiers.add(frame.getModifier());
+        }
+        return modifiers;
+    }
+
+    public void damageFrames() {
+        for (int i = 0; i < frameItems.getSlots(); i++) {
+            if (frameItems.getStackInSlot(i).hurt(1, level.random, null))
+                frameItems.setStackInSlot(i, ItemStack.EMPTY);
+        }
+    }
+
     public EnumHumidity getHumidity() {
         if (this.humidityCache == null) {
             if (getLevel() == null) {
                 return null;
             }
             this.humidityCache = EnumHumidity.getFromPosition(getLevel(), getBlockPos());
+
+            for (BeeHousingModifier mod : getFrameModifiers()) {
+                int ordinal = humidityCache.ordinal() + mod.getHumidityMod().up - mod.getHumidityMod().down;
+                humidityCache = EnumHumidity.values()[Math.max(0, Math.min(EnumHumidity.values().length - 1, ordinal))];
+            }
         }
+
         return this.humidityCache;
     }
 
@@ -333,7 +372,13 @@ public class ApiaryBlockEntity extends BlockEntity implements Container {
                 return null;
             }
             this.temperatureCache = EnumTemperature.getFromPosition(getLevel(), getBlockPos());
+
+            for (BeeHousingModifier mod : getFrameModifiers()) {
+                int ordinal = temperatureCache.ordinal() + mod.getTemperatureMod().up - mod.getTemperatureMod().down;
+                temperatureCache = EnumTemperature.values()[Math.max(0, Math.min(EnumTemperature.values().length - 1, ordinal))];
+            }
         }
+
         return this.temperatureCache;
     }
 

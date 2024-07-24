@@ -40,12 +40,12 @@ public class BeeItem extends Item {
         super(prop);
     }
 
-    public static int getAge(ItemStack stack) {
-        return stack.getOrCreateTag().getInt(AGE_TAG);
+    public static float getAge(ItemStack stack) {
+        return stack.getOrCreateTag().getFloat(AGE_TAG);
     }
 
-    public static void setAge(ItemStack stack, int age) {
-        stack.getOrCreateTag().putInt(AGE_TAG, age);
+    public static void setAge(ItemStack stack, float age) {
+        stack.getOrCreateTag().putFloat(AGE_TAG, age);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class BeeItem extends Item {
                     .withStyle(ChatFormatting.GRAY));
             components.add(((EnumProductivity)primary.getGene(GeneProductivity.ID).get()).getTranslationKey()
                     .append(" ")
-                    .append(Component.translatable("gui.complicated_bees.productivity_label"))
+                    .append(Component.translatable("gui.complicated_bees.productivity_label.short"))
                     .withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("gui.complicated_bees.temperature_label.short")
                     .append(": ")
