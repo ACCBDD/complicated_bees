@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.*;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
@@ -9,6 +10,7 @@ import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.item.*;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.FlowerRegistry;
+import com.accbdd.complicated_bees.registry.GeneRegistry;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.utils.BlockPosBoxIterator;
 import com.accbdd.complicated_bees.utils.enums.EnumErrorCodes;
@@ -17,10 +19,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -32,6 +36,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class ApiaryBlockEntity extends BlockEntity {
     public static final int BEE_SLOT = 0;
@@ -204,6 +210,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 if (slot == 0) {
                     ApiaryBlockEntity.this.clearFlowerCache();
                 }
+                setChanged();
             }
         };
     }
@@ -337,6 +344,27 @@ public class ApiaryBlockEntity extends BlockEntity {
             satisfied = false;
         } else {
             removeError(EnumErrorCodes.NO_FLOWER);
+        }
+        if (level.isRaining() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "weatherproof")).get()) {
+            addError(EnumErrorCodes.WEATHER);
+            satisfied = false;
+        } else {
+            removeError(EnumErrorCodes.WEATHER);
+        }
+        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() > getBlockPos().getY()+1 && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
+            addError(EnumErrorCodes.UNDERGROUND);
+            satisfied = false;
+        } else {
+            removeError(EnumErrorCodes.UNDERGROUND);
+        }
+        if (level.isDay() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "diurnal")).get()) {
+            addError(EnumErrorCodes.WRONG_TIME);
+            satisfied = false;
+        } else if (level.isNight() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "nocturnal")).get()){
+            addError(EnumErrorCodes.WRONG_TIME);
+            satisfied = false;
+        } else {
+            removeError(EnumErrorCodes.WRONG_TIME);
         }
 
         return satisfied;

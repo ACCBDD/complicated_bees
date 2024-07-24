@@ -18,11 +18,16 @@ public class GeneRegistry {
 
     //every registered gene should be registered as a 'default' value
     public static final DeferredRegister<Gene<?>> GENES = DeferredRegister.create(GENE_REGISTRY, MODID);
-    public static final Supplier<GeneSpecies> SPECIES_GENE = GENES.register(GeneSpecies.TAG, GeneSpecies::new);
-    public static final Supplier<GeneLifespan> LIFESPAN_GENE = GENES.register(GeneLifespan.TAG, GeneLifespan::new);
-    public static final Supplier<GeneTemperature> TEMPERATURE_GENE = GENES.register(GeneTemperature.TAG, GeneTemperature::new);
-    public static final Supplier<GeneHumidity> HUMIDITY_GENE = GENES.register(GeneHumidity.TAG, GeneHumidity::new);
-    public static final Supplier<GeneFlower> FLOWER_GENE = GENES.register(GeneFlower.TAG, GeneFlower::new);
-    public static final Supplier<GeneFertility> FERTILITY_GENE = GENES.register(GeneFertility.TAG, GeneFertility::new);
-    public static final Supplier<GeneProductivity> PRODUCTIVITY_GENE = GENES.register(GeneProductivity.TAG, GeneProductivity::new);
+    public static final Supplier<GeneSpecies> SPECIES = GENES.register(GeneSpecies.TAG, GeneSpecies::new);
+    public static final Supplier<GeneLifespan> LIFESPAN = GENES.register(GeneLifespan.TAG, GeneLifespan::new);
+    public static final Supplier<GeneTemperature> TEMPERATURE = GENES.register(GeneTemperature.TAG, GeneTemperature::new);
+    public static final Supplier<GeneHumidity> HUMIDITY = GENES.register(GeneHumidity.TAG, GeneHumidity::new);
+    public static final Supplier<GeneFlower> FLOWER = GENES.register(GeneFlower.TAG, GeneFlower::new);
+    public static final Supplier<GeneFertility> FERTILITY = GENES.register(GeneFertility.TAG, GeneFertility::new);
+    public static final Supplier<GeneProductivity> PRODUCTIVITY = GENES.register(GeneProductivity.TAG, GeneProductivity::new);
+
+    public static final Supplier<GeneBoolean> DIURNAL = GENES.register("diurnal", () -> new GeneBoolean(true, true));
+    public static final Supplier<GeneBoolean> NOCTURNAL = GENES.register("nocturnal", () -> new GeneBoolean(false, true));
+    public static final Supplier<GeneBoolean> CAVE_DWELLING = GENES.register("cave_dwelling", () -> new GeneBoolean(false, true));
+    public static final Supplier<GeneBoolean> WEATHERPROOF = GENES.register("weatherproof", () -> new GeneBoolean(false, true));
 }

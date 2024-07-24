@@ -4,7 +4,7 @@ import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
 
-public class Gene<T> implements IGene<T> {
+public abstract class Gene<T> implements IGene<T> {
     public static String DATA = "data";
     public static String DOMINANT = "dominant";
 
@@ -42,6 +42,6 @@ public class Gene<T> implements IGene<T> {
 
     @Override
     public Gene<T> deserialize(CompoundTag tag) {
-        return new Gene<T>((T) tag.getString(DATA), tag.getBoolean(DOMINANT));
+        return null;
     }
 }
