@@ -197,6 +197,14 @@ public class ApiaryBlockEntity extends BlockEntity {
                 }
                 return false;
             }
+
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                if (slot == 0) {
+                    ApiaryBlockEntity.this.clearFlowerCache();
+                }
+            }
         };
     }
 
