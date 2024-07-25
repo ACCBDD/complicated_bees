@@ -1,14 +1,13 @@
 package com.accbdd.complicated_bees.genetics;
 
-import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
-import com.accbdd.complicated_bees.registry.FlowerRegistry;
-import com.accbdd.complicated_bees.registry.MutationRegistry;
-import com.accbdd.complicated_bees.registry.SpeciesRegistry;
+import com.accbdd.complicated_bees.registry.FlowerRegistration;
+import com.accbdd.complicated_bees.registry.MutationRegistration;
+import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
@@ -66,12 +65,12 @@ public class GeneticHelper {
 
     public static Component getTranslationKey(Species species) {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
-        return Component.translatable("species.complicated_bees." + registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().getKey(species));
+        return Component.translatable("species.complicated_bees." + registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species));
     }
 
     public static Component getTranslationKey(Flower flower) {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
-        return Component.translatable("flower.complicated_bees." + registryAccess.registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get().getKey(flower));
+        return Component.translatable("flower.complicated_bees." + registryAccess.registry(FlowerRegistration.FLOWER_REGISTRY_KEY).get().getKey(flower));
     }
 
     public static IGene<?> getGene(ItemStack stack, ResourceLocation id, boolean primary) {
@@ -111,7 +110,7 @@ public class GeneticHelper {
             if (geneEntry.getValue() instanceof GeneSpecies) {
                 Species speciesA = (Species) geneA.get();
                 Species speciesB = (Species) geneB.get();
-                for (Mutation mutation : ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistry.MUTATION_REGISTRY_KEY).get().stream().toList()) {
+                for (Mutation mutation : ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistration.MUTATION_REGISTRY_KEY).get().stream().toList()) {
                     if ((mutation.getFirstSpecies() == speciesA && mutation.getSecondSpecies() == speciesB) || (mutation.getSecondSpecies() == speciesA && mutation.getFirstSpecies() == speciesB)) {
                         mutated_a = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_a);
                         mutated_b = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_b);

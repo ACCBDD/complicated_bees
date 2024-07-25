@@ -14,7 +14,7 @@ public class BlockPosBoxIterator extends AbstractIterator<BlockPos> {
     public BlockPosBoxIterator(BlockPos center, int hRadius, int vRadius) {
         this.center = center;
         this.maxPos = new BlockPos(center.getX() + hRadius, center.getY() + vRadius, center.getZ() + hRadius);
-        this.minPos = new BlockPos(center.getX() +-hRadius, center.getY() - vRadius, center.getZ() - hRadius);
+        this.minPos = new BlockPos(center.getX() - hRadius, center.getY() - vRadius, center.getZ() - hRadius);
         this.current = null;
     }
 

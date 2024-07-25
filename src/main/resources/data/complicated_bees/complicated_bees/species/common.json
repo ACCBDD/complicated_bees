@@ -27,6 +27,9 @@
     "complicated_bees:fertility": {
       "data": 3,
       "dominant": false
+    },
+    "complicated_bees:effect": {
+      "data": "complicated_bees:debug"
     }
   }
 }

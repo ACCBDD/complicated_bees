@@ -3,7 +3,7 @@ package com.accbdd.complicated_bees.genetics;
 
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
-import com.accbdd.complicated_bees.registry.SpeciesRegistry;
+import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
@@ -60,7 +60,7 @@ public class Species {
 
     public static Species getFromResourceLocation(ResourceLocation loc) {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
-        return registryAccess.registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().get(loc);
+        return registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().get(loc);
     }
 
     public boolean isDominant() {

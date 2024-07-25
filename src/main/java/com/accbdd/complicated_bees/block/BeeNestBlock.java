@@ -1,11 +1,9 @@
 package com.accbdd.complicated_bees.block;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.block.entity.BeeNestBlockEntity;
-import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
-import com.accbdd.complicated_bees.registry.SpeciesRegistry;
+import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -41,14 +39,14 @@ public class BeeNestBlock extends BaseEntityBlock {
     public static ItemStack stackNest(ItemStack stack, Species species) {
         CompoundTag tag = stack.getOrCreateTag();
         CompoundTag data = new CompoundTag();
-        data.putString("species", SpeciesRegistry.getResourceLocation(species).toString());
+        data.putString("species", SpeciesRegistration.getResourceLocation(species).toString());
         tag.put("BlockEntityTag", data);
         return stack;
     }
 
     public static int getItemColor(ItemStack stack, int tintIndex) {
         if (tintIndex == 1) {
-            Species species = SpeciesRegistry.getFromResourceLocation(ResourceLocation.tryParse(stack.getOrCreateTag().getCompound("BlockEntityTag").getString("species")));
+            Species species = SpeciesRegistration.getFromResourceLocation(ResourceLocation.tryParse(stack.getOrCreateTag().getCompound("BlockEntityTag").getString("species")));
             if (species != null) {
                 return species.getColor();
             }
@@ -94,7 +92,7 @@ public class BeeNestBlock extends BaseEntityBlock {
         CompoundTag data = new CompoundTag();
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof BeeNestBlockEntity ne)
-            data.putString("species", SpeciesRegistry.getResourceLocation(ne.getSpecies()).toString());
+            data.putString("species", SpeciesRegistration.getResourceLocation(ne.getSpecies()).toString());
         tag.put("BlockEntityTag", data);
         return nest;
     }

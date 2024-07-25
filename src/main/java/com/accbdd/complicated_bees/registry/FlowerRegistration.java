@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
-public class FlowerRegistry {
+public class FlowerRegistration {
     public static final ResourceKey<Registry<Flower>> FLOWER_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MODID, "flower"));
 
     public static final Codec<Flower> CODEC = RecordCodecBuilder.create(instance ->

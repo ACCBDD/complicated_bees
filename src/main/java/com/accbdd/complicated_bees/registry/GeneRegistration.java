@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
-public class GeneRegistry {
+public class GeneRegistration {
     public static final ResourceKey<Registry<IGene<?>>> GENE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MODID, "gene"));
     public static final Registry<IGene<?>> GENE_REGISTRY = new RegistryBuilder<>(GENE_REGISTRY_KEY)
             .create();
@@ -25,6 +25,7 @@ public class GeneRegistry {
     public static final Supplier<GeneFlower> FLOWER = GENES.register(GeneFlower.TAG, GeneFlower::new);
     public static final Supplier<GeneFertility> FERTILITY = GENES.register(GeneFertility.TAG, GeneFertility::new);
     public static final Supplier<GeneProductivity> PRODUCTIVITY = GENES.register(GeneProductivity.TAG, GeneProductivity::new);
+    public static final Supplier<GeneEffect> EFFECT = GENES.register(GeneEffect.TAG, GeneEffect::new);
 
     public static final Supplier<GeneBoolean> DIURNAL = GENES.register("diurnal", () -> new GeneBoolean(true, true));
     public static final Supplier<GeneBoolean> NOCTURNAL = GENES.register("nocturnal", () -> new GeneBoolean(false, true));

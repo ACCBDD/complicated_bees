@@ -9,12 +9,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 
-import java.util.function.Supplier;
-
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 //custom registry for species
-public class SpeciesRegistry {
+public class SpeciesRegistration {
     public static final ResourceKey<Registry<Species>> SPECIES_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MODID, "species"));
 
     public static Species getFromResourceLocation(ResourceLocation resourceLocation) {

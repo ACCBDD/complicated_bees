@@ -1,7 +1,7 @@
 package com.accbdd.complicated_bees.genetics.mutation;
 
 import com.accbdd.complicated_bees.genetics.Species;
-import com.accbdd.complicated_bees.registry.SpeciesRegistry;
+import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -31,7 +31,7 @@ public class Mutation {
     }
 
     public Species getFirstSpecies() {
-        return SpeciesRegistry.getFromResourceLocation(first);
+        return SpeciesRegistration.getFromResourceLocation(first);
     }
 
     public ResourceLocation getSecond() {
@@ -39,7 +39,7 @@ public class Mutation {
     }
 
     public Species getSecondSpecies() {
-        return SpeciesRegistry.getFromResourceLocation(second);
+        return SpeciesRegistration.getFromResourceLocation(second);
     }
 
     public ResourceLocation getResult() {
@@ -47,7 +47,7 @@ public class Mutation {
     }
 
     public Species getResultSpecies() {
-        return SpeciesRegistry.getFromResourceLocation(result);
+        return SpeciesRegistration.getFromResourceLocation(result);
     }
 
     public float getChance() {

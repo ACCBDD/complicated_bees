@@ -1,35 +1,26 @@
 package com.accbdd.complicated_bees.item;
 
 import com.accbdd.complicated_bees.genetics.Chromosome;
-import com.accbdd.complicated_bees.genetics.Flower;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumProductivity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
-import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
-import com.accbdd.complicated_bees.registry.GeneRegistry;
-import com.accbdd.complicated_bees.registry.SpeciesRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 

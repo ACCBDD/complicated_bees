@@ -66,13 +66,13 @@ public class ComplicatedBees
                 output.accept(ItemsRegistration.MOIST_FRAME.get());
                 output.accept(ItemsRegistration.DEADLY_FRAME.get());
                 output.accept(ItemsRegistration.RESTRICTIVE_FRAME.get());
-                Set<Map.Entry<ResourceKey<Species>, Species>> speciesSet = Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().entrySet();
+                Set<Map.Entry<ResourceKey<Species>, Species>> speciesSet = Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().entrySet();
                 for (Map.Entry<ResourceKey<Species>, Species> entry : speciesSet) {
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.PRINCESS.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.QUEEN.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
                 }
-                for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().keySet()) {
+                for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get().keySet()) {
                     output.accept(CombItem.setComb(ItemsRegistration.COMB.get().getDefaultInstance(), id));
                 }
                 for (Map.Entry<ResourceKey<Species>, Species> entry: speciesSet) {
@@ -95,7 +95,7 @@ public class ComplicatedBees
         BlocksRegistration.BLOCKS.register(modEventBus);
         BlockEntitiesRegistration.BLOCK_ENTITIES.register(modEventBus);
         MenuRegistration.MENU_TYPES.register(modEventBus);
-        GeneRegistry.GENES.register(modEventBus);
+        GeneRegistration.GENES.register(modEventBus);
         EsotericRegistration.LOOT_ITEM_FUNCTION_REGISTER.register(modEventBus);
         EsotericRegistration.TREE_DECORATOR_REGISTER.register(modEventBus);
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
@@ -106,33 +106,34 @@ public class ComplicatedBees
     @SubscribeEvent
     public void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(
-                SpeciesRegistry.SPECIES_REGISTRY_KEY,
+                SpeciesRegistration.SPECIES_REGISTRY_KEY,
                 Species.SPECIES_CODEC,
                 Species.SPECIES_CODEC
         );
 
         event.dataPackRegistry(
-                CombRegistry.COMB_REGISTRY_KEY,
+                CombRegistration.COMB_REGISTRY_KEY,
                 Comb.CODEC,
                 Comb.CODEC
         );
 
         event.dataPackRegistry(
-                MutationRegistry.MUTATION_REGISTRY_KEY,
+                MutationRegistration.MUTATION_REGISTRY_KEY,
                 Mutation.MUTATION_CODEC,
                 Mutation.MUTATION_CODEC
         );
 
         event.dataPackRegistry(
-                FlowerRegistry.FLOWER_REGISTRY_KEY,
-                FlowerRegistry.CODEC,
-                FlowerRegistry.CODEC
+                FlowerRegistration.FLOWER_REGISTRY_KEY,
+                FlowerRegistration.CODEC,
+                FlowerRegistration.CODEC
         );
     }
 
     @SubscribeEvent
     public void registerRegistries(NewRegistryEvent event) {
-        event.register(GeneRegistry.GENE_REGISTRY);
+        event.register(GeneRegistration.GENE_REGISTRY);
+        event.register(BeeEffectRegistration.BEE_EFFECT_REGISTRY);
     }
 
     @SubscribeEvent
@@ -167,10 +168,10 @@ public class ComplicatedBees
 
     @SubscribeEvent
     public void serverStarted(ServerStartedEvent event) {
-        LOGGER.info("Registered {} species", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(SpeciesRegistry.SPECIES_REGISTRY_KEY).get().size());
-        LOGGER.info("Registered {} combs", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().size());
-        LOGGER.info("Registered {} mutations", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistry.MUTATION_REGISTRY_KEY).get().size());
-        LOGGER.info("Registered {} flowers", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get().size());
+        LOGGER.info("Registered {} species", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().size());
+        LOGGER.info("Registered {} combs", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get().size());
+        LOGGER.info("Registered {} mutations", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistration.MUTATION_REGISTRY_KEY).get().size());
+        LOGGER.info("Registered {} flowers", ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistration.FLOWER_REGISTRY_KEY).get().size());
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

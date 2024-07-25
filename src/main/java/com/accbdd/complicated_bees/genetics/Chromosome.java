@@ -1,8 +1,7 @@
 package com.accbdd.complicated_bees.genetics;
 
-import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
-import com.accbdd.complicated_bees.registry.GeneRegistry;
+import com.accbdd.complicated_bees.registry.GeneRegistration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -16,19 +15,19 @@ public class Chromosome {
 
     public Chromosome() {
         this.genes = new HashMap<>();
-        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistry.GENE_REGISTRY.entrySet()) {
-            genes.put(entry.getKey().location(), GeneRegistry.GENE_REGISTRY.get(entry.getKey()));
+        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistration.GENE_REGISTRY.entrySet()) {
+            genes.put(entry.getKey().location(), GeneRegistration.GENE_REGISTRY.get(entry.getKey()));
         }
     }
 
     public Chromosome(CompoundTag genomeAsTag) {
         this.genes = new HashMap<>();
-        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistry.GENE_REGISTRY.entrySet()) {
+        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistration.GENE_REGISTRY.entrySet()) {
             ResourceLocation geneLocation = entry.getKey().location();
             if (genomeAsTag.contains(geneLocation.toString())) {
                 genes.put(geneLocation, entry.getValue().deserialize(genomeAsTag.getCompound(geneLocation.toString())));
             } else {
-                genes.put(entry.getKey().location(), GeneRegistry.GENE_REGISTRY.get(entry.getKey()));
+                genes.put(entry.getKey().location(), GeneRegistration.GENE_REGISTRY.get(entry.getKey()));
             }
         }
     }
@@ -55,7 +54,7 @@ public class Chromosome {
     }
 
     public IGene<?> getGene(ResourceLocation id) {
-        return this.genes.getOrDefault(id, GeneRegistry.GENE_REGISTRY.get(id));
+        return this.genes.getOrDefault(id, GeneRegistration.GENE_REGISTRY.get(id));
     }
 
     public Chromosome setGene(ResourceLocation id, IGene<?> gene) {
@@ -79,11 +78,11 @@ public class Chromosome {
 
     public static Chromosome deserialize(CompoundTag tag) {
         Map<ResourceLocation, IGene<?>> genes = new HashMap<>();
-        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry: GeneRegistry.GENE_REGISTRY.entrySet()) {
+        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry: GeneRegistration.GENE_REGISTRY.entrySet()) {
             ResourceLocation id = entry.getKey().location();
             CompoundTag geneData = tag.getCompound(id.toString());
             if (!geneData.equals(new CompoundTag())) {
-                genes.put(id, Objects.requireNonNull(GeneRegistry.GENE_REGISTRY.get(id)).deserialize(geneData));
+                genes.put(id, Objects.requireNonNull(GeneRegistration.GENE_REGISTRY.get(id)).deserialize(geneData));
             }
         }
         return new Chromosome(genes);

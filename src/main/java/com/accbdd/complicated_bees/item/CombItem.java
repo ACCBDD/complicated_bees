@@ -1,7 +1,7 @@
 package com.accbdd.complicated_bees.item;
 
 import com.accbdd.complicated_bees.genetics.Comb;
-import com.accbdd.complicated_bees.registry.CombRegistry;
+import com.accbdd.complicated_bees.registry.CombRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
@@ -29,9 +29,9 @@ public class CombItem extends Item {
             if (Minecraft.getInstance().getConnection() == null) {
                 return comb;
             }
-            comb = Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(COMB_TYPE_TAG)));
+            comb = Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(COMB_TYPE_TAG)));
         } else {
-            comb = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(COMB_TYPE_TAG)));
+            comb = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get().get(ResourceLocation.tryParse(stack.getOrCreateTag().getString(COMB_TYPE_TAG)));
         }
         return comb;
     }
@@ -51,7 +51,7 @@ public class CombItem extends Item {
 
     public static int getItemColor(ItemStack stack, int tintIndex) {
         ResourceLocation combLocation = ResourceLocation.tryParse(stack.getOrCreateTag().getString(COMB_TYPE_TAG));
-        Registry<Comb> registry = Objects.requireNonNull(Minecraft.getInstance().getConnection()).registryAccess().registry(CombRegistry.COMB_REGISTRY_KEY).get();
+        Registry<Comb> registry = Objects.requireNonNull(Minecraft.getInstance().getConnection()).registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get();
         if (combLocation != null) {
             switch (tintIndex) {
                 case 0:
