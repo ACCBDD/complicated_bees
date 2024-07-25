@@ -46,6 +46,9 @@
   "gui.complicated_bees.error.wrong_temp": "Wrong temperature!",
   "gui.complicated_bees.error.wrong_humidity": "Wrong humidity!",
   "gui.complicated_bees.error.output_full": "Output full!",
+  "gui.complicated_bees.error.wrong_time": "Wrong time of day!",
+  "gui.complicated_bees.error.underground": "Can't see the sky!",
+  "gui.complicated_bees.error.weather": "Inclement weather!",
 
   "gui.complicated_bees.humidity.wet": "Wet",
   "gui.complicated_bees.humidity.normal": "Normal",

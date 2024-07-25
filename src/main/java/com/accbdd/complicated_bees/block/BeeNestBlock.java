@@ -17,12 +17,14 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -83,5 +85,17 @@ public class BeeNestBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         Containers.dropContentsOnDestroy(pState, pNewState, pLevel, pPos);
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        ItemStack nest = new ItemStack(ItemsRegistration.BEE_NEST.get());
+        CompoundTag tag = nest.getOrCreateTag();
+        CompoundTag data = new CompoundTag();
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof BeeNestBlockEntity ne)
+            data.putString("species", SpeciesRegistry.getResourceLocation(ne.getSpecies()).toString());
+        tag.put("BlockEntityTag", data);
+        return nest;
     }
 }
