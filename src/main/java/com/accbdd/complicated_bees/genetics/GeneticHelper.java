@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.genetics;
 import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
+import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import com.accbdd.complicated_bees.registry.FlowerRegistry;
@@ -73,7 +74,7 @@ public class GeneticHelper {
         return Component.translatable("flower.complicated_bees." + registryAccess.registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get().getKey(flower));
     }
 
-    public static Gene<?> getGene(ItemStack stack, ResourceLocation id, boolean primary) {
+    public static IGene<?> getGene(ItemStack stack, ResourceLocation id, boolean primary) {
         return getChromosome(stack, primary).getGene(id);
     }
 
@@ -95,10 +96,10 @@ public class GeneticHelper {
         Chromosome mutated_a = null;
         Chromosome mutated_b = null;
 
-        for (Map.Entry<ResourceLocation, Gene<?>> geneEntry : chromosome_a.getGenes().entrySet()) {
+        for (Map.Entry<ResourceLocation, IGene<?>> geneEntry : chromosome_a.getGenes().entrySet()) {
             ResourceLocation key = geneEntry.getKey();
-            Gene<?> geneA = (rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key);
-            Gene<?> geneB = (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key);
+            IGene<?> geneA = (rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key);
+            IGene<?> geneB = (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key);
 
             if (geneEntry.getValue() instanceof GeneTolerant) {
                 EnumTolerance toleranceA = ((GeneTolerant<?>)(rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key)).getTolerance();
@@ -128,8 +129,8 @@ public class GeneticHelper {
         if (mutated_b != null) chromosome_b = mutated_b.copy();
 
         //sort genome so that dominant genes are always in a
-        for (Map.Entry<ResourceLocation, Gene<?>> entry : chromosome_a.getGenes().entrySet()) {
-            Gene<?> gene = entry.getValue();
+        for (Map.Entry<ResourceLocation, IGene<?>> entry : chromosome_a.getGenes().entrySet()) {
+            IGene<?> gene = entry.getValue();
             if (!entry.getValue().isDominant()) {
                 chromosome_a.setGene(entry.getKey(), chromosome_b.getGene(entry.getKey()));
                 chromosome_b.setGene(entry.getKey(), gene);

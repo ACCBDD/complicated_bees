@@ -12,12 +12,12 @@ import java.util.function.Supplier;
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class GeneRegistry {
-    public static final ResourceKey<Registry<Gene<?>>> GENE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MODID, "gene"));
-    public static final Registry<Gene<?>> GENE_REGISTRY = new RegistryBuilder<>(GENE_REGISTRY_KEY)
+    public static final ResourceKey<Registry<IGene<?>>> GENE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MODID, "gene"));
+    public static final Registry<IGene<?>> GENE_REGISTRY = new RegistryBuilder<>(GENE_REGISTRY_KEY)
             .create();
 
     //every registered gene should be registered as a 'default' value
-    public static final DeferredRegister<Gene<?>> GENES = DeferredRegister.create(GENE_REGISTRY, MODID);
+    public static final DeferredRegister<IGene<?>> GENES = DeferredRegister.create(GENE_REGISTRY, MODID);
     public static final Supplier<GeneSpecies> SPECIES = GENES.register(GeneSpecies.TAG, GeneSpecies::new);
     public static final Supplier<GeneLifespan> LIFESPAN = GENES.register(GeneLifespan.TAG, GeneLifespan::new);
     public static final Supplier<GeneTemperature> TEMPERATURE = GENES.register(GeneTemperature.TAG, GeneTemperature::new);
