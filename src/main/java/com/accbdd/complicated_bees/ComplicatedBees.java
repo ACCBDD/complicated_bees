@@ -96,6 +96,7 @@ public class ComplicatedBees
         BlockEntitiesRegistration.BLOCK_ENTITIES.register(modEventBus);
         MenuRegistration.MENU_TYPES.register(modEventBus);
         GeneRegistration.GENES.register(modEventBus);
+        BeeEffectRegistration.EFFECTS.register(modEventBus);
         EsotericRegistration.LOOT_ITEM_FUNCTION_REGISTER.register(modEventBus);
         EsotericRegistration.TREE_DECORATOR_REGISTER.register(modEventBus);
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);

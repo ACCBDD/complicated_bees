@@ -1,7 +1,7 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.*;
+import com.accbdd.complicated_bees.genetics.effect.IBeeEffect;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
@@ -9,8 +9,7 @@ import com.accbdd.complicated_bees.genetics.gene.enums.EnumProductivity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.item.*;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
-import com.accbdd.complicated_bees.registry.FlowerRegistry;
-import com.accbdd.complicated_bees.registry.GeneRegistry;
+import com.accbdd.complicated_bees.registry.FlowerRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.utils.BlockPosBoxIterator;
 import com.accbdd.complicated_bees.utils.enums.EnumErrorCodes;
@@ -271,6 +270,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         }
 
         if (top_stack.getItem() instanceof QueenItem && queenSatisfied(top_stack)) {
+            doBeeEffect(top_stack);
             if (cycleProgress < CYCLE_LENGTH) {
                 cycleProgress++;
             } else {
@@ -287,6 +287,14 @@ public class ApiaryBlockEntity extends BlockEntity {
             }
         } else {
             flowerCycleProgress++;
+        }
+    }
+
+    private void doBeeEffect(ItemStack topStack) {
+        if (topStack.getItem() instanceof QueenItem) {
+            IBeeEffect effect = (IBeeEffect) GeneticHelper.getGeneValue(topStack, GeneEffect.ID, true);
+            if (effect != null)
+                effect.runEffect(getLevel(), getBlockPos(), topStack, cycleProgress);
         }
     }
 
@@ -438,7 +446,7 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     private void rebuildFlowerCache(ItemStack bee) {
         clearFlowerCache();
-        Flower flower = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistry.FLOWER_REGISTRY_KEY).get()
+        Flower flower = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistration.FLOWER_REGISTRY_KEY).get()
                 .get(((GeneFlower)GeneticHelper.getGene(bee, GeneFlower.ID, true)).get());
 
         if (flower == null) {
