@@ -277,6 +277,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 cycleProgress = 0;
                 ageQueen(top_stack);
                 generateProduce(top_stack);
+                //todo: generate specialty produce
             }
         }
 
@@ -322,12 +323,11 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public void generateProduce(ItemStack bee) {
-        //todo: modify with frames
         List<Product> products = ((GeneSpecies) GeneticHelper.getGene(bee, GeneSpecies.ID, true)).get().getProducts();
+        float frameModifiers = getFrameModifiers().stream().map(BeeHousingModifier::getProductivityMod).reduce(1f, (cur, next) -> cur * next);
         for (Product product : products) {
-            outputBuffer.add(product.getStackResult(((EnumProductivity) GeneticHelper.getGeneValue(bee, GeneProductivity.ID, true)).value));
+            outputBuffer.add(product.getStackResult(((EnumProductivity) GeneticHelper.getGeneValue(bee, GeneProductivity.ID, true)).value, frameModifiers));
         }
-        //todo: generate specialty produce
         setChanged();
     }
 
