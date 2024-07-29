@@ -32,12 +32,14 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
+@ParametersAreNonnullByDefault
 public class ApiaryBlockEntity extends BlockEntity {
     public static final int BEE_SLOT = 0;
     public static final int BEE_SLOT_COUNT = 2;
@@ -71,9 +73,9 @@ public class ApiaryBlockEntity extends BlockEntity {
     private EnumHumidity humidityCache = null;
     private final List<BlockPos> flowerCache = new ArrayList<>();
 
-    private final ItemStackHandler beeItems = createBeeHandler(BEE_SLOT_COUNT);
-    private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
-    private final ItemStackHandler frameItems = createFrameHandler(FRAME_SLOT_COUNT);
+    private final ItemStackHandler beeItems = createBeeHandler();
+    private final ItemStackHandler outputItems = createOutputHandler();
+    private final ItemStackHandler frameItems = createFrameHandler();
 
     private final Lazy<IItemHandler> itemHandler = Lazy.of(() -> new CombinedInvWrapper(beeItems, outputItems, frameItems));
     private final Lazy<IItemHandler> beeItemHandler = Lazy.of(() -> new AdaptedItemHandler(beeItems) {
@@ -162,8 +164,8 @@ public class ApiaryBlockEntity extends BlockEntity {
         return this.data;
     }
 
-    private ItemStackHandler createItemHandler(int slots) {
-        return new ItemStackHandler(slots) {
+    private ItemStackHandler createOutputHandler() {
+        return new ItemStackHandler(ApiaryBlockEntity.OUTPUT_SLOT_COUNT) {
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
@@ -171,8 +173,8 @@ public class ApiaryBlockEntity extends BlockEntity {
         };
     }
 
-    private ItemStackHandler createFrameHandler(int slots) {
-        return new ItemStackHandler(slots) {
+    private ItemStackHandler createFrameHandler() {
+        return new ItemStackHandler(ApiaryBlockEntity.FRAME_SLOT_COUNT) {
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
@@ -182,8 +184,8 @@ public class ApiaryBlockEntity extends BlockEntity {
         };
     }
 
-    private ItemStackHandler createBeeHandler(int slots) {
-        return new ItemStackHandler(slots) {
+    private ItemStackHandler createBeeHandler() {
+        return new ItemStackHandler(ApiaryBlockEntity.BEE_SLOT_COUNT) {
             @Override
             public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
                 boolean itemValid = isItemValid(slot, stack);
