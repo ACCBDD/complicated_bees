@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
@@ -67,7 +68,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     private int flowerCycleProgress = 0;
     private int breedingProgress = 0;
     private int maxBreedingProgress = 20;
-    private byte errorState = 0;
+    private int errorState = 0;
 
     private EnumTemperature temperatureCache = null;
     private EnumHumidity humidityCache = null;
@@ -121,7 +122,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 switch (index) {
                     case 0 -> ApiaryBlockEntity.this.breedingProgress = value;
                     case 1 -> ApiaryBlockEntity.this.maxBreedingProgress = value;
-                    case 2 -> ApiaryBlockEntity.this.errorState = (byte) value;
+                    case 2 -> ApiaryBlockEntity.this.errorState = value;
                 }
             }
 
@@ -279,7 +280,6 @@ public class ApiaryBlockEntity extends BlockEntity {
                 cycleProgress = 0;
                 ageQueen(top_stack);
                 generateProduce(top_stack);
-                //todo: generate specialty produce
             }
         }
 
@@ -325,10 +325,15 @@ public class ApiaryBlockEntity extends BlockEntity {
     }
 
     public void generateProduce(ItemStack bee) {
-        List<Product> products = ((GeneSpecies) GeneticHelper.getGene(bee, GeneSpecies.ID, true)).get().getProducts();
+        Species species = (Species) GeneticHelper.getGeneValue(bee, GeneSpecies.ID, true);
         float frameModifiers = getFrameModifiers().stream().map(BeeHousingModifier::getProductivityMod).reduce(1f, (cur, next) -> cur * next);
-        for (Product product : products) {
+        for (Product product : species.getProducts()) {
             outputBuffer.add(product.getStackResult(((EnumProductivity) GeneticHelper.getGeneValue(bee, GeneProductivity.ID, true)).value, frameModifiers));
+        }
+        if (errorState == EnumErrorCodes.ECSTATIC.value) {
+            for (Product special : species.getSpecialtyProducts()) {
+                outputBuffer.add(special.getStackResult(((EnumProductivity) GeneticHelper.getGeneValue(bee, GeneProductivity.ID, true)).value, frameModifiers));
+            }
         }
         setChanged();
     }
@@ -377,7 +382,19 @@ public class ApiaryBlockEntity extends BlockEntity {
             removeError(EnumErrorCodes.WRONG_TIME);
         }
 
+        queenEcstatic(queen);
+
         return satisfied;
+    }
+
+    public void queenEcstatic(ItemStack queen) {
+        Chromosome chromosome = GeneticHelper.getChromosome(queen, true);
+        if (((GeneTemperature) chromosome.getGene(GeneTemperature.ID)).get().equals(getTemperature())
+                && ((GeneHumidity) chromosome.getGene(GeneHumidity.ID)).get().equals(getHumidity())) {
+            addError(EnumErrorCodes.ECSTATIC);
+        } else {
+            removeError(EnumErrorCodes.ECSTATIC);
+        }
     }
 
     public void ageQueen(ItemStack queen) {
@@ -490,7 +507,7 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     private void removeError(EnumErrorCodes... error) {
         for (EnumErrorCodes err : error) {
-            errorState = (byte) (errorState & (err.value ^ Byte.MAX_VALUE));
+            errorState = (errorState & (err.value ^ Integer.MAX_VALUE));
         }
     }
 }

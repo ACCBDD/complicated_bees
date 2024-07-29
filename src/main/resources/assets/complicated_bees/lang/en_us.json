@@ -41,7 +41,6 @@
   "gui.complicated_bees.humidity_label.short": "H",
   "gui.complicated_bees.temperature_label.short": "T",
   "gui.complicated_bees.more_info": "<Hold shift for more info>",
-  "gui.complicated_bees.error": "Error!",
   "gui.complicated_bees.error.no_flower": "No flowers!",
   "gui.complicated_bees.error.wrong_temp": "Wrong temperature!",
   "gui.complicated_bees.error.wrong_humidity": "Wrong humidity!",
@@ -49,6 +48,7 @@
   "gui.complicated_bees.error.wrong_time": "Wrong time of day!",
   "gui.complicated_bees.error.underground": "Can't see the sky!",
   "gui.complicated_bees.error.weather": "Inclement weather!",
+  "gui.complicated_bees.error.ecstatic": "Bee is ecstatic!",
 
   "gui.complicated_bees.humidity.wet": "Wet",
   "gui.complicated_bees.humidity.normal": "Normal",

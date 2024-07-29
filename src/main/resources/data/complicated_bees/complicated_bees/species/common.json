@@ -11,6 +11,12 @@
       "chance": 0.5
     }
   ],
+  "specialty_products": [
+    {
+      "item": "minecraft:diamond",
+      "chance": 1
+    }
+  ],
   "default_chromosome": {
     "complicated_bees:temperature": {
       "data": "normal",

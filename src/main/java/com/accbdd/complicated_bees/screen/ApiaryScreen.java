@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.screen;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.GeneLifespan;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
@@ -38,7 +39,6 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        //renderBg(graphics, partialTick, mouseX, mouseY);
         super.render(graphics, mouseX, mouseY, partialTick);
         renderTooltip(graphics, mouseX, mouseY);
     }
@@ -48,11 +48,13 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
             ItemStack queen = menu.getQueen();
             int lifespan = ((EnumLifespan) GeneticHelper.getChromosome(queen, true).getGene(GeneLifespan.ID).get()).value;
             int progress = menu.getScaledProgress(BeeItem.getAge(queen), lifespan);
-            boolean errorStatus = menu.getData().get(2) > 0;
+            int errorCode = menu.getData().get(2);
+            boolean errorStatus = errorCode > 0 && errorCode != EnumErrorCodes.ECSTATIC.value;
+            int barColor = errorStatus ? 182 : errorCode == 128 ? 176 : 179;
             graphics.blit(GUI,
                     x + 18,
                     y + 36 + (errorStatus ? 0 : progress),
-                    errorStatus ? 182 : 179,
+                    barColor,
                     errorStatus ? 0 : progress,
                     3,
                     45 - (errorStatus ? 0 : progress));
@@ -79,12 +81,11 @@ public class ApiaryScreen extends AbstractContainerScreen<ApiaryMenu> {
     @Override
     protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {
         super.renderTooltip(pGuiGraphics, pX, pY);
-        byte errorFlags = (byte) menu.getData().get(2);
+        int errorFlags = menu.getData().get(2);
         int relMouseX = pX - (this.width - this.imageWidth) / 2;
         int relMouseY = pY - (this.height - this.imageHeight) / 2;
         if (errorFlags > 0 && (16 < relMouseX) && (relMouseX < 22) && (34 < relMouseY) && (relMouseY < 82)) {
             List<Component> errors = new ArrayList<>();
-            errors.add(Component.translatable("gui.complicated_bees.error"));
             for (EnumErrorCodes errorCode : EnumErrorCodes.values()) {
                 if ((errorFlags & errorCode.value) != 0)
                     errors.add(Component.translatable("gui.complicated_bees.error." + errorCode.name));
