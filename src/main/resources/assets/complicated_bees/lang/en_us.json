@@ -7,6 +7,7 @@
   "item.complicated_bees.scoop": "Scoop",
   "item.complicated_bees.comb": "Comb",
   "item.complicated_bees.meter": "Meter",
+  "item.complicated_bees.analyzer": "Analyzer",
   "item.complicated_bees.frame": "Frame",
   "item.complicated_bees.thick_frame": "Frame",
   "item.complicated_bees.cold_frame": "Icy Frame",
@@ -32,6 +33,7 @@
   "gui.complicated_bees.centrifuge": "Centrifuge",
   "gui.complicated_bees.apiary": "Apiary",
   "gui.complicated_bees.generator": "Generator",
+  "gui.complicated_bees.analyzer": "Analyzer",
 
   "gui.complicated_bees.humidity_label": "Humidity",
   "gui.complicated_bees.temperature_label": "Temperature",

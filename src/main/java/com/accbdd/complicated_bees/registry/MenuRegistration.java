@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.registry;
 
+import com.accbdd.complicated_bees.screen.AnalyzerMenu;
 import com.accbdd.complicated_bees.screen.ApiaryMenu;
 import com.accbdd.complicated_bees.screen.CentrifugeMenu;
 import com.accbdd.complicated_bees.screen.GeneratorMenu;
@@ -21,4 +22,6 @@ public class MenuRegistration {
             () -> IMenuTypeExtension.create((windowId, inv, data) -> new ApiaryMenu(windowId, inv.player, data.readBlockPos())));
     public static final Supplier<MenuType<GeneratorMenu>> GENERATOR_MENU = MENU_TYPES.register("generator",
             () -> IMenuTypeExtension.create(((windowId, inv, data) -> new GeneratorMenu(windowId, inv.player, data.readBlockPos()))));
+    public static final Supplier<MenuType<AnalyzerMenu>> ANALYZER_MENU = MENU_TYPES.register("analyzer",
+            () -> IMenuTypeExtension.create(((windowId, inv, data) -> new AnalyzerMenu(windowId, inv.player))));
 }

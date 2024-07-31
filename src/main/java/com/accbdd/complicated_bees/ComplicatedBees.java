@@ -9,6 +9,7 @@ import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.*;
+import com.accbdd.complicated_bees.screen.AnalyzerScreen;
 import com.accbdd.complicated_bees.screen.ApiaryScreen;
 import com.accbdd.complicated_bees.screen.CentrifugeScreen;
 import com.accbdd.complicated_bees.screen.GeneratorScreen;
@@ -57,6 +58,7 @@ public class ComplicatedBees
                 output.accept(ItemsRegistration.CENTRIFUGE.get());
                 output.accept(ItemsRegistration.SCOOP.get());
                 output.accept(ItemsRegistration.METER.get());
+                output.accept(ItemsRegistration.ANALYZER.get());
                 output.accept(ItemsRegistration.GENERATOR.get());
                 output.accept(ItemsRegistration.FRAME.get());
                 output.accept(ItemsRegistration.THICK_FRAME.get());
@@ -185,6 +187,7 @@ public class ComplicatedBees
                 MenuScreens.register(MenuRegistration.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
                 MenuScreens.register(MenuRegistration.APIARY_MENU.get(), ApiaryScreen::new);
                 MenuScreens.register(MenuRegistration.GENERATOR_MENU.get(), GeneratorScreen::new);
+                MenuScreens.register(MenuRegistration.ANALYZER_MENU.get(), AnalyzerScreen::new);
             });
         }
     }

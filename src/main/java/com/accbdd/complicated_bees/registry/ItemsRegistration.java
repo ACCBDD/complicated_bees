@@ -18,6 +18,7 @@ public class ItemsRegistration {
     public static final DeferredItem<CombItem> COMB = ITEMS.registerItem("comb", CombItem::new);
     public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
     public static final DeferredItem<MeterItem> METER = ITEMS.registerItem("meter", MeterItem::new);
+    public static final DeferredItem<AnalyzerItem> ANALYZER = ITEMS.registerItem("analyzer", AnalyzerItem::new);
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1.2f, 1f)));
     public static final DeferredItem<FrameItem> THICK_FRAME = ITEMS.registerItem("thick_frame",
@@ -34,6 +35,7 @@ public class ItemsRegistration {
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 0.1f, 1f)));
     public static final DeferredItem<FrameItem> RESTRICTIVE_FRAME = ITEMS.registerItem("restrictive_frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1f)));
+
 
 
     public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerItem("bee_nest", BeeNestBlockItem::new);

@@ -24,6 +24,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.GENERATOR.getId().getPath(), modLoc("block/generator"));
         basicItem(ItemsRegistration.SCOOP.get());
         basicItem(ItemsRegistration.METER.get());
+        basicItem(ItemsRegistration.ANALYZER.get());
         basicItem(ItemsRegistration.FRAME.get());
         basicItem(ItemsRegistration.THICK_FRAME.get());
         basicItem(ItemsRegistration.HOT_FRAME.get());
