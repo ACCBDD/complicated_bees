@@ -5,6 +5,8 @@ import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ public class GeneHumidity extends GeneTolerant<EnumHumidity> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneHumidity() {
-        this(EnumHumidity.NORMAL, EnumTolerance.NONE, true);
+        this(EnumHumidity.NORMAL, EnumTolerance.NONE, false);
     }
 
     public GeneHumidity(EnumHumidity enumHumidity, EnumTolerance enumTolerance, boolean dominant) {
@@ -26,5 +28,10 @@ public class GeneHumidity extends GeneTolerant<EnumHumidity> {
     @Override
     public GeneHumidity deserialize(CompoundTag tag) {
         return new GeneHumidity(EnumHumidity.getFromString(tag.getString(DATA)), EnumTolerance.getFromString(tag.getString(TOLERANCE)), tag.getBoolean(DOMINANT));
+    }
+
+    @Override
+    public MutableComponent getTranslationKey() {
+        return geneData.getTranslationKey();
     }
 }

@@ -2,6 +2,8 @@ package com.accbdd.complicated_bees.genetics.gene;
 
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
@@ -22,5 +24,10 @@ public class GeneBoolean extends Gene<Boolean> {
     @Override
     public GeneBoolean deserialize(CompoundTag tag) {
         return new GeneBoolean(tag.getBoolean(DATA), tag.getBoolean(DOMINANT));
+    }
+
+    @Override
+    public MutableComponent getTranslationKey() {
+        return geneData ? Component.translatable("gui.complicated_bees.boolean.true") : Component.translatable("gui.complicated_bees.boolean.false");
     }
 }

@@ -1,5 +1,8 @@
 package com.accbdd.complicated_bees.genetics.gene.enums;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+
 public enum EnumLifespan {
     SHORTEST("shortest", 10),
     SHORTER("shorter", 20),
@@ -28,5 +31,9 @@ public enum EnumLifespan {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public MutableComponent getTranslationKey() {
+        return Component.translatable("gui.complicated_bees.lifespan." + this.toString());
     }
 }

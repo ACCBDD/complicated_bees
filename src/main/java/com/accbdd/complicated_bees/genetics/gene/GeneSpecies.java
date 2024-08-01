@@ -8,6 +8,8 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
@@ -44,5 +46,10 @@ public class GeneSpecies extends Gene<Species> {
         Registry<Species> registry = registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get();
 
         return new GeneSpecies(registry.get(ResourceLocation.tryParse(tag.getString(DATA))), tag.getBoolean(DOMINANT));
+    }
+
+    @Override
+    public MutableComponent getTranslationKey() {
+        return Component.translatable("species.complicated_bees." + SpeciesRegistration.getResourceLocation(geneData));
     }
 }

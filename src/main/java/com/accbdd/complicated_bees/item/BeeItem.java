@@ -83,19 +83,19 @@ public class BeeItem extends Item {
             components.add(Component.translatable("gui.complicated_bees.more_info").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         } else if (Minecraft.getInstance().level != null) {
             Chromosome primary = GeneticHelper.getChromosome(stack, true);
-            components.add(Component.translatable("gui.complicated_bees.lifespan." + primary.getGene(GeneLifespan.ID).get().toString())
+            components.add(primary.getGene(GeneLifespan.ID).getTranslationKey()
                     .append(" ")
                     .append(Component.translatable("gui.complicated_bees.lifespan_label"))
                     .withStyle(ChatFormatting.GRAY));
-            components.add(((EnumProductivity)primary.getGene(GeneProductivity.ID).get()).getTranslationKey()
+            components.add(primary.getGene(GeneProductivity.ID).getTranslationKey()
                     .append(" ")
                     .append(Component.translatable("gui.complicated_bees.productivity_label.short"))
                     .withStyle(ChatFormatting.GRAY));
             components.add(Component.translatable("gui.complicated_bees.temperature_label.short")
                     .append(": ")
-                    .append(((EnumTemperature)primary.getGene(GeneTemperature.ID).get()).getTranslationKey())
+                    .append(primary.getGene(GeneTemperature.ID).getTranslationKey())
                     .append(" / ")
-                    .append(((GeneTolerant<?>)primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey())
+                    .append(primary.getGene(GeneTemperature.ID).getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
             components.add(Component.translatable("gui.complicated_bees.humidity_label.short")
                     .append(": ")
@@ -103,7 +103,7 @@ public class BeeItem extends Item {
                     .append(" / ")
                     .append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
-            components.add(Component.translatable("flower.complicated_bees." + primary.getGene(GeneFlower.ID).get().toString())
+            components.add(primary.getGene(GeneFlower.ID).getTranslationKey()
                     .withStyle(ChatFormatting.GRAY));
         }
         super.appendHoverText(stack, pLevel, components, isAdvanced);

@@ -5,6 +5,8 @@ import com.accbdd.complicated_bees.registry.BeeEffectRegistration;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
@@ -14,7 +16,7 @@ public class GeneEffect extends Gene<IBeeEffect> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneEffect() {
-        super(null, true);
+        super(null, false);
     }
 
     public GeneEffect(IBeeEffect effect, boolean dominant) {
@@ -34,5 +36,10 @@ public class GeneEffect extends Gene<IBeeEffect> {
     public GeneEffect deserialize(CompoundTag tag) {
         String effectKeyString = tag.getString(DATA);
         return new GeneEffect(effectKeyString.equals("INVALID") ? null : BeeEffectRegistration.BEE_EFFECT_REGISTRY.get(ResourceLocation.tryParse(effectKeyString)), tag.getBoolean(DOMINANT));
+    }
+
+    @Override
+    public MutableComponent getTranslationKey() {
+        return Component.translatable("effect.complicated_bees." + BeeEffectRegistration.BEE_EFFECT_REGISTRY.getKey(geneData));
     }
 }

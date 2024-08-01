@@ -23,9 +23,9 @@ public class AnalyzerMenu extends AbstractContainerMenu {
         super(MenuRegistration.ANALYZER_MENU.get(), windowId);
         this.bagSlot = bagSlot;
 
-        addSlot(new SlotItemHandler(new ItemStackHandler(1), 0, 170, 8));
-        addSlot(new TagSlot(new ItemStackHandler(1), 0, 170, 26, ItemTagGenerator.BEE));
-        layoutPlayerInventorySlots(player.getInventory(), 8, 84);
+        addSlot(new SlotItemHandler(new ItemStackHandler(1), 0, 208, 8));
+        addSlot(new TagSlot(new ItemStackHandler(1), 0, 208, 26, ItemTagGenerator.BEE));
+        layoutPlayerInventorySlots(player.getInventory(), 27, 134);
     }
 
     public static AnalyzerMenu fromNetwork(int windowId, Inventory playerInv, FriendlyByteBuf data) {

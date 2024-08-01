@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
@@ -13,7 +14,7 @@ public class GeneLifespan extends Gene<EnumLifespan> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneLifespan() {
-        this(EnumLifespan.SHORTEST, true);
+        this(EnumLifespan.SHORTEST, false);
     }
 
     public GeneLifespan(EnumLifespan data, boolean dominant) {
@@ -31,5 +32,10 @@ public class GeneLifespan extends Gene<EnumLifespan> {
     @Override
     public GeneLifespan deserialize(CompoundTag tag) {
         return new GeneLifespan(EnumLifespan.getFromString(tag.getString(DATA)), tag.getBoolean(DOMINANT));
+    }
+
+    @Override
+    public MutableComponent getTranslationKey() {
+        return geneData.getTranslationKey();
     }
 }

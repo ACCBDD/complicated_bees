@@ -3,6 +3,8 @@ package com.accbdd.complicated_bees.genetics.gene;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
@@ -12,7 +14,7 @@ public class GeneFlower extends Gene<ResourceLocation> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneFlower() {
-        super(new ResourceLocation(MODID, "invalid"), true);
+        super(new ResourceLocation(MODID, "invalid"), false);
     }
 
     public GeneFlower(ResourceLocation flower, boolean dominant) {
@@ -30,5 +32,10 @@ public class GeneFlower extends Gene<ResourceLocation> {
     @Override
     public GeneFlower deserialize(CompoundTag tag) {
         return new GeneFlower(ResourceLocation.tryParse(tag.getString(DATA)), tag.getBoolean(DOMINANT));
+    }
+
+    @Override
+    public MutableComponent getTranslationKey() {
+        return Component.translatable("flower.complicated_bees." + geneData.toString());
     }
 }

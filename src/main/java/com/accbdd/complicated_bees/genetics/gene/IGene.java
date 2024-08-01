@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees.genetics.gene;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.MutableComponent;
 
 /**
  * An abstract class for a Gene representing some arbitrary information.
@@ -34,4 +35,9 @@ public interface IGene<T> {
      * @return a deserialized version of this gene from the specified tag
      */
     IGene<T> deserialize(CompoundTag tag);
+
+    /**
+     * @return a translation key for the value inside this gene
+     */
+    MutableComponent getTranslationKey();
 }
