@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.screen;
 import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import com.accbdd.complicated_bees.screen.slot.TagSlot;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,16 +17,27 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class AnalyzerMenu extends AbstractContainerMenu {
     public static int SLOT_COUNT = 2;
+    private static final String INVENTORY_TAG = "contents";
 
-    public final int bagSlot;
+    private final int bagSlot;
+    private final ItemStackHandler handler;
 
     public AnalyzerMenu(int windowId, Player player, int bagSlot) {
         super(MenuRegistration.ANALYZER_MENU.get(), windowId);
         this.bagSlot = bagSlot;
+        this.handler = new ItemStackHandler(2);
 
-        addSlot(new SlotItemHandler(new ItemStackHandler(1), 0, 208, 8));
-        addSlot(new TagSlot(new ItemStackHandler(1), 0, 208, 26, ItemTagGenerator.BEE));
-        layoutPlayerInventorySlots(player.getInventory(), 27, 134);
+        handler.deserializeNBT(player.getInventory().getItem(bagSlot).getOrCreateTag().getCompound(INVENTORY_TAG));
+        addSlot(new SlotItemHandler(handler, 0, 224, 8));
+        addSlot(new TagSlot(handler, 1, 224, 26, ItemTagGenerator.BEE));
+        layoutPlayerInventorySlots(player.getInventory(), 35, 134);
+    }
+
+    @Override
+    public void removed(Player pPlayer) {
+        ItemStack analyzer = pPlayer.getInventory().getItem(bagSlot);
+        analyzer.getOrCreateTag().put(INVENTORY_TAG, handler.serializeNBT());
+        super.removed(pPlayer);
     }
 
     public static AnalyzerMenu fromNetwork(int windowId, Inventory playerInv, FriendlyByteBuf data) {

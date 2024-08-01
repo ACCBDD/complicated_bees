@@ -16,10 +16,12 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
     private final ResourceLocation GUI = new ResourceLocation(MODID, "textures/gui/analyzer.png");
+    private static final int ACTIVE_COL = 80;
+    private static final int INACTIVE_COL = 150;
 
     public AnalyzerScreen(AnalyzerMenu container, Inventory inventory, Component title) {
         super(container, inventory, title);
-        this.imageWidth = 232;
+        this.imageWidth = 248;
         this.imageHeight = 216;
     }
 
@@ -50,11 +52,17 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
             drawText(graphics, Component.literal("Need bee to analyze!"), 9, 9, 0xFFFFFF);
             return;
         }
-        drawText(graphics, Component.literal("Active"), 69, 9, 0xFFFFFF);
-        drawText(graphics, Component.literal("Inactive"), 128, 9, 0xFFFFFF);
+        drawText(graphics, Component.literal("Active"), ACTIVE_COL, 9, 0xFFFFFF);
+        drawText(graphics, Component.literal("Inactive"), INACTIVE_COL, 9, 0xFFFFFF);
 
-        drawText(graphics, Component.literal("Lifespan"), 9, 24, 0xFFFFFF);
-        drawGeneValues(graphics, bee, GeneRegistration.LIFESPAN.get(), 69, 128, 24);
+        drawText(graphics, Component.translatable("gui.complicated_bees.species_label"), 9, 24, 0xFFFFFF);
+        drawGeneValues(graphics, bee, GeneRegistration.SPECIES.get(), ACTIVE_COL, INACTIVE_COL, 24);
+        drawText(graphics, Component.translatable("gui.complicated_bees.lifespan_label"), 9, 34, 0xFFFFFF);
+        drawGeneValues(graphics, bee, GeneRegistration.LIFESPAN.get(), ACTIVE_COL, INACTIVE_COL, 34);
+        drawText(graphics, Component.translatable("gui.complicated_bees.productivity_label"), 9, 44, 0xFFFFFF);
+        drawGeneValues(graphics, bee, GeneRegistration.PRODUCTIVITY.get(), ACTIVE_COL, INACTIVE_COL, 44);
+        drawText(graphics, Component.translatable("gui.complicated_bees.flower_label"), 9, 54, 0xFFFFFF);
+        drawGeneValues(graphics, bee, GeneRegistration.FLOWER.get(), ACTIVE_COL, INACTIVE_COL, 54);
     }
 
     private void drawText(GuiGraphics graphics, Component component, int x, int y, int color) {

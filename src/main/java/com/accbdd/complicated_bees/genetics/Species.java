@@ -38,7 +38,7 @@ public class Species {
 
     public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
+                    Codec.BOOL.optionalFieldOf("dominant", false).forGetter(Species::isDominant),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     Product.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
                     Product.CODEC.listOf().optionalFieldOf("specialty_products", new ArrayList<>()).forGetter(Species::getSpecialtyProducts),
