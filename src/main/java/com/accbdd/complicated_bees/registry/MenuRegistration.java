@@ -23,5 +23,5 @@ public class MenuRegistration {
     public static final Supplier<MenuType<GeneratorMenu>> GENERATOR_MENU = MENU_TYPES.register("generator",
             () -> IMenuTypeExtension.create(((windowId, inv, data) -> new GeneratorMenu(windowId, inv.player, data.readBlockPos()))));
     public static final Supplier<MenuType<AnalyzerMenu>> ANALYZER_MENU = MENU_TYPES.register("analyzer",
-            () -> IMenuTypeExtension.create(((windowId, inv, data) -> new AnalyzerMenu(windowId, inv.player))));
+            () -> IMenuTypeExtension.create(AnalyzerMenu::fromNetwork));
 }

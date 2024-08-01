@@ -1,23 +1,35 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.registry.MenuRegistration;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import org.checkerframework.checker.units.qual.A;
 
 public class AnalyzerMenu extends AbstractContainerMenu {
     public static int SLOT_COUNT = 2;
 
-    public AnalyzerMenu(int windowId, Player player) {
+    public final int bagSlot;
+
+    public AnalyzerMenu(int windowId, Player player, int bagSlot) {
         super(MenuRegistration.ANALYZER_MENU.get(), windowId);
+        this.bagSlot = bagSlot;
+
         addSlot(new SlotItemHandler(new ItemStackHandler(1), 0, 170, 8));
         addSlot(new SlotItemHandler(new ItemStackHandler(1), 0, 170, 26));
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
+    }
+
+    public static AnalyzerMenu fromNetwork(int windowId, Inventory playerInv, FriendlyByteBuf data) {
+        int slot = data.readInt();
+        return new AnalyzerMenu(windowId, playerInv.player, slot);
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {
@@ -87,5 +99,12 @@ public class AnalyzerMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return true;
+    }
+
+    @Override
+    public void clicked(int pSlotId, int pButton, ClickType pClickType, Player pPlayer) {
+        if (this.bagSlot == pSlotId - SLOT_COUNT - 27)
+            return;
+        super.clicked(pSlotId, pButton, pClickType, pPlayer);
     }
 }

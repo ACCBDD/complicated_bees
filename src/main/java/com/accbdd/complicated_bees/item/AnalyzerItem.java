@@ -23,7 +23,7 @@ public class AnalyzerItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide && pUsedHand == InteractionHand.MAIN_HAND) {
             MenuProvider containerProvider = new MenuProvider() {
                 @Override
                 public Component getDisplayName() {
@@ -32,10 +32,10 @@ public class AnalyzerItem extends Item {
 
                 @Override
                 public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player player) {
-                    return new AnalyzerMenu(windowId, player);
+                    return new AnalyzerMenu(windowId, player, playerInventory.selected);
                 }
             };
-            player.openMenu(containerProvider);
+            player.openMenu(containerProvider, (buf -> buf.writeInt(player.getInventory().selected)));
         }
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(pUsedHand), true);
     }
