@@ -1,11 +1,12 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
-import com.accbdd.complicated_bees.item.BeeItem;
-import com.accbdd.complicated_bees.item.FrameItem;
+import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
+import com.accbdd.complicated_bees.screen.slot.TagSlot;
+import com.accbdd.complicated_bees.screen.slot.OutputSlot;
 import com.accbdd.complicated_bees.utils.enums.EnumErrorCodes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -13,8 +14,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
 
 import static com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity.*;
 
@@ -31,56 +30,24 @@ public class ApiaryMenu extends AbstractContainerMenu {
         this.data = data;
         this.pos = pos;
         if (player.level().getBlockEntity(pos) instanceof ApiaryBlockEntity apiary) {
-            addSlot(createBeeSlot(apiary.getBeeItems(), BEE_SLOT, 29, 38));
-            addSlot(createBeeSlot(apiary.getBeeItems(), BEE_SLOT+1, 29, 63));
+            addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT, 29, 38, ItemTagGenerator.BEE));
+            addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT+1, 29, 63, ItemTagGenerator.BEE));
 
-            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT, 65, 23));
-            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51));
-            addSlot(createFrameSlot(apiary.getFrameItems(), FRAME_SLOT+2, 65, 79));
+            addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT, 65, 23, ItemTagGenerator.FRAME));
+            addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51, ItemTagGenerator.FRAME));
+            addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT+2, 65, 79, ItemTagGenerator.FRAME));
 
-            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT, 115, 51));
-            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+1, 115, 26));
-            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+2, 137, 39));
-            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+3, 137, 64));
-            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+4, 115, 76));
-            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+5, 93, 64));
-            addSlot(createOutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+6, 93, 39));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT, 115, 51));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+1, 115, 26));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+2, 137, 39));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+3, 137, 64));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+4, 115, 76));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+5, 93, 64));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+6, 93, 39));
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 105);
 
         addDataSlots(data);
-    }
-
-    private SlotItemHandler createOutputSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
-        return new SlotItemHandler(handler, index, xPos, yPos) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return false;
-            }
-        };
-    }
-
-    private SlotItemHandler createFrameSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
-        return new SlotItemHandler(handler, index, xPos, yPos) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof FrameItem;
-            }
-
-            @Override
-            public int getMaxStackSize() {
-                return 1;
-            }
-        };
-    }
-
-    private SlotItemHandler createBeeSlot(ItemStackHandler handler, int index, int xPos, int yPos) {
-        return new SlotItemHandler(handler, index, xPos, yPos) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof BeeItem;
-            }
-        };
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {

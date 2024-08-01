@@ -1,6 +1,8 @@
 package com.accbdd.complicated_bees.screen;
 
+import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
+import com.accbdd.complicated_bees.screen.slot.TagSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +13,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.checkerframework.checker.units.qual.A;
 
 public class AnalyzerMenu extends AbstractContainerMenu {
     public static int SLOT_COUNT = 2;
@@ -23,7 +24,7 @@ public class AnalyzerMenu extends AbstractContainerMenu {
         this.bagSlot = bagSlot;
 
         addSlot(new SlotItemHandler(new ItemStackHandler(1), 0, 170, 8));
-        addSlot(new SlotItemHandler(new ItemStackHandler(1), 0, 170, 26));
+        addSlot(new TagSlot(new ItemStackHandler(1), 0, 170, 26, ItemTagGenerator.BEE));
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
     }
 

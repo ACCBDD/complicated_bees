@@ -19,6 +19,8 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class ItemTagGenerator extends ItemTagsProvider {
     public static TagKey<Item> SCOOP_TOOL = ItemTags.create(new ResourceLocation("complicated_bees:scoop_tool"));
+    public static TagKey<Item> BEE = ItemTags.create(new ResourceLocation("complicated_bees:bee"));
+    public static TagKey<Item> FRAME = ItemTags.create(new ResourceLocation("complicated_bees:frame"));
 
     public ItemTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, provider, blockTagProvider, MODID, existingFileHelper);
@@ -27,5 +29,16 @@ public class ItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         tag(SCOOP_TOOL).add(ItemsRegistration.SCOOP.get());
+        tag(BEE).add(ItemsRegistration.PRINCESS.get());
+        tag(BEE).add(ItemsRegistration.DRONE.get());
+        tag(BEE).add(ItemsRegistration.QUEEN.get());
+        tag(FRAME).add(ItemsRegistration.FRAME.get());
+        tag(FRAME).add(ItemsRegistration.DEADLY_FRAME.get());
+        tag(FRAME).add(ItemsRegistration.DRY_FRAME.get());
+        tag(FRAME).add(ItemsRegistration.MOIST_FRAME.get());
+        tag(FRAME).add(ItemsRegistration.COLD_FRAME.get());
+        tag(FRAME).add(ItemsRegistration.HOT_FRAME.get());
+        tag(FRAME).add(ItemsRegistration.RESTRICTIVE_FRAME.get());
+        tag(FRAME).add(ItemsRegistration.THICK_FRAME.get());
     }
 }
