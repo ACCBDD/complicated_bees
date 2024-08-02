@@ -95,7 +95,7 @@ public class BeeItem extends Item {
                     .append(": ")
                     .append(primary.getGene(GeneTemperature.ID).getTranslationKey())
                     .append(" / ")
-                    .append(primary.getGene(GeneTemperature.ID).getTranslationKey())
+                    .append(((GeneTolerant<?>)primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
             components.add(Component.translatable("gui.complicated_bees.humidity_label.short")
                     .append(": ")

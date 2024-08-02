@@ -40,6 +40,7 @@
   "gui.complicated_bees.temperature_label": "Temperature",
   "gui.complicated_bees.lifespan_label": "Life",
   "gui.complicated_bees.flower_label": "Flower",
+  "gui.complicated_bees.tolerance_label": "Tolerance",
   "gui.complicated_bees.productivity_label": "Productivity",
   "gui.complicated_bees.productivity_label.short": "Worker",
   "gui.complicated_bees.humidity_label.short": "H",
