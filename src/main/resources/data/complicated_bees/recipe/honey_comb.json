@@ -1,0 +1,22 @@
+{
+  "input": {
+    "item": "complicated_bees:comb",
+    "nbt": {"comb_type": "complicated_bees:honey"}
+  },
+  "outputs": [
+    {
+      "item": "minecraft:honey_block",
+      "chance": 1
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:apple",
+      "chance": 0.5
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ]
+}

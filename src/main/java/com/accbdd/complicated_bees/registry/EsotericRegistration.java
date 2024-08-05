@@ -1,12 +1,12 @@
 package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.loot.InheritHiveSpeciesFunction;
+import com.accbdd.complicated_bees.recipes.CentrifugeRecipe;
 import com.accbdd.complicated_bees.worldgen.ComplicatedBeenestDecorator;
 import com.accbdd.complicated_bees.worldgen.ComplicatedHiveFeature;
 import com.accbdd.complicated_bees.worldgen.ComplicatedHiveFeatureConfiguration;
-import com.accbdd.complicated_bees.recipe.CentrifugeRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -32,10 +32,6 @@ public class EsotericRegistration {
     public static final Supplier<ComplicatedHiveFeature> COMPLICATED_HIVE_FEATURE = FEATURE_REGISTER.register("complicated_bee_nest",
             () -> new ComplicatedHiveFeature(ComplicatedHiveFeatureConfiguration.CODEC));
 
-    public static final Supplier<RecipeType<CentrifugeRecipe>> CENTRIFUGE_RECIPE = RECIPE_TYPE_REGISTER.register("centrifuge", () -> new RecipeType<CentrifugeRecipe>() {
-        @Override
-        public String toString() {
-            return MODID + ":" + "centrifuge";
-        }
-    });
+    public static final Supplier<RecipeType<CentrifugeRecipe>> CENTRIFUGE_RECIPE = RECIPE_TYPE_REGISTER.register("centrifuge",
+            () -> RecipeType.simple(new ResourceLocation(MODID, "centrifuge")));
 }

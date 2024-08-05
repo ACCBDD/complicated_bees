@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.genetics;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -21,7 +22,6 @@ public class Product {
     );
 
     public static final List<Product> EMPTY = List.of(new Product(Items.AIR.getDefaultInstance(), 0));
-
     public static final Random rand = new Random();
 
     private final ItemStack stack;
@@ -46,5 +46,16 @@ public class Product {
             stackChance *= modifier;
         }
         return rand.nextFloat() < stackChance ? this.getStack() : ItemStack.EMPTY;
+    }
+
+    public void toNetwork(FriendlyByteBuf buf) {
+        buf.writeFloat(chance);
+        buf.writeItem(stack);
+    }
+
+    public static Product fromNetwork(FriendlyByteBuf buf) {
+        float chance = buf.readFloat();
+        ItemStack item = buf.readItem();
+        return new Product(item, chance);
     }
 }
