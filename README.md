@@ -8,3 +8,9 @@ Planned features:
 * frame api
 * jei/emi/rei support
 * jade/waila/wthit support
+
+Planned version support:
+* 1.20.1
+* 1.20.4
+* 1.20.6
+* 1.21
