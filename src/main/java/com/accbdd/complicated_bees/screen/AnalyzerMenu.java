@@ -27,7 +27,7 @@ public class AnalyzerMenu extends AbstractContainerMenu {
         this.handler = new ItemStackHandler(2);
 
         handler.deserializeNBT(player.getInventory().getItem(bagSlot).getOrCreateTag().getCompound(INVENTORY_TAG));
-        addSlot(new SlotItemHandler(handler, 0, 224, 8));
+        addSlot(new TagSlot(handler, 0, 224, 8, ItemTagGenerator.ANALYZER_FUEL));
         addSlot(new TagSlot(handler, 1, 224, 26, ItemTagGenerator.BEE));
         layoutPlayerInventorySlots(player.getInventory(), 35, 134);
     }
