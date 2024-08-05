@@ -59,12 +59,11 @@ public class ApiaryMenu extends AbstractContainerMenu {
         return index;
     }
 
-    private int addSlotBox(Container playerInventory, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+    private void addSlotBox(Container playerInventory, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0 ; j < verAmount ; j++) {
             index = addSlotRange(playerInventory, index, x, y, horAmount, dx);
             y += dy;
         }
-        return index;
     }
 
     private void layoutPlayerInventorySlots(Container playerInventory, int leftCol, int topRow) {

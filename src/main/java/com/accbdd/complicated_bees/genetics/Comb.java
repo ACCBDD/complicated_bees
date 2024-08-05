@@ -47,6 +47,7 @@ public class Comb {
         return this.innerColor;
     }
 
+    @Deprecated
     public static ItemStack toStack(Comb comb) {
         ItemStack stack = new ItemStack(ItemsRegistration.COMB.get(), 1);
         CompoundTag tag = new CompoundTag();

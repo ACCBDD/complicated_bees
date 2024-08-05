@@ -5,8 +5,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
 
 public abstract class Gene<T> implements IGene<T> {
-    public static String DATA = "data";
-    public static String DOMINANT = "dominant";
+    public static final String DATA = "data";
+    public static final String DOMINANT = "dominant";
 
     private final boolean dominant;
     public T geneData;

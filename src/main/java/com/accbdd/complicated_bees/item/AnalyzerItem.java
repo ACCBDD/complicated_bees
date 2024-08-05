@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class AnalyzerItem extends Item {
-    public static String SCREEN_ANALYZER = "gui.complicated_bees.analyzer";
+    public static final String SCREEN_ANALYZER = "gui.complicated_bees.analyzer";
 
     public AnalyzerItem(Properties pProperties) {
         super(pProperties.stacksTo(1));

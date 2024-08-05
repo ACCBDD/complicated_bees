@@ -18,10 +18,10 @@ import java.util.concurrent.CompletableFuture;
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class ItemTagGenerator extends ItemTagsProvider {
-    public static TagKey<Item> SCOOP_TOOL = ItemTags.create(new ResourceLocation(MODID, "scoop_tool"));
-    public static TagKey<Item> BEE = ItemTags.create(new ResourceLocation(MODID, "bee"));
-    public static TagKey<Item> FRAME = ItemTags.create(new ResourceLocation(MODID, "frame"));
-    public static TagKey<Item> ANALYZER_FUEL = ItemTags.create(new ResourceLocation(MODID, "analyzer_fuel"));
+    public static final TagKey<Item> SCOOP_TOOL = ItemTags.create(new ResourceLocation(MODID, "scoop_tool"));
+    public static final TagKey<Item> BEE = ItemTags.create(new ResourceLocation(MODID, "bee"));
+    public static final TagKey<Item> FRAME = ItemTags.create(new ResourceLocation(MODID, "frame"));
+    public static final TagKey<Item> ANALYZER_FUEL = ItemTags.create(new ResourceLocation(MODID, "analyzer_fuel"));
 
     public ItemTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, provider, blockTagProvider, MODID, existingFileHelper);

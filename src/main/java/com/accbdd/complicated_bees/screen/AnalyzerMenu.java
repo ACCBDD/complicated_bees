@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class AnalyzerMenu extends AbstractContainerMenu {
-    public static int SLOT_COUNT = 2;
+    public static final int SLOT_COUNT = 2;
     private static final String INVENTORY_TAG = "contents";
 
     private final int bagSlot;
@@ -52,12 +52,11 @@ public class AnalyzerMenu extends AbstractContainerMenu {
         return index;
     }
 
-    private int addSlotBox(Container playerInventory, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+    private void addSlotBox(Container playerInventory, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0 ; j < verAmount ; j++) {
             index = addSlotRange(playerInventory, index, x, y, horAmount, dx);
             y += dy;
         }
-        return index;
     }
 
     private void layoutPlayerInventorySlots(Container playerInventory, int leftCol, int topRow) {

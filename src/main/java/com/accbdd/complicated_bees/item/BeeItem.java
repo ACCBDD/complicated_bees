@@ -40,7 +40,7 @@ public class BeeItem extends Item {
     @Override
     public @NotNull Component getName(ItemStack stack) {
         Species primary = GeneticHelper.getSpecies(stack, true);
-        Species secondary = GeneticHelper.getSpecies(stack, false);;
+        Species secondary = GeneticHelper.getSpecies(stack, false);
         MutableComponent component = Component.empty();
 
         component.append(GeneticHelper.getTranslationKey(primary));

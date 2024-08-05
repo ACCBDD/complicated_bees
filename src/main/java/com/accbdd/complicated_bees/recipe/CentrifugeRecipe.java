@@ -20,7 +20,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
     private final ItemStack input;
     private final List<Product> outputs;
 
-    public static Codec<CentrifugeRecipe> CODEC = RecordCodecBuilder.create(instance ->
+    public static final Codec<CentrifugeRecipe> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("input").forGetter(CentrifugeRecipe::getInput),
                     Product.CODEC.listOf().fieldOf("outputs").forGetter(CentrifugeRecipe::getOutputs)

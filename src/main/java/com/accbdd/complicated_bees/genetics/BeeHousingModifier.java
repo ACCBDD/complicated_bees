@@ -3,10 +3,10 @@ package com.accbdd.complicated_bees.genetics;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 
 public class BeeHousingModifier {
-    private EnumTolerance temperatureMod;
-    private EnumTolerance humidityMod;
-    private float lifespanMod;
-    private float productivityMod;
+    private final EnumTolerance temperatureMod;
+    private final EnumTolerance humidityMod;
+    private final float lifespanMod;
+    private final float productivityMod;
 
     public BeeHousingModifier(EnumTolerance temperatureMod, EnumTolerance humidityMod, float lifespanMod, float productivityMod) {
         this.temperatureMod = temperatureMod;

@@ -28,8 +28,8 @@ public class GeneratorBlockEntity extends BlockEntity {
     public static final int MAXTRANSFER = 1000;
     public static final int CAPACITY = 100000;
 
-    public static int SLOT_COUNT = 1;
-    public static int SLOT = 0;
+    public static final int SLOT_COUNT = 1;
+    public static final int SLOT = 0;
 
     private final ItemStackHandler items = createItemHandler();
     private final Lazy<IItemHandler> itemHandler = Lazy.of(() -> items);

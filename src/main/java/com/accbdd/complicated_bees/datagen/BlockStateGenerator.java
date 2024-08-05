@@ -77,7 +77,7 @@ public class BlockStateGenerator extends BlockStateProvider {
         });
     }
 
-    private VariantBlockStateBuilder directionBlock(Block block, BiConsumer<BlockState, ConfiguredModel.Builder<?>> model) {
+    private void directionBlock(Block block, BiConsumer<BlockState, ConfiguredModel.Builder<?>> model) {
         VariantBlockStateBuilder builder = getVariantBuilder(block);
         builder.forAllStates(state -> {
             ConfiguredModel.Builder<?> bld = ConfiguredModel.builder();
@@ -85,7 +85,6 @@ public class BlockStateGenerator extends BlockStateProvider {
             applyRotationBld(bld, state.getValue(BlockStateProperties.FACING));
             return bld.build();
         });
-        return builder;
     }
 
     private void applyRotationBld(ConfiguredModel.Builder<?> builder, Direction direction) {
