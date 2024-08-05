@@ -3,7 +3,6 @@ package com.accbdd.complicated_bees.genetics.gene;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
-import net.minecraft.network.chat.MutableComponent;
 
 public abstract class Gene<T> implements IGene<T> {
     public static String DATA = "data";

@@ -1,18 +1,10 @@
 package com.accbdd.complicated_bees.item;
 
 import com.accbdd.complicated_bees.genetics.BeeHousingModifier;
-import com.accbdd.complicated_bees.genetics.Chromosome;
-import com.accbdd.complicated_bees.genetics.GeneticHelper;
-import com.accbdd.complicated_bees.genetics.gene.*;
-import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
-import com.accbdd.complicated_bees.genetics.gene.enums.EnumProductivity;
-import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -20,8 +12,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-
-import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class FrameItem extends Item {
     private final BeeHousingModifier modifier;

@@ -5,8 +5,6 @@ import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.*;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
-import com.accbdd.complicated_bees.genetics.gene.enums.EnumProductivity;
-import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

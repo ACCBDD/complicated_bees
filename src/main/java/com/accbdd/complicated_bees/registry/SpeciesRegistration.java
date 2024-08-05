@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
-
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 //custom registry for species

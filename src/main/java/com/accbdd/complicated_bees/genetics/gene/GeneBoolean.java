@@ -4,9 +4,6 @@ import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-
-import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class GeneBoolean extends Gene<Boolean> {
     public GeneBoolean(boolean data, boolean dominant) {

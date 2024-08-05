@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import net.minecraft.nbt.CompoundTag;

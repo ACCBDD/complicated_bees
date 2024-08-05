@@ -1,18 +1,11 @@
 package com.accbdd.complicated_bees.screen;
 
-import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
-import com.accbdd.complicated_bees.genetics.GeneticHelper;
-import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
-import com.accbdd.complicated_bees.genetics.gene.IGene;
-import com.accbdd.complicated_bees.registry.GeneRegistration;
 import com.accbdd.complicated_bees.screen.widget.AnalyzerScrollWidget;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 

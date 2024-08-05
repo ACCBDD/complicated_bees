@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.worldgen;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;

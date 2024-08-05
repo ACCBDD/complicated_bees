@@ -14,7 +14,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
 import java.util.List;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;

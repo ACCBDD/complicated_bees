@@ -1,7 +1,6 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.MutableComponent;
 
 /**

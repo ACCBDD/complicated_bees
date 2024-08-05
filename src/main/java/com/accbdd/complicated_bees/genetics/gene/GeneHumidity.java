@@ -2,14 +2,9 @@ package com.accbdd.complicated_bees.genetics.gene;
 
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
-import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.ArrayList;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 

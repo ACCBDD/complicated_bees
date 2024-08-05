@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.screen;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.GeneLifespan;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumLifespan;
