@@ -1,7 +1,10 @@
 {
+  "type": "complicated_bees:centrifuge",
   "input": {
     "item": "complicated_bees:comb",
-    "nbt": {"comb_type": "complicated_bees:honey"}
+    "nbt": {
+      "comb_type": "complicated_bees:honey"
+    }
   },
   "outputs": [
     {

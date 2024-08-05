@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.recipes;
+package com.accbdd.complicated_bees.recipe;
 
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;

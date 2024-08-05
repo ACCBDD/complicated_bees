@@ -103,6 +103,7 @@ public class ComplicatedBees
         EsotericRegistration.TREE_DECORATOR_REGISTER.register(modEventBus);
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_TYPE_REGISTER.register(modEventBus);
+        EsotericRegistration.RECIPE_SERIALIZER_REGISTER.register(modEventBus);
 
         CREATIVE_MODE_TABS.register(modEventBus);
     }
