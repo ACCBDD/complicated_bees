@@ -55,6 +55,9 @@
   "gui.complicated_bees.error.weather": "Inclement weather!",
   "gui.complicated_bees.error.ecstatic": "Bee is ecstatic!",
 
+  "gui.complicated_bees.boolean.false": "No",
+  "gui.complicated_bees.boolean.true": "Yes",
+
   "gui.complicated_bees.humidity.wet": "Wet",
   "gui.complicated_bees.humidity.normal": "Normal",
   "gui.complicated_bees.humidity.dry": "Dry",

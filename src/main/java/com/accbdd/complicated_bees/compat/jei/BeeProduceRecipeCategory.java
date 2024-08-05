@@ -9,17 +9,13 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class BeeProduceRecipeCategory implements IRecipeCategory<Species> {
 
     public static final ResourceLocation ID = new ResourceLocation(MODID, "jei/bee_product");

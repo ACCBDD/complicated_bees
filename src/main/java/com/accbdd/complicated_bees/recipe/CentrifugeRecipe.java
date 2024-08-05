@@ -27,7 +27,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
             ).apply(instance, CentrifugeRecipe::new)
     );
 
-    public static final RecipeSerializer<CentrifugeRecipe> SERIALIZER = new RecipeSerializer<CentrifugeRecipe>() {
+    public static final RecipeSerializer<CentrifugeRecipe> SERIALIZER = new RecipeSerializer<>() {
         @Override
         public Codec<CentrifugeRecipe> codec() {
             return CODEC;

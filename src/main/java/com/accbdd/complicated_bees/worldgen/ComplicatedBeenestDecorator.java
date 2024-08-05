@@ -68,13 +68,12 @@ public class ComplicatedBeenestDecorator extends TreeDecorator {
             if (!list2.isEmpty()) {
                 Collections.shuffle(list2);
                 Optional<BlockPos> optional = list2.stream()
-                        .filter(pos -> context.isAir(pos))
+                        .filter(context::isAir)
                         .findFirst();
-                if (!optional.isEmpty()) {
+                if (optional.isPresent()) {
                     context.setBlock(optional.get(), BlocksRegistration.BEE_NEST.get().defaultBlockState());
-                    context.level().getBlockEntity(optional.get(), BlockEntitiesRegistration.BEE_NEST_ENTITY.get()).ifPresent(be -> {
-                        be.setSpecies(Species.getFromResourceLocation(ResourceLocation.tryParse(this.speciesKey)));
-                    });
+                    context.level().getBlockEntity(optional.get(), BlockEntitiesRegistration.BEE_NEST_ENTITY.get()).ifPresent(
+                            be -> be.setSpecies(Species.getFromResourceLocation(ResourceLocation.tryParse(this.speciesKey))));
                 }
             }
         }

@@ -24,6 +24,7 @@ public class BeeNestBlockEntity extends BlockEntity {
         super(BlockEntitiesRegistration.BEE_NEST_ENTITY.get(), pPos, pBlockState);
     }
 
+    @SuppressWarnings("unused")
     public static int getNestColor(BlockState state, BlockAndTintGetter level, BlockPos pos, int index) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof BeeNestBlockEntity) {

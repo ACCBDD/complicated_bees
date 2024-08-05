@@ -72,9 +72,7 @@ public class BlockStateGenerator extends BlockStateProvider {
         ResourceLocation FRONT_ON = new ResourceLocation(MODID, "block/generator_front_on");
         BlockModelBuilder modelOn = models().cube(BlocksRegistration.GENERATOR.getId().getPath()+"_on", BOTTOM, TOP, FRONT_ON, SIDE, SIDE, SIDE).texture("particle", SIDE);
         BlockModelBuilder modelOff = models().cube(BlocksRegistration.GENERATOR.getId().getPath(), BOTTOM, TOP, FRONT, SIDE, SIDE, SIDE).texture("particle", SIDE);
-        directionBlock(BlocksRegistration.GENERATOR.get(), (state, builder) -> {
-            builder.modelFile(state.getValue(BlockStateProperties.POWERED) ? modelOn : modelOff);
-        });
+        directionBlock(BlocksRegistration.GENERATOR.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.POWERED) ? modelOn : modelOff));
     }
 
     private void directionBlock(Block block, BiConsumer<BlockState, ConfiguredModel.Builder<?>> model) {
