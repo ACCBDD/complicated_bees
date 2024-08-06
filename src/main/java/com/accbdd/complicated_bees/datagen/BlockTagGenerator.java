@@ -24,7 +24,8 @@ public class BlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BlocksRegistration.APIARY.get());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(BlocksRegistration.APIARY.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BlocksRegistration.CENTRIFUGE.get());
         tag(SCOOPABLE).add(BlocksRegistration.BEE_NEST.get());
     }
 }

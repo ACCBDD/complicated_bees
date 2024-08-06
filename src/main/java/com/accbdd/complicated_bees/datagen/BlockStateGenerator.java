@@ -52,26 +52,32 @@ public class BlockStateGenerator extends BlockStateProvider {
 
     public BlockModelBuilder createApiaryModel() {
         String path = "apiary";
-        ResourceLocation texture = modLoc("block/bee_nest_bottom");
+        ResourceLocation side = modLoc("block/apiary_side");
+        ResourceLocation bottom = modLoc("block/apiary_bottom");
+        ResourceLocation top = modLoc("block/apiary_top");
 
-        return models().cubeAll(path, texture);
+        return models().cube(path, bottom, top, side, side, side, side).texture("particle", side);
     }
 
     public BlockModelBuilder createCentrifugeModel() {
         String path = "centrifuge";
-        ResourceLocation texture = modLoc("block/bee_nest_top");
+        ResourceLocation side = modLoc("block/centrifuge_side");
+        ResourceLocation bottom = modLoc("block/centrifuge_bottom");
+        ResourceLocation top = modLoc("block/centrifuge_top");
+        ResourceLocation front = modLoc("block/centrifuge_top");
 
-        return models().cubeAll(path, texture);
+        return models().cubeAll(path, texture).texture("particle", side);
     }
 
     public void registerGenerator() {
         ResourceLocation BOTTOM = new ResourceLocation(MODID, "block/generator_bottom");
         ResourceLocation SIDE = new ResourceLocation(MODID, "block/generator_side");
         ResourceLocation TOP = new ResourceLocation(MODID, "block/generator_top");
+        ResourceLocation BACK = new ResourceLocation(MODID, "block/generator_back");
         ResourceLocation FRONT = new ResourceLocation(MODID, "block/generator_front");
         ResourceLocation FRONT_ON = new ResourceLocation(MODID, "block/generator_front_on");
-        BlockModelBuilder modelOn = models().cube(BlocksRegistration.GENERATOR.getId().getPath()+"_on", BOTTOM, TOP, FRONT_ON, SIDE, SIDE, SIDE).texture("particle", SIDE);
-        BlockModelBuilder modelOff = models().cube(BlocksRegistration.GENERATOR.getId().getPath(), BOTTOM, TOP, FRONT, SIDE, SIDE, SIDE).texture("particle", SIDE);
+        BlockModelBuilder modelOn = models().cube(BlocksRegistration.GENERATOR.getId().getPath()+"_on", BOTTOM, TOP, FRONT_ON, BACK, SIDE, SIDE).texture("particle", SIDE);
+        BlockModelBuilder modelOff = models().cube(BlocksRegistration.GENERATOR.getId().getPath(), BOTTOM, TOP, FRONT, BACK, SIDE, SIDE).texture("particle", SIDE);
         directionBlock(BlocksRegistration.GENERATOR.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.POWERED) ? modelOn : modelOff));
     }
 
