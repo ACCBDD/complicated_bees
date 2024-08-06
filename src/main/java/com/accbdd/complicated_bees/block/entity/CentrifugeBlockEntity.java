@@ -40,7 +40,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     public static final int SLOT_COUNT = INPUT_SLOT_COUNT + OUTPUT_SLOT_COUNT;
 
-    private final Stack<ItemStack> outputBuffer = new Stack<>();
+    public final Stack<ItemStack> outputBuffer = new Stack<>();
     public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
     public static final String ENERGY_TAG = "energy";
@@ -196,7 +196,12 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     public void tickServer() {
         ItemStack stack = this.inputItems.getStackInSlot(INPUT_SLOT);
-        if (hasRecipe(stack) && energy.getEnergyStored() > 0) {
+
+        if (!outputBuffer.empty()) {
+            tryEmptyBuffer();
+        }
+
+        if (hasRecipe(stack) && energy.getEnergyStored() > 0 && outputBuffer.empty()) {
             increaseCraftingProgress();
             setChanged();
             if (hasFinished()) {
@@ -205,6 +210,19 @@ public class CentrifugeBlockEntity extends BlockEntity {
             }
         } else {
             resetProgress();
+        }
+    }
+
+    private void tryEmptyBuffer() {
+        while (!outputBuffer.empty()) {
+            ItemStack next = outputBuffer.peek();
+            next = ItemHandlerHelper.insertItem(outputItems, next, false);
+            if (next == ItemStack.EMPTY) {
+                outputBuffer.pop();
+                setChanged();
+            } else {
+                break;
+            }
         }
     }
 
