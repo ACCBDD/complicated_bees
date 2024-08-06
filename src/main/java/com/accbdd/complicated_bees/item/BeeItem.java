@@ -24,6 +24,7 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class BeeItem extends Item {
     public static final String AGE_TAG = "bee_age";
+    public static final String ANALYZED_TAG = "analyzed";
 
     public BeeItem(Properties prop) {
         super(prop);
@@ -77,8 +78,10 @@ public class BeeItem extends Item {
         } else if (geneSpecies.get() == null) {
             //species doesn't exist in registry
             components.add(Component.literal("INVALID SPECIES"));
+        } else if (!stack.getOrCreateTag().getBoolean(ANALYZED_TAG)) {
+            components.add(Component.translatable("gui.complicated_bees.not_analyzed").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         } else if (!Screen.hasShiftDown()) {
-            components.add(Component.translatable("gui.complicated_bees.more_info").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+                components.add(Component.translatable("gui.complicated_bees.more_info").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         } else if (Minecraft.getInstance().level != null) {
             Chromosome primary = GeneticHelper.getChromosome(stack, true);
             components.add(primary.getGene(GeneLifespan.ID).getTranslationKey()

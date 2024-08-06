@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
+import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import com.accbdd.complicated_bees.screen.slot.TagSlot;
 import net.minecraft.network.FriendlyByteBuf;
@@ -23,7 +24,20 @@ public class AnalyzerMenu extends AbstractContainerMenu {
     public AnalyzerMenu(int windowId, Player player, int bagSlot) {
         super(MenuRegistration.ANALYZER_MENU.get(), windowId);
         this.bagSlot = bagSlot;
-        this.handler = new ItemStackHandler(2);
+        this.handler = new ItemStackHandler(2) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                if (getSlot(0).hasItem()) {
+                    ItemStack bee = getSlot(1).getItem();
+                    if (!isBeeAnalyzed()) {
+                        bee.getOrCreateTag().putBoolean(BeeItem.ANALYZED_TAG, true);
+                        getSlot(0).remove(1);
+                    }
+                }
+                player.getInventory().getItem(bagSlot).getOrCreateTag().put(INVENTORY_TAG, this.serializeNBT());
+                super.onContentsChanged(slot);
+            }
+        };
 
         handler.deserializeNBT(player.getInventory().getItem(bagSlot).getOrCreateTag().getCompound(INVENTORY_TAG));
         addSlot(new TagSlot(handler, 0, 224, 8, ItemTagGenerator.ANALYZER_FUEL));
@@ -41,6 +55,11 @@ public class AnalyzerMenu extends AbstractContainerMenu {
     public static AnalyzerMenu fromNetwork(int windowId, Inventory playerInv, FriendlyByteBuf data) {
         int slot = data.readInt();
         return new AnalyzerMenu(windowId, playerInv.player, slot);
+    }
+
+    public boolean isBeeAnalyzed() {
+        ItemStack bee = getSlot(1).getItem();
+        return bee.is(ItemTagGenerator.BEE) && bee.getOrCreateTag().getBoolean(BeeItem.ANALYZED_TAG);
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {

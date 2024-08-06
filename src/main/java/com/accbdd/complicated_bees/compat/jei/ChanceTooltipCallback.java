@@ -21,7 +21,7 @@ public class ChanceTooltipCallback implements IRecipeSlotTooltipCallback {
 
     @Override
     public void onTooltip(IRecipeSlotView recipeSlotView, List<Component> tooltip) {
-        Component text = Component.translatable("jei.complicated_bees.chance").append(": ").append(String.format("%.0f%%", chance)).withStyle(ChatFormatting.DARK_GRAY);
+        Component text = Component.translatable("jei.complicated_bees.chance").append(": ").append(String.format("%.0f%%", chance)).withStyle(ChatFormatting.GRAY);
         tooltip.add(text);
     }
 }

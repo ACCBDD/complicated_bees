@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -41,5 +42,6 @@ public class ItemTagGenerator extends ItemTagsProvider {
         tag(FRAME).add(ItemsRegistration.HOT_FRAME.get());
         tag(FRAME).add(ItemsRegistration.RESTRICTIVE_FRAME.get());
         tag(FRAME).add(ItemsRegistration.THICK_FRAME.get());
+        tag(ANALYZER_FUEL).add(Items.STICK);
     }
 }
