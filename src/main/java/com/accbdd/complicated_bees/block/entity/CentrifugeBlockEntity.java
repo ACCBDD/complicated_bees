@@ -15,6 +15,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
@@ -202,6 +203,9 @@ public class CentrifugeBlockEntity extends BlockEntity {
         }
 
         if (hasRecipe(stack) && energy.getEnergyStored() > 0 && outputBuffer.empty()) {
+            if (!getBlockState().getValue(BlockStateProperties.POWERED)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, true));
+            }
             increaseCraftingProgress();
             setChanged();
             if (hasFinished()) {
@@ -209,6 +213,9 @@ public class CentrifugeBlockEntity extends BlockEntity {
                 resetProgress();
             }
         } else {
+            if (getBlockState().getValue(BlockStateProperties.POWERED)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, false));
+            }
             resetProgress();
         }
     }

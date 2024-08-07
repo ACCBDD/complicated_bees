@@ -3,7 +3,7 @@
   "textures": {
     "down": "complicated_bees:block/centrifuge_end",
     "east": "complicated_bees:block/centrifuge_side",
-    "north": "complicated_bees:block/centrifuge_front",
+    "north": "complicated_bees:block/centrifuge_front_on",
     "particle": "complicated_bees:block/centrifuge_side",
     "south": "complicated_bees:block/centrifuge_side",
     "up": "complicated_bees:block/centrifuge_end",

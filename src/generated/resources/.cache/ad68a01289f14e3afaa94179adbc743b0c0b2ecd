@@ -1,10 +1,11 @@
-// 1.20.4	2024-08-06T13:23:33.5199193	Block States: complicated_bees
+// 1.20.4	2024-08-06T20:01:35.7906064	Block States: complicated_bees
 f96c3049aa45fc2ee1427d6b9010e4d655e13430 assets/complicated_bees/blockstates/apiary.json
 6f082c4f7826e0853af1c6128556032c8325066e assets/complicated_bees/blockstates/bee_nest.json
-bc1ba6ce626972cc9d0aa6a9e2c1143225683932 assets/complicated_bees/blockstates/centrifuge.json
+25dfbbaa9d3a13e3bdcd4d8a4fa0e6007da24b41 assets/complicated_bees/blockstates/centrifuge.json
 565deac1d287a925f387a31eedc4cfca02c916bb assets/complicated_bees/blockstates/generator.json
 b8d341a6b69eacead66a55524a7bbba3ce7909e9 assets/complicated_bees/models/block/apiary.json
 483136423e051bb780b87623d6adab9e6b8281c2 assets/complicated_bees/models/block/bee_nest.json
-deb042d80fa70a61830462d0918f65f570518a5b assets/complicated_bees/models/block/centrifuge.json
+1510c0def729ff7e4e440ad4e855683238113a7e assets/complicated_bees/models/block/centrifuge.json
+0de3bbdd5594c9fe48372bea590d794a515efde2 assets/complicated_bees/models/block/centrifuge_on.json
 3be09bfdd2d9225275b10bb4d4ad5f80afaecd4d assets/complicated_bees/models/block/generator.json
 010f02572732dcd377086fc57c9875a0a8abf0f0 assets/complicated_bees/models/block/generator_on.json

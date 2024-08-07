@@ -1,7 +1,50 @@
 {
   "variants": {
-    "": {
+    "facing=down,powered=false": {
+      "model": "complicated_bees:block/centrifuge",
+      "x": 90
+    },
+    "facing=down,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "x": 90
+    },
+    "facing=east,powered=false": {
+      "model": "complicated_bees:block/centrifuge",
+      "y": 90
+    },
+    "facing=east,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "y": 90
+    },
+    "facing=north,powered=false": {
       "model": "complicated_bees:block/centrifuge"
+    },
+    "facing=north,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on"
+    },
+    "facing=south,powered=false": {
+      "model": "complicated_bees:block/centrifuge",
+      "y": 180
+    },
+    "facing=south,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "y": 180
+    },
+    "facing=up,powered=false": {
+      "model": "complicated_bees:block/centrifuge",
+      "x": -90
+    },
+    "facing=up,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "x": -90
+    },
+    "facing=west,powered=false": {
+      "model": "complicated_bees:block/centrifuge",
+      "y": 270
+    },
+    "facing=west,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "y": 270
     }
   }
 }

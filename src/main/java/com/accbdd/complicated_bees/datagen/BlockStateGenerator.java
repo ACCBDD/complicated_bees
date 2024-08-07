@@ -27,7 +27,7 @@ public class BlockStateGenerator extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlock(BlocksRegistration.BEE_NEST.get(), createBeeNestModel());
         simpleBlock(BlocksRegistration.APIARY.get(), createApiaryModel());
-        simpleBlock(BlocksRegistration.CENTRIFUGE.get(), createCentrifugeModel());
+        registerCentrifuge();
         registerGenerator();
     }
 
@@ -59,14 +59,17 @@ public class BlockStateGenerator extends BlockStateProvider {
         return models().cube(path, bottom, top, side, side, side, side).texture("particle", side);
     }
 
-    public BlockModelBuilder createCentrifugeModel() {
+    public void registerCentrifuge() {
         String path = "centrifuge";
         ResourceLocation side = modLoc("block/centrifuge_side");
-        ResourceLocation bottom = modLoc("block/centrifuge_bottom");
-        ResourceLocation top = modLoc("block/centrifuge_top");
-        ResourceLocation front = modLoc("block/centrifuge_top");
+        ResourceLocation end = modLoc("block/centrifuge_end");
+        ResourceLocation front = modLoc("block/centrifuge_front");
+        ResourceLocation front_on = modLoc("block/centrifuge_front_on");
 
-        return models().cubeAll(path, texture).texture("particle", side);
+        BlockModelBuilder modelOff = models().cube(path, end, end, front, side, side, side).texture("particle", side);
+        BlockModelBuilder modelOn = models().cube(path+"_on", end, end, front_on, side, side, side).texture("particle", side);
+
+        directionBlock(BlocksRegistration.CENTRIFUGE.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.POWERED) ? modelOn : modelOff));
     }
 
     public void registerGenerator() {
