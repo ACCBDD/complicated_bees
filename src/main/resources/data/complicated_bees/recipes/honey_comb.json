@@ -9,7 +9,8 @@
   "outputs": [
     {
       "item": "minecraft:honey_block",
-      "chance": 1
+      "chance": 1,
+      "count": 20
     },
     {
       "item": "minecraft:gold_ingot"

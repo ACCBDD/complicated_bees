@@ -302,13 +302,13 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     private void tryEmptyBuffer() {
         while (!outputBuffer.empty()) {
-            ItemStack next = outputBuffer.peek();
+            ItemStack next = outputBuffer.pop();
             next = ItemHandlerHelper.insertItem(outputItems, next, false);
             if (next == ItemStack.EMPTY) {
-                outputBuffer.pop();
                 setChanged();
                 removeError(EnumErrorCodes.OUTPUT_FULL);
             } else {
+                outputBuffer.push(next);
                 addError(EnumErrorCodes.OUTPUT_FULL);
                 break;
             }

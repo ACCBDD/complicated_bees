@@ -50,7 +50,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     private final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 200;
+    private int maxProgress = 20;
     private final RecipeManager.CachedCheck<Container, CentrifugeRecipe> quickCheck;
 
     private final ItemStackHandler inputItems = createItemHandler(INPUT_SLOT_COUNT);
@@ -222,12 +222,12 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     private void tryEmptyBuffer() {
         while (!outputBuffer.empty()) {
-            ItemStack next = outputBuffer.peek();
+            ItemStack next = outputBuffer.pop();
             next = ItemHandlerHelper.insertItem(outputItems, next, false);
             if (next == ItemStack.EMPTY) {
-                outputBuffer.pop();
                 setChanged();
             } else {
+                outputBuffer.push(next);
                 break;
             }
         }
@@ -264,7 +264,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
         this.inputItems.extractItem(INPUT_SLOT, 1, false);
 
         for (Product product : products) {
-            ItemHandlerHelper.insertItem(outputItems, product.getStackResult(), false);
+            outputBuffer.push(product.getStackResult());
         }
     }
 
