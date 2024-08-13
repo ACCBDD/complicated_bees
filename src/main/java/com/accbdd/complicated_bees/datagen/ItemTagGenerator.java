@@ -42,6 +42,7 @@ public class ItemTagGenerator extends ItemTagsProvider {
         tag(FRAME).add(ItemsRegistration.HOT_FRAME.get());
         tag(FRAME).add(ItemsRegistration.RESTRICTIVE_FRAME.get());
         tag(FRAME).add(ItemsRegistration.THICK_FRAME.get());
-        tag(ANALYZER_FUEL).add(Items.STICK);
+        tag(ANALYZER_FUEL).add(ItemsRegistration.HONEY_DROPLET.get());
+        tag(ANALYZER_FUEL).add(ItemsRegistration.ROYAL_JELLY.get());
     }
 }

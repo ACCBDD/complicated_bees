@@ -57,6 +57,10 @@ public class ComplicatedBees
                 output.accept(ItemsRegistration.APIARY.get());
                 output.accept(ItemsRegistration.CENTRIFUGE.get());
                 output.accept(ItemsRegistration.HONEY_DROPLET.get());
+                output.accept(ItemsRegistration.BEESWAX.get());
+                output.accept(ItemsRegistration.PROPOLIS.get());
+                output.accept(ItemsRegistration.ROYAL_JELLY.get());
+                output.accept(ItemsRegistration.POLLEN.get());
                 output.accept(ItemsRegistration.SCOOP.get());
                 output.accept(ItemsRegistration.METER.get());
                 output.accept(ItemsRegistration.ANALYZER.get());

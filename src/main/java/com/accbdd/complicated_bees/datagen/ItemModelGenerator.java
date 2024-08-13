@@ -24,6 +24,10 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.GENERATOR.getId().getPath(), modLoc("block/generator"));
         basicItem(ItemsRegistration.SCOOP.get());
         basicItem(ItemsRegistration.HONEY_DROPLET.get());
+        basicItem(ItemsRegistration.BEESWAX.get());
+        basicItem(ItemsRegistration.PROPOLIS.get());
+        basicItem(ItemsRegistration.ROYAL_JELLY.get());
+        basicItem(ItemsRegistration.POLLEN.get());
         basicItem(ItemsRegistration.METER.get());
         basicItem(ItemsRegistration.ANALYZER.get());
         basicItem(ItemsRegistration.FRAME.get());
