@@ -23,6 +23,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.CENTRIFUGE.getId().getPath(), modLoc("block/centrifuge"));
         withExistingParent(BlocksRegistration.GENERATOR.getId().getPath(), modLoc("block/generator"));
         basicItem(ItemsRegistration.SCOOP.get());
+        basicItem(ItemsRegistration.HONEY_DROPLET.get());
         basicItem(ItemsRegistration.METER.get());
         basicItem(ItemsRegistration.ANALYZER.get());
         basicItem(ItemsRegistration.FRAME.get());

@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.genetics.BeeHousingModifier;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.item.*;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -19,6 +20,9 @@ public class ItemsRegistration {
     public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
     public static final DeferredItem<MeterItem> METER = ITEMS.registerItem("meter", MeterItem::new);
     public static final DeferredItem<AnalyzerItem> ANALYZER = ITEMS.registerItem("analyzer", AnalyzerItem::new);
+
+    public static final DeferredItem<Item> HONEY_DROPLET = ITEMS.registerSimpleItem("honey_droplet");
+
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1.2f, 1f)));
     public static final DeferredItem<FrameItem> THICK_FRAME = ITEMS.registerItem("thick_frame",
