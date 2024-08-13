@@ -56,6 +56,7 @@ public class ComplicatedBees
             .displayItems((parameters, output) -> {
                 output.accept(ItemsRegistration.APIARY.get());
                 output.accept(ItemsRegistration.CENTRIFUGE.get());
+                output.accept(ItemsRegistration.HONEY_DROPLET.get());
                 output.accept(ItemsRegistration.SCOOP.get());
                 output.accept(ItemsRegistration.METER.get());
                 output.accept(ItemsRegistration.ANALYZER.get());

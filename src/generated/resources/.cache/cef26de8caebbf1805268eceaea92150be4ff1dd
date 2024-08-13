@@ -1,4 +1,4 @@
-// 1.20.4	2024-07-30T17:12:02.2954491	Item Models: complicated_bees
+// 1.20.4	2024-08-13T12:29:42.7066758	Item Models: complicated_bees
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 6df9d7e396652be82b3c1d200173d889ff220fcc assets/complicated_bees/models/item/apiary.json
 c8862de88ab41c41168edc5e0186979a36e70d47 assets/complicated_bees/models/item/bee_nest.json
@@ -10,6 +10,7 @@ c315c15b95842f658b0db66fabf913b64cbddfaa assets/complicated_bees/models/item/dro
 4bc53a1d4e97fb1198ba0da398db1be707d6fce8 assets/complicated_bees/models/item/dry_frame.json
 11489e5d0e972f0cc0861dc755263bb47cef3910 assets/complicated_bees/models/item/frame.json
 942fa15bac71ccde84a09da39c73e176e9811370 assets/complicated_bees/models/item/generator.json
+74ba4d426f10943607a1d0933129337c962eeb4d assets/complicated_bees/models/item/honey_droplet.json
 3a4e01166171378dbcf5887a89a613c67ebc3c60 assets/complicated_bees/models/item/hot_frame.json
 4e887f1f8cea3582976db56210b0e25895b8511a assets/complicated_bees/models/item/meter.json
 8dd2813cb634894f74a21951e47a30b656bc3cd2 assets/complicated_bees/models/item/moist_frame.json

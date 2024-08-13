@@ -10,7 +10,7 @@
     {
       "item": "minecraft:honey_block",
       "chance": 1,
-      "count": 20
+      "count": 1
     },
     {
       "item": "minecraft:gold_ingot"

@@ -69,7 +69,7 @@ public class BlockStateGenerator extends BlockStateProvider {
         BlockModelBuilder modelOff = models().cube(path, end, end, front, side, side, side).texture("particle", side);
         BlockModelBuilder modelOn = models().cube(path+"_on", end, end, front_on, side, side, side).texture("particle", side);
 
-        directionBlock(BlocksRegistration.CENTRIFUGE.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.POWERED) ? modelOn : modelOff));
+        directionBlock(BlocksRegistration.CENTRIFUGE.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.CRAFTING) ? modelOn : modelOff));
     }
 
     public void registerGenerator() {

@@ -203,8 +203,8 @@ public class CentrifugeBlockEntity extends BlockEntity {
         }
 
         if (hasRecipe(stack) && energy.getEnergyStored() > 0 && outputBuffer.empty()) {
-            if (!getBlockState().getValue(BlockStateProperties.POWERED)) {
-                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, true));
+            if (!getBlockState().getValue(BlockStateProperties.CRAFTING)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.CRAFTING, true));
             }
             increaseCraftingProgress();
             setChanged();
@@ -213,8 +213,8 @@ public class CentrifugeBlockEntity extends BlockEntity {
                 resetProgress();
             }
         } else {
-            if (getBlockState().getValue(BlockStateProperties.POWERED)) {
-                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, false));
+            if (getBlockState().getValue(BlockStateProperties.CRAFTING)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.CRAFTING, false));
             }
             resetProgress();
         }

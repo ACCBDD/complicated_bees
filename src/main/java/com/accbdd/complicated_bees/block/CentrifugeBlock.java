@@ -99,13 +99,13 @@ public class CentrifugeBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState()
                 .setValue(BlockStateProperties.FACING, pContext.getHorizontalDirection().getOpposite())
-                .setValue(BlockStateProperties.POWERED, false);
+                .setValue(BlockStateProperties.CRAFTING, false);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(BlockStateProperties.POWERED, BlockStateProperties.FACING);
+        pBuilder.add(BlockStateProperties.CRAFTING, BlockStateProperties.FACING);
     }
 
     @Override
