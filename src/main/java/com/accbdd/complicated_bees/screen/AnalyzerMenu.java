@@ -29,13 +29,12 @@ public class AnalyzerMenu extends AbstractContainerMenu {
             protected void onContentsChanged(int slot) {
                 if (getSlot(0).hasItem()) {
                     ItemStack bee = getSlot(1).getItem();
-                    if (!isBeeAnalyzed()) {
+                    if (!isBeeAnalyzed() && !bee.isEmpty()) {
                         bee.getOrCreateTag().putBoolean(BeeItem.ANALYZED_TAG, true);
                         getSlot(0).remove(1);
                     }
                 }
                 player.getInventory().getItem(bagSlot).getOrCreateTag().put(INVENTORY_TAG, this.serializeNBT());
-                super.onContentsChanged(slot);
             }
         };
 
