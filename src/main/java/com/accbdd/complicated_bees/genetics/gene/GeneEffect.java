@@ -40,6 +40,8 @@ public class GeneEffect extends Gene<IBeeEffect> {
 
     @Override
     public MutableComponent getTranslationKey() {
-        return Component.translatable("effect.complicated_bees." + BeeEffectRegistration.BEE_EFFECT_REGISTRY.getKey(geneData));
+        return this.geneData == null
+                ? Component.translatable("effect.complicated_bees.complicated_bees:none")
+                : Component.translatable("effect.complicated_bees." + BeeEffectRegistration.BEE_EFFECT_REGISTRY.getKey(geneData));
     }
 }

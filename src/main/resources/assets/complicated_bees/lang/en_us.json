@@ -136,5 +136,6 @@
   "flower.complicated_bees.complicated_bees:flower": "Flowers",
   "flower.complicated_bees.complicated_bees:desert": "Desert",
 
-  "effect.complicated_bees.complicated_bees:debug": "Debug"
+  "effect.complicated_bees.complicated_bees:debug": "Debug",
+  "effect.complicated_bees.complicated_bees:none": "None"
 }
