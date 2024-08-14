@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block;
 
+import com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity;
 import com.accbdd.complicated_bees.block.entity.GeneratorBlockEntity;
 import com.accbdd.complicated_bees.screen.GeneratorMenu;
 import com.mojang.serialization.MapCodec;
@@ -10,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -30,6 +32,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class GeneratorBlock extends BaseEntityBlock {
@@ -131,5 +134,17 @@ public class GeneratorBlock extends BaseEntityBlock {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return null;
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+        if (blockentity instanceof GeneratorBlockEntity generator && !pNewState.is(this)) {
+            IItemHandler handler = generator.getItems();
+            for (int i = 0; i < handler.getSlots(); i++) {
+                Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), handler.getStackInSlot(i));
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
 }
