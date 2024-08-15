@@ -6,7 +6,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
+
+import java.util.List;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -39,12 +42,8 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
     public void render(GuiGraphics graphics, int mousex, int mousey, float partialTick) {
         super.render(graphics, mousex, mousey, partialTick);
         if (!menu.isBeeAnalyzed()) {
-            drawText(graphics, Component.translatable("gui.complicated_bees.analyzer_line_1"), 9, 9, 0xFFFFFF);
-            drawText(graphics, Component.translatable("gui.complicated_bees.analyzer_line_2"), 9, 21, 0xFFFFFF);
-            drawText(graphics, Component.translatable("gui.complicated_bees.analyzer_line_3"), 9, 39, 0xFFFFFF);
-            drawText(graphics, Component.translatable("gui.complicated_bees.analyzer_line_4"), 9, 51, 0xFFFFFF);
-            drawText(graphics, Component.translatable("gui.complicated_bees.analyzer_line_5"), 9, 69, 0xFFFFFF);
-            drawText(graphics, Component.translatable("gui.complicated_bees.analyzer_line_6"), 9, 81, 0xFFFFFF);
+
+
         }
         renderTooltip(graphics, mousex, mousey);
     }
@@ -54,7 +53,5 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
         super.renderTooltip(graphics, mousex, mousey);
     }
 
-    private void drawText(GuiGraphics graphics, Component component, int x, int y, int color) {
-        graphics.drawString(Minecraft.getInstance().font, component, x + leftPos, y + topPos, color, false);
-    }
+
 }

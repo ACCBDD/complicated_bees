@@ -11,7 +11,10 @@ import net.minecraft.client.gui.components.AbstractScrollWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -56,10 +59,17 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
 
     private void renderText(GuiGraphics graphics) {
         if (menu.isBeeAnalyzed())
-            drawCommonGenes(graphics, menu.getSlot(1).getItem());
+            drawGeneInfo(graphics, menu.getSlot(1).getItem());
+        else {
+            drawWrappedText(graphics, 2, 2, 0xFFFFFF,
+                    Component.translatable("gui.complicated_bees.analyzer_line_1"),
+                    Component.translatable("gui.complicated_bees.analyzer_line_2"),
+                    Component.translatable("gui.complicated_bees.analyzer_line_3"),
+                    Component.translatable("gui.complicated_bees.analyzer_line_4"));
+        }
     }
 
-    private void drawCommonGenes(GuiGraphics graphics, ItemStack bee) {
+    private void drawGeneInfo(GuiGraphics graphics, ItemStack bee) {
         drawText(graphics, Component.literal("Active"), ACTIVE_COL, 2, 0xFFFFFF);
         drawText(graphics, Component.literal("Inactive"), INACTIVE_COL, 2, 0xFFFFFF);
 
@@ -82,6 +92,18 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
 
     private void drawText(GuiGraphics graphics, Component component, int x, int y, int color) {
         graphics.drawString(Minecraft.getInstance().font, component, x + getX(), y + getY(), color, false);
+    }
+
+    private void drawWrappedText(GuiGraphics graphics, int x, int y, int color,  Component... components) {
+        int lineHeight = y;
+        for (Component component : components) {
+            List<FormattedCharSequence> lines = Minecraft.getInstance().font.split(component, 200);
+            for (FormattedCharSequence line : lines) {
+                graphics.drawString(Minecraft.getInstance().font, line, x + getX(), lineHeight + getY(), color);
+                lineHeight += LINE_HEIGHT;
+            }
+            lineHeight += LINE_HEIGHT / 2;
+        }
     }
 
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene, int y) {

@@ -40,12 +40,10 @@
   "gui.complicated_bees.generator": "Generator",
   "gui.complicated_bees.analyzer": "Analyzer",
 
-  "gui.complicated_bees.analyzer_line_1": "Need honey and a bee to pacify and",
-  "gui.complicated_bees.analyzer_line_2": "analyze!",
-  "gui.complicated_bees.analyzer_line_3": "Once analyzed, use the scroll wheel",
-  "gui.complicated_bees.analyzer_line_4": "/arrow keys to examine a bee's genes.",
-  "gui.complicated_bees.analyzer_line_5": "For more info on a gene, please refer",
-  "gui.complicated_bees.analyzer_line_6": "to the wiki.",
+  "gui.complicated_bees.analyzer_line_1": "Needs honey drops to run and a bee to analyze!",
+  "gui.complicated_bees.analyzer_line_2": "Once analyzed, use the scroll wheel/arrow keys to examine a bee's genes.",
+  "gui.complicated_bees.analyzer_line_3": "Red values are dominant, blue values are recessive.",
+  "gui.complicated_bees.analyzer_line_4": "For more info on what a gene does, please refer to the wiki on GitHub.",
 
   "gui.complicated_bees.species_label": "Species",
   "gui.complicated_bees.humidity_label": "Humidity",
