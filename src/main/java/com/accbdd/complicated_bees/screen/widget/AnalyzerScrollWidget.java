@@ -1,15 +1,18 @@
 package com.accbdd.complicated_bees.screen.widget;
 
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
+import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.registry.GeneRegistration;
 import com.accbdd.complicated_bees.screen.AnalyzerMenu;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractScrollWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
@@ -22,8 +25,9 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private static final ResourceLocation GUI = new ResourceLocation(MODID, "textures/gui/analyzer.png");
     private static final int ACTIVE_COL = 84;
     private static final int INACTIVE_COL = 150;
-    private static final int TOLERANCE_INDENT = 10;
+    private static final int INDENT = 10;
     private static final int LINE_HEIGHT = 12;
+    private static final int PADDING = 4;
 
     private final AnalyzerMenu menu;
     private int nextLine;
@@ -36,7 +40,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
 
     @Override
     protected int getInnerHeight() {
-        return 240;
+        return menu.isBeeAnalyzed() ? 500 : 150;
     }
 
     @Override
@@ -68,11 +72,13 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
                     Component.translatable("gui.complicated_bees.analyzer_line_2"),
                     Component.translatable("gui.complicated_bees.analyzer_line_3"),
                     Component.translatable("gui.complicated_bees.analyzer_line_4"));
+            if(scrollAmount() > getMaxScrollAmount())
+                setScrollAmount(getMaxScrollAmount());
         }
     }
 
     private void drawGeneInfo(GuiGraphics graphics, ItemStack bee) {
-        nextLine = 2;
+        nextLine = PADDING;
         drawText(graphics, Component.literal("Active"), ACTIVE_COL, nextLine, 0xFFFFFF);
         drawText(graphics, Component.literal("Inactive"), INACTIVE_COL, nextLine, 0xFFFFFF);
         lineBreak();
@@ -96,6 +102,12 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.nocturnal_label"), bee, GeneRegistration.NOCTURNAL.get());
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.cave_dwelling_label"), bee, GeneRegistration.CAVE_DWELLING.get());
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.weatherproof_label"), bee, GeneRegistration.WEATHERPROOF.get());
+        lineBreak();
+        lineBreak();
+
+        drawTaxonomy(graphics, bee);
+        lineBreak();
+        drawFlavor(graphics, bee);
     }
 
     private void drawText(GuiGraphics graphics, Component component, int x, int color) {
@@ -107,26 +119,40 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         graphics.drawString(Minecraft.getInstance().font, component, x + getX(), y + getY(), color, false);
     }
 
+    private void drawRightAlignedText(GuiGraphics graphics, Component component, int x, int y, int color) {
+        graphics.drawString(Minecraft.getInstance().font, component, x - Minecraft.getInstance().font.width(component) + getX(), y + getY(), color);
+    }
+
     private void lineBreak() {
         nextLine += LINE_HEIGHT / 2;
     }
 
-    private void drawWrappedText(GuiGraphics graphics, int x, int y, int color,  Component... components) {
+    /**
+     * draws a number of components as wrapped paragraphs, with each component getting spaced by LINE_HEIGHT / 2
+     * @param graphics a GuiGraphics
+     * @param x
+     * @param y
+     * @param color a color for text
+     * @param components a number of components
+     * @return a y coordinate for the next line of text, spaced accordingly
+     */
+    private int drawWrappedText(GuiGraphics graphics, int x, int y, int color, Component... components) {
         int lineHeight = y;
         for (Component component : components) {
-            List<FormattedCharSequence> lines = Minecraft.getInstance().font.split(component, 200);
+            List<FormattedCharSequence> lines = Minecraft.getInstance().font.split(component, getWidth() - PADDING * 2);
             for (FormattedCharSequence line : lines) {
                 graphics.drawString(Minecraft.getInstance().font, line, x + getX(), lineHeight + getY(), color);
                 lineHeight += LINE_HEIGHT;
             }
             lineHeight += LINE_HEIGHT / 2;
         }
+        return lineHeight;
     }
 
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene) {
         IGene<?> active = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), true);
         IGene<?> inactive = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), false);
-        drawText(graphics, label, 2, nextLine,0xFFFFFF);
+        drawText(graphics, label, PADDING, nextLine,0xFFFFFF);
         drawText(graphics, active.getTranslationKey(), ACTIVE_COL, nextLine, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTranslationKey(), INACTIVE_COL, nextLine, inactive.isDominant() ? 0xE63225 : 0x257FE6);
         nextLine += LINE_HEIGHT;
@@ -135,7 +161,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene, int y) {
         IGene<?> active = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), true);
         IGene<?> inactive = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), false);
-        drawText(graphics, label, 2, y,0xFFFFFF);
+        drawText(graphics, label, PADDING, y,0xFFFFFF);
         drawText(graphics, active.getTranslationKey(), ACTIVE_COL, y, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTranslationKey(), INACTIVE_COL, y, inactive.isDominant() ? 0xE63225 : 0x257FE6);
     }
@@ -177,9 +203,54 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private void drawTolerantGeneValues(GuiGraphics graphics, Component label, ItemStack bee, GeneTolerant<?> gene) {
         drawGeneValues(graphics, label, bee, gene, nextLine);
         nextLine += LINE_HEIGHT;
-        drawText(graphics, Component.translatable("gui.complicated_bees.tolerance_label"), 9 + TOLERANCE_INDENT, nextLine, 0xFFFFFF);
+        drawText(graphics, Component.translatable("gui.complicated_bees.tolerance_label"), PADDING + INDENT, nextLine, 0xFFFFFF);
         drawToleranceIcons(graphics, bee, gene, ACTIVE_COL, INACTIVE_COL, nextLine);
         drawGeneTolerance(graphics, bee, gene, ACTIVE_COL + 10, INACTIVE_COL + 10, nextLine);
+        nextLine += LINE_HEIGHT;
+    }
+
+    private void drawTaxonomy(GuiGraphics graphics, ItemStack bee) {
+        Species species = GeneticHelper.getSpecies(bee, true);
+        drawText(graphics, Component.translatable("gui.complicated_bees.taxonomy"), PADDING, 0xFFFFFF);
+
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.kingdom_label"), getWidth() - PADDING, nextLine, 0x66F2E7);
+        drawText(graphics, Component.translatable("gui.complicated_bees.kingdom"), PADDING, 0x66F2E7);
+
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.class_label"), getWidth() - PADDING, nextLine, 0x76E3AA);
+        drawText(graphics, Component.translatable("gui.complicated_bees.class"), PADDING + INDENT, 0x76E3AA);
+
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.order_label"), getWidth() - PADDING, nextLine, 0x9BCE71);
+        drawText(graphics, Component.translatable("gui.complicated_bees.order"), PADDING + INDENT * 2, 0x9BCE71);
+
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.family_label"), getWidth() - PADDING, nextLine, 0xC1B34B);
+        drawText(graphics, Component.translatable("gui.complicated_bees.family"), PADDING + INDENT * 3, 0xC1B34B);
+
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.genus_label"), getWidth() - PADDING, nextLine, 0xE19248);
+        drawText(graphics, GeneticHelper.getGenusTaxonomyKey(species), PADDING + INDENT * 4, 0xE19248);
+
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.species_taxonomy_label"), getWidth() - PADDING, nextLine, 0xF26D63);
+        drawText(graphics, GeneticHelper.getSpeciesTaxonomyKey(species), PADDING + INDENT * 5, 0xF26D63);
+
+        Component authority = GeneticHelper.getAuthorityKey(species);
+        if (authority.getString().equals("gui.complicated_bees.no_authority"))
+            authority = Component.translatable("gui.complicated_bees.no_authority");
+
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.authority_label").append(authority), getWidth() - PADDING, nextLine, 0xFFFFFF);
+        nextLine += LINE_HEIGHT;
+    }
+
+    private void drawFlavor(GuiGraphics graphics, ItemStack bee) {
+        Species species = GeneticHelper.getSpecies(bee, true);
+        MutableComponent flavor = GeneticHelper.getFlavorTextKey(species);
+        if (flavor.getString().equals("gui.complicated_bees.no_flavor"))
+            flavor = Component.translatable("gui.complicated_bees.no_flavor");
+        Component author = GeneticHelper.getFlavorTextAuthorKey(species);
+        if (author.getString().equals("gui.complicated_bees.no_author"))
+            author = Component.translatable("gui.complicated_bees.no_author");
+
+        nextLine = drawWrappedText(graphics, PADDING, nextLine, 0xA4A4A4, flavor.withStyle(ChatFormatting.ITALIC));
+        nextLine -= LINE_HEIGHT / 2;
+        drawRightAlignedText(graphics, Component.literal("-").append(author), getWidth() - PADDING, nextLine, 0xA4A4A4);
         nextLine += LINE_HEIGHT;
     }
 }

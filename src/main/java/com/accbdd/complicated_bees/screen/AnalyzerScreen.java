@@ -18,7 +18,7 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
 
     public AnalyzerScreen(AnalyzerMenu container, Inventory inventory, Component title) {
         super(container, inventory, title);
-        this.imageWidth = 248;
+        this.imageWidth = 249;
         this.imageHeight = 216;
     }
 
@@ -26,7 +26,7 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
     protected void init() {
         super.init();
 
-        addRenderableWidget(new AnalyzerScrollWidget(leftPos + 8, topPos + 8, 206, 120, getMenu()));
+        addRenderableWidget(new AnalyzerScrollWidget(leftPos + 8, topPos + 8, 207, 120, getMenu()));
     }
 
     @Override
