@@ -231,26 +231,16 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.species_taxonomy_label"), getWidth() - PADDING, nextLine, 0xF26D63);
         drawText(graphics, GeneticHelper.getSpeciesTaxonomyKey(species), PADDING + INDENT * 5, 0xF26D63);
 
-        Component authority = GeneticHelper.getAuthorityKey(species);
-        if (authority.getString().equals("gui.complicated_bees.no_authority"))
-            authority = Component.translatable("gui.complicated_bees.no_authority");
-
-        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.authority_label").append(authority), getWidth() - PADDING, nextLine, 0xFFFFFF);
+        drawRightAlignedText(graphics, Component.translatable("gui.complicated_bees.authority_label").append(GeneticHelper.getAuthorityKey(species)), getWidth() - PADDING, nextLine, 0xFFFFFF);
         nextLine += LINE_HEIGHT;
     }
 
     private void drawFlavor(GuiGraphics graphics, ItemStack bee) {
         Species species = GeneticHelper.getSpecies(bee, true);
-        MutableComponent flavor = GeneticHelper.getFlavorTextKey(species);
-        if (flavor.getString().equals("gui.complicated_bees.no_flavor"))
-            flavor = Component.translatable("gui.complicated_bees.no_flavor");
-        Component author = GeneticHelper.getFlavorTextAuthorKey(species);
-        if (author.getString().equals("gui.complicated_bees.no_author"))
-            author = Component.translatable("gui.complicated_bees.no_author");
 
-        nextLine = drawWrappedText(graphics, PADDING, nextLine, 0xA4A4A4, flavor.withStyle(ChatFormatting.ITALIC));
+        nextLine = drawWrappedText(graphics, PADDING, nextLine, 0xA4A4A4, GeneticHelper.getFlavorTextKey(species).withStyle(ChatFormatting.ITALIC));
         nextLine -= LINE_HEIGHT / 2;
-        drawRightAlignedText(graphics, Component.literal("-").append(author), getWidth() - PADDING, nextLine, 0xA4A4A4);
+        drawRightAlignedText(graphics, Component.literal("-").append(GeneticHelper.getFlavorTextAuthorKey(species)), getWidth() - PADDING, nextLine, 0xA4A4A4);
         nextLine += LINE_HEIGHT;
     }
 }

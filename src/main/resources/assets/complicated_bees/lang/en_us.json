@@ -56,6 +56,8 @@
   "gui.complicated_bees.class":  "Insecta",
   "gui.complicated_bees.order": "Hymenoptera",
   "gui.complicated_bees.family":  "Apidae",
+  "gui.complicated_bees.no_genus": "Apis?",
+  "gui.complicated_bees.no_species": "?",
   "gui.complicated_bees.no_flavor": "Very little is known about this insect. You must investigate!",
   "gui.complicated_bees.no_author": "Anonymous",
   "gui.complicated_bees.no_authority": "N/A",
