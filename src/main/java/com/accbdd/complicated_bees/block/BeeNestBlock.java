@@ -48,7 +48,7 @@ public class BeeNestBlock extends BaseEntityBlock {
         if (tintIndex == 1) {
             Species species = SpeciesRegistration.getFromResourceLocation(ResourceLocation.tryParse(stack.getOrCreateTag().getCompound("BlockEntityTag").getString("species")));
             if (species != null) {
-                return species.getColor();
+                return species.getNestColor();
             }
             return 0;
         }
@@ -67,7 +67,7 @@ public class BeeNestBlock extends BaseEntityBlock {
 
     @Override
     public @NotNull BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-        if (!pPlayer.getMainHandItem().is(ItemTags.create(new ResourceLocation("complicated_bees", "scoop_tool"))) && !pPlayer.isInvulnerable()) {
+        if (!pPlayer.getMainHandItem().is(ItemTags.create(new ResourceLocation("complicated_bees", "scoop_tool"))) && pPlayer.canBeSeenAsEnemy()) {
             pPlayer.addEffect(new MobEffectInstance(MobEffects.POISON, 100));
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);

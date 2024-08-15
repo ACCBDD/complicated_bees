@@ -24,6 +24,7 @@ import static com.accbdd.complicated_bees.utils.ComplicatedBeesCodecs.HEX_STRING
  */
 public class Species {
     private final int color;
+    private final int nest_color;
     private final List<Product> products;
     private final List<Product> specialty_products;
     private final Chromosome default_chromosome;
@@ -31,6 +32,7 @@ public class Species {
 
     public static final Species INVALID = new Species(
             true,
+            0xFFFFFF,
             0xFFFFFF,
             new ArrayList<>(),
             new ArrayList<>(),
@@ -40,22 +42,24 @@ public class Species {
             instance.group(
                     Codec.BOOL.optionalFieldOf("dominant", false).forGetter(Species::isDominant),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
+                    HEX_STRING_CODEC.optionalFieldOf("nest_color", -1).forGetter(Species::getNestColor),
                     Product.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
                     Product.CODEC.listOf().optionalFieldOf("specialty_products", new ArrayList<>()).forGetter(Species::getSpecialtyProducts),
                     CompoundTag.CODEC.optionalFieldOf("default_chromosome", new Chromosome().serialize()).forGetter(species -> species.getDefaultChromosome().serialize())
             ).apply(instance, Species::new)
     );
 
-    public Species(boolean dominant, int color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
+    public Species(boolean dominant, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
         this.dominant = dominant;
         this.color = color;
+        this.nest_color = nest_color;
         this.products = products;
         this.specialty_products = specialtyProducts;
         this.default_chromosome = default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
-    public Species(boolean dominant, int color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
-        this(dominant, color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
+    public Species(boolean dominant, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
+        this(dominant, color, nest_color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
     }
 
     public static Species getFromResourceLocation(ResourceLocation loc) {
@@ -69,6 +73,10 @@ public class Species {
 
     public int getColor() {
         return this.color;
+    }
+
+    public int getNestColor() {
+        return this.nest_color == -1 ? this.color : this.nest_color;
     }
 
     public List<Product> getProducts() {

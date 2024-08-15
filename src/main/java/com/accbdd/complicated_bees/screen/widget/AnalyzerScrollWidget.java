@@ -12,7 +12,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractScrollWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
@@ -72,7 +71,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
                     Component.translatable("gui.complicated_bees.analyzer_line_2"),
                     Component.translatable("gui.complicated_bees.analyzer_line_3"),
                     Component.translatable("gui.complicated_bees.analyzer_line_4"));
-            if(scrollAmount() > getMaxScrollAmount())
+            if (scrollAmount() > getMaxScrollAmount())
                 setScrollAmount(getMaxScrollAmount());
         }
     }
@@ -129,10 +128,11 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
 
     /**
      * draws a number of components as wrapped paragraphs, with each component getting spaced by LINE_HEIGHT / 2
-     * @param graphics a GuiGraphics
+     *
+     * @param graphics   a GuiGraphics
      * @param x
      * @param y
-     * @param color a color for text
+     * @param color      a color for text
      * @param components a number of components
      * @return a y coordinate for the next line of text, spaced accordingly
      */
@@ -152,7 +152,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene) {
         IGene<?> active = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), true);
         IGene<?> inactive = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), false);
-        drawText(graphics, label, PADDING, nextLine,0xFFFFFF);
+        drawText(graphics, label, PADDING, nextLine, 0xFFFFFF);
         drawText(graphics, active.getTranslationKey(), ACTIVE_COL, nextLine, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTranslationKey(), INACTIVE_COL, nextLine, inactive.isDominant() ? 0xE63225 : 0x257FE6);
         nextLine += LINE_HEIGHT;
@@ -161,7 +161,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene, int y) {
         IGene<?> active = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), true);
         IGene<?> inactive = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), false);
-        drawText(graphics, label, PADDING, y,0xFFFFFF);
+        drawText(graphics, label, PADDING, y, 0xFFFFFF);
         drawText(graphics, active.getTranslationKey(), ACTIVE_COL, y, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTranslationKey(), INACTIVE_COL, y, inactive.isDominant() ? 0xE63225 : 0x257FE6);
     }

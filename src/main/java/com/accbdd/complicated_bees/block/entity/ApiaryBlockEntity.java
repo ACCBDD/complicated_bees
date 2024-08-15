@@ -68,6 +68,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     private int breedingProgress = 0;
     private int maxBreedingProgress = 20;
     private int errorState = 0;
+    private boolean queenSatisfied = false;
 
     private EnumTemperature temperatureCache = null;
     private EnumHumidity humidityCache = null;
@@ -265,13 +266,13 @@ public class ApiaryBlockEntity extends BlockEntity {
                 beeItems.extractItem(1, 1, false);
                 beeItems.setStackInSlot(0, createQueenFromPrincessAndDrone(top_stack, bottom_stack));
                 rebuildFlowerCache(beeItems.getStackInSlot(0));
-                queenSatisfied(top_stack);
+                checkQueenSatisfied(top_stack);
             }
         } else {
             resetBreedingProgress();
         }
 
-        if (top_stack.getItem() instanceof QueenItem && queenSatisfied(top_stack)) {
+        if (top_stack.getItem() instanceof QueenItem && checkQueenSatisfied(top_stack)) {
             doBeeEffect(top_stack);
             if (cycleProgress < CYCLE_LENGTH) {
                 cycleProgress++;
@@ -337,59 +338,60 @@ public class ApiaryBlockEntity extends BlockEntity {
         setChanged();
     }
 
-    public boolean queenSatisfied(ItemStack queen) {
+    public boolean checkQueenSatisfied(ItemStack queen) {
         Chromosome chromosome = GeneticHelper.getChromosome(queen, true);
-        boolean satisfied = true;
+        queenSatisfied = true;
 
         if (!((GeneTemperature) chromosome.getGene(GeneTemperature.ID)).withinTolerance(getTemperature())) {
             addError(EnumErrorCodes.WRONG_TEMP);
-            satisfied = false;
+            queenSatisfied = false;
         } else {
             removeError(EnumErrorCodes.WRONG_TEMP);
         }
         if (!((GeneHumidity) chromosome.getGene(GeneHumidity.ID)).withinTolerance(getHumidity())) {
             addError(EnumErrorCodes.WRONG_HUMIDITY);
-            satisfied = false;
+            queenSatisfied = false;
         } else {
             removeError(EnumErrorCodes.WRONG_HUMIDITY);
         }
         if (this.flowerCache.isEmpty()) {
             addError(EnumErrorCodes.NO_FLOWER);
-            satisfied = false;
+            queenSatisfied = false;
         } else {
             removeError(EnumErrorCodes.NO_FLOWER);
         }
         if (level.isRaining() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "weatherproof")).get()) {
             addError(EnumErrorCodes.WEATHER);
-            satisfied = false;
+            queenSatisfied = false;
         } else {
             removeError(EnumErrorCodes.WEATHER);
         }
         if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() > getBlockPos().getY()+1 && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
             addError(EnumErrorCodes.UNDERGROUND);
-            satisfied = false;
+            queenSatisfied = false;
         } else {
             removeError(EnumErrorCodes.UNDERGROUND);
         }
         if (level.isDay() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "diurnal")).get()) {
             addError(EnumErrorCodes.WRONG_TIME);
-            satisfied = false;
+            queenSatisfied = false;
         } else if (level.isNight() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "nocturnal")).get()){
             addError(EnumErrorCodes.WRONG_TIME);
-            satisfied = false;
+            queenSatisfied = false;
         } else {
             removeError(EnumErrorCodes.WRONG_TIME);
         }
 
         queenEcstatic(queen);
 
-        return satisfied;
+        return queenSatisfied;
     }
 
     public void queenEcstatic(ItemStack queen) {
         Chromosome chromosome = GeneticHelper.getChromosome(queen, true);
         if (((GeneTemperature) chromosome.getGene(GeneTemperature.ID)).get().equals(getTemperature())
-                && ((GeneHumidity) chromosome.getGene(GeneHumidity.ID)).get().equals(getHumidity())) {
+                && ((GeneHumidity) chromosome.getGene(GeneHumidity.ID)).get().equals(getHumidity())
+                && queenSatisfied) {
             addError(EnumErrorCodes.ECSTATIC);
         } else {
             removeError(EnumErrorCodes.ECSTATIC);
@@ -473,7 +475,8 @@ public class ApiaryBlockEntity extends BlockEntity {
             return;
         }
 
-        for (BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), 3, 3); it.hasNext(); ) {
+        BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), 3, 3);
+        while (it.hasNext() && this.beeItems.getStackInSlot(0).is(ItemsRegistration.QUEEN)) {
             BlockPos pos = it.next();
             if (flower.isAcceptable(level.getBlockState(pos))) {
                 flowerCache.add(pos);

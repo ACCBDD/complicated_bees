@@ -1,6 +1,7 @@
 {
   "dominant": true,
   "color": "FC030F",
+  "nest_color": "c92d02",
   "products": [
     {
       "item": "complicated_bees:comb",

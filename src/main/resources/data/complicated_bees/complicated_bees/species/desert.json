@@ -1,5 +1,5 @@
 {
-  "color": "ffedbd",
+  "color": "ffdf87",
   "products": [
     {
       "item": "minecraft:arrow"
@@ -12,7 +12,7 @@
     },
     "complicated_bees:humidity": {
       "data": "dry",
-      "tolerance": "up_1"
+      "tolerance": "none"
     },
     "complicated_bees:flower": {
       "data": "complicated_bees:desert",
