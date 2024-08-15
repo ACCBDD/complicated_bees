@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -63,12 +64,37 @@ public class GeneticHelper {
         return stack;
     }
 
-    public static Component getTranslationKey(Species species) {
+    public static MutableComponent getTranslationKey(Species species) {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
         return Component.translatable("species.complicated_bees." + registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species));
     }
 
-    public static Component getTranslationKey(Flower flower) {
+    public static MutableComponent getGenusTaxonomyKey(Species species) {
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return Component.translatable("species.complicated_bees." + registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species) + ".genus");
+    }
+
+    public static MutableComponent getSpeciesTaxonomyKey(Species species) {
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return Component.translatable("species.complicated_bees." + registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species) + ".species_taxonomy");
+    }
+
+    public static MutableComponent getFlavorTextKey(Species species) {
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return Component.translatableWithFallback("species.complicated_bees." + registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species) + ".flavor_text", "gui.complicated_bees.no_flavor");
+    }
+
+    public static MutableComponent getFlavorTextAuthorKey(Species species) {
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return Component.translatableWithFallback("species.complicated_bees." + registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species) + ".flavor_author", "gui.complicated_bees.no_author");
+    }
+
+    public static MutableComponent getAuthorityKey(Species species) {
+        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        return Component.translatableWithFallback("species.complicated_bees." + registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species) + ".authority", "gui.complicated_bees.no_authority");
+    }
+
+    public static MutableComponent getTranslationKey(Flower flower) {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
         return Component.translatable("flower.complicated_bees." + registryAccess.registry(FlowerRegistration.FLOWER_REGISTRY_KEY).get().getKey(flower));
     }
