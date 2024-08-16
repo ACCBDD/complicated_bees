@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.screen.widget;
 
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
+import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
@@ -10,6 +11,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractScrollWidget;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -101,6 +103,10 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.nocturnal_label"), bee, GeneRegistration.NOCTURNAL.get());
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.cave_dwelling_label"), bee, GeneRegistration.CAVE_DWELLING.get());
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.weatherproof_label"), bee, GeneRegistration.WEATHERPROOF.get());
+        lineBreak();
+        lineBreak();
+
+        drawProducts(graphics, bee);
         lineBreak();
         lineBreak();
 
@@ -242,5 +248,28 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         nextLine -= LINE_HEIGHT / 2;
         drawRightAlignedText(graphics, Component.literal("-").append(GeneticHelper.getFlavorTextAuthorKey(species)), getWidth() - PADDING, nextLine, 0xA4A4A4);
         nextLine += LINE_HEIGHT;
+    }
+
+    private void drawProducts(GuiGraphics graphics, ItemStack bee) {
+        Species species = GeneticHelper.getSpecies(bee, true);
+        List<Product> products = species.getProducts();
+        List<Product> specProducts = species.getSpecialtyProducts();
+        drawText(graphics, Component.translatable("gui.complicated_bees.products_label"), PADDING, 0xFFFFFF);
+        for (int i = 0; i < products.size(); i++) {
+            int x = PADDING + (51 * (i % 4)) + getX();
+            int y = nextLine + (21 * (i / 4)) + getY();
+            graphics.renderItem(products.get(i).getStack(), x, y);
+            graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int)(products.get(i).getChance() * 100) + "%"), x + 18, y+5, 0xFFFFFF);
+        }
+        nextLine += 21 * (products.size() / 4 + 1);
+
+        drawText(graphics, Component.translatable("gui.complicated_bees.specialty_products_label"), PADDING, 0xFFFFFF);
+        for (int i = 0; i < specProducts.size(); i++) {
+            int x = PADDING + (51 * (i % 4)) + getX();
+            int y = nextLine + (21 * (i / 4)) + getY();
+            graphics.renderItem(specProducts.get(i).getStack(), x, y);
+            graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int)(specProducts.get(i).getChance() * 100) + "%"), x + 18, y+5, 0xFFFFFF);
+        }
+        nextLine += 21 * (specProducts.size() / 4 + 1);
     }
 }

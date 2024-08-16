@@ -9,6 +9,18 @@
     {
       "item": "minecraft:apple",
       "chance": 0.5
+    },
+    {
+      "item": "minecraft:gold_ingot",
+      "chance": 0.257
+    },
+    {
+      "item": "minecraft:iron_ingot",
+      "chance": 0.9212
+    },
+    {
+      "item": "minecraft:honey_bottle",
+      "chance": 0.5314
     }
   ],
   "specialty_products": [

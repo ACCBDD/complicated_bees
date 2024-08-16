@@ -46,6 +46,8 @@
   "gui.complicated_bees.analyzer_line_4": "For more info on what a gene does, please refer to the wiki on GitHub.",
   "gui.complicated_bees.taxonomy": "Taxonomy:",
   "gui.complicated_bees.authority_label": "Authority: ",
+  "gui.complicated_bees.products_label": "Products:",
+  "gui.complicated_bees.specialty_products_label": "Specialty:",
   "gui.complicated_bees.kingdom_label": "KINGDOM",
   "gui.complicated_bees.class_label": "CLASS",
   "gui.complicated_bees.order_label": "ORDER",

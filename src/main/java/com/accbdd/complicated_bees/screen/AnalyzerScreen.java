@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Items;
 
 import java.util.List;
 
@@ -41,10 +42,6 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
     @Override
     public void render(GuiGraphics graphics, int mousex, int mousey, float partialTick) {
         super.render(graphics, mousex, mousey, partialTick);
-        if (!menu.isBeeAnalyzed()) {
-
-
-        }
         renderTooltip(graphics, mousex, mousey);
     }
 
