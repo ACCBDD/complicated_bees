@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.utils;
+package com.accbdd.complicated_bees.util;
 
 import com.google.common.collect.AbstractIterator;
 import net.minecraft.core.BlockPos;

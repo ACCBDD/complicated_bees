@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.utils;
+package com.accbdd.complicated_bees.util;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;

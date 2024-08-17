@@ -17,7 +17,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.accbdd.complicated_bees.utils.ComplicatedBeesCodecs.HEX_STRING_CODEC;
+import static com.accbdd.complicated_bees.util.ComplicatedBeesCodecs.HEX_STRING_CODEC;
 
 /**
  * Defines the color and products of a bee, as well as the default genes for things like JEI display and world drops.

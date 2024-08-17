@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.utils.enums;
+package com.accbdd.complicated_bees.util.enums;
 
 public enum EnumErrorCodes {
     NO_FLOWER("no_flower", 1),

@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.genetics.effect;
 
-import com.accbdd.complicated_bees.utils.BlockPosBoxIterator;
+import com.accbdd.complicated_bees.util.BlockPosBoxIterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
