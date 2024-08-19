@@ -19,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 
 public class GeneticHelper {

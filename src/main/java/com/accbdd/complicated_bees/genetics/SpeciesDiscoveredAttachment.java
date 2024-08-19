@@ -6,31 +6,40 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
-public class SpeciesDiscoveredAttachment implements CustomPacketPayload {
-    Set<String> data;
+import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
-    public SpeciesDiscoveredAttachment(Set<String> data) {
+public class SpeciesDiscoveredAttachment implements CustomPacketPayload {
+    public static final ResourceLocation ID = new ResourceLocation(MODID, "species_discovered");
+    Set<Species> data;
+
+    public SpeciesDiscoveredAttachment(Set<Species> data) {
         this.data = data;
     }
 
     public SpeciesDiscoveredAttachment(final FriendlyByteBuf buffer) {
-        String[] strings = buffer.readArray(String[]::new, buffer.readById());
+        Species[] strings = buffer.readArray(Species[]::new, this::readSpeciesFromBuffer);
+        this.data = new HashSet<>(Arrays.asList(strings));
     }
 
-    private String readSpeciesStringFromBuffer(FriendlyByteBuf buffer) {
+    private Species readSpeciesFromBuffer(FriendlyByteBuf buffer) {
         IdMap<Species> map = GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).orElseThrow();
-        return GeneticHelper.buffer.readById(map);
+        return buffer.readById(map);
     }
 
     @Override
-    public void write(FriendlyByteBuf pBuffer) {
-
+    public void write(FriendlyByteBuf buffer) {
+        IdMap<Species> map = GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).orElseThrow();
+        for (Species species : this.data) {
+            buffer.writeId(map, species);
+        }
     }
 
     @Override
     public ResourceLocation id() {
-        return null;
+        return ID;
     }
 }

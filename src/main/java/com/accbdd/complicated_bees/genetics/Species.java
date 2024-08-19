@@ -49,6 +49,10 @@ public class Species {
             ).apply(instance, Species::new)
     );
 
+    public Species() {
+        this(false, 0xFFFFFF, 0xFFFFFF, new ArrayList<>(), new ArrayList<>(), new Chromosome());
+    }
+
     public Species(boolean dominant, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
         this.dominant = dominant;
         this.color = color;
