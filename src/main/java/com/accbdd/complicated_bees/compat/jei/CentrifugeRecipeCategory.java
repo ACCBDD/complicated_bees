@@ -59,7 +59,7 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 
         for (int i = 0; i < recipe.getOutputs().size(); i++) {
             Product product = recipe.getOutputs().get(i);
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 61 + 18*(i % 3), 6 + 18*(i / 3))
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 61 + 18 * (i % 3), 6 + 18 * (i / 3))
                     .setSlotName("output")
                     .addIngredient(VanillaTypes.ITEM_STACK, product.getStack())
                     .addTooltipCallback(new ChanceTooltipCallback(product.getChance()));

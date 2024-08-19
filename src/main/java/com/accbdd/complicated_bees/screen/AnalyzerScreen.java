@@ -1,17 +1,12 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.screen.widget.AnalyzerScrollWidget;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-
-import java.util.List;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 

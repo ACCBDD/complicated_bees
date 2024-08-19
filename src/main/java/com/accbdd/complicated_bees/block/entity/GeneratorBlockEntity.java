@@ -84,7 +84,7 @@ public class GeneratorBlockEntity extends BlockEntity {
                 }
                 items.extractItem(SLOT, 1, false);
             } else {
-                setBurnTime(burnTime-1);
+                setBurnTime(burnTime - 1);
                 energy.receiveEnergy(GENERATE, false);
             }
             setChanged();

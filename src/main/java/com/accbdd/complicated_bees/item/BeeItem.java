@@ -81,7 +81,7 @@ public class BeeItem extends Item {
         } else if (!stack.getOrCreateTag().getBoolean(ANALYZED_TAG)) {
             components.add(Component.translatable("gui.complicated_bees.not_analyzed").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         } else if (!Screen.hasShiftDown()) {
-                components.add(Component.translatable("gui.complicated_bees.more_info").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+            components.add(Component.translatable("gui.complicated_bees.more_info").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         } else if (Minecraft.getInstance().level != null) {
             Chromosome primary = GeneticHelper.getChromosome(stack, true);
             components.add(primary.getGene(GeneLifespan.ID).getTranslationKey()
@@ -96,13 +96,13 @@ public class BeeItem extends Item {
                     .append(": ")
                     .append(primary.getGene(GeneTemperature.ID).getTranslationKey())
                     .append(" / ")
-                    .append(((GeneTolerant<?>)primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey())
+                    .append(((GeneTolerant<?>) primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
             components.add(Component.translatable("gui.complicated_bees.humidity_label.short")
                     .append(": ")
-                    .append(((EnumHumidity)primary.getGene(GeneHumidity.ID).get()).getTranslationKey())
+                    .append(((EnumHumidity) primary.getGene(GeneHumidity.ID).get()).getTranslationKey())
                     .append(" / ")
-                    .append(((GeneTolerant<?>)primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey())
+                    .append(((GeneTolerant<?>) primary.getGene(GeneHumidity.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
             components.add(primary.getGene(GeneFlower.ID).getTranslationKey()
                     .withStyle(ChatFormatting.GRAY));

@@ -33,7 +33,7 @@ public enum EnumTemperature {
             return NORMAL;
         } else if (temp > 0.0f) {
             return COLD;
-        } else if (temp > -0.35f){
+        } else if (temp > -0.35f) {
             return ICY;
         } else {
             return FROZEN;

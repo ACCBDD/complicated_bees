@@ -17,7 +17,7 @@ public class MeterItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if(pLevel.isClientSide()) {
+        if (pLevel.isClientSide()) {
             pPlayer.getCooldowns().addCooldown(this, 40);
             EnumHumidity humidity = EnumHumidity.getFromPosition(pLevel, pPlayer.getOnPos());
             EnumTemperature temperature = EnumTemperature.getFromPosition(pLevel, pPlayer.getOnPos());

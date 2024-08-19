@@ -43,8 +43,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Mod(ComplicatedBees.MODID)
-public class ComplicatedBees
-{
+public class ComplicatedBees {
     public static final String MODID = "complicated_bees";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
@@ -82,13 +81,12 @@ public class ComplicatedBees
                 for (ResourceLocation id : Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get().keySet()) {
                     output.accept(CombItem.setComb(ItemsRegistration.COMB.get().getDefaultInstance(), id));
                 }
-                for (Map.Entry<ResourceKey<Species>, Species> entry: speciesSet) {
+                for (Map.Entry<ResourceKey<Species>, Species> entry : speciesSet) {
                     output.accept(BeeNestBlock.stackNest(ItemsRegistration.BEE_NEST.get().getDefaultInstance(), entry.getValue()));
                 }
             }).build());
 
-    public ComplicatedBees(IEventBus modEventBus)
-    {
+    public ComplicatedBees(IEventBus modEventBus) {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ColorHandlers::registerItemColorHandlers);
         modEventBus.addListener(ColorHandlers::registerBlockColorHandlers);
@@ -171,8 +169,7 @@ public class ComplicatedBees
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         //setup code
     }
 
@@ -185,11 +182,9 @@ public class ComplicatedBees
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 MenuScreens.register(MenuRegistration.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
                 MenuScreens.register(MenuRegistration.APIARY_MENU.get(), ApiaryScreen::new);

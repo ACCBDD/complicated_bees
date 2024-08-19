@@ -31,19 +31,19 @@ public class ApiaryMenu extends AbstractContainerMenu {
         this.pos = pos;
         if (player.level().getBlockEntity(pos) instanceof ApiaryBlockEntity apiary) {
             addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT, 29, 38, ItemTagGenerator.BEE));
-            addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT+1, 29, 63, ItemTagGenerator.BEE));
+            addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT + 1, 29, 63, ItemTagGenerator.BEE));
 
             addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT, 65, 23, ItemTagGenerator.FRAME));
-            addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT+1, 65, 51, ItemTagGenerator.FRAME));
-            addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT+2, 65, 79, ItemTagGenerator.FRAME));
+            addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT + 1, 65, 51, ItemTagGenerator.FRAME));
+            addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT + 2, 65, 79, ItemTagGenerator.FRAME));
 
             addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT, 115, 51));
-            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+1, 115, 26));
-            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+2, 137, 39));
-            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+3, 137, 64));
-            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+4, 115, 76));
-            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+5, 93, 64));
-            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT+6, 93, 39));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT + 1, 115, 26));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT + 2, 137, 39));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT + 3, 137, 64));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT + 4, 115, 76));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT + 5, 93, 64));
+            addSlot(new OutputSlot(apiary.getOutputItems(), OUTPUT_SLOT + 6, 93, 39));
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 105);
 
@@ -51,7 +51,7 @@ public class ApiaryMenu extends AbstractContainerMenu {
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {
-        for (int i = 0 ; i < amount ; i++) {
+        for (int i = 0; i < amount; i++) {
             addSlot(new Slot(playerInventory, index, x, y));
             x += dx;
             index++;
@@ -60,7 +60,7 @@ public class ApiaryMenu extends AbstractContainerMenu {
     }
 
     private void addSlotBox(Container playerInventory, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
-        for (int j = 0 ; j < verAmount ; j++) {
+        for (int j = 0; j < verAmount; j++) {
             index = addSlotRange(playerInventory, index, x, y, horAmount, dx);
             y += dy;
         }

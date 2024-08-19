@@ -366,7 +366,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         } else {
             removeError(EnumErrorCodes.WEATHER);
         }
-        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() > getBlockPos().getY()+1 && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
+        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() > getBlockPos().getY() + 1 && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
             addError(EnumErrorCodes.UNDERGROUND);
             queenSatisfied = false;
         } else {
@@ -375,7 +375,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         if (level.isDay() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "diurnal")).get()) {
             addError(EnumErrorCodes.WRONG_TIME);
             queenSatisfied = false;
-        } else if (level.isNight() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "nocturnal")).get()){
+        } else if (level.isNight() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "nocturnal")).get()) {
             addError(EnumErrorCodes.WRONG_TIME);
             queenSatisfied = false;
         } else {
@@ -467,7 +467,7 @@ public class ApiaryBlockEntity extends BlockEntity {
     private void rebuildFlowerCache(ItemStack bee) {
         clearFlowerCache();
         Flower flower = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistration.FLOWER_REGISTRY_KEY).get()
-                .get(((GeneFlower)GeneticHelper.getGene(bee, GeneFlower.ID, true)).get());
+                .get(((GeneFlower) GeneticHelper.getGene(bee, GeneFlower.ID, true)).get());
 
         if (flower == null) {
             //no valid flower gene

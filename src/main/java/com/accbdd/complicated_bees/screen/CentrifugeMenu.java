@@ -31,9 +31,9 @@ public class CentrifugeMenu extends AbstractContainerMenu {
             addSlot(new SlotItemHandler(centrifuge.getInputItems(), INPUT_SLOT, 34, 35));
             for (int i = 0; i < 9; i++) {
                 addSlot(new SlotItemHandler(centrifuge.getOutputItems(),
-                        OUTPUT_SLOT+i,
-                        91+(18 * (i % 3)),
-                        17+(18 * (i / 3))) {
+                        OUTPUT_SLOT + i,
+                        91 + (18 * (i % 3)),
+                        17 + (18 * (i / 3))) {
                     @Override
                     public boolean mayPlace(ItemStack stack) {
                         return false;
@@ -85,7 +85,7 @@ public class CentrifugeMenu extends AbstractContainerMenu {
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {
-        for (int i = 0 ; i < amount ; i++) {
+        for (int i = 0; i < amount; i++) {
             addSlot(new Slot(playerInventory, index, x, y));
             x += dx;
             index++;
@@ -94,7 +94,7 @@ public class CentrifugeMenu extends AbstractContainerMenu {
     }
 
     private void addSlotBox(Container playerInventory, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
-        for (int j = 0 ; j < verAmount ; j++) {
+        for (int j = 0; j < verAmount; j++) {
             index = addSlotRange(playerInventory, index, x, y, horAmount, dx);
             y += dy;
         }

@@ -78,7 +78,7 @@ public class Chromosome {
 
     public static Chromosome deserialize(CompoundTag tag) {
         Map<ResourceLocation, IGene<?>> genes = new HashMap<>();
-        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry: GeneRegistration.GENE_REGISTRY.entrySet()) {
+        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistration.GENE_REGISTRY.entrySet()) {
             ResourceLocation id = entry.getKey().location();
             CompoundTag geneData = tag.getCompound(id.toString());
             if (!geneData.equals(new CompoundTag())) {

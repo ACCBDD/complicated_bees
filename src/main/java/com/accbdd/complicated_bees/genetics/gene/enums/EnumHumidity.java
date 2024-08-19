@@ -22,7 +22,7 @@ public enum EnumHumidity {
     public static EnumHumidity getFromValue(float downfall) {
         if (downfall > 0.85f) {
             return WET;
-        } else if (downfall > 0.3f){
+        } else if (downfall > 0.3f) {
             return NORMAL;
         } else {
             return DRY;

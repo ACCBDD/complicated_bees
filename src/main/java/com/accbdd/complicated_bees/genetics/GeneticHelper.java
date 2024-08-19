@@ -131,10 +131,10 @@ public class GeneticHelper {
             IGene<?> geneB = (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key);
 
             if (geneEntry.getValue() instanceof GeneTolerant) {
-                EnumTolerance toleranceA = ((GeneTolerant<?>)(rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key)).getTolerance();
-                EnumTolerance toleranceB = ((GeneTolerant<?>)(rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key)).getTolerance();
-                geneA = ((GeneTolerant<?>)geneA).setTolerance(toleranceA);
-                geneB = ((GeneTolerant<?>)geneB).setTolerance(toleranceB);
+                EnumTolerance toleranceA = ((GeneTolerant<?>) (rand.nextFloat() < 0.5 ? left.getPrimary() : left.getSecondary()).getGene(key)).getTolerance();
+                EnumTolerance toleranceB = ((GeneTolerant<?>) (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key)).getTolerance();
+                geneA = ((GeneTolerant<?>) geneA).setTolerance(toleranceA);
+                geneB = ((GeneTolerant<?>) geneB).setTolerance(toleranceB);
             }
 
             if (geneEntry.getValue() instanceof GeneSpecies) {
