@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.genetics.gene;
 
+import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import net.minecraft.client.Minecraft;
@@ -30,7 +31,7 @@ public class GeneSpecies extends Gene<Species> {
     @Override
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
-        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        RegistryAccess registryAccess = GeneticHelper.getRegistryAccess();
         if (registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(this.get()) == null) {
             tag.put(DATA, StringTag.valueOf("complicated_bees:invalid"));
         } else {
@@ -42,8 +43,7 @@ public class GeneSpecies extends Gene<Species> {
 
     @Override
     public GeneSpecies deserialize(CompoundTag tag) {
-        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
-        Registry<Species> registry = registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get();
+        Registry<Species> registry = GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get();
 
         return new GeneSpecies(registry.get(ResourceLocation.tryParse(tag.getString(DATA))), tag.getBoolean(DOMINANT));
     }

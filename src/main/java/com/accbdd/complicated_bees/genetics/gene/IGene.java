@@ -32,7 +32,7 @@ public interface IGene<T> {
     /**
      * Creates a deserialized gene from a serialized NBT tag.
      *
-     * @param tag the serialized version of the data this gene stores
+     * @param tag the nbt serialized version of this gene
      * @return a deserialized version of this gene from the specified tag
      */
     IGene<T> deserialize(CompoundTag tag);

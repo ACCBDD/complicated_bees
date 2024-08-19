@@ -102,6 +102,7 @@ public class ComplicatedBees {
         MenuRegistration.MENU_TYPES.register(modEventBus);
         GeneRegistration.GENES.register(modEventBus);
         BeeEffectRegistration.EFFECTS.register(modEventBus);
+        MutationRegistration.MUTATION_CONDITIONS.register(modEventBus);
         EsotericRegistration.LOOT_ITEM_FUNCTION_REGISTER.register(modEventBus);
         EsotericRegistration.TREE_DECORATOR_REGISTER.register(modEventBus);
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
@@ -142,6 +143,7 @@ public class ComplicatedBees {
     public void registerRegistries(NewRegistryEvent event) {
         event.register(GeneRegistration.GENE_REGISTRY);
         event.register(BeeEffectRegistration.BEE_EFFECT_REGISTRY);
+        event.register(MutationRegistration.MUTATION_CONDITION_REGISTRY);
     }
 
     @SubscribeEvent

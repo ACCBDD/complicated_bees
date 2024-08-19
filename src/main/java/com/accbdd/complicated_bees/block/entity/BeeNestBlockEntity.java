@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
@@ -35,7 +36,7 @@ public class BeeNestBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
+        RegistryAccess registryAccess = GeneticHelper.getRegistryAccess();
         if (registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(getSpecies()) == null) {
             tag.put("species", StringTag.valueOf("complicated_bees:invalid"));
         } else {

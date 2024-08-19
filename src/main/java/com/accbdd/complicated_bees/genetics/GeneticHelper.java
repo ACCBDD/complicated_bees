@@ -4,11 +4,13 @@ import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
+import com.accbdd.complicated_bees.genetics.mutation.IMutationCondition;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import com.accbdd.complicated_bees.registry.FlowerRegistration;
 import com.accbdd.complicated_bees.registry.MutationRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -16,6 +18,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.Map;
@@ -119,7 +122,7 @@ public class GeneticHelper {
         return getGene(stack, id, primary).get();
     }
 
-    private static Genome mixGenomes(Genome left, Genome right) {
+    private static Genome mixGenomes(Genome left, Genome right, Level level, BlockPos pos) {
         Chromosome chromosome_a = new Chromosome();
         Chromosome chromosome_b = new Chromosome();
         Chromosome mutated_a = null;
@@ -142,9 +145,13 @@ public class GeneticHelper {
                 Species speciesB = (Species) geneB.get();
                 for (Mutation mutation : ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistration.MUTATION_REGISTRY_KEY).get().stream().toList()) {
                     if ((mutation.getFirstSpecies() == speciesA && mutation.getSecondSpecies() == speciesB) || (mutation.getSecondSpecies() == speciesA && mutation.getFirstSpecies() == speciesB)) {
-                        mutated_a = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_a);
-                        mutated_b = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_b);
-                        //todo: check for extra mutation conditions
+                        boolean canMutate = mutation.getConditions().isEmpty();
+                        for (IMutationCondition condition : mutation.getConditions())
+                            canMutate = canMutate || condition.check(level, pos);
+                        if (canMutate) {
+                            mutated_a = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_a);
+                            mutated_b = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_b);
+                        }
                     }
                 }
             }
@@ -175,14 +182,23 @@ public class GeneticHelper {
         return new Genome(chromosome_a, chromosome_b);
     }
 
-    public static ItemStack getFromMate(ItemStack stack, Item resultType) {
+    /**
+     * Gets an offspring from an ItemStack with a genome. If the ItemStack also has a mate set, the offspring is mutated according to mixGenomes.
+     *
+     * @param bee        an ItemStack to get an offspring from
+     * @param resultType the Item an offspring should be
+     * @param level      the level the offspring is generating in (for mutation conditions)
+     * @param pos        the blockpos the offspring is generating in (for mutation conditions)
+     * @return an ItemStack of type resultType with a genome set
+     */
+    public static ItemStack getOffspring(ItemStack bee, Item resultType, Level level, BlockPos pos) {
         ItemStack result = new ItemStack(resultType);
-        CompoundTag eggs = stack.getOrCreateTag().getCompound(MATE);
+        CompoundTag eggs = bee.getOrCreateTag().getCompound(MATE);
 
-        Genome genome = getGenome(stack);
+        Genome genome = getGenome(bee);
         Genome mate = new Genome(Chromosome.deserialize(eggs.getCompound(CHROMOSOME_A)), Chromosome.deserialize(eggs.getCompound(CHROMOSOME_B)));
         if (!eggs.equals(new CompoundTag())) {
-            setGenome(result, mixGenomes(genome, mate));
+            setGenome(result, mixGenomes(genome, mate, level, pos));
         } else {
             setGenome(result, genome);
         }

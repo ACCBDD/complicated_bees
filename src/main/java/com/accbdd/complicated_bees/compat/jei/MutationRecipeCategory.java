@@ -39,7 +39,8 @@ public class MutationRecipeCategory implements IRecipeCategory<Mutation> {
     @Override
     public void draw(Mutation recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
-        guiGraphics.drawCenteredString(Minecraft.getInstance().font, String.format("%.0f%%", recipe.getChance() * 100), 95, 1, 0xFFFFFF);
+        String chanceString = recipe.getConditions().isEmpty() ? String.format("%.0f%%", recipe.getChance() * 100) : String.format("[%.0f%%]", recipe.getChance() * 100);
+        guiGraphics.drawCenteredString(Minecraft.getInstance().font, chanceString, 95, 1, 0xFFFFFF);
     }
 
     @Override
