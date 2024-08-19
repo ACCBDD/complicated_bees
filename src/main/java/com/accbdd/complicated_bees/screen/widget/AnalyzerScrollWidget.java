@@ -11,7 +11,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractScrollWidget;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -136,8 +135,8 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
      * draws a number of components as wrapped paragraphs, with each component getting spaced by LINE_HEIGHT / 2
      *
      * @param graphics   a GuiGraphics
-     * @param x
-     * @param y
+     * @param x          the x coordinate of the top left line
+     * @param y          the y coordinate of the top left line
      * @param color      a color for text
      * @param components a number of components
      * @return a y coordinate for the next line of text, spaced accordingly
@@ -259,7 +258,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
             int x = PADDING + (51 * (i % 4)) + getX();
             int y = nextLine + (21 * (i / 4)) + getY();
             graphics.renderItem(products.get(i).getStack(), x, y);
-            graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int)(products.get(i).getChance() * 100) + "%"), x + 18, y+5, 0xFFFFFF);
+            graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int) (products.get(i).getChance() * 100) + "%"), x + 18, y + 5, 0xFFFFFF);
         }
         nextLine += 21 * (products.size() / 4 + 1);
 
@@ -268,7 +267,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
             int x = PADDING + (51 * (i % 4)) + getX();
             int y = nextLine + (21 * (i / 4)) + getY();
             graphics.renderItem(specProducts.get(i).getStack(), x, y);
-            graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int)(specProducts.get(i).getChance() * 100) + "%"), x + 18, y+5, 0xFFFFFF);
+            graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int) (specProducts.get(i).getChance() * 100) + "%"), x + 18, y + 5, 0xFFFFFF);
         }
         nextLine += 21 * (specProducts.size() / 4 + 1);
     }
