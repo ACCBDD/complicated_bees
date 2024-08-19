@@ -48,7 +48,6 @@ public class EsotericRegistration {
     public static final Supplier<RecipeSerializer<CentrifugeRecipe>> CENTRIFUGE_RECIPE_SERIALIZER = RECIPE_SERIALIZER_REGISTER.register("centrifuge",
             () -> CentrifugeRecipe.SERIALIZER);
 
-    //todo: implement?
     public static final Supplier<AttachmentType<HashSet<String>>> SPECIES_DISCOVERED_ATTACHMENT = ATTACHMENT_TYPE_REGISTER.register("species_discovered",
-            () -> AttachmentType.builder(() -> new HashSet<String>()).serialize(new SpeciesDiscoveredSerializer()).build());
+            () -> AttachmentType.builder(() -> new HashSet<String>()).serialize(new SpeciesDiscoveredSerializer()).copyOnDeath().build());
 }
