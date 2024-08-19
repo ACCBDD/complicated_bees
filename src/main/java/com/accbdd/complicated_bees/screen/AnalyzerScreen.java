@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
     private final ResourceLocation GUI = new ResourceLocation(MODID, "textures/gui/analyzer.png");
+    private AnalyzerScrollWidget widget;
 
     public AnalyzerScreen(AnalyzerMenu container, Inventory inventory, Component title) {
         super(container, inventory, title);
@@ -26,8 +28,7 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
     @Override
     protected void init() {
         super.init();
-
-        addRenderableWidget(new AnalyzerScrollWidget(leftPos + 8, topPos + 8, 207, 120, getMenu()));
+        this.widget = addRenderableWidget(new AnalyzerScrollWidget(leftPos + 8, topPos + 8, 207, 120, getMenu()));
     }
 
     @Override
@@ -47,7 +48,12 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
 
     @Override
     protected void renderTooltip(GuiGraphics graphics, int mousex, int mousey) {
-        super.renderTooltip(graphics, mousex, mousey);
+        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
+            ItemStack itemstack = this.hoveredSlot.getItem();
+            graphics.renderTooltip(this.font, this.getTooltipFromContainerItem(itemstack), itemstack.getTooltipImage(), itemstack, mousex, mousey);
+        } else if (this.menu.getCarried().isEmpty() && widget.hoveredStack != null) {
+            graphics.renderTooltip(this.font, this.getTooltipFromContainerItem(widget.hoveredStack), widget.hoveredStack.getTooltipImage(), widget.hoveredStack, mousex, mousey);
+        }
     }
 
 

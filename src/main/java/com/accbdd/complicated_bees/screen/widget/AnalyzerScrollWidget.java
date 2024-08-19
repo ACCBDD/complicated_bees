@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.screen.widget;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
@@ -30,6 +31,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private static final int PADDING = 4;
 
     private final AnalyzerMenu menu;
+    public ItemStack hoveredStack = ItemStack.EMPTY;
     private int nextLine;
 
     public AnalyzerScrollWidget(int pX, int pY, int pWidth, int pHeight, AnalyzerMenu menu) {
@@ -54,18 +56,9 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     }
 
     @Override
-    protected void renderContents(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderText(pGuiGraphics);
-    }
-
-    @Override
-    protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
-
-    }
-
-    private void renderText(GuiGraphics graphics) {
+    protected void renderContents(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         if (menu.isBeeAnalyzed())
-            drawGeneInfo(graphics, menu.getSlot(1).getItem());
+            drawGeneInfo(graphics, menu.getSlot(1).getItem(), mouseX, mouseY);
         else {
             drawWrappedText(graphics, 2, 2, 0xFFFFFF,
                     Component.translatable("gui.complicated_bees.analyzer_line_1"),
@@ -77,8 +70,14 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         }
     }
 
-    private void drawGeneInfo(GuiGraphics graphics, ItemStack bee) {
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+
+    }
+
+    private void drawGeneInfo(GuiGraphics graphics, ItemStack bee, int mouseX, int mouseY) {
         nextLine = PADDING;
+
         drawText(graphics, Component.literal("Active"), ACTIVE_COL, nextLine, 0xFFFFFF);
         drawText(graphics, Component.literal("Inactive"), INACTIVE_COL, nextLine, 0xFFFFFF);
         lineBreak();
@@ -105,7 +104,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         lineBreak();
         lineBreak();
 
-        drawProducts(graphics, bee);
+        drawProducts(graphics, bee, mouseX, mouseY);
         lineBreak();
         lineBreak();
 
@@ -249,16 +248,20 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         nextLine += LINE_HEIGHT;
     }
 
-    private void drawProducts(GuiGraphics graphics, ItemStack bee) {
+    private void drawProducts(GuiGraphics graphics, ItemStack bee, int mouseX, int mouseY) {
         Species species = GeneticHelper.getSpecies(bee, true);
         List<Product> products = species.getProducts();
         List<Product> specProducts = species.getSpecialtyProducts();
         drawText(graphics, Component.translatable("gui.complicated_bees.products_label"), PADDING, 0xFFFFFF);
+        this.hoveredStack = null;
         for (int i = 0; i < products.size(); i++) {
             int x = PADDING + (51 * (i % 4)) + getX();
             int y = nextLine + (21 * (i / 4)) + getY();
             graphics.renderItem(products.get(i).getStack(), x, y);
             graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int) (products.get(i).getChance() * 100) + "%"), x + 18, y + 5, 0xFFFFFF);
+            if (mouseX >= x && mouseX <= x + 16 && mouseY + scrollAmount() >= y && mouseY + scrollAmount() <= y + 16) {
+                this.hoveredStack = products.get(i).getStack();
+            }
         }
         nextLine += 21 * (products.size() / 4 + 1);
 
@@ -268,6 +271,9 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
             int y = nextLine + (21 * (i / 4)) + getY();
             graphics.renderItem(specProducts.get(i).getStack(), x, y);
             graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int) (specProducts.get(i).getChance() * 100) + "%"), x + 18, y + 5, 0xFFFFFF);
+            if (mouseX >= x && mouseX <= x + 16 && mouseY - getY() + scrollAmount() >= y - 16 && mouseY - getY() + scrollAmount() <= y) {
+                this.hoveredStack = specProducts.get(i).getStack();
+            }
         }
         nextLine += 21 * (specProducts.size() / 4 + 1);
     }
