@@ -45,7 +45,7 @@ public class Chromosome {
     }
 
     public Chromosome copy() {
-        return new Chromosome(this.genes);
+        return new Chromosome(this.serialize());
     }
 
     public Chromosome setGenes(Map<ResourceLocation, IGene<?>> genes) {

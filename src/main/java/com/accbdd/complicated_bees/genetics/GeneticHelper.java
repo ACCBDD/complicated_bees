@@ -138,19 +138,19 @@ public class GeneticHelper {
                 EnumTolerance toleranceB = ((GeneTolerant<?>) (rand.nextFloat() < 0.5 ? right.getPrimary() : right.getSecondary()).getGene(key)).getTolerance();
                 geneA = ((GeneTolerant<?>) geneA).setTolerance(toleranceA);
                 geneB = ((GeneTolerant<?>) geneB).setTolerance(toleranceB);
-            }
-
-            if (geneEntry.getValue() instanceof GeneSpecies) {
+            } else if (geneEntry.getValue() instanceof GeneSpecies) {
                 Species speciesA = (Species) geneA.get();
                 Species speciesB = (Species) geneB.get();
                 for (Mutation mutation : ServerLifecycleHooks.getCurrentServer().registryAccess().registry(MutationRegistration.MUTATION_REGISTRY_KEY).get().stream().toList()) {
                     if ((mutation.getFirstSpecies() == speciesA && mutation.getSecondSpecies() == speciesB) || (mutation.getSecondSpecies() == speciesA && mutation.getFirstSpecies() == speciesB)) {
-                        boolean canMutate = mutation.getConditions().isEmpty();
+                        boolean canMutate = true;
                         for (IMutationCondition condition : mutation.getConditions())
-                            canMutate = canMutate || condition.check(level, pos);
+                            canMutate = canMutate && condition.check(level, pos);
                         if (canMutate) {
-                            mutated_a = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_a);
-                            mutated_b = (rand.nextFloat() < mutation.getChance() ? mutation.getResultSpecies().getDefaultChromosome() : mutated_b);
+                            if (rand.nextFloat() < mutation.getChance())
+                                mutated_a = mutation.getResultSpecies().getDefaultChromosome();
+                            if (rand.nextFloat() < mutation.getChance())
+                                mutated_b = mutation.getResultSpecies().getDefaultChromosome();
                         }
                     }
                 }

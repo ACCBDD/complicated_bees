@@ -6,6 +6,7 @@
   "conditions": {
     "complicated_bees:block_under": {
       "block": "minecraft:glass"
-    }
+    },
+    "complicated_bees:ecstatic": {}
   }
 }

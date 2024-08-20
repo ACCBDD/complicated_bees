@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.genetics.mutation.BlockUnderCondition;
+import com.accbdd.complicated_bees.genetics.mutation.EcstaticCondition;
 import com.accbdd.complicated_bees.genetics.mutation.IMutationCondition;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import net.minecraft.core.HolderSet;
@@ -27,4 +28,5 @@ public class MutationRegistration {
     public static final DeferredRegister<IMutationCondition> MUTATION_CONDITIONS = DeferredRegister.create(MUTATION_CONDITION_REGISTRY, MODID);
 
     public static final Supplier<IMutationCondition> BLOCK_UNDER = MUTATION_CONDITIONS.register(BlockUnderCondition.ID, () -> new BlockUnderCondition(Blocks.AIR));
+    public static final Supplier<IMutationCondition> ECSTATIC = MUTATION_CONDITIONS.register(EcstaticCondition.ID, EcstaticCondition::new);
 }

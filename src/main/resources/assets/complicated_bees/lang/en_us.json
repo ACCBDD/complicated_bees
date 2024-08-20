@@ -139,7 +139,8 @@
   "gui.complicated_bees.productivity.faster": "Faster",
   "gui.complicated_bees.productivity.fastest": "Fastest",
 
-  "gui.complicated_bees.mutations.block_under" : "Requires %s underneath",
+  "gui.complicated_bees.mutations.block_under" : "Requires %s underneath apiary",
+  "gui.complicated_bees.mutations.ecstatic" : "Queen must be ecstatic",
 
   "jei.complicated_bees.chance": "Chance",
 

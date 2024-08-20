@@ -64,6 +64,7 @@ public class Species {
 
     public Species(boolean dominant, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
         this(dominant, color, nest_color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
+        default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
     public static Species getFromResourceLocation(ResourceLocation loc) {
