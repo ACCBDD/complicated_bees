@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees.genetics.mutation;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
@@ -12,6 +13,11 @@ public interface IMutationCondition {
      * @return whether this mutation condition is satisfied
      */
     boolean check(Level level, BlockPos pos);
+
+    /**
+     * @return a description to show in a recipe viewer that explains this mutation condition
+     */
+    Component getDescription();
 
     /**
      * Serializes this condition into a compound tag.

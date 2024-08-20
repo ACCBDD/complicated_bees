@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.compat.jei;
 
+import com.accbdd.complicated_bees.genetics.mutation.IMutationCondition;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -16,6 +17,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -41,6 +45,17 @@ public class MutationRecipeCategory implements IRecipeCategory<Mutation> {
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
         String chanceString = recipe.getConditions().isEmpty() ? String.format("%.0f%%", recipe.getChance() * 100) : String.format("[%.0f%%]", recipe.getChance() * 100);
         guiGraphics.drawCenteredString(Minecraft.getInstance().font, chanceString, 95, 1, 0xFFFFFF);
+    }
+
+    @Override
+    public List<Component> getTooltipStrings(Mutation recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        List<Component> tips = new ArrayList<>();
+        if (mouseX >= 81 && mouseX <= 106 && mouseY >= 1 && mouseY <= 10) {
+            for (IMutationCondition condition : recipe.getConditions()) {
+                tips.add(condition.getDescription());
+            }
+        }
+        return tips;
     }
 
     @Override
