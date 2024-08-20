@@ -1,6 +1,6 @@
 package com.accbdd.complicated_bees.compat.jei;
 
-import com.accbdd.complicated_bees.genetics.mutation.IMutationCondition;
+import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -50,7 +50,8 @@ public class MutationRecipeCategory implements IRecipeCategory<Mutation> {
     @Override
     public List<Component> getTooltipStrings(Mutation recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tips = new ArrayList<>();
-        if (mouseX >= 81 && mouseX <= 106 && mouseY >= 1 && mouseY <= 10) {
+        if (mouseX >= 81 && mouseX <= 106 && mouseY >= 1 && mouseY <= 10 && !recipe.getConditions().isEmpty()) {
+            tips.add(Component.translatable("gui.complicated_bees.mutations.has_conditions"));
             for (IMutationCondition condition : recipe.getConditions()) {
                 tips.add(condition.getDescription());
             }

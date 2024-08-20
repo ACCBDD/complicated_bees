@@ -1,4 +1,4 @@
-package com.accbdd.complicated_bees.genetics.mutation;
+package com.accbdd.complicated_bees.genetics.mutation.condition;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;

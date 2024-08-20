@@ -2,6 +2,7 @@ package com.accbdd.complicated_bees.genetics.mutation;
 
 import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
 import com.accbdd.complicated_bees.registry.MutationRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import com.mojang.serialization.Codec;

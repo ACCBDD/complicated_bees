@@ -139,8 +139,16 @@
   "gui.complicated_bees.productivity.faster": "Faster",
   "gui.complicated_bees.productivity.fastest": "Fastest",
 
+  "gui.complicated_bees.mutations.has_conditions": "Special conditions for mutation:",
   "gui.complicated_bees.mutations.block_under" : "Requires %s underneath apiary",
   "gui.complicated_bees.mutations.ecstatic" : "Queen must be ecstatic",
+  "gui.complicated_bees.mutations.downfall": "Requires downfall",
+  "gui.complicated_bees.mutations.daytime": "Requires daylight",
+  "gui.complicated_bees.mutations.nighttime": "Requires moonlight",
+  "gui.complicated_bees.mutations.temperature": "Requires a temperature of %s",
+  "gui.complicated_bees.mutations.temperature_range": "Requires a temperature between %s and %s",
+  "gui.complicated_bees.mutations.humidity": "Requires a humidity of %s",
+  "gui.complicated_bees.mutations.humidity_range": "Requires a humidity between %s and %s",
 
   "jei.complicated_bees.chance": "Chance",
 
