@@ -27,7 +27,6 @@ public class GeneRegistration {
     public static final Supplier<GeneProductivity> PRODUCTIVITY = GENES.register(GeneProductivity.TAG, GeneProductivity::new);
     public static final Supplier<GeneEffect> EFFECT = GENES.register(GeneEffect.TAG, GeneEffect::new);
 
-    public static final Supplier<GeneBoolean> DIURNAL = GENES.register("diurnal", () -> new GeneBoolean(true, true));
     public static final Supplier<GeneBoolean> NOCTURNAL = GENES.register("nocturnal", () -> new GeneBoolean(false, true));
     public static final Supplier<GeneBoolean> CAVE_DWELLING = GENES.register("cave_dwelling", () -> new GeneBoolean(false, true));
     public static final Supplier<GeneBoolean> WEATHERPROOF = GENES.register("weatherproof", () -> new GeneBoolean(false, true));

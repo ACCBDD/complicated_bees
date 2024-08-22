@@ -96,7 +96,6 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.fertility_label"), bee, GeneRegistration.FERTILITY.get());
         lineBreak();
 
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.diurnal_label"), bee, GeneRegistration.DIURNAL.get());
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.nocturnal_label"), bee, GeneRegistration.NOCTURNAL.get());
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.cave_dwelling_label"), bee, GeneRegistration.CAVE_DWELLING.get());
         drawGeneValues(graphics, Component.translatable("gui.complicated_bees.weatherproof_label"), bee, GeneRegistration.WEATHERPROOF.get());
