@@ -1,0 +1,11 @@
+{
+  "blocks": [
+    "minecraft:vine",
+    "minecraft:cocoa",
+    "minecraft:melon",
+    "minecraft:bamboo"
+  ],
+  "tags": [
+    "minecraft:flowers"
+  ]
+}

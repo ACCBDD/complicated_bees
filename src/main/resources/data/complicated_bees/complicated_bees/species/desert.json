@@ -2,7 +2,10 @@
   "color": "ffdf87",
   "products": [
     {
-      "item": "minecraft:arrow"
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:dusty"
+      }
     }
   ],
   "default_chromosome": {
@@ -15,8 +18,7 @@
       "tolerance": "none"
     },
     "complicated_bees:flower": {
-      "data": "complicated_bees:desert",
-      "dominant": false
+      "data": "complicated_bees:desert"
     }
   }
 }

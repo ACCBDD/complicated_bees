@@ -3,11 +3,10 @@
   "color": "03FCE8",
   "products": [
     {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:apple",
-      "chance": 0.5
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:honey"
+      }
     }
   ],
   "default_chromosome": {
@@ -19,8 +18,7 @@
       "tolerance": "down_1"
     },
     "complicated_bees:flower": {
-      "data": "complicated_bees:flower",
-      "dominant": false
+      "data": "complicated_bees:flower"
     }
   }
 }

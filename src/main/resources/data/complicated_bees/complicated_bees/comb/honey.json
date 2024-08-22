@@ -3,18 +3,12 @@
   "inner_color": "fea02b",
   "products": [
     {
-      "item": "minecraft:honey_block",
-      "chance": 1
+      "item": "complicated_bees:honey_droplet",
+      "chance": 0.8
     },
     {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:apple",
-      "chance": 0.5
-    },
-    {
-      "item": "minecraft:iron_ingot"
+      "item": "complicated_bees:beeswax",
+      "chance": 0.4
     }
   ]
 }

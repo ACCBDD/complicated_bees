@@ -90,6 +90,7 @@
   "gui.complicated_bees.error.underground": "Can't see the sky!",
   "gui.complicated_bees.error.weather": "Inclement weather!",
   "gui.complicated_bees.error.ecstatic": "Bee is ecstatic!",
+  "gui.complicated_bees.error.not_underground": "Needs to be underground!",
 
   "gui.complicated_bees.boolean.false": "No",
   "gui.complicated_bees.boolean.true": "Yes",
@@ -152,9 +153,10 @@
 
   "jei.complicated_bees.chance": "Chance",
 
-  "comb.complicated_bees.complicated_bees:stringy": "Stringy",
-  "comb.complicated_bees.complicated_bees:juicy": "Juicy",
   "comb.complicated_bees.complicated_bees:honey": "Honey",
+  "comb.complicated_bees.complicated_bees:rocky": "Rocky",
+  "comb.complicated_bees.complicated_bees:dusty": "Dusty",
+  "comb.complicated_bees.complicated_bees:silky": "Silky",
 
   "species.complicated_bees.complicated_bees:forest": "Forest",
   "species.complicated_bees.complicated_bees:forest.genus": "Apis",
@@ -174,6 +176,18 @@
   "species.complicated_bees.complicated_bees:desert.authority": "Ayse Eigh",
   "species.complicated_bees.complicated_bees:desert.flavor_text": "Adapted to hot and dry climates, this species can no longer survive in a more temperate environment.",
   "species.complicated_bees.complicated_bees:desert.flavor_author": "Beekeeping 101",
+  "species.complicated_bees.complicated_bees:jungle": "Jungle",
+  "species.complicated_bees.complicated_bees:jungle.genus": "Apis",
+  "species.complicated_bees.complicated_bees:jungle.species_taxonomy": "A. saltu",
+  "species.complicated_bees.complicated_bees:jungle.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:jungle.flavor_text": "Thriving in hot and humid environments, Apis saltu disdains pollen and prefers the chlorophyll of native jungle plants.",
+  "species.complicated_bees.complicated_bees:jungle.flavor_author": "Beekeeping 101",
+  "species.complicated_bees.complicated_bees:rocky": "Rocky",
+  "species.complicated_bees.complicated_bees:rocky.genus": "Apis",
+  "species.complicated_bees.complicated_bees:rocky.species_taxonomy": "A. griseo",
+  "species.complicated_bees.complicated_bees:rocky.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:rocky.flavor_text": "Uniquely adapted to the low light conditions of lush caves, this species can no longer function in true daylight.",
+  "species.complicated_bees.complicated_bees:rocky.flavor_author": "Beekeeping 101",
   "species.complicated_bees.complicated_bees:common": "Common",
   "species.complicated_bees.complicated_bees:common.genus": "Apis",
   "species.complicated_bees.complicated_bees:common.species_taxonomy": "A. planum",
@@ -183,6 +197,8 @@
 
   "flower.complicated_bees.complicated_bees:flower": "Flowers",
   "flower.complicated_bees.complicated_bees:desert": "Desert",
+  "flower.complicated_bees.complicated_bees:jungle": "Jungle",
+  "flower.complicated_bees.complicated_bees:lush_cave": "Lush Cave",
 
   "effect.complicated_bees.complicated_bees:debug": "Debug",
   "effect.complicated_bees.complicated_bees:none": "None"

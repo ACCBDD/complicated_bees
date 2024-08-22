@@ -1,12 +1,12 @@
 {
   "dominant": true,
-  "color": "FC030F",
-  "nest_color": "c92d02",
+  "color": "7bbf04",
+  "nest_color": "4F721E",
   "products": [
     {
       "item": "complicated_bees:comb",
       "nbt": {
-        "comb_type": "complicated_bees:honey"
+        "comb_type": "complicated_bees:silky"
       }
     }
   ],
@@ -15,15 +15,18 @@
       "data": "shortest"
     },
     "complicated_bees:temperature": {
-      "data": "normal",
+      "data": "warm",
       "tolerance": "up_1"
     },
     "complicated_bees:humidity": {
-      "data": "normal",
+      "data": "wet",
       "tolerance": "none"
     },
     "complicated_bees:flower": {
-      "data": "complicated_bees:flower"
+      "data": "complicated_bees:jungle"
+    },
+    "complicated_bees:cave_dwelling": {
+      "data": false
     }
   }
 }
