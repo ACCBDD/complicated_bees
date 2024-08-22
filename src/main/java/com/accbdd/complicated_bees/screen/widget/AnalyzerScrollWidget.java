@@ -269,7 +269,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
             int y = nextLine + (21 * (i / 4)) + getY();
             graphics.renderItem(specProducts.get(i).getStack(), x, y);
             graphics.drawString(Minecraft.getInstance().font, Component.literal("- " + (int) (specProducts.get(i).getChance() * 100) + "%"), x + 18, y + 5, 0xFFFFFF);
-            if (mouseX >= x && mouseX <= x + 16 && mouseY - getY() + scrollAmount() >= y - 16 && mouseY - getY() + scrollAmount() <= y) {
+            if (mouseX >= x && mouseX <= x + 16 && mouseY + scrollAmount() >= y && mouseY + scrollAmount() <= y + 16) {
                 this.hoveredStack = specProducts.get(i).getStack();
             }
         }
