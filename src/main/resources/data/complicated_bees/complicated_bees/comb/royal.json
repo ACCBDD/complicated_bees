@@ -1,0 +1,18 @@
+{
+  "outer_color": "d20000",
+  "inner_color": "ffcc3e",
+  "products": [
+    {
+      "item": "complicated_bees:honey_droplet",
+      "chance": 0.9
+    },
+    {
+      "item": "complicated_bees:royal_jelly",
+      "chance": 0.2
+    },
+    {
+      "item": "complicated_bees:beeswax",
+      "chance": 0.2
+    }
+  ]
+}

@@ -6,7 +6,8 @@
       "item": "complicated_bees:comb",
       "nbt": {
         "comb_type": "complicated_bees:honey"
-      }
+      },
+      "chance": 0.35
     }
   ],
   "default_chromosome": {
