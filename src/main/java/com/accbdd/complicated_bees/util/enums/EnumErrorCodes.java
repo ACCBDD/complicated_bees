@@ -8,7 +8,8 @@ public enum EnumErrorCodes {
     WRONG_TIME("wrong_time", 16),
     UNDERGROUND("underground", 32),
     WEATHER("weather", 64),
-    ECSTATIC("ecstatic", 128);
+    ECSTATIC("ecstatic", 128),
+    NOT_UNDERGROUND("underground", 256);
 
     public final String name;
     public final int value;

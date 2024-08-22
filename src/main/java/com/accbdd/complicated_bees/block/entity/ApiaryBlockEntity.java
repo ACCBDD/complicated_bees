@@ -366,8 +366,13 @@ public class ApiaryBlockEntity extends BlockEntity {
         } else {
             removeError(EnumErrorCodes.WEATHER);
         }
-        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() > getBlockPos().getY() + 1 && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
+        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() > getBlockPos().getY() + 1
+                && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
             addError(EnumErrorCodes.UNDERGROUND);
+            queenSatisfied = false;
+        } else if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() <= getBlockPos().getY() + 1
+                && (boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
+            addError((EnumErrorCodes.NOT_UNDERGROUND));
             queenSatisfied = false;
         } else {
             removeError(EnumErrorCodes.UNDERGROUND);
