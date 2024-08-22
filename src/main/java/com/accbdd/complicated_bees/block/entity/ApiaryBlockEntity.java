@@ -370,12 +370,15 @@ public class ApiaryBlockEntity extends BlockEntity {
                 && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
             addError(EnumErrorCodes.UNDERGROUND);
             queenSatisfied = false;
-        } else if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() <= getBlockPos().getY() + 1
+        } else {
+            removeError(EnumErrorCodes.UNDERGROUND);
+        }
+        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() <= getBlockPos().getY() + 1
                 && (boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
             addError((EnumErrorCodes.NOT_UNDERGROUND));
             queenSatisfied = false;
         } else {
-            removeError(EnumErrorCodes.UNDERGROUND);
+            removeError(EnumErrorCodes.NOT_UNDERGROUND);
         }
         if (level.isDay() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "diurnal")).get()) {
             addError(EnumErrorCodes.WRONG_TIME);
@@ -412,6 +415,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         damageFrames();
         if (BeeItem.getAge(queen) >= ((EnumLifespan) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)).value) {
             beeItems.extractItem(BEE_SLOT, 1, false);
+            errorState = 0;
             outputBuffer.add(GeneticHelper.getOffspring(queen, ItemsRegistration.PRINCESS.get(), getLevel(), getBlockPos()));
             for (int i = 0; i < (int) GeneticHelper.getGeneValue(queen, GeneFertility.ID, true); i++) {
                 outputBuffer.add(GeneticHelper.getOffspring(queen, ItemsRegistration.DRONE.get(), getLevel(), getBlockPos()));

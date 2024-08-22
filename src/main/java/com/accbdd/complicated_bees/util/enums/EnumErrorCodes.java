@@ -9,7 +9,7 @@ public enum EnumErrorCodes {
     UNDERGROUND("underground", 32),
     WEATHER("weather", 64),
     ECSTATIC("ecstatic", 128),
-    NOT_UNDERGROUND("underground", 256);
+    NOT_UNDERGROUND("not_underground", 256);
 
     public final String name;
     public final int value;

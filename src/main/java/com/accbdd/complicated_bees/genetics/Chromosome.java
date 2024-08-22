@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.genetics;
 
+import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.registry.GeneRegistration;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +26,10 @@ public class Chromosome {
         for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistration.GENE_REGISTRY.entrySet()) {
             ResourceLocation geneLocation = entry.getKey().location();
             if (genomeAsTag.contains(geneLocation.toString())) {
-                genes.put(geneLocation, entry.getValue().deserialize(genomeAsTag.getCompound(geneLocation.toString())));
+                CompoundTag serializedGene = genomeAsTag.getCompound(geneLocation.toString());
+                if (!serializedGene.contains(Gene.DOMINANT))
+                    serializedGene.putBoolean(Gene.DOMINANT, true);
+                genes.put(geneLocation, entry.getValue().deserialize(serializedGene));
             } else {
                 genes.put(entry.getKey().location(), GeneRegistration.GENE_REGISTRY.get(entry.getKey()));
             }
@@ -82,7 +86,10 @@ public class Chromosome {
             ResourceLocation id = entry.getKey().location();
             CompoundTag geneData = tag.getCompound(id.toString());
             if (!geneData.equals(new CompoundTag())) {
+                if (!geneData.contains(Gene.DOMINANT))
+                    geneData.putBoolean(Gene.DOMINANT, true);
                 genes.put(id, Objects.requireNonNull(GeneRegistration.GENE_REGISTRY.get(id)).deserialize(geneData));
+
             }
         }
         return new Chromosome(genes);
