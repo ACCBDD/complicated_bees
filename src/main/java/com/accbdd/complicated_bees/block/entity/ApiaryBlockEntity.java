@@ -380,10 +380,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         } else {
             removeError(EnumErrorCodes.NOT_UNDERGROUND);
         }
-        if (level.isDay() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "diurnal")).get()) {
-            addError(EnumErrorCodes.WRONG_TIME);
-            queenSatisfied = false;
-        } else if (level.isNight() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "nocturnal")).get()) {
+        if (level.isNight() && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "nocturnal")).get()) {
             addError(EnumErrorCodes.WRONG_TIME);
             queenSatisfied = false;
         } else {

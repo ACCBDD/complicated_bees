@@ -23,6 +23,10 @@
     "complicated_bees:cave_dwelling": {
       "data": true
     },
+    "complicated_bees:nocturnal": {
+      "data": true,
+      "dominant": false
+    },
     "complicated_bees:flower": {
       "data": "complicated_bees:lush_cave"
     }
