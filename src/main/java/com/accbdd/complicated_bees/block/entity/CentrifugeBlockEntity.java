@@ -216,7 +216,13 @@ public class CentrifugeBlockEntity extends BlockEntity {
             if (getBlockState().getValue(BlockStateProperties.CRAFTING)) {
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.CRAFTING, false));
             }
-            resetProgress();
+            lowerProgress();
+        }
+    }
+
+    private void lowerProgress() {
+        if (progress > 0) {
+            progress--;
         }
     }
 
@@ -248,7 +254,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
             ItemStack primary = ItemStack.EMPTY;
             CentrifugeRecipe recipe = recipeCheck.get().value();
             if (!recipe.getOutputs().isEmpty()) {
-                primary = recipe.getOutputs().get(0).getStackResult();
+                primary = recipe.getOutputs().get(0).getStack();
             }
             return canInsertIntoOutput(primary);
         }
