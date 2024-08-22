@@ -13,7 +13,7 @@ public class GeneTemperature extends GeneTolerant<EnumTemperature> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneTemperature() {
-        super(EnumTemperature.NORMAL, EnumTolerance.NONE, false);
+        super(EnumTemperature.NORMAL, EnumTolerance.NONE, true);
     }
 
     public GeneTemperature(EnumTemperature temperature, EnumTolerance tolerance, boolean dominant) {

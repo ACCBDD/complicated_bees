@@ -14,7 +14,7 @@ public class GeneFlower extends Gene<ResourceLocation> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneFlower() {
-        super(new ResourceLocation(MODID, "invalid"), false);
+        super(new ResourceLocation(MODID, "invalid"), true);
     }
 
     public GeneFlower(ResourceLocation flower, boolean dominant) {

@@ -16,7 +16,7 @@ public class GeneEffect extends Gene<IBeeEffect> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneEffect() {
-        super(null, false);
+        super(null, true);
     }
 
     public GeneEffect(IBeeEffect effect, boolean dominant) {

@@ -14,7 +14,7 @@ public class GeneProductivity extends Gene<EnumProductivity> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneProductivity() {
-        this(EnumProductivity.SLOWEST, false);
+        this(EnumProductivity.SLOWEST, true);
     }
 
     public GeneProductivity(EnumProductivity data, boolean dominant) {

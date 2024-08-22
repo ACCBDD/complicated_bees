@@ -14,7 +14,7 @@ public class GeneFertility extends Gene<Integer> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneFertility() {
-        this(2, false);
+        this(2, true);
     }
 
     public GeneFertility(int data, boolean dominant) {

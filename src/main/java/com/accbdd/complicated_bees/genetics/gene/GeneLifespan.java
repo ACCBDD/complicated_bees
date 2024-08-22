@@ -14,7 +14,7 @@ public class GeneLifespan extends Gene<EnumLifespan> {
     public static final ResourceLocation ID = new ResourceLocation(MODID, TAG);
 
     public GeneLifespan() {
-        this(EnumLifespan.SHORTEST, false);
+        this(EnumLifespan.SHORTEST, true);
     }
 
     public GeneLifespan(EnumLifespan data, boolean dominant) {
