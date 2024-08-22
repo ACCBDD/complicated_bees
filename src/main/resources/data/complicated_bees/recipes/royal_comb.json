@@ -3,17 +3,21 @@
   "input": {
     "item": "complicated_bees:comb",
     "nbt": {
-      "comb_type": "complicated_bees:honey"
+      "comb_type": "complicated_bees:royal"
     }
   },
   "outputs": [
     {
       "item": "complicated_bees:honey_droplet",
-      "chance": 0.8
+      "chance": 0.9
+    },
+    {
+      "item": "complicated_bees:royal_jelly",
+      "chance": 0.2
     },
     {
       "item": "complicated_bees:beeswax",
-      "chance": 0.4
+      "chance": 0.2
     }
   ]
 }

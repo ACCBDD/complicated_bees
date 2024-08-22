@@ -1,14 +1,4 @@
 {
   "outer_color": "e7d46a",
-  "inner_color": "fea02b",
-  "products": [
-    {
-      "item": "complicated_bees:honey_droplet",
-      "chance": 0.8
-    },
-    {
-      "item": "complicated_bees:beeswax",
-      "chance": 0.4
-    }
-  ]
+  "inner_color": "fea02b"
 }
