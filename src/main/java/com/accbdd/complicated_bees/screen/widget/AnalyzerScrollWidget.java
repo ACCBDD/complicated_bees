@@ -30,7 +30,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private static final int PADDING = 4;
 
     private final AnalyzerMenu menu;
-    public ItemStack hoveredStack = ItemStack.EMPTY;
+    public ItemStack hoveredStack = null;
     private int nextLine;
 
     public AnalyzerScrollWidget(int pX, int pY, int pWidth, int pHeight, AnalyzerMenu menu) {
