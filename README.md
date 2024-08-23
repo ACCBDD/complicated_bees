@@ -1,5 +1,5 @@
 # Complicated Bees
-A port of forestry bees for modern versions of minecraft
+A bee genetic mod inspired by forestry bees for modern versions of minecraft
 
 Planned features:
 * data-driven species 
