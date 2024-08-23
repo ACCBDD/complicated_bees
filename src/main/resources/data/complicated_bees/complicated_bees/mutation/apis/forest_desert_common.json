@@ -2,5 +2,5 @@
   "first": "complicated_bees:forest",
   "second": "complicated_bees:desert",
   "result": "complicated_bees:common",
-  "chance": 0.25
+  "chance": 0.15
 }

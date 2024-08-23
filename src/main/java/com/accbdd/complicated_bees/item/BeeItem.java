@@ -30,6 +30,11 @@ public class BeeItem extends Item {
         super(prop);
     }
 
+    @Override
+    public boolean isFoil(ItemStack pStack) {
+        return GeneticHelper.getSpecies(pStack, true).isFoil();
+    }
+
     public static float getAge(ItemStack stack) {
         return stack.getOrCreateTag().getFloat(AGE_TAG);
     }

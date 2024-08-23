@@ -297,7 +297,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         if (topStack.getItem() instanceof QueenItem) {
             IBeeEffect effect = (IBeeEffect) GeneticHelper.getGeneValue(topStack, GeneEffect.ID, true);
             if (effect != null)
-                effect.runEffect(getLevel(), getBlockPos(), topStack, cycleProgress);
+                effect.runEffect(this, topStack, cycleProgress);
         }
     }
 
@@ -320,6 +320,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         ItemStack queen = new ItemStack(ItemsRegistration.QUEEN.get());
         GeneticHelper.setGenome(queen, GeneticHelper.getGenome(princess));
         GeneticHelper.setMate(queen, GeneticHelper.getGenome(drone));
+        QueenItem.setGeneration(queen, PrincessItem.getGeneration(princess));
 
         return queen;
     }
@@ -411,12 +412,12 @@ public class ApiaryBlockEntity extends BlockEntity {
         BeeItem.setAge(queen, BeeItem.getAge(queen) + ageFactor);
         damageFrames();
         if (BeeItem.getAge(queen) >= ((EnumLifespan) GeneticHelper.getGeneValue(queen, GeneLifespan.ID, true)).value) {
-            beeItems.extractItem(BEE_SLOT, 1, false);
             errorState = 0;
             outputBuffer.add(GeneticHelper.getOffspring(queen, ItemsRegistration.PRINCESS.get(), getLevel(), getBlockPos()));
             for (int i = 0; i < (int) GeneticHelper.getGeneValue(queen, GeneFertility.ID, true); i++) {
                 outputBuffer.add(GeneticHelper.getOffspring(queen, ItemsRegistration.DRONE.get(), getLevel(), getBlockPos()));
             }
+            beeItems.extractItem(BEE_SLOT, 1, false);
             setChanged();
         }
     }

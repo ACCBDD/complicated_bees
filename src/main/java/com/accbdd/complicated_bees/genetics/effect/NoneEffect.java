@@ -1,12 +1,12 @@
 package com.accbdd.complicated_bees.genetics.effect;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class NoneEffect implements IBeeEffect {
+
     @Override
-    public void runEffect(Level level, BlockPos pos, ItemStack queen, int cycleProgress) {
+    public void runEffect(BlockEntity entity, ItemStack queen, int cycleProgress) {
 
     }
 }

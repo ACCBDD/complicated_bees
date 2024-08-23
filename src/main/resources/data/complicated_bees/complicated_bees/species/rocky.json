@@ -21,10 +21,18 @@
     "complicated_bees:humidity": {
       "data": "normal"
     },
+    "complicated_bees:fertility": {
+      "data": 2,
+      "dominant": true
+    },
     "complicated_bees:cave_dwelling": {
       "data": true
     },
     "complicated_bees:nocturnal": {
+      "data": true,
+      "dominant": false
+    },
+    "complicated_bees:weatherproof": {
       "data": true,
       "dominant": false
     },

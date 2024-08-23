@@ -1,56 +1,49 @@
 {
   "dominant": false,
   "foil": true,
-  "color": "d3d5fd",
-  "nest_color": "d3d5fd",
+  "color": "ecfafe",
+  "nest_color": "ecfafe",
   "products": [
     {
       "item": "complicated_bees:comb",
       "nbt": {
-        "comb_type": "complicated_bees:dripping"
+        "comb_type": "complicated_bees:stringy"
       },
-      "chance": 0.55
+      "chance": 0.60
     }
   ],
   "specialty_products": [
     {
-      "item": "complicated_bees:comb",
-      "nbt": {
-        "comb_type": "complicated_bees:royal"
-      },
-      "chance": 0.5
+      "item": "complicated_bees:pollen",
+      "chance": 0.4
     }
   ],
   "default_chromosome": {
     "complicated_bees:lifespan": {
       "data": "average",
-      "dominant": false
+      "dominant": true
     },
     "complicated_bees:temperature": {
-      "data": "warm",
-      "tolerance": "down_1",
+      "data": "cold",
+      "tolerance": "both_2",
       "dominant": true
     },
     "complicated_bees:humidity": {
       "data": "normal",
-      "tolerance": "none",
-      "dominant": true
+      "tolerance": "up_1",
+      "dominant": false
     },
     "complicated_bees:productivity": {
       "data": "average",
-      "dominant": false
+      "dominant": true
     },
     "complicated_bees:fertility": {
-      "data": 4,
-      "dominant": false
+      "data": 2,
+      "dominant": true
     },
     "complicated_bees:flower": {
       "data": "complicated_bees:flower",
       "dominant": true
-    },
-    "complicated_bees:effect": {
-      "data": "complicated_bees:beatific",
-      "dominant": false
     },
     "complicated_bees:nocturnal": {
       "data": false,
@@ -61,7 +54,7 @@
       "dominant": true
     },
     "complicated_bees:weatherproof": {
-      "data": false,
+      "data": true,
       "dominant": true
     }
   }

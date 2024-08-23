@@ -13,7 +13,7 @@
   ],
   "default_chromosome": {
     "complicated_bees:lifespan": {
-      "data": "shortest"
+      "data": "shorter"
     },
     "complicated_bees:temperature": {
       "data": "normal",

@@ -2,9 +2,11 @@ package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.genetics.effect.DebugEffect;
 import com.accbdd.complicated_bees.genetics.effect.IBeeEffect;
+import com.accbdd.complicated_bees.genetics.effect.PotionEffect;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.RegistryBuilder;
 
@@ -19,4 +21,5 @@ public class BeeEffectRegistration {
     public static final DeferredRegister<IBeeEffect> EFFECTS = DeferredRegister.create(BEE_REGISTRY_KEY, MODID);
 
     public static final Supplier<DebugEffect> DEBUG = EFFECTS.register("debug", DebugEffect::new);
+    public static final Supplier<PotionEffect> BEATIFIC = EFFECTS.register("beatific", () -> new PotionEffect(MobEffects.REGENERATION, 100));
 }

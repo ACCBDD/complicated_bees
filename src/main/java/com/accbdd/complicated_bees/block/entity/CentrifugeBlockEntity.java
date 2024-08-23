@@ -240,7 +240,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
     }
 
     private void increaseCraftingProgress() {
-        energy.extractEnergy(10, false);
+        energy.extractEnergy(20, false);
         progress++;
     }
 

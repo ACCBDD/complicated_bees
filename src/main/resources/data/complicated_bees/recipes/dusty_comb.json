@@ -8,10 +8,6 @@
   },
   "outputs": [
     {
-      "item": "complicated_bees:propolis",
-      "chance": 0.5
-    },
-    {
       "item": "complicated_bees:beeswax",
       "chance": 0.3
     },

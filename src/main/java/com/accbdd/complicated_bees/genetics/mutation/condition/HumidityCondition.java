@@ -1,7 +1,6 @@
 package com.accbdd.complicated_bees.genetics.mutation.condition;
 
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
-import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;

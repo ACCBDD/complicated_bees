@@ -14,12 +14,20 @@
       "data": "hot",
       "tolerance": "none"
     },
+    "complicated_bees:lifespan": {
+      "data": "short",
+      "dominant": true
+    },
     "complicated_bees:humidity": {
       "data": "dry",
       "tolerance": "none"
     },
     "complicated_bees:flower": {
       "data": "complicated_bees:desert"
+    },
+    "complicated_bees:productivity": {
+      "data": "slowest",
+      "dominant": true
     }
   }
 }

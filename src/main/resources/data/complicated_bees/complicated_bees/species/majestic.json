@@ -26,8 +26,8 @@
       "dominant": false
     },
     "complicated_bees:temperature": {
-      "data": "cold",
-      "tolerance": "up_1",
+      "data": "warm",
+      "tolerance": "down_1",
       "dominant": false
     },
     "complicated_bees:humidity": {
@@ -40,7 +40,7 @@
       "dominant": false
     },
     "complicated_bees:fertility": {
-      "data": "3",
+      "data": 3,
       "dominant": false
     },
     "complicated_bees:flower": {

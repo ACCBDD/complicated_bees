@@ -2,8 +2,8 @@ package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTemperature;
-import com.accbdd.complicated_bees.genetics.mutation.condition.*;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
+import com.accbdd.complicated_bees.genetics.mutation.condition.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

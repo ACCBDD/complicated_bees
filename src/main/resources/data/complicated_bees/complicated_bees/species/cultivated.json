@@ -1,21 +1,14 @@
 {
   "dominant": true,
-  "color": "a500e0",
-  "nest_color": "a500e0",
+  "color": "4542f5",
+  "nest_color": "4542f5",
   "products": [
     {
       "item": "complicated_bees:comb",
       "nbt": {
         "comb_type": "complicated_bees:honey"
       },
-      "chance": 0.4
-    },
-    {
-      "item": "complicated_bees:comb",
-      "nbt": {
-        "comb_type": "complicated_bees:dripping"
-      },
-      "chance": 0.2
+      "chance": 0.5
     }
   ],
   "specialty_products": [
@@ -36,11 +29,11 @@
       "dominant": false
     },
     "complicated_bees:productivity": {
-      "data": "slow",
+      "data": "fast",
       "dominant": true
     },
     "complicated_bees:fertility": {
-      "data": "2",
+      "data": 2,
       "dominant": false
     },
     "complicated_bees:flower": {

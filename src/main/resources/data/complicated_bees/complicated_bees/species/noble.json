@@ -33,7 +33,7 @@
       "dominant": false
     },
     "complicated_bees:fertility": {
-      "data": "2",
+      "data": 2,
       "dominant": true
     },
     "complicated_bees:flower": {

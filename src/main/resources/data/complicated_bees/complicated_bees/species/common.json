@@ -14,7 +14,7 @@
   "specialty_products": [],
   "default_chromosome": {
     "complicated_bees:lifespan": {
-      "data": "shortest",
+      "data": "shorter",
       "dominant": true
     },
     "complicated_bees:temperature": {
@@ -32,7 +32,7 @@
       "dominant": true
     },
     "complicated_bees:fertility": {
-      "data": "2",
+      "data": 2,
       "dominant": true
     },
     "complicated_bees:flower": {

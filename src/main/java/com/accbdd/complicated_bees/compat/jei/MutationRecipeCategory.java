@@ -1,7 +1,7 @@
 package com.accbdd.complicated_bees.compat.jei;
 
-import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
+import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,7 +17,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
 import java.util.ArrayList;
 import java.util.List;
 

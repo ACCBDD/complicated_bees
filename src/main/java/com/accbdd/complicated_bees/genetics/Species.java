@@ -29,18 +29,14 @@ public class Species {
     private final List<Product> specialty_products;
     private final Chromosome default_chromosome;
     private final boolean dominant;
+    private final boolean foil;
 
-    public static final Species INVALID = new Species(
-            true,
-            0xFFFFFF,
-            0xFFFFFF,
-            new ArrayList<>(),
-            new ArrayList<>(),
-            new Chromosome());
+    public static final Species INVALID = new Species();
 
     public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
+                    Codec.BOOL.optionalFieldOf("foil", false).forGetter(Species::isFoil),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     HEX_STRING_CODEC.optionalFieldOf("nest_color", -1).forGetter(Species::getNestColor),
                     Product.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
@@ -50,26 +46,31 @@ public class Species {
     );
 
     public Species() {
-        this(false, 0xFFFFFF, 0xFFFFFF, new ArrayList<>(), new ArrayList<>(), new Chromosome());
+        this(false, false, 0xFFFFFF, 0xFFFFFF, new ArrayList<>(), new ArrayList<>(), new Chromosome());
     }
 
-    public Species(boolean dominant, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
+    public Species(boolean dominant, boolean foil, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
         this.dominant = dominant;
         this.color = color;
         this.nest_color = nest_color;
         this.products = products;
         this.specialty_products = specialtyProducts;
+        this.foil = foil;
         this.default_chromosome = default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
-    public Species(boolean dominant, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
-        this(dominant, color, nest_color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
+    public Species(boolean dominant, boolean foil, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
+        this(dominant, foil, color, nest_color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
         default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
     public static Species getFromResourceLocation(ResourceLocation loc) {
         RegistryAccess registryAccess = (Minecraft.getInstance().getConnection() == null) ? ServerLifecycleHooks.getCurrentServer().registryAccess() : Minecraft.getInstance().getConnection().registryAccess();
         return registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().get(loc);
+    }
+
+    public boolean isFoil() {
+        return this.foil;
     }
 
     public boolean isDominant() {

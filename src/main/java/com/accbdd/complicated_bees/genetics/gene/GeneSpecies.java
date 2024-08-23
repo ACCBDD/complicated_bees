@@ -3,7 +3,6 @@ package com.accbdd.complicated_bees.genetics.gene;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.ByteTag;
@@ -12,7 +11,6 @@ import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 

@@ -4,8 +4,10 @@ import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
-import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
+import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
+import com.accbdd.complicated_bees.item.PrincessItem;
+import com.accbdd.complicated_bees.item.QueenItem;
 import com.accbdd.complicated_bees.registry.FlowerRegistration;
 import com.accbdd.complicated_bees.registry.MutationRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
@@ -202,6 +204,8 @@ public class GeneticHelper {
         } else {
             setGenome(result, genome);
         }
+        if (resultType instanceof PrincessItem)
+            PrincessItem.setGeneration(result, QueenItem.getGeneration(bee) + 1);
         return result;
     }
 }

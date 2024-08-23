@@ -5,6 +5,8 @@ import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
+import com.accbdd.complicated_bees.item.PrincessItem;
+import com.accbdd.complicated_bees.item.QueenItem;
 import com.accbdd.complicated_bees.registry.GeneRegistration;
 import com.accbdd.complicated_bees.screen.AnalyzerMenu;
 import net.minecraft.ChatFormatting;
@@ -104,6 +106,13 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
 
         drawProducts(graphics, bee, mouseX, mouseY);
         lineBreak();
+
+        if (bee.getItem() instanceof PrincessItem || bee.getItem() instanceof QueenItem) {
+            drawTextCentered(graphics, Component.translatable("gui.complicated_bees.generations", PrincessItem.getGeneration(bee)), 107, nextLine, 0x8cf536);
+            lineBreak();
+            lineBreak();
+        }
+
         lineBreak();
 
         drawTaxonomy(graphics, bee);
@@ -118,6 +127,10 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
 
     private void drawText(GuiGraphics graphics, Component component, int x, int y, int color) {
         graphics.drawString(Minecraft.getInstance().font, component, x + getX(), y + getY(), color, false);
+    }
+
+    private void drawTextCentered(GuiGraphics graphics, Component component, int x, int y, int color) {
+        graphics.drawCenteredString(Minecraft.getInstance().font, component, x + getX(), y + getY(), color);
     }
 
     private void drawRightAlignedText(GuiGraphics graphics, Component component, int x, int y, int color) {
