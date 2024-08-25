@@ -9,6 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
+import javax.annotation.Nullable;
+
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class GeneEffect extends Gene<IBeeEffect> {
@@ -43,5 +45,12 @@ public class GeneEffect extends Gene<IBeeEffect> {
         return this.geneData == null
                 ? Component.translatable("effect.complicated_bees.complicated_bees:none")
                 : Component.translatable("effect.complicated_bees." + BeeEffectRegistration.BEE_EFFECT_REGISTRY.getKey(geneData));
+    }
+
+    @Nullable
+    public MutableComponent getDescriptionKey() {
+        return this.geneData == null
+                ? null
+                : Component.translatable("effect.complicated_bees." + BeeEffectRegistration.BEE_EFFECT_REGISTRY.getKey(geneData) + ".desc");
     }
 }

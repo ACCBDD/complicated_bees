@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.screen.widget;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.gene.GeneEffect;
 import com.accbdd.complicated_bees.genetics.gene.GeneTolerant;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.item.PrincessItem;
@@ -32,7 +33,10 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private static final int PADDING = 4;
 
     private final AnalyzerMenu menu;
+    private int mouseX;
+    private int mouseY;
     public ItemStack hoveredStack = null;
+    public Component geneTooltip = null;
     private int nextLine;
 
     public AnalyzerScrollWidget(int pX, int pY, int pWidth, int pHeight, AnalyzerMenu menu) {
@@ -78,6 +82,8 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
 
     private void drawGeneInfo(GuiGraphics graphics, ItemStack bee, int mouseX, int mouseY) {
         nextLine = PADDING;
+        this.mouseX = mouseX;
+        this.mouseY = mouseY;
 
         drawText(graphics, Component.literal("Active"), ACTIVE_COL, nextLine, 0xFFFFFF);
         drawText(graphics, Component.literal("Inactive"), INACTIVE_COL, nextLine, 0xFFFFFF);
@@ -104,7 +110,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         lineBreak();
         lineBreak();
 
-        drawProducts(graphics, bee, mouseX, mouseY);
+        drawProducts(graphics, bee);
         lineBreak();
 
         if (bee.getItem() instanceof PrincessItem || bee.getItem() instanceof QueenItem) {
@@ -164,12 +170,28 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         return lineHeight;
     }
 
+    private int getAdjustedMouseY() {
+        return (int) (mouseY + scrollAmount() - getY());
+    }
+
+    private int getAdjustedMouseX() {
+        return mouseX - getX();
+    }
+
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene) {
         IGene<?> active = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), true);
         IGene<?> inactive = GeneticHelper.getGene(bee, GeneRegistration.GENE_REGISTRY.getKey(gene), false);
         drawText(graphics, label, PADDING, nextLine, 0xFFFFFF);
         drawText(graphics, active.getTranslationKey(), ACTIVE_COL, nextLine, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTranslationKey(), INACTIVE_COL, nextLine, inactive.isDominant() ? 0xE63225 : 0x257FE6);
+        if (gene instanceof GeneEffect) {
+            if (getAdjustedMouseX() >= ACTIVE_COL && getAdjustedMouseX() <= ACTIVE_COL + Minecraft.getInstance().font.width(active.getTranslationKey()) && getAdjustedMouseY() >= nextLine && getAdjustedMouseY() <= nextLine + LINE_HEIGHT)
+                geneTooltip = ((GeneEffect)active).getDescriptionKey();
+            else if ((getAdjustedMouseX() >= INACTIVE_COL && getAdjustedMouseX() <= INACTIVE_COL + Minecraft.getInstance().font.width(active.getTranslationKey()) && getAdjustedMouseY() >= nextLine && getAdjustedMouseY() <= nextLine + Minecraft.getInstance().font.lineHeight))
+                geneTooltip = ((GeneEffect)inactive).getDescriptionKey();
+            else
+                geneTooltip = null;
+        }
         nextLine += LINE_HEIGHT;
     }
 
@@ -259,7 +281,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         nextLine += LINE_HEIGHT;
     }
 
-    private void drawProducts(GuiGraphics graphics, ItemStack bee, int mouseX, int mouseY) {
+    private void drawProducts(GuiGraphics graphics, ItemStack bee) {
         Species species = GeneticHelper.getSpecies(bee, true);
         List<Product> products = species.getProducts();
         List<Product> specProducts = species.getSpecialtyProducts();

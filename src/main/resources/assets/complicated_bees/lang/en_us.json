@@ -246,5 +246,6 @@
 
   "effect.complicated_bees.complicated_bees:debug": "Debug",
   "effect.complicated_bees.complicated_bees:beatific": "Beatific",
+  "effect.complicated_bees.complicated_bees:beatific.desc": "Gives nearby creatures regeneration.",
   "effect.complicated_bees.complicated_bees:none": "None"
 }

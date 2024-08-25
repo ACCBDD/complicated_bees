@@ -43,11 +43,15 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
 
     @Override
     protected void renderTooltip(GuiGraphics graphics, int mousex, int mousey) {
-        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
-            ItemStack itemstack = this.hoveredSlot.getItem();
-            graphics.renderTooltip(this.font, this.getTooltipFromContainerItem(itemstack), itemstack.getTooltipImage(), itemstack, mousex, mousey);
-        } else if (this.menu.getCarried().isEmpty() && widget.hoveredStack != null) {
-            graphics.renderTooltip(this.font, this.getTooltipFromContainerItem(widget.hoveredStack), widget.hoveredStack.getTooltipImage(), widget.hoveredStack, mousex, mousey);
+        if (this.menu.getCarried().isEmpty()) {
+            if (this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
+                ItemStack itemstack = this.hoveredSlot.getItem();
+                graphics.renderTooltip(this.font, this.getTooltipFromContainerItem(itemstack), itemstack.getTooltipImage(), itemstack, mousex, mousey);
+            } else if (widget.hoveredStack != null) {
+                graphics.renderTooltip(this.font, this.getTooltipFromContainerItem(widget.hoveredStack), widget.hoveredStack.getTooltipImage(), widget.hoveredStack, mousex, mousey);
+            } else if (widget.geneTooltip != null) {
+                graphics.renderTooltip(this.font, widget.geneTooltip, mousex, mousey);
+            }
         }
     }
 
