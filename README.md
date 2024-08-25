@@ -10,7 +10,7 @@ Planned features:
 * jade/waila/wthit support
 
 Planned version support:
-* 1.20.1
+* 1.20.1 (maybe)
 * 1.20.4
 * 1.20.6
 * 1.21
