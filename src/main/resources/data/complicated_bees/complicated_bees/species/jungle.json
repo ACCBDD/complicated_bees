@@ -30,6 +30,10 @@
     "complicated_bees:flower": {
       "data": "complicated_bees:jungle"
     },
+    "complicated_bees:effect": {
+      "data": "complicated_bees:venomous",
+      "dominant": true
+    },
     "complicated_bees:cave_dwelling": {
       "data": false
     }

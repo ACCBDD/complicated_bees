@@ -3,9 +3,9 @@
     "minecraft:vine",
     "minecraft:cocoa",
     "minecraft:melon",
-    "minecraft:bamboo"
+    "minecraft:bamboo",
+    "minecraft:bamboo_sapling"
   ],
   "tags": [
-    "minecraft:flowers"
   ]
 }

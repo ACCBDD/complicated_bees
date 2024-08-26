@@ -1,0 +1,6 @@
+{
+  "first": "complicated_bees:robust",
+  "second": "complicated_bees:rocky",
+  "result": "complicated_bees:resilient",
+  "chance": 0.08
+}
