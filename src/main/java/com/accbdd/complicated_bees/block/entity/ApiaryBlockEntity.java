@@ -60,11 +60,11 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     public static final int CYCLE_LENGTH = 20;
     public static final String CYCLE_TAG = "cycle";
-    public static final int FLOWER_CYCLE_LENGTH = 200;
+    public static final int SATISFY_CYCLE_LENGTH = 200;
 
     private final ContainerData data;
     private int cycleProgress = 0;
-    private int flowerCycleProgress = 0;
+    private int satisfyCycleProgress = 0;
     private int breedingProgress = 0;
     private int maxBreedingProgress = 20;
     private int errorState = 0;
@@ -211,6 +211,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 super.onContentsChanged(slot);
                 if (slot == 0) {
                     ApiaryBlockEntity.this.clearFlowerCache();
+                    ApiaryBlockEntity.this.checkQueenSatisfied();
                 }
                 setChanged();
             }
@@ -249,16 +250,19 @@ public class ApiaryBlockEntity extends BlockEntity {
                 outputBuffer.add(ItemStack.of((CompoundTag) itemCompound));
             }
         }
+        queenSatisfied = checkQueenSatisfied();
     }
 
     public void tickServer() {
         ItemStack top_stack = beeItems.getStackInSlot(0);
         ItemStack bottom_stack = beeItems.getStackInSlot(1);
 
+        //empty buffer
         if (!outputBuffer.empty()) {
             tryEmptyBuffer();
         }
 
+        //breed
         if (top_stack.getItem() instanceof PrincessItem && bottom_stack.getItem() instanceof DroneItem) {
             increaseBreedingProgress();
             if (hasFinished()) {
@@ -266,13 +270,25 @@ public class ApiaryBlockEntity extends BlockEntity {
                 beeItems.extractItem(1, 1, false);
                 beeItems.setStackInSlot(0, createQueenFromPrincessAndDrone(top_stack, bottom_stack));
                 rebuildFlowerCache(beeItems.getStackInSlot(0));
-                checkQueenSatisfied(top_stack);
+                checkQueenSatisfied();
             }
         } else {
             resetBreedingProgress();
         }
 
-        if (top_stack.getItem() instanceof QueenItem && checkQueenSatisfied(top_stack)) {
+        //check if queen is satisfied
+        if (satisfyCycleProgress >= SATISFY_CYCLE_LENGTH) {
+            if (top_stack.getItem() instanceof QueenItem) {
+                rebuildFlowerCache(top_stack);
+                queenSatisfied = checkQueenSatisfied();
+                satisfyCycleProgress = 0;
+            }
+        } else {
+            satisfyCycleProgress++;
+        }
+
+        //do queen cycle
+        if (top_stack.getItem() instanceof QueenItem && queenSatisfied) {
             doBeeEffect(top_stack);
             if (cycleProgress < CYCLE_LENGTH) {
                 cycleProgress++;
@@ -281,15 +297,6 @@ public class ApiaryBlockEntity extends BlockEntity {
                 ageQueen(top_stack);
                 generateProduce(top_stack);
             }
-        }
-
-        if (flowerCycleProgress >= FLOWER_CYCLE_LENGTH) {
-            if (top_stack.getItem() instanceof QueenItem) {
-                rebuildFlowerCache(top_stack);
-                flowerCycleProgress = 0;
-            }
-        } else {
-            flowerCycleProgress++;
         }
     }
 
@@ -339,8 +346,11 @@ public class ApiaryBlockEntity extends BlockEntity {
         setChanged();
     }
 
-    public boolean checkQueenSatisfied(ItemStack queen) {
-        Chromosome chromosome = GeneticHelper.getChromosome(queen, true);
+    public boolean checkQueenSatisfied() {
+        if (!(beeItems.getStackInSlot(0).getItem() instanceof QueenItem))
+            return false;
+
+        Chromosome chromosome = GeneticHelper.getChromosome(beeItems.getStackInSlot(0), true);
         queenSatisfied = true;
 
         if (!((GeneTemperature) chromosome.getGene(GeneTemperature.ID)).withinTolerance(getTemperature())) {
@@ -367,7 +377,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         } else {
             removeError(EnumErrorCodes.WEATHER);
         }
-        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, getBlockPos()).getY() > getBlockPos().getY() + 1
+        if (level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, getBlockPos()).getY() > getBlockPos().getY() + 1
                 && !(boolean) chromosome.getGene(new ResourceLocation(MODID, "cave_dwelling")).get()) {
             addError(EnumErrorCodes.UNDERGROUND);
             queenSatisfied = false;
@@ -388,13 +398,13 @@ public class ApiaryBlockEntity extends BlockEntity {
             removeError(EnumErrorCodes.WRONG_TIME);
         }
 
-        queenEcstatic(queen);
+        queenEcstatic();
 
         return queenSatisfied;
     }
 
-    public void queenEcstatic(ItemStack queen) {
-        Chromosome chromosome = GeneticHelper.getChromosome(queen, true);
+    public void queenEcstatic() {
+        Chromosome chromosome = GeneticHelper.getChromosome(beeItems.getStackInSlot(0), true);
         if (((GeneTemperature) chromosome.getGene(GeneTemperature.ID)).get().equals(getTemperature())
                 && ((GeneHumidity) chromosome.getGene(GeneHumidity.ID)).get().equals(getHumidity())
                 && queenSatisfied) {
