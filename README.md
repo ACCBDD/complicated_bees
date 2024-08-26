@@ -1,5 +1,7 @@
 # Complicated Bees
-A bee genetic mod inspired by forestry bees for modern versions of minecraft
+A bee genetic mod inspired by forestry bees for modern versions of minecraft.
+
+For datapack and resourcepack stuff, please check the [Wiki](https://github.com/ACCBDD/complicated_bees/wiki)
 
 Planned features:
 * data-driven species 
