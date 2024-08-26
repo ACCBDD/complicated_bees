@@ -262,6 +262,18 @@
   "species.complicated_bees.complicated_bees:resilient.authority": "Ayse Eigh",
   "species.complicated_bees.complicated_bees:resilient.flavor_text": "An extended gestation period means these queens, while very long lived, tend to be much less prolific than other species.",
   "species.complicated_bees.complicated_bees:resilient.flavor_author": "Subterranean Swarms",
+  "species.complicated_bees.complicated_bees:outcast": "Outcast",
+  "species.complicated_bees.complicated_bees:outcast.genus": "Areapis",
+  "species.complicated_bees.complicated_bees:outcast.species_taxonomy": "A. utlagatus",
+  "species.complicated_bees.complicated_bees:outcast.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:outcast.flavor_text": "From noble roots to desert warrior; a truly remarkable journey.",
+  "species.complicated_bees.complicated_bees:outcast.flavor_author": "Arid Apidae",
+  "species.complicated_bees.complicated_bees:bandit": "Bandit",
+  "species.complicated_bees.complicated_bees:bandit.genus": "Areapis",
+  "species.complicated_bees.complicated_bees:bandit.species_taxonomy": "A. latro",
+  "species.complicated_bees.complicated_bees:bandit.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:bandit.flavor_text": "Generally solitary, it prowls the desert, targeting hapless animals for tribute - seemingly for the sole purpose of hoarding.",
+  "species.complicated_bees.complicated_bees:bandit.flavor_author": "Arid Apidae",
 
 
   "flower.complicated_bees.complicated_bees:flower": "Flowers",
@@ -276,5 +288,7 @@
   "effect.complicated_bees.complicated_bees:venomous.desc": "Poisons nearby creatures.",
   "effect.complicated_bees.complicated_bees:pollenic": "Pollenic",
   "effect.complicated_bees.complicated_bees:pollenic.desc": "Bonemeals nearby plants.",
+  "effect.complicated_bees.complicated_bees:tribute": "Tribute",
+  "effect.complicated_bees.complicated_bees:tribute.desc": "Occasionally produces nearby passive mob drops.",
   "effect.complicated_bees.complicated_bees:none": "None"
 }

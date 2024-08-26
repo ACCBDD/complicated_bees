@@ -1,33 +1,35 @@
 {
   "dominant": true,
-  "color": "FC030F",
-  "nest_color": "c92d02",
+  "foil": false,
+  "color": "fdca72",
+  "nest_color": "fdca72",
   "products": [
     {
       "item": "complicated_bees:comb",
       "nbt": {
-        "comb_type": "complicated_bees:honey"
+        "comb_type": "complicated_bees:dusty"
       },
-      "chance": 0.35
+      "chance": 0.40
     }
   ],
+  "specialty_products": [],
   "default_chromosome": {
     "complicated_bees:lifespan": {
-      "data": "shorter",
+      "data": "short",
       "dominant": true
     },
     "complicated_bees:temperature": {
-      "data": "normal",
-      "tolerance": "up_1",
+      "data": "hot",
+      "tolerance": "down_1",
       "dominant": true
     },
     "complicated_bees:humidity": {
-      "data": "normal",
+      "data": "dry",
       "tolerance": "none",
       "dominant": true
     },
     "complicated_bees:productivity": {
-      "data": "slowest",
+      "data": "slow",
       "dominant": true
     },
     "complicated_bees:fertility": {
@@ -35,7 +37,7 @@
       "dominant": true
     },
     "complicated_bees:flower": {
-      "data": "complicated_bees:flower",
+      "data": "complicated_bees:desert",
       "dominant": true
     },
     "complicated_bees:nocturnal": {

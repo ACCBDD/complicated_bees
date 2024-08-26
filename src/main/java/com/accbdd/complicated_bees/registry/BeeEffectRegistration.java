@@ -1,9 +1,6 @@
 package com.accbdd.complicated_bees.registry;
 
-import com.accbdd.complicated_bees.genetics.effect.DebugEffect;
-import com.accbdd.complicated_bees.genetics.effect.IBeeEffect;
-import com.accbdd.complicated_bees.genetics.effect.PollenicEffect;
-import com.accbdd.complicated_bees.genetics.effect.PotionEffect;
+import com.accbdd.complicated_bees.genetics.effect.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +21,7 @@ public class BeeEffectRegistration {
 
     public static final Supplier<DebugEffect> DEBUG = EFFECTS.register("debug", DebugEffect::new);
     public static final Supplier<PollenicEffect> POLLENIC = EFFECTS.register("pollenic", PollenicEffect::new);
+    public static final Supplier<TributeEffect> TRIBUTE = EFFECTS.register("tribute", TributeEffect::new);
     public static final Supplier<PotionEffect> BEATIFIC = EFFECTS.register("beatific", () ->
             new PotionEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1, true, true), 80));
     public static final Supplier<PotionEffect> VENOMOUS = EFFECTS.register("venomous", () ->

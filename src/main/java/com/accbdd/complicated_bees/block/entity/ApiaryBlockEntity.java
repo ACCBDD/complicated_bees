@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.*;
 import com.accbdd.complicated_bees.genetics.effect.IBeeEffect;
 import com.accbdd.complicated_bees.genetics.gene.*;
@@ -330,6 +331,11 @@ public class ApiaryBlockEntity extends BlockEntity {
         QueenItem.setGeneration(queen, PrincessItem.getGeneration(princess));
 
         return queen;
+    }
+
+    //hook for effects to add to output
+    public void addToOutput(ItemStack stack) {
+        outputBuffer.add(stack);
     }
 
     public void generateProduce(ItemStack bee) {

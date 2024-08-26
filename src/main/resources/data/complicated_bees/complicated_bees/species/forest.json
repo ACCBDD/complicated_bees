@@ -12,14 +12,42 @@
   ],
   "default_chromosome": {
     "complicated_bees:lifespan": {
-      "data": "shorter"
+      "data": "shortest",
+      "dominant": true
     },
     "complicated_bees:temperature": {
       "data": "normal",
-      "tolerance": "down_1"
+      "tolerance": "down_1",
+      "dominant": true
+    },
+    "complicated_bees:humidity": {
+      "data": "normal",
+      "tolerance": "none",
+      "dominant": true
+    },
+    "complicated_bees:productivity": {
+      "data": "slowest",
+      "dominant": true
+    },
+    "complicated_bees:fertility": {
+      "data": 2,
+      "dominant": true
     },
     "complicated_bees:flower": {
-      "data": "complicated_bees:flower"
+      "data": "complicated_bees:flower",
+      "dominant": true
+    },
+    "complicated_bees:nocturnal": {
+      "data": false,
+      "dominant": true
+    },
+    "complicated_bees:cave_dwelling": {
+      "data": false,
+      "dominant": true
+    },
+    "complicated_bees:weatherproof": {
+      "data": false,
+      "dominant": true
     }
   }
 }
