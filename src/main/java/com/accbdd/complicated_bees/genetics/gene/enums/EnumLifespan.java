@@ -4,10 +4,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public enum EnumLifespan {
-    SHORTEST("shortest", 20),
-    SHORTER("shorter", 35),
-    SHORT("short", 45),
-    AVERAGE("average", 55),
+    SHORTEST("shortest", 15),
+    SHORTER("shorter", 25),
+    SHORT("short", 35),
+    AVERAGE("average", 50),
     LONG("long", 65),
     LONGER("longer", 75),
     LONGEST("longest", 90);

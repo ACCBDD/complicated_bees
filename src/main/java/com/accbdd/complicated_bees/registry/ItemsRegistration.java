@@ -28,9 +28,9 @@ public class ItemsRegistration {
     public static final DeferredItem<Item> BEESWAX = ITEMS.registerSimpleItem("beeswax");
 
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1.2f, 1f)));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1.1f, 1f)));
     public static final DeferredItem<FrameItem> THICK_FRAME = ITEMS.registerItem("thick_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1.2f)));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1.1f)));
     public static final DeferredItem<FrameItem> COLD_FRAME = ITEMS.registerItem("cold_frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.DOWN_1, EnumTolerance.NONE, 0.8f, 1f)));
     public static final DeferredItem<FrameItem> HOT_FRAME = ITEMS.registerItem("hot_frame",
