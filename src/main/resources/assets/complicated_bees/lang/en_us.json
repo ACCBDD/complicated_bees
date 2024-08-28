@@ -274,7 +274,24 @@
   "species.complicated_bees.complicated_bees:bandit.authority": "Ayse Eigh",
   "species.complicated_bees.complicated_bees:bandit.flavor_text": "Generally solitary, it prowls the desert, targeting hapless animals for tribute - seemingly for the sole purpose of hoarding.",
   "species.complicated_bees.complicated_bees:bandit.flavor_author": "Arid Apidae",
-
+  "species.complicated_bees.complicated_bees:explorer": "Explorer",
+  "species.complicated_bees.complicated_bees:explorer.genus": "Herapis",
+  "species.complicated_bees.complicated_bees:explorer.species_taxonomy": "H. rimor",
+  "species.complicated_bees.complicated_bees:explorer.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:explorer.flavor_text": "Brave and hardy, they venture out in search of fresh and new experiences.",
+  "species.complicated_bees.complicated_bees:explorer.flavor_author": "Wings of Valor",
+  "species.complicated_bees.complicated_bees:intrepid": "Intrepid",
+  "species.complicated_bees.complicated_bees:intrepid.genus": "Herapis",
+  "species.complicated_bees.complicated_bees:intrepid.species_taxonomy": "H. inpavidus",
+  "species.complicated_bees.complicated_bees:intrepid.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:intrepid.flavor_text": "Sturdier than their explorer cousins, these bees can even fly through rain.",
+  "species.complicated_bees.complicated_bees:intrepid.flavor_author": "Wings of Valor",
+  "species.complicated_bees.complicated_bees:champion": "Champion",
+  "species.complicated_bees.complicated_bees:champion.genus": "Herapis",
+  "species.complicated_bees.complicated_bees:champion.species_taxonomy": "H. vindex",
+  "species.complicated_bees.complicated_bees:champion.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:champion.flavor_text": "In deepest cave, in darkest night, no evil shall escape our sight...",
+  "species.complicated_bees.complicated_bees:champion.flavor_author": "Wings of Valor",
 
   "flower.complicated_bees.complicated_bees:flower": "Flowers",
   "flower.complicated_bees.complicated_bees:desert": "Desert",
@@ -290,5 +307,7 @@
   "effect.complicated_bees.complicated_bees:pollenic.desc": "Bonemeals nearby plants.",
   "effect.complicated_bees.complicated_bees:tribute": "Tribute",
   "effect.complicated_bees.complicated_bees:tribute.desc": "Occasionally produces nearby passive mob drops.",
+  "effect.complicated_bees.complicated_bees:explorer": "Explorer",
+  "effect.complicated_bees.complicated_bees:explorer.desc": "Gives nearby players experience.",
   "effect.complicated_bees.complicated_bees:none": "None"
 }
