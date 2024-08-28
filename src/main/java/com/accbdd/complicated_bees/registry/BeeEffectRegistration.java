@@ -22,6 +22,8 @@ public class BeeEffectRegistration {
     public static final Supplier<DebugEffect> DEBUG = EFFECTS.register("debug", DebugEffect::new);
     public static final Supplier<PollenicEffect> POLLENIC = EFFECTS.register("pollenic", PollenicEffect::new);
     public static final Supplier<TributeEffect> TRIBUTE = EFFECTS.register("tribute", TributeEffect::new);
+    public static final Supplier<ExplorerEffect> EXPLORER = EFFECTS.register("explorer", ExplorerEffect::new);
+    public static final Supplier<ChampionEffect> CHAMPION = EFFECTS.register("champion", ChampionEffect::new);
     public static final Supplier<PotionEffect> BEATIFIC = EFFECTS.register("beatific", () ->
             new PotionEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1, true, true), 80));
     public static final Supplier<PotionEffect> VENOMOUS = EFFECTS.register("venomous", () ->

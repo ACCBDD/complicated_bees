@@ -62,7 +62,7 @@ public class BeeProduceRecipeCategory implements IRecipeCategory<Species> {
                     .addTooltipCallback(new ChanceTooltipCallback(products.get(i).getChance()));
         }
 
-        for (int i = 0; i < products.size(); i++) {
+        for (int i = 0; i < specProducts.size(); i++) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 66 + (18 * i), 35)
                     .setSlotName("specialty_output_" + i)
                     .addIngredient(VanillaTypes.ITEM_STACK, specProducts.get(i).getStack())
