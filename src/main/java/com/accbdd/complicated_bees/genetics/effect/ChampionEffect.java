@@ -11,7 +11,7 @@ import net.minecraft.world.phys.Vec3;
 public class ChampionEffect implements IBeeEffect {
     @Override
     public void runEffect(BlockEntity blockEntity, ItemStack queen, int cycleProgress) {
-        if (cycleProgress == 0) {
+        if (cycleProgress % 50 == 0) {
             Vec3 center = blockEntity.getBlockPos().getCenter();
             Vec3 offset = new Vec3(3, 3, 3);
             for (Entity entity : blockEntity.getLevel().getEntities(null, new AABB(center.add(offset), center.subtract(offset)))) {
