@@ -1,0 +1,60 @@
+{
+  "dominant": true,
+  "foil": false,
+  "color": "1db9b7",
+  "nest_color": "167e86",
+  "products": [
+    {
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:nether"
+      },
+      "chance": 0.30
+    }
+  ],
+  "specialty_products": [],
+  "default_chromosome": {
+    "complicated_bees:lifespan": {
+      "data": "shorter",
+      "dominant": true
+    },
+    "complicated_bees:temperature": {
+      "data": "hellish",
+      "tolerance": "down_1",
+      "dominant": true
+    },
+    "complicated_bees:humidity": {
+      "data": "dry",
+      "tolerance": "none",
+      "dominant": true
+    },
+    "complicated_bees:productivity": {
+      "data": "slower",
+      "dominant": true
+    },
+    "complicated_bees:fertility": {
+      "data": 2,
+      "dominant": true
+    },
+    "complicated_bees:flower": {
+      "data": "complicated_bees:nether",
+      "dominant": true
+    },
+    "complicated_bees:effect": {
+      "data": "complicated_bees:aggressive",
+      "dominant": true
+    },
+    "complicated_bees:nocturnal": {
+      "data": true,
+      "dominant": true
+    },
+    "complicated_bees:cave_dwelling": {
+      "data": true,
+      "dominant": true
+    },
+    "complicated_bees:weatherproof": {
+      "data": false,
+      "dominant": true
+    }
+  }
+}

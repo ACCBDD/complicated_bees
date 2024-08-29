@@ -1,0 +1,12 @@
+{
+  "first": "complicated_bees:devilish",
+  "second": "complicated_bees:bandit",
+  "result": "complicated_bees:infernal",
+  "chance": 0.08,
+  "conditions": {
+    "complicated_bees:temperature": {
+      "min": "hellish",
+      "max": "hellish"
+    }
+  }
+}

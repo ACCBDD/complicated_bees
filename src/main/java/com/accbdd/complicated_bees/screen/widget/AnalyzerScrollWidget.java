@@ -160,10 +160,13 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private int drawWrappedText(GuiGraphics graphics, int x, int y, int color, Component... components) {
         int lineHeight = y;
         for (Component component : components) {
-            List<FormattedCharSequence> lines = Minecraft.getInstance().font.split(component, getWidth() - PADDING * 2);
-            for (FormattedCharSequence line : lines) {
-                graphics.drawString(Minecraft.getInstance().font, line, x + getX(), lineHeight + getY(), color);
-                lineHeight += LINE_HEIGHT;
+            String[] linebroken = component.getString().split("\\r?\\n");
+            for (String prewrap : linebroken) {
+                List<FormattedCharSequence> lines = Minecraft.getInstance().font.split(Component.literal(prewrap).withStyle(component.getStyle()), getWidth() - PADDING * 2);
+                for (FormattedCharSequence line : lines) {
+                    graphics.drawString(Minecraft.getInstance().font, line, x + getX(), lineHeight + getY(), color);
+                    lineHeight += LINE_HEIGHT;
+                }
             }
             lineHeight += LINE_HEIGHT / 2;
         }

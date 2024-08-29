@@ -1,0 +1,11 @@
+{
+  "blocks": [
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus",
+    "minecraft:nether_sprouts",
+    "minecraft:crimson_roots",
+    "minecraft:warped_roots",
+    "minecraft:shroomlight",
+    "minecraft:nether_wart"
+  ]
+}

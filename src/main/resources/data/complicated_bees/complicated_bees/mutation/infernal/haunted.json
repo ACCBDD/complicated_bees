@@ -1,0 +1,15 @@
+{
+  "first": "complicated_bees:cursed",
+  "second": "complicated_bees:warped",
+  "result": "complicated_bees:haunted",
+  "chance": 0.12,
+  "conditions": {
+    "complicated_bees:temperature": {
+      "min": "hellish",
+      "max": "hellish"
+    },
+    "complicated_bees:block_under": {
+      "block": "minecraft:soul_sand"
+    }
+  }
+}

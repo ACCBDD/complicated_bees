@@ -1,0 +1,65 @@
+{
+  "dominant": true,
+  "foil": true,
+  "color": "ff0059",
+  "nest_color": "ff0059",
+  "products": [
+    {
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:nether"
+      },
+      "chance": 0.45
+    }
+  ],
+  "specialty_products": [
+    {
+      "item": "minecraft:blaze_powder",
+      "chance": 0.1
+    }
+  ],
+  "default_chromosome": {
+    "complicated_bees:lifespan": {
+      "data": "longer",
+      "dominant": true
+    },
+    "complicated_bees:temperature": {
+      "data": "hellish",
+      "tolerance": "down_1",
+      "dominant": true
+    },
+    "complicated_bees:humidity": {
+      "data": "dry",
+      "tolerance": "down_1",
+      "dominant": true
+    },
+    "complicated_bees:productivity": {
+      "data": "average",
+      "dominant": true
+    },
+    "complicated_bees:fertility": {
+      "data": 1,
+      "dominant": true
+    },
+    "complicated_bees:flower": {
+      "data": "complicated_bees:nether",
+      "dominant": true
+    },
+    "complicated_bees:effect": {
+      "data": "complicated_bees:hostile",
+      "dominant": true
+    },
+    "complicated_bees:nocturnal": {
+      "data": true,
+      "dominant": true
+    },
+    "complicated_bees:cave_dwelling": {
+      "data": true,
+      "dominant": true
+    },
+    "complicated_bees:weatherproof": {
+      "data": true,
+      "dominant": true
+    }
+  }
+}

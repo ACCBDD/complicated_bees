@@ -1,0 +1,12 @@
+{
+  "first": "complicated_bees:cursed",
+  "second": "complicated_bees:crimson",
+  "result": "complicated_bees:fiendish",
+  "chance": 0.10,
+  "conditions": {
+    "complicated_bees:temperature": {
+      "min": "hellish",
+      "max": "hellish"
+    }
+  }
+}

@@ -24,8 +24,15 @@ public class BeeEffectRegistration {
     public static final Supplier<TributeEffect> TRIBUTE = EFFECTS.register("tribute", TributeEffect::new);
     public static final Supplier<ExplorerEffect> EXPLORER = EFFECTS.register("explorer", ExplorerEffect::new);
     public static final Supplier<ChampionEffect> CHAMPION = EFFECTS.register("champion", ChampionEffect::new);
+    public static final Supplier<AggressiveEffect> AGGRESSIVE = EFFECTS.register("aggressive", AggressiveEffect::new);
+    public static final Supplier<FlamingEffect> FLAMING = EFFECTS.register("flaming", FlamingEffect::new);
+    public static final Supplier<HostileEffect> HOSTILE = EFFECTS.register("hostile", HostileEffect::new);
+    public static final Supplier<CursedEffect> CURSED = EFFECTS.register("cursed", CursedEffect::new);
     public static final Supplier<PotionEffect> BEATIFIC = EFFECTS.register("beatific", () ->
             new PotionEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1, true, true), 80));
     public static final Supplier<PotionEffect> VENOMOUS = EFFECTS.register("venomous", () ->
             new PotionEffect(new MobEffectInstance(MobEffects.POISON, 40, 1, true, true), 80));
+    public static final Supplier<PotionEffect> SPECTRAL = EFFECTS.register("spectral", () ->
+            new PotionEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 1, true, true), 80));
+
 }

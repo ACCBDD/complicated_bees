@@ -1,0 +1,12 @@
+{
+  "first": "complicated_bees:fiendish",
+  "second": "complicated_bees:cultivated",
+  "result": "complicated_bees:devilish",
+  "chance": 0.08,
+  "conditions": {
+    "complicated_bees:temperature": {
+      "min": "hellish",
+      "max": "hellish"
+    }
+  }
+}

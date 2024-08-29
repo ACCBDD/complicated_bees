@@ -1,0 +1,23 @@
+{
+  "type": "complicated_bees:centrifuge",
+  "input": {
+    "item": "complicated_bees:comb",
+    "nbt": {
+      "comb_type": "complicated_bees:nether"
+    }
+  },
+  "outputs": [
+    {
+      "item": "complicated_bees:honey_droplet",
+      "chance": 0.75
+    },
+    {
+      "item": "complicated_bees:beeswax",
+      "chance": 0.2
+    },
+    {
+      "item": "complicated_bees:propolis",
+      "chance": 0.1
+    }
+  ]
+}

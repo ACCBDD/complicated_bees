@@ -9,7 +9,7 @@
   "outputs": [
     {
       "item": "complicated_bees:honey_droplet",
-      "chance": 0.9
+      "chance": 0.85
     },
     {
       "item": "complicated_bees:beeswax",
