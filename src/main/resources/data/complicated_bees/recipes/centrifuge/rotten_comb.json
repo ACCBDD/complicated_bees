@@ -3,17 +3,21 @@
   "input": {
     "item": "complicated_bees:comb",
     "nbt": {
-      "comb_type": "complicated_bees:rocky"
+      "comb_type": "complicated_bees:rotten"
     }
   },
   "outputs": [
     {
       "item": "complicated_bees:beeswax",
-      "chance": 0.8
+      "chance": 0.6
+    },
+    {
+      "item": "minecraft:bone_meal",
+      "chance": 0.3
     },
     {
       "item": "complicated_bees:honey_droplet",
-      "chance": 0.4
+      "chance": 0.1
     }
   ]
 }

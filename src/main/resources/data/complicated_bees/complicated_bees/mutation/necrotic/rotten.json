@@ -1,0 +1,6 @@
+{
+  "first": "complicated_bees:decaying",
+  "second": "complicated_bees:tangle",
+  "result": "complicated_bees:rotten",
+  "chance": 0.10
+}

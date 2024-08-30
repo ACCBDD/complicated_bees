@@ -9,7 +9,14 @@
       "nbt": {
         "comb_type": "complicated_bees:stringy"
       },
-      "chance": 0.55
+      "chance": 0.50
+    },
+    {
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:honey"
+      },
+      "chance": 0.15
     }
   ],
   "specialty_products": [

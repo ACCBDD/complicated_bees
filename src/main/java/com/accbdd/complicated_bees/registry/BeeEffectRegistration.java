@@ -28,11 +28,14 @@ public class BeeEffectRegistration {
     public static final Supplier<FlamingEffect> FLAMING = EFFECTS.register("flaming", FlamingEffect::new);
     public static final Supplier<HostileEffect> HOSTILE = EFFECTS.register("hostile", HostileEffect::new);
     public static final Supplier<CursedEffect> CURSED = EFFECTS.register("cursed", CursedEffect::new);
+    public static final Supplier<ResurrectionEffect> RESURRECTION = EFFECTS.register("resurrection", ResurrectionEffect::new);
     public static final Supplier<PotionEffect> BEATIFIC = EFFECTS.register("beatific", () ->
             new PotionEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1, true, true), 80));
     public static final Supplier<PotionEffect> VENOMOUS = EFFECTS.register("venomous", () ->
             new PotionEffect(new MobEffectInstance(MobEffects.POISON, 40, 1, true, true), 80));
     public static final Supplier<PotionEffect> SPECTRAL = EFFECTS.register("spectral", () ->
             new PotionEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 1, true, true), 80));
+    public static final Supplier<PotionEffect> UNHEALTHY = EFFECTS.register("unhealthy", () ->
+            new PotionEffect(new MobEffectInstance(MobEffects.HUNGER, 40, 1, true, true), 80));
 
 }

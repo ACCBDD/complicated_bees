@@ -1,22 +1,22 @@
 {
-  "dominant": true,
+  "dominant": false,
   "foil": false,
-  "color": "b642f5",
-  "nest_color": "b642f5",
+  "color": "008a67",
+  "nest_color": "008a67",
   "products": [
     {
       "item": "complicated_bees:comb",
       "nbt": {
-        "comb_type": "complicated_bees:stringy"
+        "comb_type": "complicated_bees:rotten"
       },
       "chance": 0.40
     },
     {
       "item": "complicated_bees:comb",
       "nbt": {
-        "comb_type": "complicated_bees:honey"
+        "comb_type": "complicated_bees:stringy"
       },
-      "chance": 0.10
+      "chance": 0.2
     }
   ],
   "specialty_products": [],
@@ -26,13 +26,13 @@
       "dominant": true
     },
     "complicated_bees:temperature": {
-      "data": "normal",
+      "data": "cold",
       "tolerance": "up_1",
-      "dominant": false
+      "dominant": true
     },
     "complicated_bees:humidity": {
       "data": "normal",
-      "tolerance": "none",
+      "tolerance": "both_1",
       "dominant": false
     },
     "complicated_bees:productivity": {
@@ -40,16 +40,20 @@
       "dominant": true
     },
     "complicated_bees:fertility": {
-      "data": 2,
+      "data": 1,
       "dominant": true
     },
     "complicated_bees:flower": {
-      "data": "complicated_bees:flower",
+      "data": "complicated_bees:skulls",
+      "dominant": true
+    },
+    "complicated_bees:effect": {
+      "data": "complicated_bees:unhealthy",
       "dominant": true
     },
     "complicated_bees:nocturnal": {
-      "data": false,
-      "dominant": true
+      "data": true,
+      "dominant": false
     },
     "complicated_bees:cave_dwelling": {
       "data": false,

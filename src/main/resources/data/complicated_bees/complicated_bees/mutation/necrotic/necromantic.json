@@ -1,0 +1,13 @@
+{
+  "first": "complicated_bees:rotten",
+  "second": "complicated_bees:lush",
+  "result": "complicated_bees:necromantic",
+  "chance": 0.08,
+  "conditions": {
+    "complicated_bees:nighttime": {},
+    "complicated_bees:temperature": {
+      "min": "cold",
+      "max": "cold"
+    }
+  }
+}
