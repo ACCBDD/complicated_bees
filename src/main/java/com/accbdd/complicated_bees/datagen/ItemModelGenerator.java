@@ -45,6 +45,7 @@ public class ItemModelGenerator extends ItemModelProvider {
     }
 
     private ItemModelBuilder createBeeModel(ResourceLocation bee_type) {
+        //todo: create custom model to allow string based overrides!
         ResourceLocation bee_base = modLoc("item/bee_base");
         ResourceLocation bee_outline = modLoc("item/bee_outline");
         return getBuilder(bee_type.toString())
