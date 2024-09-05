@@ -50,7 +50,7 @@ public class ItemModelGenerator extends ItemModelProvider {
     }
 
     private ItemModelBuilder createBeeModel(ResourceLocation bee_type) {
-        //todo: create custom model to allow string based overrides!
+        //todo: document how beemodel works!
         ResourceLocation bee_base = modLoc("item/bee_base");
         ResourceLocation bee_outline = modLoc("item/bee_outline");
 
@@ -58,14 +58,6 @@ public class ItemModelGenerator extends ItemModelProvider {
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", bee_base)
                 .texture("layer1", bee_outline)
-//                .guiLight(BlockModel.GuiLight.FRONT)
-//                .transforms()
-//                    .transform(ItemDisplayContext.GROUND).rotation(0,0,0).translation(0,2, 0).scale(0.5f).end()
-//                    .transform(ItemDisplayContext.HEAD).rotation(0, 180, 0).translation(0, 13, 7).scale(1).end()
-//                    .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(0, 0, 0).translation(0, 3, 1).scale(0.55f).end()
-//                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, -90, 25).translation(1.13f, 3.2f, 1.13f).scale(0.68f).end()
-//                    .transform(ItemDisplayContext.FIXED).rotation(0, 180, 0).scale(1).end()
-//                .end()
                 .customLoader(BeeModelBuilder::begin).end();
     }
 
