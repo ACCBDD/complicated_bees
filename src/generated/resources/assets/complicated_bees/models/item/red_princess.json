@@ -1,15 +1,12 @@
 {
   "parent": "minecraft:item/generated",
-  "loader": "complicated_bees:bee_model",
+  "loader": "neoforge:item_layers",
   "neoforge_data": {
     "layers": {}
   },
   "render_types": {},
-  "variants": {
-    "complicated_bees:jungle": "complicated_bees:item/red_princess"
-  },
   "textures": {
-    "layer0": "complicated_bees:item/bee_base",
+    "layer0": "complicated_bees:item/red_bee_base",
     "layer1": "complicated_bees:item/bee_outline",
     "layer2": "complicated_bees:item/princess_crown"
   }

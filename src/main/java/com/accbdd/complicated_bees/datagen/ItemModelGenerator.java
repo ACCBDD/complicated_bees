@@ -2,11 +2,15 @@ package com.accbdd.complicated_bees.datagen;
 
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.neoforged.neoforge.client.model.ItemLayerModel;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.loaders.ItemLayerModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
@@ -48,10 +52,20 @@ public class ItemModelGenerator extends ItemModelProvider {
         //todo: create custom model to allow string based overrides!
         ResourceLocation bee_base = modLoc("item/bee_base");
         ResourceLocation bee_outline = modLoc("item/bee_outline");
+
         return getBuilder(bee_type.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", bee_base)
-                .texture("layer1", bee_outline);
+                .texture("layer1", bee_outline)
+//                .guiLight(BlockModel.GuiLight.FRONT)
+//                .transforms()
+//                    .transform(ItemDisplayContext.GROUND).rotation(0,0,0).translation(0,2, 0).scale(0.5f).end()
+//                    .transform(ItemDisplayContext.HEAD).rotation(0, 180, 0).translation(0, 13, 7).scale(1).end()
+//                    .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(0, 0, 0).translation(0, 3, 1).scale(0.55f).end()
+//                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, -90, 25).translation(1.13f, 3.2f, 1.13f).scale(0.68f).end()
+//                    .transform(ItemDisplayContext.FIXED).rotation(0, 180, 0).scale(1).end()
+//                .end()
+                .customLoader(ItemLayerModelBuilder::begin).end();
     }
 
     private void createCombModel() {
