@@ -23,13 +23,13 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.NeoForgeRenderTypes;
 import net.neoforged.neoforge.client.RenderTypeGroup;
 import net.neoforged.neoforge.client.model.CompositeModel;
 import net.neoforged.neoforge.client.model.ExtraFaceData;
-import net.neoforged.neoforge.client.model.ItemLayerModel;
 import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
 import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
 import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
@@ -44,14 +44,14 @@ import java.util.function.Function;
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class BeeModel implements IUnbakedGeometry<BeeModel> {
-    private record Variant(ResourceLocation species) {}
+    public record Variant(ResourceLocation species) {}
 
-    private final Map<Variant, ItemLayerModel> modelMap;
+    private final Map<Variant, ResourceLocation> modelMap;
     private final Int2ObjectMap<ExtraFaceData> layerData;
     private final Int2ObjectMap<ResourceLocation> renderTypeNames;
     private ImmutableList<Material> textures = null;
 
-    public BeeModel(Map<Variant, ItemLayerModel> modelMap, Int2ObjectMap<ExtraFaceData> layerData, Int2ObjectMap<ResourceLocation> renderTypeNames) {
+    public BeeModel(Map<Variant, ResourceLocation> modelMap, Int2ObjectMap<ExtraFaceData> layerData, Int2ObjectMap<ResourceLocation> renderTypeNames) {
         this.modelMap = modelMap;
         this.layerData = layerData;
         this.renderTypeNames = renderTypeNames;
@@ -59,8 +59,6 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
 
     @Override
     public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-
-
         if (textures == null) {
             ImmutableList.Builder<Material> builder = ImmutableList.builder();
             for (int i = 0; context.hasMaterial("layer" + i); i++) {
@@ -68,14 +66,14 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
             }
             textures = builder.build();
         }
-        var rootTransform = context.getRootTransform();
-        if (!rootTransform.isIdentity())
-            modelState = UnbakedGeometryHelper.composeRootTransformIntoModelState(modelState, rootTransform);
         TextureAtlasSprite particle = spriteGetter.apply(
                 context.hasMaterial("particle") ? context.getMaterial("particle") : textures.get(0));
 
-        ModelState finalModelState = modelState;
-        Map<Variant, BakedModel> bakedMap = Map.copyOf(Maps.transformValues(modelMap, model -> model.bake(context, baker, spriteGetter, finalModelState, overrides, modelLocation)));
+        Map<Variant, BakedModel> bakedMap = Map.copyOf(Maps.transformValues(modelMap, model -> {
+            var unbaked = baker.getModel(model);
+            unbaked.resolveParents(baker::getModel);
+            return unbaked.bake(baker, spriteGetter, modelState, model);
+        }));
         ItemOverrides nbt_overrides = new ItemOverrides() {
             @Nullable
             @Override
@@ -108,11 +106,11 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
 
         @Override
         public BeeModel read(JsonObject jsonObject, JsonDeserializationContext deserializationContext) throws JsonParseException {
-            Map<Variant, ItemLayerModel> variantMap = new HashMap<>();
-            var variantsJson = jsonObject.getAsJsonObject("variants");
+            Map<Variant, ResourceLocation> variantMap = new HashMap<>();
+            var variantsJson = GsonHelper.getAsJsonObject(jsonObject, "variants");
             for (Map.Entry<String, JsonElement> entry : variantsJson.entrySet()) {
                 ResourceLocation loc = ResourceLocation.tryParse(entry.getKey());
-                ItemLayerModel model = deserializationContext.deserialize(entry.getValue(), ItemLayerModel.class);
+                ResourceLocation model = ResourceLocation.tryParse(entry.getValue().getAsString());
                 variantMap.put(new Variant(loc), model);
             }
 
