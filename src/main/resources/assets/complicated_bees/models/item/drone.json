@@ -9,5 +9,7 @@
     "layer0": "complicated_bees:item/bee_base",
     "layer1": "complicated_bees:item/bee_outline"
   },
-  "variants": {}
+  "variants": {
+    "complicated_bees:infernal": "complicated_bees:item/red_drone"
+  }
 }

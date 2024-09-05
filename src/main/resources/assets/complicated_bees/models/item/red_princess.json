@@ -8,6 +8,6 @@
   "textures": {
     "layer0": "complicated_bees:item/red_bee_base",
     "layer1": "complicated_bees:item/red_bee_outline",
-    "layer2": "complicated_bees:item/princess_crown"
+    "layer2": "complicated_bees:item/red_princess_crown"
   }
 }

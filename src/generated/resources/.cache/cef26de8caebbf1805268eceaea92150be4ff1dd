@@ -1,4 +1,4 @@
-// 1.20.4	2024-09-04T23:28:28.04682	Item Models: complicated_bees
+// 1.20.4	2024-09-05T01:40:28.3578303	Item Models: complicated_bees
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 6df9d7e396652be82b3c1d200173d889ff220fcc assets/complicated_bees/models/item/apiary.json
 f2842120833073b82c83a81f23130c1a5f9ca947 assets/complicated_bees/models/item/beeswax.json
@@ -7,7 +7,7 @@ ddd308a0febba5cb812ba9322e3f33922eb2cb7b assets/complicated_bees/models/item/cen
 7cf834c09b220a64ae97333c28f97bb16d3e31dd assets/complicated_bees/models/item/cold_frame.json
 b0ab6f97c112e891c09a3814b16e0f4cbc177253 assets/complicated_bees/models/item/comb.json
 5d261e8cd5f3dd07c3b891a3c2057ed79f1d7fdc assets/complicated_bees/models/item/deadly_frame.json
-4281157cc1b2e99db5ce97881dd722811c1d1660 assets/complicated_bees/models/item/drone.json
+e1c44dbe71fdf49f92b82194231c9fa4f263be1b assets/complicated_bees/models/item/drone.json
 4bc53a1d4e97fb1198ba0da398db1be707d6fce8 assets/complicated_bees/models/item/dry_frame.json
 11489e5d0e972f0cc0861dc755263bb47cef3910 assets/complicated_bees/models/item/frame.json
 942fa15bac71ccde84a09da39c73e176e9811370 assets/complicated_bees/models/item/generator.json
@@ -16,9 +16,9 @@ b0ab6f97c112e891c09a3814b16e0f4cbc177253 assets/complicated_bees/models/item/com
 4e887f1f8cea3582976db56210b0e25895b8511a assets/complicated_bees/models/item/meter.json
 8dd2813cb634894f74a21951e47a30b656bc3cd2 assets/complicated_bees/models/item/moist_frame.json
 fdade14308f6b59c6629c9fb48aa3ae023776efb assets/complicated_bees/models/item/pollen.json
-482d38d4c5dd624c4cde807e91fdfc21dd6a8976 assets/complicated_bees/models/item/princess.json
+bd065224c54899152c47411c282f7beff983cb4e assets/complicated_bees/models/item/princess.json
 ffeff91bbc84f6485cd92d59259880b8e6d12038 assets/complicated_bees/models/item/propolis.json
-d9d87286a09ffc7681d1f29db95d215e2018382b assets/complicated_bees/models/item/queen.json
+a89dc7b5fc042fe03463b219e5a93826d79b887f assets/complicated_bees/models/item/queen.json
 e184a0d9b3e84a356b0fa6a34823b6e793ce32d1 assets/complicated_bees/models/item/restrictive_frame.json
 e687e1a9d5cdfcf6b1717f540917fc409af53e57 assets/complicated_bees/models/item/royal_jelly.json
 274eeb113984d54762b8fc469fe9a8720d1fe4fd assets/complicated_bees/models/item/scoop.json

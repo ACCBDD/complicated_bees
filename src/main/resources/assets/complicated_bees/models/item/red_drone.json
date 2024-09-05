@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:item_layers",
+  "neoforge_data": {
+    "layers": {}
+  },
+  "render_types": {},
+  "textures": {
+    "layer0": "complicated_bees:item/red_bee_base",
+    "layer1": "complicated_bees:item/red_bee_outline"
+  }
+}

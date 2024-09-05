@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.datagen;
 
+import com.accbdd.complicated_bees.client.BeeModelBuilder;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.client.renderer.block.model.BlockModel;
@@ -65,7 +66,7 @@ public class ItemModelGenerator extends ItemModelProvider {
 //                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, -90, 25).translation(1.13f, 3.2f, 1.13f).scale(0.68f).end()
 //                    .transform(ItemDisplayContext.FIXED).rotation(0, 180, 0).scale(1).end()
 //                .end()
-                .customLoader(ItemLayerModelBuilder::begin).end();
+                .customLoader(BeeModelBuilder::begin).end();
     }
 
     private void createCombModel() {

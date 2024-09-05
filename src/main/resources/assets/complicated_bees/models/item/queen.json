@@ -7,7 +7,10 @@
   "render_types": {},
   "textures": {
     "layer0": "complicated_bees:item/bee_base",
-    "layer1": "complicated_bees:item/bee_outline"
+    "layer1": "complicated_bees:item/bee_outline",
+    "layer2": "complicated_bees:item/queen_crown"
   },
-  "variants": {}
+  "variants": {
+    "complicated_bees:infernal": "complicated_bees:item/red_queen"
+  }
 }
