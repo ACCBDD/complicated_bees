@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " X ",
+    "XXX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "complicated_bees:pearl_shard"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "minecraft:ender_pearl"
+  }
+}

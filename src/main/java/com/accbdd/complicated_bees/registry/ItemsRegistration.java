@@ -20,12 +20,14 @@ public class ItemsRegistration {
     public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
     public static final DeferredItem<MeterItem> METER = ITEMS.registerItem("meter", MeterItem::new);
     public static final DeferredItem<AnalyzerItem> ANALYZER = ITEMS.registerItem("analyzer", AnalyzerItem::new);
+    public static final DeferredItem<ExpDropItem> EXP_DROP = ITEMS.registerItem("exp_drop", ExpDropItem::new);
 
     public static final DeferredItem<Item> HONEY_DROPLET = ITEMS.registerSimpleItem("honey_droplet");
     public static final DeferredItem<Item> ROYAL_JELLY = ITEMS.registerSimpleItem("royal_jelly");
     public static final DeferredItem<Item> POLLEN = ITEMS.registerSimpleItem("pollen");
     public static final DeferredItem<Item> PROPOLIS = ITEMS.registerSimpleItem("propolis");
     public static final DeferredItem<Item> BEESWAX = ITEMS.registerSimpleItem("beeswax");
+    public static final DeferredItem<Item> PEARL_SHARD = ITEMS.registerSimpleItem("pearl_shard");
 
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1.1f, 1f)));

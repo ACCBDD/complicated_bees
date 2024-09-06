@@ -74,6 +74,8 @@ public class ComplicatedBees {
                 output.accept(ItemsRegistration.MOIST_FRAME.get());
                 output.accept(ItemsRegistration.DEADLY_FRAME.get());
                 output.accept(ItemsRegistration.RESTRICTIVE_FRAME.get());
+                output.accept(ItemsRegistration.PEARL_SHARD.get());
+                output.accept(ItemsRegistration.EXP_DROP.get());
                 Set<Map.Entry<ResourceKey<Species>, Species>> speciesSet = Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().entrySet();
                 for (Map.Entry<ResourceKey<Species>, Species> entry : speciesSet) {
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));

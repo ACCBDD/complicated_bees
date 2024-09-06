@@ -31,4 +31,5 @@ public class MutationRegistration {
     public static final Supplier<IMutationCondition> DOWNFALL = MUTATION_CONDITIONS.register(DownfallCondition.ID, DownfallCondition::new);
     public static final Supplier<IMutationCondition> HUMIDITY = MUTATION_CONDITIONS.register(HumidityCondition.ID, () -> new HumidityCondition(EnumHumidity.NORMAL, EnumHumidity.NORMAL));
     public static final Supplier<IMutationCondition> TEMPERATURE = MUTATION_CONDITIONS.register(TemperatureCondition.ID, () -> new TemperatureCondition(EnumTemperature.NORMAL, EnumTemperature.NORMAL));
+    public static final Supplier<IMutationCondition> DIMENSION = MUTATION_CONDITIONS.register(DimensionCondition.ID, () -> new DimensionCondition(new ResourceLocation("minecraft:overworld")));
 }

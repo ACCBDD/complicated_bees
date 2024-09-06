@@ -39,6 +39,8 @@ public class ItemModelGenerator extends ItemModelProvider {
         basicItem(ItemsRegistration.MOIST_FRAME.get());
         basicItem(ItemsRegistration.DEADLY_FRAME.get());
         basicItem(ItemsRegistration.RESTRICTIVE_FRAME.get());
+        basicItem(ItemsRegistration.PEARL_SHARD.get());
+        basicItem(ItemsRegistration.EXP_DROP.get());
         createBeeModel(ItemsRegistration.DRONE.getId());
         createBeeModel(ItemsRegistration.PRINCESS.getId()).texture("layer2", modLoc("item/princess_crown"));
         createBeeModel(ItemsRegistration.QUEEN.getId()).texture("layer2", modLoc("item/queen_crown"));
@@ -46,7 +48,6 @@ public class ItemModelGenerator extends ItemModelProvider {
     }
 
     private ItemModelBuilder createBeeModel(ResourceLocation bee_type) {
-        //todo: document how beemodel works!
         ResourceLocation bee_base = modLoc("item/bee_base");
         ResourceLocation bee_outline = modLoc("item/bee_outline");
 
