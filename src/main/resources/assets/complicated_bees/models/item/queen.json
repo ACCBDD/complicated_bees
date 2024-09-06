@@ -11,6 +11,8 @@
     "layer2": "complicated_bees:item/queen_crown"
   },
   "variants": {
-    "complicated_bees:infernal": "complicated_bees:item/red_queen"
+    "complicated_bees:infernal": "complicated_bees:item/red_queen",
+    "complicated_bees:fiendish": "complicated_bees:item/red_queen",
+    "complicated_bees:devilish": "complicated_bees:item/red_queen"
   }
 }

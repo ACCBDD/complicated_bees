@@ -69,6 +69,7 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
         TextureAtlasSprite particle = spriteGetter.apply(
                 context.hasMaterial("particle") ? context.getMaterial("particle") : textures.get(0));
 
+        //todo: make this multiple resourcepack-friendly - maybe a separate field in the species definition?
         Map<Variant, BakedModel> bakedMap = Map.copyOf(Maps.transformValues(modelMap, model -> {
             var unbaked = baker.getModel(model);
             unbaked.resolveParents(baker::getModel);

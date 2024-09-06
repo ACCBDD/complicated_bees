@@ -10,6 +10,8 @@
     "layer1": "complicated_bees:item/bee_outline"
   },
   "variants": {
-    "complicated_bees:infernal": "complicated_bees:item/red_drone"
+    "complicated_bees:infernal": "complicated_bees:item/red_drone",
+    "complicated_bees:fiendish": "complicated_bees:item/red_drone",
+    "complicated_bees:devilish": "complicated_bees:item/red_drone"
   }
 }

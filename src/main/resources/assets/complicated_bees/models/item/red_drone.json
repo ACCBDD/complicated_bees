@@ -7,6 +7,6 @@
   "render_types": {},
   "textures": {
     "layer0": "complicated_bees:item/red_bee_base",
-    "layer1": "complicated_bees:item/red_bee_outline"
+    "layer1": "complicated_bees:item/bee_outline"
   }
 }
