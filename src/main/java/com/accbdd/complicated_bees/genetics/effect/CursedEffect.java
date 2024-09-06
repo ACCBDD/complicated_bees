@@ -32,6 +32,10 @@ public class CursedEffect implements IBeeEffect {
                 BlockState state = level.getBlockState(switchPos);
                 if (state.is(Blocks.SAND) || state.is(Blocks.RED_SAND)) {
                     level.setBlockAndUpdate(switchPos, Blocks.SOUL_SAND.defaultBlockState());
+                } else if (state.is(Blocks.GRASS_BLOCK)) {
+                    level.setBlockAndUpdate(switchPos, Blocks.DIRT.defaultBlockState());
+                } else if (state.is(Blocks.DIRT)) {
+                    level.setBlockAndUpdate(switchPos, Blocks.COARSE_DIRT.defaultBlockState());
                 } else {
                     level.setBlockAndUpdate(switchPos, Blocks.SOUL_SOIL.defaultBlockState());
                 }

@@ -4,6 +4,7 @@ package com.accbdd.complicated_bees.genetics;
 import com.accbdd.complicated_bees.genetics.gene.GeneSpecies;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 import static com.accbdd.complicated_bees.util.ComplicatedBeesCodecs.HEX_STRING_CODEC;
 
 /**
@@ -25,18 +27,25 @@ import static com.accbdd.complicated_bees.util.ComplicatedBeesCodecs.HEX_STRING_
 public class Species {
     private final int color;
     private final int nest_color;
+    private List<ResourceLocation> models;
     private final List<Product> products;
     private final List<Product> specialty_products;
     private final Chromosome default_chromosome;
     private final boolean dominant;
     private final boolean foil;
 
+    public static List<ResourceLocation> DEFAULT_MODELS = new ArrayList<>() {{
+        add(new ResourceLocation(MODID, "item/drone"));
+        add(new ResourceLocation(MODID, "item/princess"));
+        add(new ResourceLocation(MODID, "item/queen"));
+    }};
     public static final Species INVALID = new Species();
 
     public static final Codec<Species> SPECIES_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.BOOL.optionalFieldOf("dominant", true).forGetter(Species::isDominant),
                     Codec.BOOL.optionalFieldOf("foil", false).forGetter(Species::isFoil),
+                    ResourceLocation.CODEC.listOf().optionalFieldOf("models", DEFAULT_MODELS).forGetter(Species::getModels),
                     HEX_STRING_CODEC.fieldOf("color").forGetter(Species::getColor),
                     HEX_STRING_CODEC.optionalFieldOf("nest_color", -1).forGetter(Species::getNestColor),
                     Product.CODEC.listOf().optionalFieldOf("products", new ArrayList<>()).forGetter(Species::getProducts),
@@ -46,21 +55,23 @@ public class Species {
     );
 
     public Species() {
-        this(false, false, 0xFFFFFF, 0xFFFFFF, new ArrayList<>(), new ArrayList<>(), new Chromosome());
+        this(false, false, new ArrayList<>(), 0xFFFFFF, 0xFFFFFF, new ArrayList<>(), new ArrayList<>(), new Chromosome());
+        this.models = DEFAULT_MODELS;
     }
 
-    public Species(boolean dominant, boolean foil, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
+    public Species(boolean dominant, boolean foil, List<ResourceLocation> models, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, Chromosome default_chromosome) {
         this.dominant = dominant;
+        this.foil = foil;
+        this.models = models;
         this.color = color;
         this.nest_color = nest_color;
         this.products = products;
         this.specialty_products = specialtyProducts;
-        this.foil = foil;
         this.default_chromosome = default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
-    public Species(boolean dominant, boolean foil, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
-        this(dominant, foil, color, nest_color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
+    public Species(boolean dominant, boolean foil, List<ResourceLocation> models, int color, int nest_color, List<Product> products, List<Product> specialtyProducts, CompoundTag defaultGenomeAsTag) {
+        this(dominant, foil, models, color, nest_color, products, specialtyProducts, new Chromosome(defaultGenomeAsTag));
         default_chromosome.setGene(GeneSpecies.ID, new GeneSpecies(this, dominant));
     }
 
@@ -75,6 +86,10 @@ public class Species {
 
     public boolean isDominant() {
         return this.dominant;
+    }
+
+    public List<ResourceLocation> getModels() {
+        return this.models;
     }
 
     public int getColor() {

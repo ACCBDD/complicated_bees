@@ -2,9 +2,8 @@ package com.accbdd.complicated_bees.client;
 
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
-import com.accbdd.complicated_bees.registry.SpeciesRegistration;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -23,7 +22,6 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.NeoForgeRenderTypes;
@@ -36,7 +34,6 @@ import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -46,13 +43,11 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 public class BeeModel implements IUnbakedGeometry<BeeModel> {
     public record Variant(ResourceLocation species) {}
 
-    private final Map<Variant, ResourceLocation> modelMap;
     private final Int2ObjectMap<ExtraFaceData> layerData;
     private final Int2ObjectMap<ResourceLocation> renderTypeNames;
     private ImmutableList<Material> textures = null;
 
-    public BeeModel(Map<Variant, ResourceLocation> modelMap, Int2ObjectMap<ExtraFaceData> layerData, Int2ObjectMap<ResourceLocation> renderTypeNames) {
-        this.modelMap = modelMap;
+    public BeeModel(Int2ObjectMap<ExtraFaceData> layerData, Int2ObjectMap<ResourceLocation> renderTypeNames) {
         this.layerData = layerData;
         this.renderTypeNames = renderTypeNames;
     }
@@ -70,21 +65,23 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
                 context.hasMaterial("particle") ? context.getMaterial("particle") : textures.get(0));
 
         //todo: make this multiple resourcepack-friendly - maybe a separate field in the species definition?
-        Map<Variant, BakedModel> bakedMap = Map.copyOf(Maps.transformValues(modelMap, model -> {
-            var unbaked = baker.getModel(model);
-            unbaked.resolveParents(baker::getModel);
-            return unbaked.bake(baker, spriteGetter, modelState, model);
-        }));
         ItemOverrides nbt_overrides = new ItemOverrides() {
             @Nullable
             @Override
             public BakedModel resolve(BakedModel pModel, ItemStack pStack, @Nullable ClientLevel pLevel, @Nullable LivingEntity pEntity, int pSeed) {
                 Species species = GeneticHelper.getSpecies(pStack, true);
-                Variant variant = new Variant(GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species));
-
-                BakedModel model = bakedMap.get(variant);
-                if (model == null) return pModel;
-                return model.getOverrides().resolve(model, pStack, pLevel, pEntity, pSeed);
+                ResourceLocation modelLoc;
+                if (pStack.is(ItemsRegistration.QUEEN))
+                    modelLoc = species.getModels().get(2);
+                else if (pStack.is(ItemsRegistration.PRINCESS))
+                    modelLoc = species.getModels().get(1);
+                else
+                    modelLoc = species.getModels().get(0);
+                var unbaked = baker.getModel(modelLoc);
+                unbaked.resolveParents(baker::getModel);
+                var baked = unbaked.bake(baker, spriteGetter, modelState, modelLoc);
+                if (baked == null) return pModel;
+                return baked;
             }
         };
 
@@ -107,14 +104,6 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
 
         @Override
         public BeeModel read(JsonObject jsonObject, JsonDeserializationContext deserializationContext) throws JsonParseException {
-            Map<Variant, ResourceLocation> variantMap = new HashMap<>();
-            var variantsJson = GsonHelper.getAsJsonObject(jsonObject, "variants");
-            for (Map.Entry<String, JsonElement> entry : variantsJson.entrySet()) {
-                ResourceLocation loc = ResourceLocation.tryParse(entry.getKey());
-                ResourceLocation model = ResourceLocation.tryParse(entry.getValue().getAsString());
-                variantMap.put(new Variant(loc), model);
-            }
-
             var renderTypeNames = new Int2ObjectOpenHashMap<ResourceLocation>();
             if (jsonObject.has("render_types")) {
                 var renderTypes = jsonObject.getAsJsonObject("render_types");
@@ -133,7 +122,7 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
                 readLayerData(forgeData, "layers", renderTypeNames, emissiveLayers, false);
             };
 
-            return new BeeModel(variantMap, emissiveLayers, renderTypeNames);
+            return new BeeModel(emissiveLayers, renderTypeNames);
         }
 
         protected void readLayerData(JsonObject jsonObject, String name, Int2ObjectOpenHashMap<ResourceLocation> renderTypeNames, Int2ObjectMap<ExtraFaceData> layerData, boolean logWarning) {
