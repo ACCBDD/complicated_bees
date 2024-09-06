@@ -34,6 +34,7 @@ import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -41,8 +42,9 @@ import java.util.function.Function;
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class BeeModel implements IUnbakedGeometry<BeeModel> {
-    public record Variant(ResourceLocation species) {}
+    public record Variant(BakedModel drone, BakedModel princess, BakedModel queen) {}
 
+    private final Map<Species, Variant> cacheMap = new HashMap<>();
     private final Int2ObjectMap<ExtraFaceData> layerData;
     private final Int2ObjectMap<ResourceLocation> renderTypeNames;
     private ImmutableList<Material> textures = null;
@@ -64,24 +66,28 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
         TextureAtlasSprite particle = spriteGetter.apply(
                 context.hasMaterial("particle") ? context.getMaterial("particle") : textures.get(0));
 
-        //todo: make this multiple resourcepack-friendly - maybe a separate field in the species definition?
         ItemOverrides nbt_overrides = new ItemOverrides() {
             @Nullable
             @Override
             public BakedModel resolve(BakedModel pModel, ItemStack pStack, @Nullable ClientLevel pLevel, @Nullable LivingEntity pEntity, int pSeed) {
                 Species species = GeneticHelper.getSpecies(pStack, true);
-                ResourceLocation modelLoc;
+                if (!cacheMap.containsKey(species)) {
+                    BakedModel[] bakedModels = new BakedModel[3];
+                    for (int i = 0; i < 3; i++) {
+                        ResourceLocation modelLoc = species.getModels().get(i);
+                        var unbaked = baker.getModel(modelLoc);
+                        unbaked.resolveParents(baker::getModel);
+                        var baked = unbaked.bake(baker, spriteGetter, modelState, modelLoc);
+                        bakedModels[i] = baked;
+                    }
+                    cacheMap.put(species, new Variant(bakedModels[0], bakedModels[1], bakedModels[2]));
+                }
                 if (pStack.is(ItemsRegistration.QUEEN))
-                    modelLoc = species.getModels().get(2);
+                    return cacheMap.get(species).queen;
                 else if (pStack.is(ItemsRegistration.PRINCESS))
-                    modelLoc = species.getModels().get(1);
+                    return cacheMap.get(species).princess;
                 else
-                    modelLoc = species.getModels().get(0);
-                var unbaked = baker.getModel(modelLoc);
-                unbaked.resolveParents(baker::getModel);
-                var baked = unbaked.bake(baker, spriteGetter, modelState, modelLoc);
-                if (baked == null) return pModel;
-                return baked;
+                    return cacheMap.get(species).drone;
             }
         };
 
