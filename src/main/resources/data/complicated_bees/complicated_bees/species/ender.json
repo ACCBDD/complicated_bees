@@ -1,0 +1,70 @@
+{
+  "dominant": true,
+  "foil": false,
+  "models": [
+    "complicated_bees:item/ender_drone",
+    "complicated_bees:item/ender_princess",
+    "complicated_bees:item/ender_queen"
+  ],
+  "color": "f18aff",
+  "nest_color": "f18aff",
+  "products": [
+    {
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:ender"
+      },
+      "chance": 0.25
+    }
+  ],
+  "specialty_products": [
+    {
+      "item": "complicated_bees:pearl_shard",
+      "chance": 0.05
+    }
+  ],
+  "default_chromosome": {
+    "complicated_bees:lifespan": {
+      "data": "short",
+      "dominant": false
+    },
+    "complicated_bees:temperature": {
+      "data": "cold",
+      "tolerance": "up_2",
+      "dominant": true
+    },
+    "complicated_bees:humidity": {
+      "data": "normal",
+      "tolerance": "both_1",
+      "dominant": true
+    },
+    "complicated_bees:productivity": {
+      "data": "average",
+      "dominant": false
+    },
+    "complicated_bees:fertility": {
+      "data": 2,
+      "dominant": false
+    },
+    "complicated_bees:flower": {
+      "data": "complicated_bees:chorus",
+      "dominant": true
+    },
+    "complicated_bees:effect": {
+      "data": "complicated_bees:ends",
+      "dominant": true
+    },
+    "complicated_bees:nocturnal": {
+      "data": true,
+      "dominant": true
+    },
+    "complicated_bees:cave_dwelling": {
+      "data": false,
+      "dominant": true
+    },
+    "complicated_bees:weatherproof": {
+      "data": false,
+      "dominant": true
+    }
+  }
+}

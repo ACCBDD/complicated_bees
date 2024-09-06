@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:ender",
+  "second": "complicated_bees:warped",
+  "result": "complicated_bees:surreal",
+  "chance": 0.10,
+  "conditions": {
+    "complicated_bees:dimension": {
+      "dimension": "minecraft:the_end"
+    }
+  }
+}

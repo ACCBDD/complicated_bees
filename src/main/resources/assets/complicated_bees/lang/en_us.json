@@ -21,6 +21,8 @@
   "item.complicated_bees.moist_frame": "Moist Frame",
   "item.complicated_bees.deadly_frame": "Deadly Frame",
   "item.complicated_bees.restrictive_frame": "Restrictive Frame",
+  "item.complicated_bees.pearl_shard": "Pearl Shard",
+  "item.complicated_bees.exp_drop": "Experience Droplet",
 
   "block.complicated_bees.bee_nest": "Bee Nest",
   "block.complicated_bees.apiary": "Apiary",
@@ -149,6 +151,7 @@
   "gui.complicated_bees.mutations.temperature_range": "Requires a temperature between %s and %s",
   "gui.complicated_bees.mutations.humidity": "Requires a humidity of %s",
   "gui.complicated_bees.mutations.humidity_range": "Requires a humidity between %s and %s",
+  "gui.complicated_bees.mutations.dimension": "Requires the %s dimension",
 
   "jei.complicated_bees.chance": "Chance",
 
@@ -162,6 +165,7 @@
   "comb.complicated_bees.complicated_bees:nether": "Nether",
   "comb.complicated_bees.complicated_bees:spectral": "Spectral",
   "comb.complicated_bees.complicated_bees:rotten": "Rotten",
+  "comb.complicated_bees.complicated_bees:ender": "Ender",
 
   "species.complicated_bees.complicated_bees:forest": "Forest",
   "species.complicated_bees.complicated_bees:forest.genus": "Apis",
@@ -367,6 +371,24 @@
   "species.complicated_bees.complicated_bees:necromantic.authority": "Ayse Eigh",
   "species.complicated_bees.complicated_bees:necromantic.flavor_text": "\"So there I was, payin' me respects, when out from the soil burst a rotten hand! I got out of there right quick... say, have you noticed more of them blasted bees around?\"",
   "species.complicated_bees.complicated_bees:necromantic.flavor_author": "Bees from Beyond",
+  "species.complicated_bees.complicated_bees:ender": "Ender",
+  "species.complicated_bees.complicated_bees:ender.genus": "Extapis",
+  "species.complicated_bees.complicated_bees:ender.species_taxonomy": "E. draco",
+  "species.complicated_bees.complicated_bees:ender.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:ender.flavor_text": "Technically a species of dragon, known to collect chorus dew and solidify it into shards of nectar.",
+  "species.complicated_bees.complicated_bees:ender.flavor_author": "Enigmatic Apistry",
+  "species.complicated_bees.complicated_bees:surreal": "Surreal",
+  "species.complicated_bees.complicated_bees:surreal.genus": "Extapis",
+  "species.complicated_bees.complicated_bees:surreal.species_taxonomy": "E. fictum",
+  "species.complicated_bees.complicated_bees:surreal.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:surreal.flavor_text": "Utilizes subtle fluctuations in spacetime to evade predators.",
+  "species.complicated_bees.complicated_bees:surreal.flavor_author": "Enigmatic Apistry",
+  "species.complicated_bees.complicated_bees:enigmatic": "Enigmatic",
+  "species.complicated_bees.complicated_bees:enigmatic.genus": "Extapis",
+  "species.complicated_bees.complicated_bees:enigmatic.species_taxonomy": "E. ambages",
+  "species.complicated_bees.complicated_bees:enigmatic.authority": "Ayse Eigh",
+  "species.complicated_bees.complicated_bees:enigmatic.flavor_text": "Rarely seen, they are even more rarely caught. Rumor has it that these bees can crystallize knowledge... in the right conditions.",
+  "species.complicated_bees.complicated_bees:enigmatic.flavor_author": "Enigmatic Apistry",
 
   "flower.complicated_bees.complicated_bees:flower": "Flowers",
   "flower.complicated_bees.complicated_bees:desert": "Desert",
@@ -374,6 +396,7 @@
   "flower.complicated_bees.complicated_bees:lush_cave": "Lush Cave",
   "flower.complicated_bees.complicated_bees:nether": "Nether",
   "flower.complicated_bees.complicated_bees:skulls": "Skulls",
+  "flower.complicated_bees.complicated_bees:chorus": "Chorus",
 
   "effect.complicated_bees.complicated_bees:none": "None",
   "effect.complicated_bees.complicated_bees:debug": "Debug",
@@ -400,6 +423,7 @@
   "effect.complicated_bees.complicated_bees:unhealthy": "Unhealthy",
   "effect.complicated_bees.complicated_bees:unhealthy.desc": "Makes nearby mobs hungry.",
   "effect.complicated_bees.complicated_bees:resurrection": "Resurr.",
-  "effect.complicated_bees.complicated_bees:resurrection.desc": "Resurrects mob drops into mobs."
-
+  "effect.complicated_bees.complicated_bees:resurrection.desc": "Resurrects mob drops into mobs.",
+  "effect.complicated_bees.complicated_bees:ends": "Ends",
+  "effect.complicated_bees.complicated_bees:ends.desc": "Deals a large amount of damage to nearby players."
 }
