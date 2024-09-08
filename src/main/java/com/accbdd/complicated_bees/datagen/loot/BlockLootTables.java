@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Collections;
 
@@ -63,7 +64,7 @@ public class BlockLootTables extends BlockLootSubProvider {
                         .add(
                                 LootItem.lootTableItem(ItemsRegistration.DRONE)
                                         .apply(InheritHiveSpeciesFunction.set())
-                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
                                         .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5f, 1))
                         )
                 );
