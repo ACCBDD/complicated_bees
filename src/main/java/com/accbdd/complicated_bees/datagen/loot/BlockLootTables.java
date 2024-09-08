@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.datagen.loot;
 
+import com.accbdd.complicated_bees.loot.InheritHiveCombFunction;
 import com.accbdd.complicated_bees.loot.InheritHiveSpeciesFunction;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
+import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -65,7 +67,16 @@ public class BlockLootTables extends BlockLootSubProvider {
                                 LootItem.lootTableItem(ItemsRegistration.DRONE)
                                         .apply(InheritHiveSpeciesFunction.set())
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
-                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5f, 1))
+                                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 1))
+                        ))
+                .withPool(LootPool.lootPool()
+                        .when(HAS_NO_SILK_TOUCH)
+                        .setRolls(BinomialDistributionGenerator.binomial(1, 0.35f))
+                        .add(
+                                LootItem.lootTableItem(ItemsRegistration.COMB)
+                                        .apply(InheritHiveCombFunction.set())
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0f)))
+                                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 1))
                         )
                 );
     }

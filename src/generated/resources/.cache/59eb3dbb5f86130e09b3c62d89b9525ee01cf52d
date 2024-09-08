@@ -1,5 +1,5 @@
-// 1.20.4	2024-09-07T17:48:53.1199584	Loot Tables
+// 1.20.4	2024-09-07T18:11:28.1965237	Loot Tables
 5dae4e0b0ceed05cb4b581710a7dae801d6fe69f data/complicated_bees/loot_tables/blocks/apiary.json
-c1587038cd6674a9c9e4e4446b849ffd7acf6c42 data/complicated_bees/loot_tables/blocks/bee_nest.json
+c743013ed729c3f25c0f465cf21ddef4397adeb6 data/complicated_bees/loot_tables/blocks/bee_nest.json
 de7ba93aaaddb74775b0ddf9d87ef6aeb1f33222 data/complicated_bees/loot_tables/blocks/centrifuge.json
 22400e190f8ff5fd8a7818af1a2a142ba17a9ed0 data/complicated_bees/loot_tables/blocks/generator.json

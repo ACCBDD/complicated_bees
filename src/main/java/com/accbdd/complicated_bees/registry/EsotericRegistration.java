@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.registry;
 
+import com.accbdd.complicated_bees.loot.InheritHiveCombFunction;
 import com.accbdd.complicated_bees.loot.InheritHiveSpeciesFunction;
 import com.accbdd.complicated_bees.recipe.CentrifugeRecipe;
 import com.accbdd.complicated_bees.worldgen.ComplicatedBeenestDecorator;
@@ -27,6 +28,8 @@ public class EsotericRegistration {
 
     public static final Supplier<LootItemFunctionType> INHERIT_HIVE = LOOT_ITEM_FUNCTION_REGISTER.register("inherit_hive_species",
             () -> new LootItemFunctionType(InheritHiveSpeciesFunction.CODEC));
+    public static final Supplier<LootItemFunctionType> INHERIT_COMB = LOOT_ITEM_FUNCTION_REGISTER.register("inherit_hive_comb",
+            () -> new LootItemFunctionType(InheritHiveCombFunction.CODEC));
 
     public static final Supplier<TreeDecoratorType<ComplicatedBeenestDecorator>> COMPLICATED_BEENEST_DECORATOR = TREE_DECORATOR_REGISTER.register("bee_nest_decorator",
             () -> new TreeDecoratorType<>(ComplicatedBeenestDecorator.CODEC));
