@@ -7,7 +7,7 @@
     {
       "item": "complicated_bees:comb",
       "nbt": {
-        "comb_type": "complicated_bees:nether"
+        "comb_type": "complicated_bees:simmering"
       },
       "chance": 0.35
     },

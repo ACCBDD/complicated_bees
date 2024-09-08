@@ -12,7 +12,7 @@
     {
       "item": "complicated_bees:comb",
       "nbt": {
-        "comb_type": "complicated_bees:ender"
+        "comb_type": "complicated_bees:mysterious"
       },
       "chance": 0.30
     }
