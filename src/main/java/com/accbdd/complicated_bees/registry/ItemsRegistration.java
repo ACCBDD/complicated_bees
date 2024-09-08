@@ -26,7 +26,7 @@ public class ItemsRegistration {
     public static final DeferredItem<Item> ROYAL_JELLY = ITEMS.registerSimpleItem("royal_jelly");
     public static final DeferredItem<Item> POLLEN = ITEMS.registerSimpleItem("pollen");
     public static final DeferredItem<Item> PROPOLIS = ITEMS.registerSimpleItem("propolis");
-    public static final DeferredItem<Item> BEESWAX = ITEMS.registerSimpleItem("beeswax");
+    public static final DeferredItem<BeeswaxItem> BEESWAX = ITEMS.registerItem("beeswax", BeeswaxItem::new);
     public static final DeferredItem<Item> PEARL_SHARD = ITEMS.registerSimpleItem("pearl_shard");
 
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
