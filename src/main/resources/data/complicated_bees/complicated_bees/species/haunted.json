@@ -1,6 +1,11 @@
 {
   "dominant": false,
   "foil": false,
+  "models": [
+    "complicated_bees:item/red_drone",
+    "complicated_bees:item/red_princess",
+    "complicated_bees:item/red_queen"
+  ],
   "color": "743d25",
   "nest_color": "743d25",
   "products": [

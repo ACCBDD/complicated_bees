@@ -1,52 +1,47 @@
 {
   "dominant": false,
-  "foil": false,
+  "foil": true,
   "models": [
     "complicated_bees:item/red_drone",
     "complicated_bees:item/red_princess",
     "complicated_bees:item/red_queen"
   ],
-  "color": "c2f0ff",
-  "nest_color": "c2f0ff",
+  "color": "4d453d",
+  "nest_color": "4d453d",
   "products": [
-    {
-      "item": "complicated_bees:comb",
-      "nbt": {
-        "comb_type": "complicated_bees:spectral"
-      },
-      "chance": 0.35
-    },
     {
       "item": "complicated_bees:comb",
       "nbt": {
         "comb_type": "complicated_bees:simmering"
       },
-      "chance": 0.10
-    }
-  ],
-  "specialty_products": [
+      "chance": 0.30
+    },
     {
-      "item": "minecraft:glowstone_dust",
+      "item": "complicated_bees:comb",
+      "nbt": {
+        "comb_type": "complicated_bees:netherite"
+      },
       "chance": 0.05
     }
   ],
+  "specialty_products": [],
   "default_chromosome": {
     "complicated_bees:lifespan": {
-      "data": "short",
+      "data": "average",
       "dominant": false
     },
     "complicated_bees:temperature": {
-      "data": "hellish",
-      "tolerance": "down_1",
+      "data": "hot",
+      "tolerance": "up_1",
       "dominant": true
     },
     "complicated_bees:humidity": {
-      "data": "dry",
-      "tolerance": "none",
+      "data": "normal",
+      "tolerance": "down_1",
       "dominant": true
     },
     "complicated_bees:productivity": {
-      "data": "fast",
+      "data": "slower",
       "dominant": false
     },
     "complicated_bees:fertility": {
@@ -54,24 +49,20 @@
       "dominant": false
     },
     "complicated_bees:flower": {
-      "data": "complicated_bees:nether",
+      "data": "complicated_bees:debris",
       "dominant": true
-    },
-    "complicated_bees:effect": {
-      "data": "complicated_bees:spectral",
-      "dominant": false
     },
     "complicated_bees:nocturnal": {
       "data": true,
-      "dominant": false
+      "dominant": true
     },
     "complicated_bees:cave_dwelling": {
       "data": true,
-      "dominant": false
+      "dominant": true
     },
     "complicated_bees:weatherproof": {
       "data": true,
-      "dominant": false
+      "dominant": true
     }
   }
 }
