@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:cuprous",
+  "second": "complicated_bees:precious",
+  "result": "complicated_bees:ferrous",
+  "chance": 0.10,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:iron_block"
+    }
+  }
+}

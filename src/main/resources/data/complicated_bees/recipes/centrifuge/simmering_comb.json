@@ -3,7 +3,7 @@
   "input": {
     "item": "complicated_bees:comb",
     "nbt": {
-      "comb_type": "complicated_bees:nether"
+      "comb_type": "complicated_bees:simmering"
     }
   },
   "outputs": [

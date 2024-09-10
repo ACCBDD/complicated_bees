@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:ferrous",
+  "second": "complicated_bees:luminous",
+  "result": "complicated_bees:adamantine",
+  "chance": 0.06,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:netherite_block"
+    }
+  }
+}

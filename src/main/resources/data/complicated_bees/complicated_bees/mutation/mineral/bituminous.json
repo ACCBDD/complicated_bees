@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:rocky",
+  "second": "complicated_bees:desert",
+  "result": "complicated_bees:bituminous",
+  "chance": 0.10,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:coal_block"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:amethyst",
+  "second": "complicated_bees:conductive",
+  "result": "complicated_bees:emeradic",
+  "chance": 0.08,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:lapis_block"
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "input": {
     "item": "complicated_bees:comb",
     "nbt": {
-      "comb_type": "complicated_bees:rotten"
+      "comb_type": "complicated_bees:redstone"
     }
   },
   "outputs": [
@@ -13,11 +13,11 @@
     },
     {
       "item": "complicated_bees:honey_droplet",
-      "chance": 0.5
+      "chance": 0.3
     },
     {
-      "item": "complicated_bees:pearl_shard",
-      "chance": 0.1
+      "item": "minecraft:redstone",
+      "chance": 0.25
     }
   ]
 }

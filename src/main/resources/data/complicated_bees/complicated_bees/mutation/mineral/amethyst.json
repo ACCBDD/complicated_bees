@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:conductive",
+  "second": "complicated_bees:bituminous",
+  "result": "complicated_bees:amethyst",
+  "chance": 0.10,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:amethyst_block"
+    }
+  }
+}

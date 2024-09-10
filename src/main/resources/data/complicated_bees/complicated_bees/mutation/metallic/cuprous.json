@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:diligent",
+  "second": "complicated_bees:robust",
+  "result": "complicated_bees:cuprous",
+  "chance": 0.10,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:waxed_copper_block"
+    }
+  }
+}

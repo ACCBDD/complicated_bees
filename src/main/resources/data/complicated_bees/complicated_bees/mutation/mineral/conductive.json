@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:bituminous",
+  "second": "complicated_bees:rocky",
+  "result": "complicated_bees:conductive",
+  "chance": 0.10,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:redstone_block"
+    }
+  }
+}

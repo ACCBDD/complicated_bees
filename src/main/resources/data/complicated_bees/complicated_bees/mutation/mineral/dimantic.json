@@ -1,0 +1,11 @@
+{
+  "first": "complicated_bees:lapic",
+  "second": "complicated_bees:amethyst",
+  "result": "complicated_bees:amethyst",
+  "chance": 0.06,
+  "conditions": {
+    "complicated_bees:block_under": {
+      "block": "minecraft:diamond_block"
+    }
+  }
+}
