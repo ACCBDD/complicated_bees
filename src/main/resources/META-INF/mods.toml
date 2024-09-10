@@ -40,3 +40,11 @@ description='''${mod_description}'''
     versionRange="[17.3,)"
     ordering="AFTER"
     side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="jade"
+    type="optional"
+    reason="block lookies"
+    versionRange="[13.3,)"
+    ordering="AFTER"
+    side="BOTH"
