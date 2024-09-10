@@ -1,5 +1,5 @@
 {
-  "feature": "complicated_bees:birch_forest_bees",
+  "feature": "complicated_bees:jungle_bee_nest",
   "placement": [
     {
       "type": "minecraft:in_square"
@@ -20,7 +20,7 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "minecraft:birch_sapling",
+          "Name": "minecraft:jungle_sapling",
           "Properties": {
             "stage": "0"
           }
@@ -29,7 +29,7 @@
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 75
+      "chance": 50
     }
   ]
 }

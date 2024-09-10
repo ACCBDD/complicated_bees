@@ -1,5 +1,5 @@
 {
-  "feature": "complicated_bees:plains_bee_nest",
+  "feature": "complicated_bees:desert_bee_nest",
   "placement": [
     {
       "type": "minecraft:count",
@@ -16,17 +16,8 @@
       "type": "minecraft:biome"
     },
     {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "minecraft:would_survive",
-        "state": {
-          "Name": "minecraft:short_grass"
-        }
-      }
-    },
-    {
       "type": "minecraft:rarity_filter",
-      "chance": 200
+      "chance": 300
     }
   ]
 }

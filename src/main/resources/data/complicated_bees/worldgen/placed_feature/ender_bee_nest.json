@@ -1,0 +1,24 @@
+{
+  "feature": "complicated_bees:rocky_bee_nest",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 1
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [0,-1,0],
+        "blocks": "minecraft:chorus_flower"
+      }
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 100
+    }
+  ]
+}

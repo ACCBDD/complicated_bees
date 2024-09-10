@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": ["minecraft:desert", "minecraft:badlands", "minecraft:wooded_badlands", "minecraft:eroded_badlands"],
+  "features": "complicated_bees:desert_bee_nest",
+  "step": "vegetal_decoration"
+}
