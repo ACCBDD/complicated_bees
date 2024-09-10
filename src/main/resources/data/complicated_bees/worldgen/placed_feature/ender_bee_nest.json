@@ -1,24 +1,42 @@
 {
-  "feature": "complicated_bees:rocky_bee_nest",
+  "feature": "complicated_bees:ender_bee_nest",
   "placement": [
     {
-      "type": "minecraft:count_on_every_layer",
-      "count": 1
+      "type": "minecraft:count",
+      "count": 90
     },
     {
-      "type": "minecraft:biome"
+      "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 256
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "direction_of_search": "up",
+      "max_steps": 12,
+      "target_condition": {
         "type": "minecraft:matching_blocks",
         "offset": [0,-1,0],
         "blocks": "minecraft:chorus_flower"
       }
     },
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 100
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": -1
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }
