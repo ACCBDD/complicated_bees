@@ -1,7 +1,7 @@
 {
   "first": "complicated_bees:intrepid",
   "second": "complicated_bees:surreal",
-  "result": "complicated_bees:otherworldly",
+  "result": "complicated_bees:enigmatic",
   "chance": 0.10,
   "conditions": {
     "complicated_bees:dimension": {

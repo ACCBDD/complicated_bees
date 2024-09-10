@@ -25,6 +25,7 @@ public abstract class GeneTolerant<T extends Enum<T>> extends Gene<T> {
     }
 
     public boolean withinTolerance(T condition) {
+        if (condition == null) return false;
         int ordinal = condition.ordinal();
         return (ordinal >= (get().ordinal() - getTolerance().down)) && (ordinal <= (get().ordinal() + getTolerance().up));
     }

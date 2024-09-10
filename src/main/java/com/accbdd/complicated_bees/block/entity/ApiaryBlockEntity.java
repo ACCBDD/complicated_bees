@@ -1,6 +1,5 @@
 package com.accbdd.complicated_bees.block.entity;
 
-import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.*;
 import com.accbdd.complicated_bees.genetics.effect.IBeeEffect;
 import com.accbdd.complicated_bees.genetics.gene.*;
@@ -355,6 +354,8 @@ public class ApiaryBlockEntity extends BlockEntity {
     public boolean checkQueenSatisfied() {
         if (!(beeItems.getStackInSlot(0).getItem() instanceof QueenItem))
             return false;
+
+        if (getLevel() == null) return false;
 
         Chromosome chromosome = GeneticHelper.getChromosome(beeItems.getStackInSlot(0), true);
         queenSatisfied = true;
