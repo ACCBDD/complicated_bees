@@ -1,5 +1,6 @@
 {
   "itemGroup.complicated_bees": "Complicated Bees",
+  "config.jade.plugin_complicated_bees.apiary_errors": "Apiary Errors",
 
   "item.complicated_bees.drone": "Drone",
   "item.complicated_bees.princess": "Princess",
