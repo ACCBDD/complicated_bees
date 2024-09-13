@@ -59,7 +59,7 @@ public class ComplicatedBeesJEI implements IModPlugin {
 
         IIngredientSubtypeInterpreter<ItemStack> combInterpreter = (stack, context) -> {
             Lazy<Comb> comb = Lazy.of(() -> CombItem.getComb(stack));
-            return comb.get().toString();
+            return comb.get() == null ? Comb.NULL.toString() : comb.get().toString();
         };
         registration.registerSubtypeInterpreter(ItemsRegistration.DRONE.get(), speciesInterpreter);
         registration.registerSubtypeInterpreter(ItemsRegistration.QUEEN.get(), speciesInterpreter);

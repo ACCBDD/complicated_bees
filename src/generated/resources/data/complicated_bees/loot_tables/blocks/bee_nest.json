@@ -167,9 +167,9 @@
         }
       ],
       "rolls": {
-        "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 0.0
+        "type": "minecraft:binomial",
+        "n": 1.0,
+        "p": 0.35
       }
     }
   ],

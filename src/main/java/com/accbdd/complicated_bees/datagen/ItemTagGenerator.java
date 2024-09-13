@@ -20,6 +20,7 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 public class ItemTagGenerator extends ItemTagsProvider {
     public static final TagKey<Item> SCOOP_TOOL = ItemTags.create(new ResourceLocation(MODID, "scoop_tool"));
     public static final TagKey<Item> BEE = ItemTags.create(new ResourceLocation(MODID, "bee"));
+    public static final TagKey<Item> ROYAL = ItemTags.create(new ResourceLocation(MODID, "royal"));
     public static final TagKey<Item> FRAME = ItemTags.create(new ResourceLocation(MODID, "frame"));
     public static final TagKey<Item> ANALYZER_FUEL = ItemTags.create(new ResourceLocation(MODID, "analyzer_fuel"));
 
@@ -30,9 +31,9 @@ public class ItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         tag(SCOOP_TOOL).add(ItemsRegistration.SCOOP.get());
-        tag(BEE).add(ItemsRegistration.PRINCESS.get());
-        tag(BEE).add(ItemsRegistration.DRONE.get());
-        tag(BEE).add(ItemsRegistration.QUEEN.get());
+        tag(ROYAL).add(ItemsRegistration.PRINCESS.get(), ItemsRegistration.QUEEN.get());
+        tag(BEE).add(ItemsRegistration.PRINCESS.get(), ItemsRegistration.QUEEN.get(), ItemsRegistration.DRONE.get());
+        tag(ANALYZER_FUEL).add(ItemsRegistration.HONEY_DROPLET.get(), ItemsRegistration.ROYAL_JELLY.get());
         tag(FRAME).add(ItemsRegistration.FRAME.get());
         tag(FRAME).add(ItemsRegistration.DEADLY_FRAME.get());
         tag(FRAME).add(ItemsRegistration.DRY_FRAME.get());
@@ -41,7 +42,5 @@ public class ItemTagGenerator extends ItemTagsProvider {
         tag(FRAME).add(ItemsRegistration.HOT_FRAME.get());
         tag(FRAME).add(ItemsRegistration.RESTRICTIVE_FRAME.get());
         tag(FRAME).add(ItemsRegistration.THICK_FRAME.get());
-        tag(ANALYZER_FUEL).add(ItemsRegistration.HONEY_DROPLET.get());
-        tag(ANALYZER_FUEL).add(ItemsRegistration.ROYAL_JELLY.get());
     }
 }

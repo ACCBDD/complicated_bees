@@ -32,11 +32,13 @@ public class Comb {
     }
 
     public ResourceLocation getId() {
+        ResourceLocation id;
         try {
-            return Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get().getKey(this);
+            id = Minecraft.getInstance().getConnection().registryAccess().registry(CombRegistration.COMB_REGISTRY_KEY).get().getKey(this);
         } catch (NullPointerException e) {
             return new ResourceLocation(MODID, "null");
         }
+        return id == null ? new ResourceLocation(MODID, "null") : id;
     }
 
     public int getOuterColor() {

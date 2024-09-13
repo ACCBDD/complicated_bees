@@ -5,6 +5,7 @@ import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
+import com.accbdd.complicated_bees.screen.slot.ItemSlot;
 import com.accbdd.complicated_bees.screen.slot.OutputSlot;
 import com.accbdd.complicated_bees.screen.slot.TagSlot;
 import com.accbdd.complicated_bees.util.enums.EnumErrorCodes;
@@ -30,8 +31,8 @@ public class ApiaryMenu extends AbstractContainerMenu {
         this.data = data;
         this.pos = pos;
         if (player.level().getBlockEntity(pos) instanceof ApiaryBlockEntity apiary) {
-            addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT, 29, 38, ItemTagGenerator.BEE));
-            addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT + 1, 29, 63, ItemTagGenerator.BEE));
+            addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT, 29, 38, ItemTagGenerator.ROYAL));
+            addSlot(new ItemSlot(apiary.getBeeItems(), BEE_SLOT + 1, 29, 63, ItemsRegistration.DRONE.get()));
 
             addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT, 65, 23, ItemTagGenerator.FRAME));
             addSlot(new TagSlot(apiary.getFrameItems(), FRAME_SLOT + 1, 65, 51, ItemTagGenerator.FRAME));
