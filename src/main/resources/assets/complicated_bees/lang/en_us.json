@@ -1,6 +1,8 @@
 {
   "itemGroup.complicated_bees": "Complicated Bees",
   "config.jade.plugin_complicated_bees.apiary_errors": "Apiary Errors",
+  "config.jade.plugin_complicated_bees.show_errors": "Show Apiary Errors",
+  "config.jade.plugin_complicated_bees.show_cycle_ticks": "Show Ticks in Apiary Cycle",
 
   "item.complicated_bees.drone": "Drone",
   "item.complicated_bees.princess": "Princess",
@@ -86,6 +88,7 @@
   "gui.complicated_bees.boolean.false": "No",
   "gui.complicated_bees.boolean.true": "Yes",
   "gui.complicated_bees.generations": "Generation %s in captivity",
+  "gui.complicated_bees.jade.cycle_ticks": "Ticks left in cycle: %s",
 
   "gui.complicated_bees.error.no_flower": "No flowers!",
   "gui.complicated_bees.error.wrong_temp": "Wrong temperature!",

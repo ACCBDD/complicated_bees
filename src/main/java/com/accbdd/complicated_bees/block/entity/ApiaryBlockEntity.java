@@ -165,6 +165,10 @@ public class ApiaryBlockEntity extends BlockEntity {
         return this.data;
     }
 
+    public int getCycleProgress() {
+        return CYCLE_LENGTH - this.cycleProgress;
+    }
+
     private ItemStackHandler createOutputHandler() {
         return new ItemStackHandler(ApiaryBlockEntity.OUTPUT_SLOT_COUNT) {
             @Override
@@ -288,15 +292,19 @@ public class ApiaryBlockEntity extends BlockEntity {
         }
 
         //do queen cycle
-        if (top_stack.getItem() instanceof QueenItem && queenSatisfied) {
-            doBeeEffect(top_stack);
-            if (cycleProgress < CYCLE_LENGTH) {
-                cycleProgress++;
-            } else {
-                cycleProgress = 0;
-                ageQueen(top_stack);
-                generateProduce(top_stack);
+        if (top_stack.getItem() instanceof QueenItem) {
+            if (queenSatisfied) {
+                doBeeEffect(top_stack);
+                if (cycleProgress < CYCLE_LENGTH) {
+                    cycleProgress++;
+                } else {
+                    cycleProgress = 0;
+                    ageQueen(top_stack);
+                    generateProduce(top_stack);
+                }
             }
+        } else {
+            cycleProgress = 0;
         }
     }
 
