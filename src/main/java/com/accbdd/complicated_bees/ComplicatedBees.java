@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees;
 import com.accbdd.complicated_bees.block.BeeNestBlock;
 import com.accbdd.complicated_bees.client.BeeModel;
 import com.accbdd.complicated_bees.client.ColorHandlers;
+import com.accbdd.complicated_bees.config.Config;
 import com.accbdd.complicated_bees.datagen.DataGenerators;
 import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
@@ -26,7 +27,9 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -112,6 +115,8 @@ public class ComplicatedBees {
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_TYPE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_SERIALIZER_REGISTER.register(modEventBus);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CONFIG_SPEC);
 
         CREATIVE_MODE_TABS.register(modEventBus);
     }

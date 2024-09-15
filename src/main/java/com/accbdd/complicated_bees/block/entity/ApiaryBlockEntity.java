@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.block.entity;
 
+import com.accbdd.complicated_bees.config.Config;
 import com.accbdd.complicated_bees.genetics.*;
 import com.accbdd.complicated_bees.genetics.effect.IBeeEffect;
 import com.accbdd.complicated_bees.genetics.gene.*;
@@ -58,9 +59,9 @@ public class ApiaryBlockEntity extends BlockEntity {
     public final Stack<ItemStack> outputBuffer = new Stack<>();
     public static final String OUTPUT_BUFFER_TAG = "output_buffer";
 
-    public static final int CYCLE_LENGTH = 20;
+    public static final int CYCLE_LENGTH = Config.CONFIG.productionCycleLength.get();
     public static final String CYCLE_TAG = "cycle";
-    public static final int SATISFY_CYCLE_LENGTH = 200;
+    public static final int SATISFY_CYCLE_LENGTH = Config.CONFIG.enviroCycleLength.get();
 
     private final ContainerData data;
     private int cycleProgress = 0;
