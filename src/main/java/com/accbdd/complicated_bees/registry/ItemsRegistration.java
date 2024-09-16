@@ -46,10 +46,11 @@ public class ItemsRegistration {
     public static final DeferredItem<FrameItem> RESTRICTIVE_FRAME = ITEMS.registerItem("restrictive_frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1f)));
 
-
     public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerItem("bee_nest", BeeNestBlockItem::new);
     public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);
     public static final DeferredItem<BlockItem> CENTRIFUGE = ITEMS.registerSimpleBlockItem("centrifuge", BlocksRegistration.CENTRIFUGE);
     public static final DeferredItem<BlockItem> GENERATOR = ITEMS.registerSimpleBlockItem("generator", BlocksRegistration.GENERATOR);
-
+    public static final DeferredItem<BlockItem> WAX_BLOCK = ITEMS.registerSimpleBlockItem("wax_block", BlocksRegistration.WAX_BLOCK);
+    public static final DeferredItem<BlockItem> WAX_BLOCK_STAIRS = ITEMS.registerSimpleBlockItem("wax_block_stairs", BlocksRegistration.WAX_BLOCK_STAIRS);
+    public static final DeferredItem<BlockItem> WAX_BLOCK_SLAB = ITEMS.registerSimpleBlockItem("wax_block_slab", BlocksRegistration.WAX_BLOCK_SLAB);
 }

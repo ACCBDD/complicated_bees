@@ -5,6 +5,7 @@ import com.accbdd.complicated_bees.block.BeeNestBlock;
 import com.accbdd.complicated_bees.block.CentrifugeBlock;
 import com.accbdd.complicated_bees.block.GeneratorBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -29,6 +30,8 @@ public class BlocksRegistration {
                     .requiresCorrectToolForDrops()
                     .strength(1.5F, 6.0F)
     ));
+    public static final DeferredBlock<StairBlock> WAX_BLOCK_STAIRS = BLOCKS.register("wax_block_stairs", () -> stair(WAX_BLOCK.get()));
+    public static final DeferredBlock<SlabBlock> WAX_BLOCK_SLAB = BLOCKS.register("wax_block_slab", () -> slab(WAX_BLOCK.get()));
     public static final DeferredBlock<Block> SMOOTH_WAX = BLOCKS.register("smooth_wax", () -> new Block(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_YELLOW)
@@ -36,14 +39,14 @@ public class BlocksRegistration {
                     .requiresCorrectToolForDrops()
                     .strength(1.5F, 6.0F)
     ));
-    public static final DeferredBlock<Block> WAX_BRICKS = BLOCKS.register("smooth_wax", () -> new Block(
+    public static final DeferredBlock<Block> WAX_BRICKS = BLOCKS.register("wax_bricks", () -> new Block(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_YELLOW)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .requiresCorrectToolForDrops()
                     .strength(1.5F, 6.0F)
     ));
-    public static final DeferredBlock<Block> CHISELED_WAX = BLOCKS.register("smooth_wax", () -> new Block(
+    public static final DeferredBlock<Block> CHISELED_WAX = BLOCKS.register("chiseled_wax", () -> new Block(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_YELLOW)
                     .instrument(NoteBlockInstrument.BASEDRUM)
@@ -53,5 +56,9 @@ public class BlocksRegistration {
 
     private static StairBlock stair(Block base) {
         return new StairBlock(base::defaultBlockState, base.properties());
+    }
+
+    private static SlabBlock slab(Block base) {
+        return new SlabBlock(base.properties());
     }
 }

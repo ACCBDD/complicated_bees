@@ -27,6 +27,9 @@ public class BlockStateGenerator extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlock(BlocksRegistration.BEE_NEST.get(), createBeeNestModel());
         simpleBlock(BlocksRegistration.APIARY.get(), createApiaryModel());
+        simpleBlock(BlocksRegistration.WAX_BLOCK.get());
+        stairsBlock(BlocksRegistration.WAX_BLOCK_STAIRS.get(), modLoc("block/wax_block"));
+        slabBlock(BlocksRegistration.WAX_BLOCK_SLAB.get(), modLoc("block/wax_block"), modLoc("block/wax_block"));
         registerCentrifuge();
         registerGenerator();
     }
