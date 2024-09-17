@@ -5,10 +5,12 @@ import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -26,12 +28,15 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.WAX_BLOCK.getId().getPath(), modLoc("block/wax_block"));
         withExistingParent(BlocksRegistration.WAX_BLOCK_STAIRS.getId().getPath(), modLoc("block/wax_block_stairs"));
         withExistingParent(BlocksRegistration.WAX_BLOCK_SLAB.getId().getPath(), modLoc("block/wax_block_slab"));
-        withExistingParent(BlocksRegistration.WAX_BRICKS.getId().getPath(), modLoc("block/wax_bricks"));
-        withExistingParent(BlocksRegistration.WAX_BRICK_STAIRS.getId().getPath(), modLoc("block/wax_brick_stairs"));
-        withExistingParent(BlocksRegistration.WAX_BRICK_SLAB.getId().getPath(), modLoc("block/wax_brick_slab"));
+        wallItem(BlocksRegistration.WAX_BLOCK_WALL, BlocksRegistration.WAX_BLOCK);
         withExistingParent(BlocksRegistration.SMOOTH_WAX.getId().getPath(), modLoc("block/smooth_wax"));
         withExistingParent(BlocksRegistration.SMOOTH_WAX_STAIRS.getId().getPath(), modLoc("block/smooth_wax_stairs"));
         withExistingParent(BlocksRegistration.SMOOTH_WAX_SLAB.getId().getPath(), modLoc("block/smooth_wax_slab"));
+        wallItem(BlocksRegistration.SMOOTH_WAX_WALL, BlocksRegistration.SMOOTH_WAX);
+        withExistingParent(BlocksRegistration.WAX_BRICKS.getId().getPath(), modLoc("block/wax_bricks"));
+        withExistingParent(BlocksRegistration.WAX_BRICK_STAIRS.getId().getPath(), modLoc("block/wax_brick_stairs"));
+        withExistingParent(BlocksRegistration.WAX_BRICK_SLAB.getId().getPath(), modLoc("block/wax_brick_slab"));
+        wallItem(BlocksRegistration.WAX_BRICK_WALL, BlocksRegistration.WAX_BRICKS);
         withExistingParent(BlocksRegistration.CHISELED_WAX.getId().getPath(), modLoc("block/chiseled_wax"));
         basicItem(ItemsRegistration.SCOOP.get());
         basicItem(ItemsRegistration.HONEY_DROPLET.get());
@@ -76,5 +81,10 @@ public class ItemModelGenerator extends ItemModelProvider {
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", comb_outer)
                 .texture("layer1", comb_inner);
+    }
+
+    private void wallItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
+        this.withExistingParent(block.getId().getPath(), mcLoc("block/wall_inventory"))
+                .texture("wall", new ResourceLocation(MODID, "block/" + baseBlock.getId().getPath()));
     }
 }

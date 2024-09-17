@@ -5,12 +5,15 @@
     "complicated_bees:wax_block",
     "complicated_bees:wax_block_stairs",
     "complicated_bees:wax_block_slab",
-    "complicated_bees:wax_bricks",
-    "complicated_bees:wax_brick_stairs",
-    "complicated_bees:wax_brick_slab",
+    "complicated_bees:wax_block_wall",
     "complicated_bees:smooth_wax",
     "complicated_bees:smooth_wax_stairs",
     "complicated_bees:smooth_wax_slab",
+    "complicated_bees:smooth_wax_wall",
+    "complicated_bees:wax_bricks",
+    "complicated_bees:wax_brick_stairs",
+    "complicated_bees:wax_brick_slab",
+    "complicated_bees:wax_brick_wall",
     "complicated_bees:chiseled_wax"
   ]
 }

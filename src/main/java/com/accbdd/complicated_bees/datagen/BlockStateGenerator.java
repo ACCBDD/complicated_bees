@@ -32,12 +32,15 @@ public class BlockStateGenerator extends BlockStateProvider {
         simpleBlock(BlocksRegistration.WAX_BLOCK.get());
         stairsBlock(BlocksRegistration.WAX_BLOCK_STAIRS.get(), modLoc("block/wax_block"));
         slabBlock(BlocksRegistration.WAX_BLOCK_SLAB.get(), modLoc("block/wax_block"), modLoc("block/wax_block"));
-        simpleBlock(BlocksRegistration.WAX_BRICKS.get());
-        stairsBlock(BlocksRegistration.WAX_BRICK_STAIRS.get(), modLoc("block/wax_bricks"));
-        slabBlock(BlocksRegistration.WAX_BRICK_SLAB.get(), modLoc("block/wax_bricks"), modLoc("block/wax_bricks"));
+        wallBlock(BlocksRegistration.WAX_BLOCK_WALL.get(), modLoc("block/wax_block"));
         simpleBlock(BlocksRegistration.SMOOTH_WAX.get());
         stairsBlock(BlocksRegistration.SMOOTH_WAX_STAIRS.get(), modLoc("block/smooth_wax"));
         slabBlock(BlocksRegistration.SMOOTH_WAX_SLAB.get(), modLoc("block/smooth_wax_slab_side"), modLoc("block/smooth_wax"));
+        wallBlock(BlocksRegistration.SMOOTH_WAX_WALL.get(), modLoc("block/smooth_wax"));
+        simpleBlock(BlocksRegistration.WAX_BRICKS.get());
+        stairsBlock(BlocksRegistration.WAX_BRICK_STAIRS.get(), modLoc("block/wax_bricks"));
+        slabBlock(BlocksRegistration.WAX_BRICK_SLAB.get(), modLoc("block/wax_bricks"), modLoc("block/wax_bricks"));
+        wallBlock(BlocksRegistration.WAX_BRICK_WALL.get(), modLoc("block/wax_bricks"));
         simpleBlock(BlocksRegistration.CHISELED_WAX.get());
         registerCentrifuge();
         registerGenerator();

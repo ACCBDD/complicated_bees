@@ -31,14 +31,22 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 BlocksRegistration.WAX_BLOCK.get(),
                 BlocksRegistration.WAX_BLOCK_STAIRS.get(),
                 BlocksRegistration.WAX_BLOCK_SLAB.get(),
-                BlocksRegistration.WAX_BRICKS.get(),
-                BlocksRegistration.WAX_BRICK_STAIRS.get(),
-                BlocksRegistration.WAX_BRICK_SLAB.get(),
+                BlocksRegistration.WAX_BLOCK_WALL.get(),
                 BlocksRegistration.SMOOTH_WAX.get(),
                 BlocksRegistration.SMOOTH_WAX_STAIRS.get(),
                 BlocksRegistration.SMOOTH_WAX_SLAB.get(),
+                BlocksRegistration.SMOOTH_WAX_WALL.get(),
+                BlocksRegistration.WAX_BRICKS.get(),
+                BlocksRegistration.WAX_BRICK_STAIRS.get(),
+                BlocksRegistration.WAX_BRICK_SLAB.get(),
+                BlocksRegistration.WAX_BRICK_WALL.get(),
                 BlocksRegistration.CHISELED_WAX.get()
         );
         tag(SCOOPABLE).add(BlocksRegistration.BEE_NEST.get());
+        tag(BlockTags.WALLS).add(
+                BlocksRegistration.WAX_BLOCK_WALL.get(),
+                BlocksRegistration.SMOOTH_WAX_WALL.get(),
+                BlocksRegistration.WAX_BRICK_WALL.get()
+        );
     }
 }

@@ -1,4 +1,4 @@
-// 1.20.4	2024-09-17T12:59:35.3601651	Item Models: complicated_bees
+// 1.20.4	2024-09-17T13:28:08.1149876	Item Models: complicated_bees
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 6df9d7e396652be82b3c1d200173d889ff220fcc assets/complicated_bees/models/item/apiary.json
 f2842120833073b82c83a81f23130c1a5f9ca947 assets/complicated_bees/models/item/beeswax.json
@@ -28,10 +28,13 @@ e687e1a9d5cdfcf6b1717f540917fc409af53e57 assets/complicated_bees/models/item/roy
 2310ff094a7f33c7359c027f053c7e701665420e assets/complicated_bees/models/item/smooth_wax.json
 2e62cf1adca50cd68c7e1a22d9ae1dc7102000b9 assets/complicated_bees/models/item/smooth_wax_slab.json
 e01283eed40df59e0d0272464c5534a12ed8fc1d assets/complicated_bees/models/item/smooth_wax_stairs.json
+c0773042138c5a604f03d2766c2e42a2e7528194 assets/complicated_bees/models/item/smooth_wax_wall.json
 012ae4df953c674a20bf6647968141694125fb19 assets/complicated_bees/models/item/thick_frame.json
 e053793e02344fe846a69b58afe9c2ed9e653b6b assets/complicated_bees/models/item/wax_block.json
 f79c497c92578ff80084a8dc48b87b4f07ea62b5 assets/complicated_bees/models/item/wax_block_slab.json
 3e6fe83119e620548e44540506aeca264a6a9e93 assets/complicated_bees/models/item/wax_block_stairs.json
+44dde0b6af281abbd263de7e4d15e4922a2e4f1f assets/complicated_bees/models/item/wax_block_wall.json
 e88f6a96c2afd04045621c68f577da55cc524378 assets/complicated_bees/models/item/wax_bricks.json
 9157342f9b6c4aa70baecfeef5c0e7fc5a4b40af assets/complicated_bees/models/item/wax_brick_slab.json
 6d53b021779c9313bb822c8526ed270523b824cd assets/complicated_bees/models/item/wax_brick_stairs.json
+2fce687b637176fcff9dd1b442aff9789b06187d assets/complicated_bees/models/item/wax_brick_wall.json

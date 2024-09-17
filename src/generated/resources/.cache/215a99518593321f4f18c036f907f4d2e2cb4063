@@ -1,4 +1,5 @@
-// 1.20.4	2024-09-17T12:59:35.3621658	Tags for minecraft:block mod id complicated_bees
+// 1.20.4	2024-09-17T13:28:08.1159876	Tags for minecraft:block mod id complicated_bees
 b885b9bfa871217e12140024058bfc85538865bf data/complicated_bees/tags/blocks/mineable/scoop_tool.json
 b8db3fe92b70a0b2acd58d584eedd0770da0584a data/minecraft/tags/blocks/mineable/axe.json
-1f0201f1509d75b5bc2c73827020ee26fbb14a19 data/minecraft/tags/blocks/mineable/pickaxe.json
+2ac2c6ade08a955446ebab98441ae3f6aaaa52cf data/minecraft/tags/blocks/mineable/pickaxe.json
+ca801bbc6186cf4fb045ceefb6089d19fc865a46 data/minecraft/tags/blocks/walls.json
