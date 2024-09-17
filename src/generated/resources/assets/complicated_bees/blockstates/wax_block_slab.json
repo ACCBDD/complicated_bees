@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "complicated_bees:block/wax_block_slab"
+    },
+    "type=double": {
+      "model": "complicated_bees:block/wax_block_slab_double"
+    },
+    "type=top": {
+      "model": "complicated_bees:block/wax_block_slab_top"
+    }
+  }
+}

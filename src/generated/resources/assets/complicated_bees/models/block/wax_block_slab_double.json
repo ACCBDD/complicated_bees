@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "complicated_bees:block/wax_block",
+    "side": "complicated_bees:block/wax_block"
+  }
+}

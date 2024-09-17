@@ -39,6 +39,8 @@ public class BlocksRegistration {
                     .requiresCorrectToolForDrops()
                     .strength(1.5F, 6.0F)
     ));
+    public static final DeferredBlock<StairBlock> SMOOTH_WAX_STAIRS = BLOCKS.register("smooth_wax_stairs", () -> stair(SMOOTH_WAX.get()));
+    public static final DeferredBlock<SlabBlock> SMOOTH_WAX_SLAB = BLOCKS.register("smooth_wax_slab", () -> slab(SMOOTH_WAX.get()));
     public static final DeferredBlock<Block> WAX_BRICKS = BLOCKS.register("wax_bricks", () -> new Block(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_YELLOW)
@@ -46,6 +48,8 @@ public class BlocksRegistration {
                     .requiresCorrectToolForDrops()
                     .strength(1.5F, 6.0F)
     ));
+    public static final DeferredBlock<StairBlock> WAX_BRICK_STAIRS = BLOCKS.register("wax_brick_stairs", () -> stair(SMOOTH_WAX.get()));
+    public static final DeferredBlock<SlabBlock> WAX_BRICK_SLAB = BLOCKS.register("wax_brick_slab", () -> slab(SMOOTH_WAX.get()));
     public static final DeferredBlock<Block> CHISELED_WAX = BLOCKS.register("chiseled_wax", () -> new Block(
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_YELLOW)

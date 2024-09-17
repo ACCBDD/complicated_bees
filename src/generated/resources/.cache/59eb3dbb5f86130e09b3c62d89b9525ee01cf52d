@@ -1,5 +1,15 @@
-// 1.20.4	2024-09-13T14:18:01.0327053	Loot Tables
+// 1.20.4	2024-09-17T12:59:35.3611656	Loot Tables
 5dae4e0b0ceed05cb4b581710a7dae801d6fe69f data/complicated_bees/loot_tables/blocks/apiary.json
 b7b392c87d6ac566b09c299a34ffe0374afe6285 data/complicated_bees/loot_tables/blocks/bee_nest.json
 de7ba93aaaddb74775b0ddf9d87ef6aeb1f33222 data/complicated_bees/loot_tables/blocks/centrifuge.json
+3c29e9bfcd1e71f759ec20adc834debc6717a980 data/complicated_bees/loot_tables/blocks/chiseled_wax.json
 22400e190f8ff5fd8a7818af1a2a142ba17a9ed0 data/complicated_bees/loot_tables/blocks/generator.json
+bd7a636694ceed66c0213a49c3aa86de890a9806 data/complicated_bees/loot_tables/blocks/smooth_wax.json
+bd1e6f46769a0a48f521c3a6609673a47305e315 data/complicated_bees/loot_tables/blocks/smooth_wax_slab.json
+e41b85d707f3c6f9513c67d2f79f7bdbbc221282 data/complicated_bees/loot_tables/blocks/smooth_wax_stairs.json
+a0ea4eab395dffa74e14be9eab253375303fff38 data/complicated_bees/loot_tables/blocks/wax_block.json
+235ddcd4b7652622e7db501917ed03b38af3a1f5 data/complicated_bees/loot_tables/blocks/wax_block_slab.json
+cfc827cc07b9aa091a0b776f654620d0cd8ffa6e data/complicated_bees/loot_tables/blocks/wax_block_stairs.json
+434b0cfd77a8c3527508be987cdd7b5da955e21c data/complicated_bees/loot_tables/blocks/wax_bricks.json
+dc78336dc34ed7002a83cba48384a4526ff9e39e data/complicated_bees/loot_tables/blocks/wax_brick_slab.json
+c24fa3ab5a06bea1097ad0385d99461ae569323b data/complicated_bees/loot_tables/blocks/wax_brick_stairs.json

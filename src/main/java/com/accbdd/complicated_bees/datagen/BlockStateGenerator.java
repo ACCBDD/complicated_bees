@@ -2,9 +2,11 @@ package com.accbdd.complicated_bees.datagen;
 
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
@@ -30,8 +32,24 @@ public class BlockStateGenerator extends BlockStateProvider {
         simpleBlock(BlocksRegistration.WAX_BLOCK.get());
         stairsBlock(BlocksRegistration.WAX_BLOCK_STAIRS.get(), modLoc("block/wax_block"));
         slabBlock(BlocksRegistration.WAX_BLOCK_SLAB.get(), modLoc("block/wax_block"), modLoc("block/wax_block"));
+        simpleBlock(BlocksRegistration.WAX_BRICKS.get());
+        stairsBlock(BlocksRegistration.WAX_BRICK_STAIRS.get(), modLoc("block/wax_bricks"));
+        slabBlock(BlocksRegistration.WAX_BRICK_SLAB.get(), modLoc("block/wax_bricks"), modLoc("block/wax_bricks"));
+        simpleBlock(BlocksRegistration.SMOOTH_WAX.get());
+        stairsBlock(BlocksRegistration.SMOOTH_WAX_STAIRS.get(), modLoc("block/smooth_wax"));
+        slabBlock(BlocksRegistration.SMOOTH_WAX_SLAB.get(), modLoc("block/smooth_wax_slab_side"), modLoc("block/smooth_wax"));
+        simpleBlock(BlocksRegistration.CHISELED_WAX.get());
         registerCentrifuge();
         registerGenerator();
+    }
+
+    public void slabBlock(SlabBlock block, ResourceLocation side, ResourceLocation end) {
+        slabBlock(
+                block,
+                models().slab(name(block), side, end, end),
+                models().slab(name(block) + "_top", side, end, end),
+                models().cubeColumn(name(block) + "_double", side, end)
+        );
     }
 
     public BlockModelBuilder createBeeNestModel() {
@@ -107,5 +125,13 @@ public class BlockStateGenerator extends BlockStateProvider {
             case WEST -> builder.rotationY(270);
             case EAST -> builder.rotationY(90);
         }
+    }
+
+    private ResourceLocation key(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
     }
 }

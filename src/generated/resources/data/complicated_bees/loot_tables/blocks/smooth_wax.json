@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "complicated_bees:smooth_wax"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "complicated_bees:blocks/smooth_wax"
+}

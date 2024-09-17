@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "complicated_bees:block/smooth_wax",
+    "side": "complicated_bees:block/smooth_wax_slab_side",
+    "top": "complicated_bees:block/smooth_wax"
+  }
+}

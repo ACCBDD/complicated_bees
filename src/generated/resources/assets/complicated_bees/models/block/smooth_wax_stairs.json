@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "complicated_bees:block/smooth_wax",
+    "side": "complicated_bees:block/smooth_wax",
+    "top": "complicated_bees:block/smooth_wax"
+  }
+}

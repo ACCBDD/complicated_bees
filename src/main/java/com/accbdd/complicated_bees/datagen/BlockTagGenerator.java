@@ -25,7 +25,20 @@ public class BlockTagGenerator extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(BlockTags.MINEABLE_WITH_AXE).add(BlocksRegistration.APIARY.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BlocksRegistration.CENTRIFUGE.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                BlocksRegistration.CENTRIFUGE.get(),
+                BlocksRegistration.CHISELED_WAX.get(),
+                BlocksRegistration.WAX_BLOCK.get(),
+                BlocksRegistration.WAX_BLOCK_STAIRS.get(),
+                BlocksRegistration.WAX_BLOCK_SLAB.get(),
+                BlocksRegistration.WAX_BRICKS.get(),
+                BlocksRegistration.WAX_BRICK_STAIRS.get(),
+                BlocksRegistration.WAX_BRICK_SLAB.get(),
+                BlocksRegistration.SMOOTH_WAX.get(),
+                BlocksRegistration.SMOOTH_WAX_STAIRS.get(),
+                BlocksRegistration.SMOOTH_WAX_SLAB.get(),
+                BlocksRegistration.CHISELED_WAX.get()
+        );
         tag(SCOOPABLE).add(BlocksRegistration.BEE_NEST.get());
     }
 }

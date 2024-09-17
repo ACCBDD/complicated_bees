@@ -23,6 +23,16 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.APIARY.getId().getPath(), modLoc("block/apiary"));
         withExistingParent(BlocksRegistration.CENTRIFUGE.getId().getPath(), modLoc("block/centrifuge"));
         withExistingParent(BlocksRegistration.GENERATOR.getId().getPath(), modLoc("block/generator"));
+        withExistingParent(BlocksRegistration.WAX_BLOCK.getId().getPath(), modLoc("block/wax_block"));
+        withExistingParent(BlocksRegistration.WAX_BLOCK_STAIRS.getId().getPath(), modLoc("block/wax_block_stairs"));
+        withExistingParent(BlocksRegistration.WAX_BLOCK_SLAB.getId().getPath(), modLoc("block/wax_block_slab"));
+        withExistingParent(BlocksRegistration.WAX_BRICKS.getId().getPath(), modLoc("block/wax_bricks"));
+        withExistingParent(BlocksRegistration.WAX_BRICK_STAIRS.getId().getPath(), modLoc("block/wax_brick_stairs"));
+        withExistingParent(BlocksRegistration.WAX_BRICK_SLAB.getId().getPath(), modLoc("block/wax_brick_slab"));
+        withExistingParent(BlocksRegistration.SMOOTH_WAX.getId().getPath(), modLoc("block/smooth_wax"));
+        withExistingParent(BlocksRegistration.SMOOTH_WAX_STAIRS.getId().getPath(), modLoc("block/smooth_wax_stairs"));
+        withExistingParent(BlocksRegistration.SMOOTH_WAX_SLAB.getId().getPath(), modLoc("block/smooth_wax_slab"));
+        withExistingParent(BlocksRegistration.CHISELED_WAX.getId().getPath(), modLoc("block/chiseled_wax"));
         basicItem(ItemsRegistration.SCOOP.get());
         basicItem(ItemsRegistration.HONEY_DROPLET.get());
         basicItem(ItemsRegistration.BEESWAX.get());

@@ -58,9 +58,16 @@ public class ComplicatedBees {
             .title(Component.translatable("itemGroup.complicated_bees"))
             .icon(() -> ItemsRegistration.DRONE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(ItemsRegistration.WAX_BLOCK);
-                output.accept(ItemsRegistration.WAX_BLOCK_STAIRS);
-                output.accept(ItemsRegistration.WAX_BLOCK_SLAB);
+                output.accept(ItemsRegistration.WAX_BLOCK.get());
+                output.accept(ItemsRegistration.WAX_BLOCK_STAIRS.get());
+                output.accept(ItemsRegistration.WAX_BLOCK_SLAB.get());
+                output.accept(ItemsRegistration.SMOOTH_WAX.get());
+                output.accept(ItemsRegistration.SMOOTH_WAX_STAIRS.get());
+                output.accept(ItemsRegistration.SMOOTH_WAX_SLAB.get());
+                output.accept(ItemsRegistration.WAX_BRICKS.get());
+                output.accept(ItemsRegistration.WAX_BRICK_STAIRS.get());
+                output.accept(ItemsRegistration.WAX_BRICK_SLAB.get());
+                output.accept(ItemsRegistration.CHISELED_WAX.get());
                 output.accept(ItemsRegistration.APIARY.get());
                 output.accept(ItemsRegistration.CENTRIFUGE.get());
                 output.accept(ItemsRegistration.HONEY_DROPLET.get());

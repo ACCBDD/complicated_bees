@@ -53,4 +53,11 @@ public class ItemsRegistration {
     public static final DeferredItem<BlockItem> WAX_BLOCK = ITEMS.registerSimpleBlockItem("wax_block", BlocksRegistration.WAX_BLOCK);
     public static final DeferredItem<BlockItem> WAX_BLOCK_STAIRS = ITEMS.registerSimpleBlockItem("wax_block_stairs", BlocksRegistration.WAX_BLOCK_STAIRS);
     public static final DeferredItem<BlockItem> WAX_BLOCK_SLAB = ITEMS.registerSimpleBlockItem("wax_block_slab", BlocksRegistration.WAX_BLOCK_SLAB);
+    public static final DeferredItem<BlockItem> SMOOTH_WAX = ITEMS.registerSimpleBlockItem("smooth_wax", BlocksRegistration.SMOOTH_WAX);
+    public static final DeferredItem<BlockItem> SMOOTH_WAX_STAIRS = ITEMS.registerSimpleBlockItem("smooth_wax_stairs", BlocksRegistration.SMOOTH_WAX_STAIRS);
+    public static final DeferredItem<BlockItem> SMOOTH_WAX_SLAB = ITEMS.registerSimpleBlockItem("smooth_wax_slab", BlocksRegistration.SMOOTH_WAX_SLAB);
+    public static final DeferredItem<BlockItem> WAX_BRICKS = ITEMS.registerSimpleBlockItem("wax_bricks", BlocksRegistration.WAX_BRICKS);
+    public static final DeferredItem<BlockItem> WAX_BRICK_STAIRS = ITEMS.registerSimpleBlockItem("wax_brick_stairs", BlocksRegistration.WAX_BRICK_STAIRS);
+    public static final DeferredItem<BlockItem> WAX_BRICK_SLAB = ITEMS.registerSimpleBlockItem("wax_brick_slab", BlocksRegistration.WAX_BRICK_SLAB);
+    public static final DeferredItem<BlockItem> CHISELED_WAX = ITEMS.registerSimpleBlockItem("chiseled_wax", BlocksRegistration.CHISELED_WAX);
 }
