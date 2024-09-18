@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "complicated_bees:block/honeyed_planks"
+  }
+}

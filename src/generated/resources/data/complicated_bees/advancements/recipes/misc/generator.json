@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_comb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "complicated_bees:comb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "complicated_bees:generator"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_comb"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "complicated_bees:generator"
+    ]
+  }
+}

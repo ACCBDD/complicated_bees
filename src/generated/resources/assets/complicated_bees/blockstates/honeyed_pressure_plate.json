@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "complicated_bees:block/honeyed_pressure_plate"
+    },
+    "powered=true": {
+      "model": "complicated_bees:block/honeyed_pressure_plate_down"
+    }
+  }
+}

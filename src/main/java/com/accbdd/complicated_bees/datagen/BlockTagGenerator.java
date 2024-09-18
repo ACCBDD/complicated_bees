@@ -24,7 +24,19 @@ public class BlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(BlockTags.MINEABLE_WITH_AXE).add(BlocksRegistration.APIARY.get());
+        tag(SCOOPABLE).add(BlocksRegistration.BEE_NEST.get());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(
+                BlocksRegistration.APIARY.get(),
+                BlocksRegistration.HONEYED_PLANKS.get(),
+                BlocksRegistration.HONEYED_STAIRS.get(),
+                BlocksRegistration.HONEYED_SLAB.get(),
+                BlocksRegistration.HONEYED_FENCE.get(),
+                BlocksRegistration.HONEYED_FENCE_GATE.get(),
+                BlocksRegistration.HONEYED_BUTTON.get(),
+                BlocksRegistration.HONEYED_PRESSURE_PLATE.get(),
+                BlocksRegistration.HONEYED_DOOR.get(),
+                BlocksRegistration.HONEYED_TRAPDOOR.get()
+        );
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 BlocksRegistration.CENTRIFUGE.get(),
                 BlocksRegistration.CHISELED_WAX.get(),
@@ -42,11 +54,16 @@ public class BlockTagGenerator extends BlockTagsProvider {
                 BlocksRegistration.WAX_BRICK_WALL.get(),
                 BlocksRegistration.CHISELED_WAX.get()
         );
-        tag(SCOOPABLE).add(BlocksRegistration.BEE_NEST.get());
         tag(BlockTags.WALLS).add(
                 BlocksRegistration.WAX_BLOCK_WALL.get(),
                 BlocksRegistration.SMOOTH_WAX_WALL.get(),
                 BlocksRegistration.WAX_BRICK_WALL.get()
+        );
+        tag(BlockTags.FENCES).add(
+                BlocksRegistration.HONEYED_FENCE.get()
+        );
+        tag(BlockTags.FENCE_GATES).add(
+                BlocksRegistration.HONEYED_FENCE_GATE.get()
         );
     }
 }

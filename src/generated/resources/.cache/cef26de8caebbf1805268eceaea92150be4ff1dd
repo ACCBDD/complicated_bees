@@ -1,4 +1,4 @@
-// 1.20.4	2024-09-17T13:28:08.1149876	Item Models: complicated_bees
+// 1.20.4	2024-09-17T19:05:12.5766273	Item Models: complicated_bees
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 6df9d7e396652be82b3c1d200173d889ff220fcc assets/complicated_bees/models/item/apiary.json
 f2842120833073b82c83a81f23130c1a5f9ca947 assets/complicated_bees/models/item/beeswax.json
@@ -13,6 +13,15 @@ e1c44dbe71fdf49f92b82194231c9fa4f263be1b assets/complicated_bees/models/item/dro
 3a787d46b8971793edc21fcf12b5b6475bf7b892 assets/complicated_bees/models/item/exp_drop.json
 11489e5d0e972f0cc0861dc755263bb47cef3910 assets/complicated_bees/models/item/frame.json
 942fa15bac71ccde84a09da39c73e176e9811370 assets/complicated_bees/models/item/generator.json
+0b5bf0e689788c204000a4d4183130d506f40ba3 assets/complicated_bees/models/item/honeyed_button.json
+785541d0dc78dfd397bdd7399df4914992fe5ce8 assets/complicated_bees/models/item/honeyed_door.json
+053bbfd184a788c523838b83af3b96708a8b3441 assets/complicated_bees/models/item/honeyed_fence.json
+868a27d2e079a81379b195bb9ef81fcecb19894d assets/complicated_bees/models/item/honeyed_fence_gate.json
+827ecbec64995ee27b635f874914a299f0afa0dc assets/complicated_bees/models/item/honeyed_planks.json
+a88d01442bc757aff88cda1d8482ac119419937a assets/complicated_bees/models/item/honeyed_pressure_plate.json
+05d213c613e130a6568e2a82a922c6738d87b9b2 assets/complicated_bees/models/item/honeyed_slab.json
+2e847fb24eb8fb98f347d3e7c3706c8cf268ce9f assets/complicated_bees/models/item/honeyed_stairs.json
+1cdac17baed503b51d993113bd7ac7ebd11d5b92 assets/complicated_bees/models/item/honeyed_trapdoor.json
 74ba4d426f10943607a1d0933129337c962eeb4d assets/complicated_bees/models/item/honey_droplet.json
 3a4e01166171378dbcf5887a89a613c67ebc3c60 assets/complicated_bees/models/item/hot_frame.json
 4e887f1f8cea3582976db56210b0e25895b8511a assets/complicated_bees/models/item/meter.json

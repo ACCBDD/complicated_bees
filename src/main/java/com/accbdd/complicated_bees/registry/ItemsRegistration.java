@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.genetics.BeeHousingModifier;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.item.*;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -63,4 +64,13 @@ public class ItemsRegistration {
     public static final DeferredItem<BlockItem> WAX_BRICK_SLAB = ITEMS.registerSimpleBlockItem("wax_brick_slab", BlocksRegistration.WAX_BRICK_SLAB);
     public static final DeferredItem<BlockItem> WAX_BRICK_WALL = ITEMS.registerSimpleBlockItem("wax_brick_wall", BlocksRegistration.WAX_BRICK_WALL);
     public static final DeferredItem<BlockItem> CHISELED_WAX = ITEMS.registerSimpleBlockItem("chiseled_wax", BlocksRegistration.CHISELED_WAX);
+    public static final DeferredItem<BlockItem> HONEYED_PLANKS = ITEMS.registerSimpleBlockItem("honeyed_planks", BlocksRegistration.HONEYED_PLANKS);
+    public static final DeferredItem<BlockItem> HONEYED_STAIRS = ITEMS.registerSimpleBlockItem("honeyed_stairs", BlocksRegistration.HONEYED_STAIRS);
+    public static final DeferredItem<BlockItem> HONEYED_SLAB = ITEMS.registerSimpleBlockItem("honeyed_slab", BlocksRegistration.HONEYED_SLAB);
+    public static final DeferredItem<BlockItem> HONEYED_FENCE = ITEMS.registerSimpleBlockItem("honeyed_fence", BlocksRegistration.HONEYED_FENCE);
+    public static final DeferredItem<BlockItem> HONEYED_FENCE_GATE = ITEMS.registerSimpleBlockItem("honeyed_fence_gate", BlocksRegistration.HONEYED_FENCE_GATE);
+    public static final DeferredItem<BlockItem> HONEYED_BUTTON = ITEMS.registerSimpleBlockItem("honeyed_button", BlocksRegistration.HONEYED_BUTTON);
+    public static final DeferredItem<BlockItem> HONEYED_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem("honeyed_pressure_plate", BlocksRegistration.HONEYED_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> HONEYED_DOOR = ITEMS.register("honeyed_door", () -> new DoubleHighBlockItem(BlocksRegistration.HONEYED_DOOR.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> HONEYED_TRAPDOOR = ITEMS.registerSimpleBlockItem("honeyed_trapdoor", BlocksRegistration.HONEYED_TRAPDOOR);
 }

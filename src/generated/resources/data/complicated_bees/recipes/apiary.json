@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "complicated_bees:comb"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "ICI",
+    "PPP"
+  ],
+  "result": {
+    "item": "complicated_bees:apiary"
+  }
+}

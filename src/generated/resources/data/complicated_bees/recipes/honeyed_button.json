@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "complicated_bees:honeyed_planks"
+    }
+  ],
+  "result": {
+    "item": "complicated_bees:honeyed_button"
+  }
+}

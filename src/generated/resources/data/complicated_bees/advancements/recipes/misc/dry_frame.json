@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_apiary": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "complicated_bees:apiary"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "complicated_bees:dry_frame"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_apiary"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "complicated_bees:dry_frame"
+    ]
+  }
+}

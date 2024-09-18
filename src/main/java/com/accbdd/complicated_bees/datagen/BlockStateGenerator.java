@@ -9,10 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
+import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.BiConsumer;
@@ -42,15 +39,25 @@ public class BlockStateGenerator extends BlockStateProvider {
         slabBlock(BlocksRegistration.WAX_BRICK_SLAB.get(), modLoc("block/wax_bricks"), modLoc("block/wax_bricks"));
         wallBlock(BlocksRegistration.WAX_BRICK_WALL.get(), modLoc("block/wax_bricks"));
         simpleBlock(BlocksRegistration.CHISELED_WAX.get());
+        simpleBlock(BlocksRegistration.HONEYED_PLANKS.get());
+        stairsBlock(BlocksRegistration.HONEYED_STAIRS.get(), modLoc("block/honeyed_planks"));
+        slabBlock(BlocksRegistration.HONEYED_SLAB.get(), modLoc("block/honeyed_planks"), modLoc("block/honeyed_planks"));
+        fenceBlock(BlocksRegistration.HONEYED_FENCE.get(), modLoc("block/honeyed_planks"));
+        fenceGateBlock(BlocksRegistration.HONEYED_FENCE_GATE.get(), modLoc("block/honeyed_planks"));
+        buttonBlock(BlocksRegistration.HONEYED_BUTTON.get(), modLoc("block/honeyed_planks"));
+        pressurePlateBlock(BlocksRegistration.HONEYED_PRESSURE_PLATE.get(), modLoc("block/honeyed_planks"));
+        doorBlockWithRenderType(BlocksRegistration.HONEYED_DOOR.get(), modLoc("block/honeyed_door_bottom"), modLoc("block/honeyed_door_top"), "cutout");
+        trapdoorBlockWithRenderType(BlocksRegistration.HONEYED_TRAPDOOR.get(), modLoc("block/honeyed_trapdoor"), true, "cutout");
         registerCentrifuge();
         registerGenerator();
+
     }
 
     public void slabBlock(SlabBlock block, ResourceLocation side, ResourceLocation end) {
         slabBlock(
                 block,
                 models().slab(name(block), side, end, end),
-                models().slab(name(block) + "_top", side, end, end),
+                models().slabTop(name(block) + "_top", side, end, end),
                 models().cubeColumn(name(block) + "_double", side, end)
         );
     }
@@ -136,5 +143,10 @@ public class BlockStateGenerator extends BlockStateProvider {
 
     private String name(Block block) {
         return key(block).getPath();
+    }
+
+    @Override
+    public void simpleBlockItem(Block block, ModelFile model) {
+        super.simpleBlockItem(block, model);
     }
 }

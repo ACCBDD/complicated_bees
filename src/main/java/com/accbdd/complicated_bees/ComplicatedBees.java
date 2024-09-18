@@ -71,6 +71,15 @@ public class ComplicatedBees {
                 output.accept(ItemsRegistration.WAX_BRICK_SLAB.get());
                 output.accept(ItemsRegistration.WAX_BRICK_WALL.get());
                 output.accept(ItemsRegistration.CHISELED_WAX.get());
+                output.accept(ItemsRegistration.HONEYED_PLANKS.get());
+                output.accept(ItemsRegistration.HONEYED_STAIRS.get());
+                output.accept(ItemsRegistration.HONEYED_SLAB.get());
+                output.accept(ItemsRegistration.HONEYED_FENCE.get());
+                output.accept(ItemsRegistration.HONEYED_FENCE_GATE.get());
+                output.accept(ItemsRegistration.HONEYED_BUTTON.get());
+                output.accept(ItemsRegistration.HONEYED_PRESSURE_PLATE.get());
+                output.accept(ItemsRegistration.HONEYED_DOOR.get());
+                output.accept(ItemsRegistration.HONEYED_TRAPDOOR.get());
                 output.accept(ItemsRegistration.APIARY.get());
                 output.accept(ItemsRegistration.CENTRIFUGE.get());
                 output.accept(ItemsRegistration.HONEY_DROPLET.get());

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "complicated_bees:block/honeyed_planks",
+    "side": "complicated_bees:block/honeyed_planks"
+  }
+}

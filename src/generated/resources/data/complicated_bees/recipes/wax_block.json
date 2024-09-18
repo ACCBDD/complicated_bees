@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "complicated_bees:beeswax"
+    }
+  },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "result": {
+    "item": "complicated_bees:wax_block"
+  }
+}

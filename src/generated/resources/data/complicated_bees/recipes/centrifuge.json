@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "pattern": [
+    "III",
+    "ICI",
+    "SRS"
+  ],
+  "result": {
+    "item": "complicated_bees:centrifuge"
+  }
+}

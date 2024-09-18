@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "complicated_bees:block/honeyed_slab"
+    },
+    "type=double": {
+      "model": "complicated_bees:block/honeyed_slab_double"
+    },
+    "type=top": {
+      "model": "complicated_bees:block/honeyed_slab_top"
+    }
+  }
+}

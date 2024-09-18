@@ -1,5 +1,14 @@
 {
   "values": [
-    "complicated_bees:apiary"
+    "complicated_bees:apiary",
+    "complicated_bees:honeyed_planks",
+    "complicated_bees:honeyed_stairs",
+    "complicated_bees:honeyed_slab",
+    "complicated_bees:honeyed_fence",
+    "complicated_bees:honeyed_fence_gate",
+    "complicated_bees:honeyed_button",
+    "complicated_bees:honeyed_pressure_plate",
+    "complicated_bees:honeyed_door",
+    "complicated_bees:honeyed_trapdoor"
   ]
 }

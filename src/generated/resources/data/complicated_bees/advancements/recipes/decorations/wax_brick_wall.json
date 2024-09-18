@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "complicated_bees:wax_brick_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wax_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "complicated_bees:wax_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wax_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "complicated_bees:wax_brick_wall"
+    ]
+  }
+}

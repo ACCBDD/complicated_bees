@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "OXO",
+    "OOO"
+  ],
+  "result": {
+    "item": "complicated_bees:thick_frame"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "item": "minecraft:blue_ice"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "OXO",
+    "OOO"
+  ],
+  "result": {
+    "item": "complicated_bees:cold_frame"
+  }
+}

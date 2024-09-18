@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "complicated_bees:block/honeyed_door_bottom",
+    "top": "complicated_bees:block/honeyed_door_top"
+  }
+}

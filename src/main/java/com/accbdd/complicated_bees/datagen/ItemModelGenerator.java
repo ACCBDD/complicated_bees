@@ -38,6 +38,17 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.WAX_BRICK_SLAB.getId().getPath(), modLoc("block/wax_brick_slab"));
         wallItem(BlocksRegistration.WAX_BRICK_WALL, BlocksRegistration.WAX_BRICKS);
         withExistingParent(BlocksRegistration.CHISELED_WAX.getId().getPath(), modLoc("block/chiseled_wax"));
+
+        withExistingParent(BlocksRegistration.HONEYED_PLANKS.getId().getPath(), modLoc("block/honeyed_planks"));
+        withExistingParent(BlocksRegistration.HONEYED_STAIRS.getId().getPath(), modLoc("block/honeyed_stairs"));
+        withExistingParent(BlocksRegistration.HONEYED_SLAB.getId().getPath(), modLoc("block/honeyed_slab"));
+        fenceItem(BlocksRegistration.HONEYED_FENCE, BlocksRegistration.HONEYED_PLANKS);
+        withExistingParent(BlocksRegistration.HONEYED_FENCE_GATE.getId().getPath(), modLoc("block/honeyed_fence_gate"));
+        buttonItem(BlocksRegistration.HONEYED_BUTTON, BlocksRegistration.HONEYED_PLANKS);
+        withExistingParent(BlocksRegistration.HONEYED_PRESSURE_PLATE.getId().getPath(), modLoc("block/honeyed_pressure_plate"));
+        basicItem(BlocksRegistration.HONEYED_DOOR.asItem());
+        withExistingParent(BlocksRegistration.HONEYED_TRAPDOOR.getId().getPath(), modLoc("block/honeyed_trapdoor_bottom"));
+
         basicItem(ItemsRegistration.SCOOP.get());
         basicItem(ItemsRegistration.HONEY_DROPLET.get());
         basicItem(ItemsRegistration.BEESWAX.get());
@@ -86,5 +97,15 @@ public class ItemModelGenerator extends ItemModelProvider {
     private void wallItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
         this.withExistingParent(block.getId().getPath(), mcLoc("block/wall_inventory"))
                 .texture("wall", new ResourceLocation(MODID, "block/" + baseBlock.getId().getPath()));
+    }
+
+    private void fenceItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
+        this.withExistingParent(block.getId().getPath(), mcLoc("block/fence_inventory"))
+                .texture("texture", new ResourceLocation(MODID, "block/" + baseBlock.getId().getPath()));
+    }
+
+    private void buttonItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
+        this.withExistingParent(block.getId().getPath(), mcLoc("block/button_inventory"))
+                .texture("texture", new ResourceLocation(MODID, "block/" + baseBlock.getId().getPath()));
     }
 }

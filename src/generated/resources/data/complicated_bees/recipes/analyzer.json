@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "forge:glass_panes"
+    },
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    },
+    "W": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "IGI",
+    "RWR",
+    "ITI"
+  ],
+  "result": {
+    "item": "complicated_bees:analyzer"
+  }
+}

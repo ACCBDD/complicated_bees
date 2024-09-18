@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "complicated_bees:block/honeyed_planks",
+    "side": "complicated_bees:block/honeyed_planks",
+    "top": "complicated_bees:block/honeyed_planks"
+  }
+}

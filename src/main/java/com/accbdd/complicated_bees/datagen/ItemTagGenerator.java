@@ -5,7 +5,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -35,13 +34,16 @@ public class ItemTagGenerator extends ItemTagsProvider {
         tag(ROYAL).add(ItemsRegistration.PRINCESS.get(), ItemsRegistration.QUEEN.get());
         tag(BEE).add(ItemsRegistration.PRINCESS.get(), ItemsRegistration.QUEEN.get(), ItemsRegistration.DRONE.get());
         tag(ANALYZER_FUEL).add(ItemsRegistration.HONEY_DROPLET.get(), ItemsRegistration.ROYAL_JELLY.get());
-        tag(FRAME).add(ItemsRegistration.FRAME.get());
-        tag(FRAME).add(ItemsRegistration.DEADLY_FRAME.get());
-        tag(FRAME).add(ItemsRegistration.DRY_FRAME.get());
-        tag(FRAME).add(ItemsRegistration.MOIST_FRAME.get());
-        tag(FRAME).add(ItemsRegistration.COLD_FRAME.get());
-        tag(FRAME).add(ItemsRegistration.HOT_FRAME.get());
-        tag(FRAME).add(ItemsRegistration.RESTRICTIVE_FRAME.get());
-        tag(FRAME).add(ItemsRegistration.THICK_FRAME.get());
+        tag(FRAME).add(
+                ItemsRegistration.FRAME.get(),
+                ItemsRegistration.DEADLY_FRAME.get(),
+                ItemsRegistration.DRY_FRAME.get(),
+                ItemsRegistration.MOIST_FRAME.get(),
+                ItemsRegistration.COLD_FRAME.get(),
+                ItemsRegistration.HOT_FRAME.get(),
+                ItemsRegistration.RESTRICTIVE_FRAME.get(),
+                ItemsRegistration.THICK_FRAME.get()
+        );
+        tag(ItemTags.PLANKS).add(ItemsRegistration.HONEYED_PLANKS.get());
     }
 }

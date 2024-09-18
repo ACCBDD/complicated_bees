@@ -46,6 +46,15 @@ public class BlockLootTables extends BlockLootSubProvider {
         this.add(BlocksRegistration.WAX_BRICK_SLAB.get(), createSlabItemTable(BlocksRegistration.WAX_BRICK_SLAB.get()));
         dropSelf(BlocksRegistration.WAX_BRICK_WALL.get());
         dropSelf(BlocksRegistration.CHISELED_WAX.get());
+        dropSelf(BlocksRegistration.HONEYED_PLANKS.get());
+        dropSelf(BlocksRegistration.HONEYED_STAIRS.get());
+        this.add(BlocksRegistration.HONEYED_SLAB.get(), createSlabItemTable(BlocksRegistration.HONEYED_SLAB.get()));
+        dropSelf(BlocksRegistration.HONEYED_FENCE.get());
+        dropSelf(BlocksRegistration.HONEYED_FENCE_GATE.get());
+        dropSelf(BlocksRegistration.HONEYED_BUTTON.get());
+        dropSelf(BlocksRegistration.HONEYED_PRESSURE_PLATE.get());
+        this.add(BlocksRegistration.HONEYED_DOOR.get(), createDoorTable(BlocksRegistration.HONEYED_DOOR.get()));
+        dropSelf(BlocksRegistration.HONEYED_TRAPDOOR.get());
     }
 
     @Override

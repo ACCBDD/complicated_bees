@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "tag": "minecraft:sand"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "OXO",
+    "OOO"
+  ],
+  "result": {
+    "item": "complicated_bees:dry_frame"
+  }
+}
