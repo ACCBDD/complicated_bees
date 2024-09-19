@@ -55,6 +55,6 @@ public enum EnumHumidity {
     }
 
     public MutableComponent getTranslationKey() {
-        return Component.translatable("gui.complicated_bees.humidity." + this.toString());
+        return Component.translatable("gene.complicated_bees.humidity." + this.toString());
     }
 }

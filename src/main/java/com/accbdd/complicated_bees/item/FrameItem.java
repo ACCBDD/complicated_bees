@@ -29,22 +29,22 @@ public class FrameItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag pIsAdvanced) {
         if (Minecraft.getInstance().level != null) {
             if (modifier.getLifespanMod() != 1)
-                components.add(Component.translatable("gui.complicated_bees.lifespan_label")
+                components.add(Component.translatable("gene.complicated_bees.lifespan_label")
                         .append(": ")
                         .append(Component.literal(modifier.getLifespanMod() + "x"))
                         .withStyle(ChatFormatting.GRAY));
             if (modifier.getProductivityMod() != 1)
-                components.add(Component.translatable("gui.complicated_bees.productivity_label")
+                components.add(Component.translatable("gene.complicated_bees.productivity_label")
                         .append(": ")
                         .append(Component.literal(modifier.getProductivityMod() + "x"))
                         .withStyle(ChatFormatting.GRAY));
             if (!modifier.getTemperatureMod().equals(EnumTolerance.NONE))
-                components.add(Component.translatable("gui.complicated_bees.temperature_label")
+                components.add(Component.translatable("gene.complicated_bees.temperature_label")
                         .append(": ")
                         .append(modifier.getTemperatureMod().getTranslationKey())
                         .withStyle(ChatFormatting.GRAY));
             if (!modifier.getHumidityMod().equals(EnumTolerance.NONE))
-                components.add(Component.translatable("gui.complicated_bees.humidity_label")
+                components.add(Component.translatable("gene.complicated_bees.humidity_label")
                         .append(": ")
                         .append(modifier.getHumidityMod().getTranslationKey())
                         .withStyle(ChatFormatting.GRAY));

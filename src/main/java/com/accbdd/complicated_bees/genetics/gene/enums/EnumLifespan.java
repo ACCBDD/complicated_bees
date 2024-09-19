@@ -34,6 +34,6 @@ public enum EnumLifespan {
     }
 
     public MutableComponent getTranslationKey() {
-        return Component.translatable("gui.complicated_bees.lifespan." + this.toString());
+        return Component.translatable("gene.complicated_bees.lifespan." + this.toString());
     }
 }

@@ -4,16 +4,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 
-public class FlamingEffect implements IBeeEffect {
+public class FlamingEffect extends BeeEffect {
     @Override
-    public void runEffect(BlockEntity blockEntity, ItemStack queen, int cycleProgress) {
+    public void runEffect(BlockEntity apiary, ItemStack queen, int cycleProgress) {
+        if (apiary.getLevel() == null) return;
+
         if (cycleProgress % 80 == 0) {
-            Vec3 center = blockEntity.getBlockPos().getCenter();
-            Vec3 offset = new Vec3(3, 3, 3);
-            for (Entity entity : blockEntity.getLevel().getEntities(null, new AABB(center.add(offset), center.subtract(offset)))) {
+            for (Entity entity : getTerritoryEntities(apiary, queen)) {
                 if (entity instanceof LivingEntity living) {
                     living.setSecondsOnFire(3);
                 }

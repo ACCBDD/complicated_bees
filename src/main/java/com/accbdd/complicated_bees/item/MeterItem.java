@@ -21,12 +21,12 @@ public class MeterItem extends Item {
             pPlayer.getCooldowns().addCooldown(this, 40);
             EnumHumidity humidity = EnumHumidity.getFromPosition(pLevel, pPlayer.getOnPos());
             EnumTemperature temperature = EnumTemperature.getFromPosition(pLevel, pPlayer.getOnPos());
-            pPlayer.displayClientMessage(Component.translatable("gui.complicated_bees.humidity_label")
+            pPlayer.displayClientMessage(Component.translatable("gene.complicated_bees.humidity_label")
                     .append(": ")
-                    .append(Component.translatable("gui.complicated_bees.humidity." + humidity.toString())), false);
-            pPlayer.displayClientMessage(Component.translatable("gui.complicated_bees.temperature_label")
+                    .append(Component.translatable("gene.complicated_bees.humidity." + humidity.toString())), false);
+            pPlayer.displayClientMessage(Component.translatable("gene.complicated_bees.temperature_label")
                     .append(": ")
-                    .append(Component.translatable("gui.complicated_bees.temperature." + temperature.toString())), false);
+                    .append(Component.translatable("gene.complicated_bees.temperature." + temperature.toString())), false);
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }

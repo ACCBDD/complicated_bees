@@ -36,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
@@ -255,7 +256,7 @@ public class ApiaryBlockEntity extends BlockEntity {
                 outputBuffer.add(ItemStack.of((CompoundTag) itemCompound));
             }
         }
-        queenSatisfied = checkQueenSatisfied();
+        satisfyCycleProgress = SATISFY_CYCLE_LENGTH - new Random().nextInt(20, 80);
     }
 
     public void tickServer() {
@@ -453,7 +454,7 @@ public class ApiaryBlockEntity extends BlockEntity {
 
     public void damageFrames() {
         for (int i = 0; i < frameItems.getSlots(); i++) {
-            if (frameItems.getStackInSlot(i).hurt(1, level.random, null))
+            if (frameItems.getStackInSlot(i).hurt(1, getLevel().random, null))
                 frameItems.setStackInSlot(i, ItemStack.EMPTY);
         }
     }
@@ -500,11 +501,11 @@ public class ApiaryBlockEntity extends BlockEntity {
             flowerCache.add(getBlockPos());
             return;
         }
-
-        BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), 3, 3);
+        int[] searchRadii = (int[]) GeneticHelper.getGeneValue(bee, GeneTerritory.ID, true);
+        BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), searchRadii[0], searchRadii[1]);
         while (it.hasNext() && this.beeItems.getStackInSlot(0).is(ItemsRegistration.QUEEN)) {
             BlockPos pos = it.next();
-            if (flower.isAcceptable(level.getBlockState(pos))) {
+            if (flower.isAcceptable(getLevel().getBlockState(pos))) {
                 flowerCache.add(pos);
             }
         }

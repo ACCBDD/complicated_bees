@@ -34,6 +34,6 @@ public enum EnumProductivity {
     }
 
     public MutableComponent getTranslationKey() {
-        return Component.translatable("gui.complicated_bees.productivity." + this.toString());
+        return Component.translatable("gene.complicated_bees.productivity." + this.toString());
     }
 }

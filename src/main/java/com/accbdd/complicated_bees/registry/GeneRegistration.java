@@ -25,6 +25,7 @@ public class GeneRegistration {
     public static final Supplier<GeneFlower> FLOWER = GENES.register(GeneFlower.TAG, GeneFlower::new);
     public static final Supplier<GeneFertility> FERTILITY = GENES.register(GeneFertility.TAG, GeneFertility::new);
     public static final Supplier<GeneProductivity> PRODUCTIVITY = GENES.register(GeneProductivity.TAG, GeneProductivity::new);
+    public static final Supplier<GeneTerritory> TERRITORY = GENES.register(GeneTerritory.TAG, GeneTerritory::new);
     public static final Supplier<GeneEffect> EFFECT = GENES.register(GeneEffect.TAG, GeneEffect::new);
 
     public static final Supplier<GeneBoolean> NOCTURNAL = GENES.register("nocturnal", () -> new GeneBoolean(false, true));

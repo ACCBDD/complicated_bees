@@ -1,30 +1,29 @@
 package com.accbdd.complicated_bees.genetics.effect;
 
-import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.util.BlockPosBoxIterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.CocoaBlock;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 
-public class PollenicEffect implements IBeeEffect {
+public class PollenicEffect extends BeeEffect {
     @Override
-    public void runEffect(BlockEntity entity, ItemStack queen, int cycleProgress) {
+    public void runEffect(BlockEntity apiary, ItemStack queen, int cycleProgress) {
+        if (apiary.getLevel() == null) return;
+
         if (cycleProgress == 0) {
-            BlockPosBoxIterator iterator = new BlockPosBoxIterator(entity.getBlockPos(), 3, 3);
+            BlockPosBoxIterator iterator = getBlockIterator(apiary, queen);
             List<BlockPos> positions = new ArrayList<>();
-            ServerLevel level = ServerLifecycleHooks.getCurrentServer().getLevel(entity.getLevel().dimension());
+            ServerLevel level = ServerLifecycleHooks.getCurrentServer().getLevel(apiary.getLevel().dimension());
             if (level != null) {
                 while (iterator.hasNext()) {
                     BlockPos checkPos = iterator.next();

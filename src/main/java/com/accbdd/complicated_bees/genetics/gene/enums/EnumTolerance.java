@@ -62,6 +62,6 @@ public enum EnumTolerance {
     }
 
     public Component getTranslationKey() {
-        return Component.translatable("gui.complicated_bees.tolerance." + this.toString().toLowerCase());
+        return Component.translatable("gene.complicated_bees.tolerance." + this.toString().toLowerCase());
     }
 }

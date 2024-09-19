@@ -91,19 +91,19 @@ public class BeeItem extends Item {
             Chromosome primary = GeneticHelper.getChromosome(stack, true);
             components.add(primary.getGene(GeneLifespan.ID).getTranslationKey()
                     .append(" ")
-                    .append(Component.translatable("gui.complicated_bees.lifespan_label"))
+                    .append(Component.translatable("gene.complicated_bees.lifespan_label"))
                     .withStyle(ChatFormatting.GRAY));
             components.add(primary.getGene(GeneProductivity.ID).getTranslationKey()
                     .append(" ")
-                    .append(Component.translatable("gui.complicated_bees.productivity_label.short"))
+                    .append(Component.translatable("gene.complicated_bees.productivity_label.short"))
                     .withStyle(ChatFormatting.GRAY));
-            components.add(Component.translatable("gui.complicated_bees.temperature_label.short")
+            components.add(Component.translatable("gene.complicated_bees.temperature_label.short")
                     .append(": ")
                     .append(primary.getGene(GeneTemperature.ID).getTranslationKey())
                     .append(" / ")
                     .append(((GeneTolerant<?>) primary.getGene(GeneTemperature.ID)).getTolerance().getTranslationKey())
                     .withStyle(ChatFormatting.GREEN));
-            components.add(Component.translatable("gui.complicated_bees.humidity_label.short")
+            components.add(Component.translatable("gene.complicated_bees.humidity_label.short")
                     .append(": ")
                     .append(((EnumHumidity) primary.getGene(GeneHumidity.ID).get()).getTranslationKey())
                     .append(" / ")

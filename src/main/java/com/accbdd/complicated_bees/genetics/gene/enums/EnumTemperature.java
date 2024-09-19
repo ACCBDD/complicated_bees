@@ -70,6 +70,6 @@ public enum EnumTemperature {
     }
 
     public MutableComponent getTranslationKey() {
-        return Component.translatable("gui.complicated_bees.temperature." + this.toString());
+        return Component.translatable("gene.complicated_bees.temperature." + this.toString());
     }
 }

@@ -90,23 +90,24 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         lineBreak();
         lineBreak();
 
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.species_label"), bee, GeneRegistration.SPECIES.get());
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.lifespan_label"), bee, GeneRegistration.LIFESPAN.get());
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.productivity_label"), bee, GeneRegistration.PRODUCTIVITY.get());
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.flower_label"), bee, GeneRegistration.FLOWER.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.species_label"), bee, GeneRegistration.SPECIES.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.lifespan_label"), bee, GeneRegistration.LIFESPAN.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.productivity_label"), bee, GeneRegistration.PRODUCTIVITY.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.flower_label"), bee, GeneRegistration.FLOWER.get());
         lineBreak();
 
-        drawTolerantGeneValues(graphics, Component.translatable("gui.complicated_bees.humidity_label"), bee, GeneRegistration.HUMIDITY.get());
-        drawTolerantGeneValues(graphics, Component.translatable("gui.complicated_bees.temperature_label"), bee, GeneRegistration.TEMPERATURE.get());
+        drawTolerantGeneValues(graphics, Component.translatable("gene.complicated_bees.humidity_label"), bee, GeneRegistration.HUMIDITY.get());
+        drawTolerantGeneValues(graphics, Component.translatable("gene.complicated_bees.temperature_label"), bee, GeneRegistration.TEMPERATURE.get());
         lineBreak();
 
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.effect_label"), bee, GeneRegistration.EFFECT.get());
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.fertility_label"), bee, GeneRegistration.FERTILITY.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.territory_label"), bee, GeneRegistration.TERRITORY.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.effect_label"), bee, GeneRegistration.EFFECT.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.fertility_label"), bee, GeneRegistration.FERTILITY.get());
         lineBreak();
 
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.nocturnal_label"), bee, GeneRegistration.NOCTURNAL.get());
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.cave_dwelling_label"), bee, GeneRegistration.CAVE_DWELLING.get());
-        drawGeneValues(graphics, Component.translatable("gui.complicated_bees.weatherproof_label"), bee, GeneRegistration.WEATHERPROOF.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.nocturnal_label"), bee, GeneRegistration.NOCTURNAL.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.cave_dwelling_label"), bee, GeneRegistration.CAVE_DWELLING.get());
+        drawGeneValues(graphics, Component.translatable("gene.complicated_bees.weatherproof_label"), bee, GeneRegistration.WEATHERPROOF.get());
         lineBreak();
         lineBreak();
 
@@ -243,7 +244,7 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     private void drawTolerantGeneValues(GuiGraphics graphics, Component label, ItemStack bee, GeneTolerant<?> gene) {
         drawGeneValues(graphics, label, bee, gene, nextLine);
         nextLine += LINE_HEIGHT;
-        drawText(graphics, Component.translatable("gui.complicated_bees.tolerance_label"), PADDING + INDENT, nextLine, 0xFFFFFF);
+        drawText(graphics, Component.translatable("gene.complicated_bees.tolerance_label"), PADDING + INDENT, nextLine, 0xFFFFFF);
         drawToleranceIcons(graphics, bee, gene, ACTIVE_COL, INACTIVE_COL, nextLine);
         drawGeneTolerance(graphics, bee, gene, ACTIVE_COL + 10, INACTIVE_COL + 10, nextLine);
         nextLine += LINE_HEIGHT;

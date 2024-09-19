@@ -11,13 +11,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CursedEffect implements IBeeEffect {
+public class CursedEffect extends BeeEffect {
     @Override
-    public void runEffect(BlockEntity entity, ItemStack queen, int cycleProgress) {
+    public void runEffect(BlockEntity apiary, ItemStack queen, int cycleProgress) {
+        if (apiary.getLevel() == null) return;
+
         if (cycleProgress == 0) {
-            Level level = entity.getLevel();
+            Level level = apiary.getLevel();
             if (level == null) return;
-            BlockPosBoxIterator iterator = new BlockPosBoxIterator(entity.getBlockPos(), 3, 3);
+            BlockPosBoxIterator iterator = getBlockIterator(apiary, queen);
             List<BlockPos> convertables = new ArrayList<>();
             while (iterator.hasNext()) {
                 BlockPos checkPos = iterator.next();
