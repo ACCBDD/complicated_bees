@@ -1,5 +1,9 @@
-// 1.20.4	2024-09-17T19:05:12.5766273	Item Models: complicated_bees
+// 1.20.4	2024-09-18T23:02:33.7317442	Item Models: complicated_bees
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
+78dc08d43023162f54b70bdb3abb1770f12e72fe assets/complicated_bees/models/item/apiarist_boots.json
+687f9291aa818f819bc22d07b1e1f0689fad8e91 assets/complicated_bees/models/item/apiarist_chestplate.json
+8c078ace95c127e223e80a61f37188f0e51cf411 assets/complicated_bees/models/item/apiarist_helmet.json
+166406cfb2987cbc700b26f3c002b8dbb0abd395 assets/complicated_bees/models/item/apiarist_leggings.json
 6df9d7e396652be82b3c1d200173d889ff220fcc assets/complicated_bees/models/item/apiary.json
 f2842120833073b82c83a81f23130c1a5f9ca947 assets/complicated_bees/models/item/beeswax.json
 c8862de88ab41c41168edc5e0186979a36e70d47 assets/complicated_bees/models/item/bee_nest.json
@@ -34,6 +38,7 @@ a89dc7b5fc042fe03463b219e5a93826d79b887f assets/complicated_bees/models/item/que
 e184a0d9b3e84a356b0fa6a34823b6e793ce32d1 assets/complicated_bees/models/item/restrictive_frame.json
 e687e1a9d5cdfcf6b1717f540917fc409af53e57 assets/complicated_bees/models/item/royal_jelly.json
 274eeb113984d54762b8fc469fe9a8720d1fe4fd assets/complicated_bees/models/item/scoop.json
+54607d554b6e630792d0709bf02a8da5e8477f2c assets/complicated_bees/models/item/silk_wisp.json
 2310ff094a7f33c7359c027f053c7e701665420e assets/complicated_bees/models/item/smooth_wax.json
 2e62cf1adca50cd68c7e1a22d9ae1dc7102000b9 assets/complicated_bees/models/item/smooth_wax_slab.json
 e01283eed40df59e0d0272464c5534a12ed8fc1d assets/complicated_bees/models/item/smooth_wax_stairs.json
@@ -47,3 +52,4 @@ e88f6a96c2afd04045621c68f577da55cc524378 assets/complicated_bees/models/item/wax
 9157342f9b6c4aa70baecfeef5c0e7fc5a4b40af assets/complicated_bees/models/item/wax_brick_slab.json
 6d53b021779c9313bb822c8526ed270523b824cd assets/complicated_bees/models/item/wax_brick_stairs.json
 2fce687b637176fcff9dd1b442aff9789b06187d assets/complicated_bees/models/item/wax_brick_wall.json
+5c97e2382b51b6a6a58340edc18451c572a773bb assets/complicated_bees/models/item/woven_mesh.json

@@ -1,0 +1,16 @@
+{
+  "type": "complicated_bees:centrifuge",
+  "input": {
+    "item": "complicated_bees:propolis"
+  },
+  "outputs": [
+    {
+      "item": "complicated_bees:silk_wisp",
+      "chance": 0.6
+    },
+    {
+      "item": "minecraft:slime_ball",
+      "chance": 0.1
+    }
+  ]
+}

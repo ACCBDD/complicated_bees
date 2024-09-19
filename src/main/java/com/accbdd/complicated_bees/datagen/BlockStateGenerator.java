@@ -50,7 +50,6 @@ public class BlockStateGenerator extends BlockStateProvider {
         trapdoorBlockWithRenderType(BlocksRegistration.HONEYED_TRAPDOOR.get(), modLoc("block/honeyed_trapdoor"), true, "cutout");
         registerCentrifuge();
         registerGenerator();
-
     }
 
     public void slabBlock(SlabBlock block, ResourceLocation side, ResourceLocation end) {

@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.registry;
 import com.accbdd.complicated_bees.genetics.BeeHousingModifier;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.item.*;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
@@ -22,12 +23,14 @@ public class ItemsRegistration {
     public static final DeferredItem<MeterItem> METER = ITEMS.registerItem("meter", MeterItem::new);
     public static final DeferredItem<AnalyzerItem> ANALYZER = ITEMS.registerItem("analyzer", AnalyzerItem::new);
     public static final DeferredItem<ExpDropItem> EXP_DROP = ITEMS.registerItem("exp_drop", ExpDropItem::new);
+    public static final DeferredItem<BeeswaxItem> BEESWAX = ITEMS.registerItem("beeswax", BeeswaxItem::new);
 
     public static final DeferredItem<Item> HONEY_DROPLET = ITEMS.registerSimpleItem("honey_droplet");
     public static final DeferredItem<Item> ROYAL_JELLY = ITEMS.registerSimpleItem("royal_jelly");
     public static final DeferredItem<Item> POLLEN = ITEMS.registerSimpleItem("pollen");
     public static final DeferredItem<Item> PROPOLIS = ITEMS.registerSimpleItem("propolis");
-    public static final DeferredItem<BeeswaxItem> BEESWAX = ITEMS.registerItem("beeswax", BeeswaxItem::new);
+    public static final DeferredItem<Item> SILK_WISP = ITEMS.registerSimpleItem("silk_wisp");
+    public static final DeferredItem<Item> WOVEN_MESH = ITEMS.registerSimpleItem("woven_mesh");
     public static final DeferredItem<Item> PEARL_SHARD = ITEMS.registerSimpleItem("pearl_shard");
 
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
@@ -46,6 +49,15 @@ public class ItemsRegistration {
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 0.1f, 1f)));
     public static final DeferredItem<FrameItem> RESTRICTIVE_FRAME = ITEMS.registerItem("restrictive_frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1f)));
+
+    public static final DeferredItem<Item> APIARIST_HELMET = ITEMS.registerItem("apiarist_helmet",
+            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final DeferredItem<Item> APIARIST_CHESTPLATE = ITEMS.registerItem("apiarist_chestplate",
+            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final DeferredItem<Item> APIARIST_LEGGINGS = ITEMS.registerItem("apiarist_leggings",
+            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final DeferredItem<Item> APIARIST_BOOTS = ITEMS.registerItem("apiarist_boots",
+            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerItem("bee_nest", BeeNestBlockItem::new);
     public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);

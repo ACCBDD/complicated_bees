@@ -26,6 +26,12 @@
   "item.complicated_bees.restrictive_frame": "Restrictive Frame",
   "item.complicated_bees.pearl_shard": "Pearl Shard",
   "item.complicated_bees.exp_drop": "Experience Droplet",
+  "item.complicated_bees.silk_wisp": "Silk Wisp",
+  "item.complicated_bees.woven_mesh": "Woven Mesh",
+  "item.complicated_bees.apiarist_helmet": "Apiarist's Helmet",
+  "item.complicated_bees.apiarist_chestplate": "Apiarist's Chestplate",
+  "item.complicated_bees.apiarist_leggings": "Apiarist's Leggings",
+  "item.complicated_bees.apiarist_boots": "Apiarist's Boots",
 
   "block.complicated_bees.bee_nest": "Bee Nest",
   "block.complicated_bees.apiary": "Apiary",

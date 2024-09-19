@@ -82,6 +82,38 @@ public class RecipeGenerator extends RecipeProvider {
                 .define('S', Items.SMOOTH_STONE)
                 .define('R', Items.REDSTONE)
                 .unlockedBy(getHasName(ItemsRegistration.COMB), has(ItemsRegistration.COMB)).save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemsRegistration.WOVEN_MESH)
+                .pattern("WWW")
+                .pattern("WWW")
+                .pattern("WWW")
+                .define('W', ItemsRegistration.SILK_WISP)
+                .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_HELMET)
+                .pattern("MMM")
+                .pattern("MPM")
+                .define('M', ItemsRegistration.WOVEN_MESH)
+                .define('P', ItemsRegistration.POLLEN)
+                .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_CHESTPLATE)
+                .pattern("MPM")
+                .pattern("MMM")
+                .pattern("MMM")
+                .define('M', ItemsRegistration.WOVEN_MESH)
+                .define('P', ItemsRegistration.POLLEN)
+                .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_LEGGINGS)
+                .pattern("MMM")
+                .pattern("MPM")
+                .pattern("M M")
+                .define('M', ItemsRegistration.WOVEN_MESH)
+                .define('P', ItemsRegistration.POLLEN)
+                .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_BOOTS)
+                .pattern("MPM")
+                .pattern("M M")
+                .define('M', ItemsRegistration.WOVEN_MESH)
+                .define('P', ItemsRegistration.POLLEN)
+                .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ItemsRegistration.HONEYED_PLANKS, 8)
                 .pattern("SSS")
