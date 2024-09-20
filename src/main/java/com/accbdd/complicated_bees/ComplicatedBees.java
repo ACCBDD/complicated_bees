@@ -108,6 +108,9 @@ public class ComplicatedBees {
                 output.accept(ItemsRegistration.APIARIST_CHESTPLATE);
                 output.accept(ItemsRegistration.APIARIST_LEGGINGS);
                 output.accept(ItemsRegistration.APIARIST_BOOTS);
+                output.accept(ItemsRegistration.HONEY_BREAD);
+                output.accept(ItemsRegistration.HONEY_PORKCHOP);
+                output.accept(ItemsRegistration.AMBROSIA);
                 Set<Map.Entry<ResourceKey<Species>, Species>> speciesSet = Objects.requireNonNull(Minecraft.getInstance().getConnection()).registryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().entrySet();
                 for (Map.Entry<ResourceKey<Species>, Species> entry : speciesSet) {
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));

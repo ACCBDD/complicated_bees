@@ -73,6 +73,9 @@ public class ItemModelGenerator extends ItemModelProvider {
         basicItem(ItemsRegistration.APIARIST_CHESTPLATE.get());
         basicItem(ItemsRegistration.APIARIST_LEGGINGS.get());
         basicItem(ItemsRegistration.APIARIST_BOOTS.get());
+        basicItem(ItemsRegistration.HONEY_BREAD.get());
+        basicItem(ItemsRegistration.HONEY_PORKCHOP.get());
+        basicItem(ItemsRegistration.AMBROSIA.get());
 
         createBeeModel(ItemsRegistration.DRONE.getId());
         createBeeModel(ItemsRegistration.PRINCESS.getId()).texture("layer2", modLoc("item/princess_crown"));

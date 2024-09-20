@@ -28,6 +28,22 @@ public class RecipeGenerator extends RecipeProvider {
         frameRecipe(output, ItemsRegistration.HOT_FRAME, Ingredient.of(Items.MAGMA_BLOCK), Ingredient.of(Items.NETHER_BRICK));
         frameRecipe(output, ItemsRegistration.COLD_FRAME, Ingredient.of(Items.BLUE_ICE), Ingredient.of(Tags.Items.RODS_WOODEN));
         deadlyFrame(output);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ItemsRegistration.HONEY_BREAD)
+                .requires(Items.BREAD)
+                .requires(ItemsRegistration.HONEY_DROPLET, 4)
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET)).save(output);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ItemsRegistration.HONEY_PORKCHOP)
+                .requires(Items.COOKED_PORKCHOP)
+                .requires(ItemsRegistration.HONEY_DROPLET, 4)
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET)).save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ItemsRegistration.AMBROSIA)
+                .pattern("HHH")
+                .pattern("PRP")
+                .pattern("HHH")
+                .define('H', ItemsRegistration.HONEY_DROPLET)
+                .define('P', ItemsRegistration.POLLEN)
+                .define('R', ItemsRegistration.ROYAL_JELLY)
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET)).save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemsRegistration.ANALYZER)
                 .pattern("IGI")
                 .pattern("RWR")

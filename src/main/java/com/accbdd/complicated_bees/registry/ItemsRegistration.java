@@ -3,10 +3,11 @@ package com.accbdd.complicated_bees.registry;
 import com.accbdd.complicated_bees.genetics.BeeHousingModifier;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import com.accbdd.complicated_bees.item.*;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DoubleHighBlockItem;
-import net.minecraft.world.item.Item;
+import com.accbdd.complicated_bees.item.ArmorMaterials;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -32,6 +33,25 @@ public class ItemsRegistration {
     public static final DeferredItem<Item> SILK_WISP = ITEMS.registerSimpleItem("silk_wisp");
     public static final DeferredItem<Item> WOVEN_MESH = ITEMS.registerSimpleItem("woven_mesh");
     public static final DeferredItem<Item> PEARL_SHARD = ITEMS.registerSimpleItem("pearl_shard");
+
+    public static final DeferredItem<Item> HONEY_BREAD = ITEMS.registerItem("honey_bread", Item::new,
+            new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(0.4f).build()));
+    public static final DeferredItem<Item> HONEY_PORKCHOP = ITEMS.registerItem("honey_porkchop", Item::new,
+            new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(0.5f).build()));
+    public static final DeferredItem<Item> AMBROSIA = ITEMS.registerItem("ambrosia", (prop) -> new Item(prop) {
+                @Override
+                public boolean isFoil(ItemStack pStack) {
+                    return true;
+                }
+            },
+            new Item.Properties().food(new FoodProperties.Builder()
+                    .nutrition(6)
+                    .saturationMod(1.2F)
+                    .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 400, 1), 1.0F)
+                    .effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200, 2), 1.0F)
+                    .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 2400, 1), 1.0F)
+                    .alwaysEat()
+                    .build()).rarity(Rarity.RARE));
 
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1.1f, 1f)));

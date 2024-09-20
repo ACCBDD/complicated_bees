@@ -1,4 +1,5 @@
-// 1.20.4	2024-09-18T23:02:33.7317442	Item Models: complicated_bees
+// 1.20.4	2024-09-20T16:03:45.7296538	Item Models: complicated_bees
+eed162555c50979ffb14f7ef23c98ac3ac9929cd assets/complicated_bees/models/item/ambrosia.json
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 78dc08d43023162f54b70bdb3abb1770f12e72fe assets/complicated_bees/models/item/apiarist_boots.json
 687f9291aa818f819bc22d07b1e1f0689fad8e91 assets/complicated_bees/models/item/apiarist_chestplate.json
@@ -26,7 +27,9 @@ a88d01442bc757aff88cda1d8482ac119419937a assets/complicated_bees/models/item/hon
 05d213c613e130a6568e2a82a922c6738d87b9b2 assets/complicated_bees/models/item/honeyed_slab.json
 2e847fb24eb8fb98f347d3e7c3706c8cf268ce9f assets/complicated_bees/models/item/honeyed_stairs.json
 1cdac17baed503b51d993113bd7ac7ebd11d5b92 assets/complicated_bees/models/item/honeyed_trapdoor.json
+7f831c72192c985b1f27ed077f6f155f261c72bf assets/complicated_bees/models/item/honey_bread.json
 74ba4d426f10943607a1d0933129337c962eeb4d assets/complicated_bees/models/item/honey_droplet.json
+f9cd668a0476991cb01fd083136c9560af37b4e1 assets/complicated_bees/models/item/honey_porkchop.json
 3a4e01166171378dbcf5887a89a613c67ebc3c60 assets/complicated_bees/models/item/hot_frame.json
 4e887f1f8cea3582976db56210b0e25895b8511a assets/complicated_bees/models/item/meter.json
 8dd2813cb634894f74a21951e47a30b656bc3cd2 assets/complicated_bees/models/item/moist_frame.json
