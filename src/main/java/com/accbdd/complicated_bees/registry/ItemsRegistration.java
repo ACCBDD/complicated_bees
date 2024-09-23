@@ -54,7 +54,7 @@ public class ItemsRegistration {
                     .build()).rarity(Rarity.RARE));
 
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1.1f, 1f)));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1.05f)));
     public static final DeferredItem<FrameItem> THICK_FRAME = ITEMS.registerItem("thick_frame",
             (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1.1f)));
     public static final DeferredItem<FrameItem> COLD_FRAME = ITEMS.registerItem("cold_frame",
