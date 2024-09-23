@@ -1,4 +1,4 @@
-// 1.20.4	2024-09-20T16:03:45.7296538	Item Models: complicated_bees
+// 1.20.4	2024-09-23T12:37:28.024752	Item Models: complicated_bees
 eed162555c50979ffb14f7ef23c98ac3ac9929cd assets/complicated_bees/models/item/ambrosia.json
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 78dc08d43023162f54b70bdb3abb1770f12e72fe assets/complicated_bees/models/item/apiarist_boots.json
@@ -32,7 +32,6 @@ a88d01442bc757aff88cda1d8482ac119419937a assets/complicated_bees/models/item/hon
 f9cd668a0476991cb01fd083136c9560af37b4e1 assets/complicated_bees/models/item/honey_porkchop.json
 3a4e01166171378dbcf5887a89a613c67ebc3c60 assets/complicated_bees/models/item/hot_frame.json
 4e887f1f8cea3582976db56210b0e25895b8511a assets/complicated_bees/models/item/meter.json
-8dd2813cb634894f74a21951e47a30b656bc3cd2 assets/complicated_bees/models/item/moist_frame.json
 35e242999e61ab0e681c4eae3316bccf547b786c assets/complicated_bees/models/item/pearl_shard.json
 fdade14308f6b59c6629c9fb48aa3ae023776efb assets/complicated_bees/models/item/pollen.json
 bd065224c54899152c47411c282f7beff983cb4e assets/complicated_bees/models/item/princess.json
@@ -55,4 +54,5 @@ e88f6a96c2afd04045621c68f577da55cc524378 assets/complicated_bees/models/item/wax
 9157342f9b6c4aa70baecfeef5c0e7fc5a4b40af assets/complicated_bees/models/item/wax_brick_slab.json
 6d53b021779c9313bb822c8526ed270523b824cd assets/complicated_bees/models/item/wax_brick_stairs.json
 2fce687b637176fcff9dd1b442aff9789b06187d assets/complicated_bees/models/item/wax_brick_wall.json
+ba00a9562987b25443230f4225b6e20e6c2995ea assets/complicated_bees/models/item/wet_frame.json
 5c97e2382b51b6a6a58340edc18451c572a773bb assets/complicated_bees/models/item/woven_mesh.json

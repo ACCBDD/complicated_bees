@@ -1,7 +1,9 @@
 package com.accbdd.complicated_bees.datagen;
 
+import com.accbdd.complicated_bees.datagen.condition.ItemEnabledCondition;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -24,18 +26,20 @@ public class RecipeGenerator extends RecipeProvider {
         frameRecipe(output, ItemsRegistration.FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(Tags.Items.RODS_WOODEN));
         frameRecipe(output, ItemsRegistration.THICK_FRAME, Ingredient.of(ItemTags.WOOL), Ingredient.of(Tags.Items.RODS_WOODEN));
         frameRecipe(output, ItemsRegistration.DRY_FRAME, Ingredient.of(ItemTags.SAND), Ingredient.of(Tags.Items.RODS_WOODEN));
-        frameRecipe(output, ItemsRegistration.MOIST_FRAME, Ingredient.of(Items.WATER_BUCKET), Ingredient.of(Tags.Items.RODS_WOODEN));
+        frameRecipe(output, ItemsRegistration.WET_FRAME, Ingredient.of(Items.WATER_BUCKET), Ingredient.of(Tags.Items.RODS_WOODEN));
         frameRecipe(output, ItemsRegistration.HOT_FRAME, Ingredient.of(Items.MAGMA_BLOCK), Ingredient.of(Items.NETHER_BRICK));
         frameRecipe(output, ItemsRegistration.COLD_FRAME, Ingredient.of(Items.BLUE_ICE), Ingredient.of(Tags.Items.RODS_WOODEN));
         deadlyFrame(output);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ItemsRegistration.HONEY_BREAD)
                 .requires(Items.BREAD)
                 .requires(ItemsRegistration.HONEY_DROPLET, 4)
-                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET)).save(output);
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET))
+                .save(output.withConditions(new ItemEnabledCondition(ItemsRegistration.HONEY_BREAD.getId())));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ItemsRegistration.HONEY_PORKCHOP)
                 .requires(Items.COOKED_PORKCHOP)
                 .requires(ItemsRegistration.HONEY_DROPLET, 4)
-                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET)).save(output);
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET))
+                .save(output.withConditions(new ItemEnabledCondition(ItemsRegistration.HONEY_PORKCHOP.getId())));
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ItemsRegistration.AMBROSIA)
                 .pattern("HHH")
                 .pattern("PRP")
@@ -43,7 +47,8 @@ public class RecipeGenerator extends RecipeProvider {
                 .define('H', ItemsRegistration.HONEY_DROPLET)
                 .define('P', ItemsRegistration.POLLEN)
                 .define('R', ItemsRegistration.ROYAL_JELLY)
-                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET)).save(output);
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET))
+                .save(output.withConditions(new ItemEnabledCondition(ItemsRegistration.AMBROSIA.getId())));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemsRegistration.ANALYZER)
                 .pattern("IGI")
                 .pattern("RWR")
@@ -174,7 +179,7 @@ public class RecipeGenerator extends RecipeProvider {
                 .pattern("OOO")
                 .define('O', outside)
                 .define('X', center)
-                .unlockedBy("has_apiary", has(ItemsRegistration.APIARY)).save(output);
+                .unlockedBy("has_apiary", has(ItemsRegistration.APIARY)).save(output.withConditions(new ItemEnabledCondition(BuiltInRegistries.ITEM.getKey(result.asItem()))));
     }
 
     protected static void deadlyFrame(RecipeOutput output) {
@@ -185,7 +190,7 @@ public class RecipeGenerator extends RecipeProvider {
                 .define('O', Items.OBSIDIAN)
                 .define('X', Items.SKELETON_SKULL)
                 .define('C', Items.CRYING_OBSIDIAN)
-                .unlockedBy("has_apiary", has(ItemsRegistration.APIARY)).save(output);
+                .unlockedBy("has_apiary", has(ItemsRegistration.APIARY)).save(output.withConditions(new ItemEnabledCondition(ItemsRegistration.DEADLY_FRAME.getId())));
     }
 
     protected static void stonecutterFor(RecipeOutput output, BlockFamily family) {

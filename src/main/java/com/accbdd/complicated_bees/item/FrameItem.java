@@ -5,19 +5,19 @@ import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FrameItem extends Item {
+public class FrameItem extends DisableableItem {
     private final BeeHousingModifier modifier;
 
-    public FrameItem(Properties pProperties, BeeHousingModifier modifier) {
-        super(pProperties);
+    public FrameItem(Properties pProperties, BeeHousingModifier modifier, ModConfigSpec.ConfigValue<Boolean> configValue) {
+        super(pProperties, configValue);
         this.modifier = modifier;
     }
 

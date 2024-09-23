@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "complicated_bees:item_enabled",
+      "item": "complicated_bees:wet_frame"
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_apiary": {
@@ -15,7 +21,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "complicated_bees:moist_frame"
+        "recipe": "complicated_bees:wet_frame"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +34,7 @@
   ],
   "rewards": {
     "recipes": [
-      "complicated_bees:moist_frame"
+      "complicated_bees:wet_frame"
     ]
   }
 }

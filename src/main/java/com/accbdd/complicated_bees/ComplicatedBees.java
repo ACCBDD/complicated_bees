@@ -97,7 +97,7 @@ public class ComplicatedBees {
                 output.accept(ItemsRegistration.HOT_FRAME);
                 output.accept(ItemsRegistration.COLD_FRAME);
                 output.accept(ItemsRegistration.DRY_FRAME);
-                output.accept(ItemsRegistration.MOIST_FRAME);
+                output.accept(ItemsRegistration.WET_FRAME);
                 output.accept(ItemsRegistration.DEADLY_FRAME);
                 output.accept(ItemsRegistration.RESTRICTIVE_FRAME);
                 output.accept(ItemsRegistration.PEARL_SHARD);
@@ -147,6 +147,7 @@ public class ComplicatedBees {
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_TYPE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_SERIALIZER_REGISTER.register(modEventBus);
+        EsotericRegistration.CONDITION_SERIALIZERS.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CONFIG_SPEC);
 

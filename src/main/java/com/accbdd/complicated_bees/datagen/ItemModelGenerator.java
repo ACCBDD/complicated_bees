@@ -62,7 +62,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         basicItem(ItemsRegistration.HOT_FRAME.get());
         basicItem(ItemsRegistration.COLD_FRAME.get());
         basicItem(ItemsRegistration.DRY_FRAME.get());
-        basicItem(ItemsRegistration.MOIST_FRAME.get());
+        basicItem(ItemsRegistration.WET_FRAME.get());
         basicItem(ItemsRegistration.DEADLY_FRAME.get());
         basicItem(ItemsRegistration.RESTRICTIVE_FRAME.get());
         basicItem(ItemsRegistration.PEARL_SHARD.get());

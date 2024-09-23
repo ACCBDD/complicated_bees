@@ -38,7 +38,7 @@ public class ItemTagGenerator extends ItemTagsProvider {
                 ItemsRegistration.FRAME.get(),
                 ItemsRegistration.DEADLY_FRAME.get(),
                 ItemsRegistration.DRY_FRAME.get(),
-                ItemsRegistration.MOIST_FRAME.get(),
+                ItemsRegistration.WET_FRAME.get(),
                 ItemsRegistration.COLD_FRAME.get(),
                 ItemsRegistration.HOT_FRAME.get(),
                 ItemsRegistration.RESTRICTIVE_FRAME.get(),

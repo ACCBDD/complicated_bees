@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "complicated_bees:item_enabled",
+      "item": "complicated_bees:frame"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {

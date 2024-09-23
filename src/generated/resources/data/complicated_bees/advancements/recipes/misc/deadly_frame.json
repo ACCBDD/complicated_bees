@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "complicated_bees:item_enabled",
+      "item": "complicated_bees:deadly_frame"
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_apiary": {

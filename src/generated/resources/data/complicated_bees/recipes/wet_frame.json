@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "complicated_bees:item_enabled",
+      "item": "complicated_bees:wet_frame"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
@@ -15,6 +21,6 @@
     "OOO"
   ],
   "result": {
-    "item": "complicated_bees:moist_frame"
+    "item": "complicated_bees:wet_frame"
   }
 }
