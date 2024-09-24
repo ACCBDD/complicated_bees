@@ -41,7 +41,10 @@ public class GeneSpecies extends Gene<Species> {
 
     @Override
     public GeneSpecies deserialize(CompoundTag tag) {
-        Registry<Species> registry = GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get();
+        RegistryAccess registryAccess = GeneticHelper.getRegistryAccess();
+        if (registryAccess == null)
+            return new GeneSpecies();
+        Registry<Species> registry = registryAccess.registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get();
 
         return new GeneSpecies(registry.get(ResourceLocation.tryParse(tag.getString(DATA))), tag.getBoolean(DOMINANT));
     }
