@@ -10,6 +10,7 @@ import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
 import com.accbdd.complicated_bees.item.CombItem;
+import com.accbdd.complicated_bees.particle.BeeParticle;
 import com.accbdd.complicated_bees.registry.*;
 import com.accbdd.complicated_bees.screen.AnalyzerScreen;
 import com.accbdd.complicated_bees.screen.ApiaryScreen;
@@ -17,6 +18,8 @@ import com.accbdd.complicated_bees.screen.CentrifugeScreen;
 import com.accbdd.complicated_bees.screen.GeneratorScreen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -35,6 +38,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
@@ -108,6 +112,7 @@ public class ComplicatedBees {
                 output.accept(ItemsRegistration.APIARIST_CHESTPLATE);
                 output.accept(ItemsRegistration.APIARIST_LEGGINGS);
                 output.accept(ItemsRegistration.APIARIST_BOOTS);
+                output.accept(ItemsRegistration.BEE_STAFF);
                 output.accept(ItemsRegistration.HONEY_BREAD);
                 output.accept(ItemsRegistration.HONEY_PORKCHOP);
                 output.accept(ItemsRegistration.AMBROSIA);
@@ -142,12 +147,14 @@ public class ComplicatedBees {
         GeneRegistration.GENES.register(modEventBus);
         BeeEffectRegistration.EFFECTS.register(modEventBus);
         MutationRegistration.MUTATION_CONDITIONS.register(modEventBus);
+        EntitiesRegistration.ENTITY_TYPE.register(modEventBus);
         EsotericRegistration.LOOT_ITEM_FUNCTION_REGISTER.register(modEventBus);
         EsotericRegistration.TREE_DECORATOR_REGISTER.register(modEventBus);
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_TYPE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_SERIALIZER_REGISTER.register(modEventBus);
         EsotericRegistration.CONDITION_SERIALIZERS.register(modEventBus);
+        EsotericRegistration.PARTICLE_TYPE.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CONFIG_SPEC);
 
@@ -229,12 +236,7 @@ public class ComplicatedBees {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-//            event.enqueueWork(() -> {
-//                MenuScreens.register(MenuRegistration.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
-//                MenuScreens.register(MenuRegistration.APIARY_MENU.get(), ApiaryScreen::new);
-//                MenuScreens.register(MenuRegistration.GENERATOR_MENU.get(), GeneratorScreen::new);
-//                MenuScreens.register(MenuRegistration.ANALYZER_MENU.get(), AnalyzerScreen::new);
-//            });
+            EntityRenderers.register(EntitiesRegistration.BEE_STAFF_MOUNT.get(), (context) -> new ThrownItemRenderer<>(context, 1.0f, true));
         }
 
         @SubscribeEvent
@@ -248,6 +250,12 @@ public class ComplicatedBees {
         @SubscribeEvent
         public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
             event.register(BeeModel.Loader.ID, BeeModel.Loader.INSTANCE);
+        }
+
+        @SubscribeEvent
+        public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(EsotericRegistration.BEE_PARTICLE.get(),
+                    BeeParticle.Provider::new);
         }
     }
 }

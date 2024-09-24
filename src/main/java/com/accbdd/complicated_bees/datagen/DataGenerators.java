@@ -50,12 +50,12 @@ public class DataGenerators {
 
         generator.addProvider(event.includeClient(), new BlockStateGenerator(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ItemModelGenerator(packOutput, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ParticleDescriptionGenerator(packOutput, existingFileHelper));
 
         BlockTagGenerator blockTagGenerator = new BlockTagGenerator(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagGenerator);
         generator.addProvider(event.includeServer(), new ItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
         generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableGenerator>) pOutput -> new LootTableGenerator(packOutput));
         generator.addProvider(event.includeServer(), new RecipeGenerator(packOutput));
-
     }
 }

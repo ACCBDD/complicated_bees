@@ -8,6 +8,8 @@ import com.accbdd.complicated_bees.worldgen.ComplicatedBeenestDecorator;
 import com.accbdd.complicated_bees.worldgen.ComplicatedHiveFeature;
 import com.accbdd.complicated_bees.worldgen.ComplicatedHiveFeatureConfiguration;
 import com.mojang.serialization.Codec;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -30,8 +32,13 @@ public class EsotericRegistration {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, MODID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER_REGISTER = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, MODID);
     public static final DeferredRegister<Codec<? extends ICondition>> CONDITION_SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.CONDITION_SERIALIZERS, MODID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, MODID);
 
-    public static final Supplier<Codec<? extends ICondition>> ENABLED_CONDITION = CONDITION_SERIALIZERS.register("item_enabled", () -> ItemEnabledCondition.CODEC);
+    public static final Supplier<Codec<? extends ICondition>> ENABLED_CONDITION = CONDITION_SERIALIZERS.register("item_enabled",
+            () -> ItemEnabledCondition.CODEC);
+
+    public static final Supplier<SimpleParticleType> BEE_PARTICLE = PARTICLE_TYPE.register("bee",
+            () -> new SimpleParticleType(true));
 
     public static final Supplier<LootItemFunctionType> INHERIT_HIVE = LOOT_ITEM_FUNCTION_REGISTER.register("inherit_hive_species",
             () -> new LootItemFunctionType(InheritHiveSpeciesFunction.CODEC));

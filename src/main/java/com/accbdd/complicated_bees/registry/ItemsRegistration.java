@@ -34,6 +34,7 @@ public class ItemsRegistration {
     public static final DeferredItem<Item> SILK_WISP = ITEMS.registerSimpleItem("silk_wisp");
     public static final DeferredItem<Item> WOVEN_MESH = ITEMS.registerSimpleItem("woven_mesh");
     public static final DeferredItem<Item> PEARL_SHARD = ITEMS.registerSimpleItem("pearl_shard");
+    public static final DeferredItem<Item> BEE_STAFF = ITEMS.registerItem("bee_staff", prop -> new BeeStaffItem(prop, Config.CONFIG.honeyBread));
 
     public static final DeferredItem<Item> HONEY_BREAD = ITEMS.registerItem("honey_bread", (prop) -> new DisableableItem(prop, Config.CONFIG.honeyBread),
             new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(0.4f).build()));
