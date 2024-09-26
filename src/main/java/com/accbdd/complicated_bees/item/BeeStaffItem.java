@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.item;
 
 import com.accbdd.complicated_bees.entity.BeeStaffProjectile;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -23,6 +24,7 @@ public class BeeStaffItem extends DisableableItem {
         projectile.moveTo(position.x, position.y+1.5f, position.z);
         pLevel.addFreshEntity(projectile);
         pPlayer.getItemInHand(pUsedHand).hurtAndBreak(1, pPlayer, (player) -> player.broadcastBreakEvent(pUsedHand));
+        pPlayer.playSound(SoundEvents.BEE_HURT);
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 }
