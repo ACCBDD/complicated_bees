@@ -69,7 +69,7 @@ public class BeeStaffProjectile extends Projectile implements ItemSupplier {
                 this.discard();
             this.setDeltaMovement(vec3.add(this.speedX, this.speedY, this.speedZ));
             this.level().addParticle(EsotericRegistration.BEE_PARTICLE.get(), dX, dY, dZ, 0.0, 0.0, 0.0);
-
+            this.level().addParticle(EsotericRegistration.BEE_PARTICLE.get(), dX, dY, dZ, 0.0, 0.0, 0.0);
             this.setPos(dX, dY, dZ);
         } else {
             this.discard();

@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.item;
 
 import com.accbdd.complicated_bees.entity.BeeStaffProjectile;
+import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -26,5 +27,10 @@ public class BeeStaffItem extends DisableableItem {
         pPlayer.getItemInHand(pUsedHand).hurtAndBreak(1, pPlayer, (player) -> player.broadcastBreakEvent(pUsedHand));
         pPlayer.playSound(SoundEvents.BEE_HURT);
         return super.use(pLevel, pPlayer, pUsedHand);
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack pStack, ItemStack pRepairCandidate) {
+        return pRepairCandidate.is(ItemsRegistration.ROYAL_JELLY);
     }
 }

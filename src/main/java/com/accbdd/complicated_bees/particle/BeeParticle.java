@@ -19,6 +19,8 @@ public class BeeParticle extends TextureSheetParticle {
         this.yd = this.yd / d1 * d0 * 0.4F;
         this.zd = this.zd / d1 * d0 * 0.4F;
         this.friction = 1;
+        scale(0.25f);
+        setColor(1, 0.8f, 0);
         setSpriteFromAge(spriteSet);
     }
 
