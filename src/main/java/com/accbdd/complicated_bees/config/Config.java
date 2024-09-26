@@ -10,6 +10,7 @@ public class Config {
     public final ModConfigSpec.ConfigValue<Integer> productionCycleLength, enviroCycleLength, centrifugeEnergy, generatorEnergy;
     public final ModConfigSpec.ConfigValue<Boolean> frame, thickFrame, coldFrame , hotFrame, dryFrame, wetFrame, deadlyFrame, restrictiveFrame;
     public final ModConfigSpec.ConfigValue<Boolean> honeyBread, honeyPorkchop, ambrosia;
+    public final ModConfigSpec.ConfigValue<Boolean> beeStaff;
 
     Config(ModConfigSpec.Builder builder) {
         builder.push("cycle_length");
@@ -35,6 +36,9 @@ public class Config {
         honeyBread = builder.comment("Enable honey bread").define("honeyBreadEnabled", true);
         honeyPorkchop = builder.comment("Enable honey porkchop").define("honeyPorkchopEnabled", true);
         ambrosia = builder.comment("Enable ambrosia").define("ambrosiaEnabled", true);
+        builder.pop();
+        builder.push("misc");
+        beeStaff = builder.comment("Enable bee staff").define("staffEnabled", true);
         builder.pop(2);
     }
 

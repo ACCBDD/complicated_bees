@@ -13,11 +13,12 @@ public class BeeParticle extends TextureSheetParticle {
         this.xd = pXSpeed + (Math.random() * 2.0 - 1.0) * 0.4F;
         this.yd = pYSpeed + (Math.random() * 2.0 - 1.0) * 0.4F;
         this.zd = pZSpeed + (Math.random() * 2.0 - 1.0) * 0.4F;
-        double d0 = (Math.random() + Math.random() + 1.0) * 0.15F;
+        double d0 = (Math.random() + Math.random() + 1.0) * 0.05F;
         double d1 = Math.sqrt(this.xd * this.xd + this.yd * this.yd + this.zd * this.zd);
         this.xd = this.xd / d1 * d0 * 0.4F;
         this.yd = this.yd / d1 * d0 * 0.4F;
         this.zd = this.zd / d1 * d0 * 0.4F;
+        this.friction = 1;
         setSpriteFromAge(spriteSet);
     }
 
@@ -31,9 +32,9 @@ public class BeeParticle extends TextureSheetParticle {
         } else {
             this.move(this.xd, this.yd, this.zd);
 
-            this.xd *= (double)this.friction;
-            this.yd *= (double)this.friction;
-            this.zd *= (double)this.friction;
+            this.xd *= this.friction;
+            this.yd *= this.friction;
+            this.zd *= this.friction;
         }
     }
 

@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "complicated_bees:item_enabled",
+      "item": "complicated_bees:bee_staff"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "J": {
+      "item": "complicated_bees:royal_jelly"
+    },
+    "L": {
+      "item": "complicated_bees:pollen"
+    },
+    "P": {
+      "item": "complicated_bees:propolis"
+    },
+    "Z": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "pattern": [
+    " LJ",
+    "PZL",
+    "ZP "
+  ],
+  "result": {
+    "item": "complicated_bees:bee_staff"
+  }
+}

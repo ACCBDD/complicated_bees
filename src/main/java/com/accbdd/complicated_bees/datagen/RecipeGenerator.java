@@ -49,6 +49,16 @@ public class RecipeGenerator extends RecipeProvider {
                 .define('R', ItemsRegistration.ROYAL_JELLY)
                 .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET))
                 .save(output.withConditions(new ItemEnabledCondition(ItemsRegistration.AMBROSIA.getId())));
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.BEE_STAFF)
+                .pattern(" LJ")
+                .pattern("PZL")
+                .pattern("ZP ")
+                .define('Z', Items.BLAZE_ROD)
+                .define('P', ItemsRegistration.PROPOLIS)
+                .define('J', ItemsRegistration.ROYAL_JELLY)
+                .define('L', ItemsRegistration.POLLEN)
+                .unlockedBy(getHasName(ItemsRegistration.ROYAL_JELLY), has(ItemsRegistration.ROYAL_JELLY))
+                .save(output.withConditions(new ItemEnabledCondition(ItemsRegistration.BEE_STAFF.getId())));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemsRegistration.ANALYZER)
                 .pattern("IGI")
                 .pattern("RWR")
