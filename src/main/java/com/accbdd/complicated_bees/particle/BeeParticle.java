@@ -10,12 +10,31 @@ public class BeeParticle extends TextureSheetParticle {
     protected BeeParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet, double pXSpeed, double pYSpeed, double pZSpeed) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
         this.lifetime = 20;
+        this.xd = pXSpeed + (Math.random() * 2.0 - 1.0) * 0.4F;
+        this.yd = pYSpeed + (Math.random() * 2.0 - 1.0) * 0.4F;
+        this.zd = pZSpeed + (Math.random() * 2.0 - 1.0) * 0.4F;
+        double d0 = (Math.random() + Math.random() + 1.0) * 0.15F;
+        double d1 = Math.sqrt(this.xd * this.xd + this.yd * this.yd + this.zd * this.zd);
+        this.xd = this.xd / d1 * d0 * 0.4F;
+        this.yd = this.yd / d1 * d0 * 0.4F;
+        this.zd = this.zd / d1 * d0 * 0.4F;
         setSpriteFromAge(spriteSet);
     }
 
     @Override
     public void tick() {
-        super.tick();
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        if (this.age++ >= this.lifetime) {
+            this.remove();
+        } else {
+            this.move(this.xd, this.yd, this.zd);
+
+            this.xd *= (double)this.friction;
+            this.yd *= (double)this.friction;
+            this.zd *= (double)this.friction;
+        }
     }
 
     @Override

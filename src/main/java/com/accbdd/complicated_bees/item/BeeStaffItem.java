@@ -22,6 +22,7 @@ public class BeeStaffItem extends DisableableItem {
         BeeStaffProjectile projectile = new BeeStaffProjectile(pLevel, pPlayer, vector.x, vector.y, vector.z);
         projectile.moveTo(position.x, position.y+1.5f, position.z);
         pLevel.addFreshEntity(projectile);
+        pPlayer.getItemInHand(pUsedHand).hurtAndBreak(1, pPlayer, (player) -> player.broadcastBreakEvent(pUsedHand));
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 }
