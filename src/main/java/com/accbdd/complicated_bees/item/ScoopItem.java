@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.datagen.BlockTagGenerator;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DiggerItem;
@@ -39,5 +40,10 @@ public class ScoopItem extends DiggerItem {
     @Override
     public int getEnchantmentValue(ItemStack stack) {
         return 14;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack pToRepair, ItemStack pRepair) {
+        return pRepair.is(ItemTags.WOOL);
     }
 }
