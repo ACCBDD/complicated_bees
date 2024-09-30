@@ -24,7 +24,7 @@ public class Comb {
     private final int outerColor;
     private final int innerColor;
 
-    public static final Comb NULL = new Comb(0, 0);
+    public static final Comb NULL = new Comb(0xe7d46a, 0xfea02b);
 
     public Comb(int outerColor, int innerColor) {
         this.outerColor = outerColor;

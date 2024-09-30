@@ -44,7 +44,7 @@ public class CombItem extends Item {
     @Override
     public @NotNull Component getName(ItemStack stack) {
         return Component.translatable("comb.complicated_bees." +
-                        stack.getOrCreateTag().getString(COMB_TYPE_TAG))
+                        (stack.getOrCreateTag().contains(COMB_TYPE_TAG) ? stack.getOrCreateTag().getString(COMB_TYPE_TAG) : "invalid"))
                 .append(" ")
                 .append(Component.translatable(getDescriptionId()));
     }
@@ -55,9 +55,9 @@ public class CombItem extends Item {
         if (combLocation != null) {
             switch (tintIndex) {
                 case 0:
-                    return registry.containsKey(combLocation) ? Objects.requireNonNull(registry.get(combLocation)).getOuterColor() : 0;
+                    return registry.containsKey(combLocation) ? Objects.requireNonNull(registry.get(combLocation)).getOuterColor() : 0xe7d46a;
                 case 1:
-                    return registry.containsKey(combLocation) ? Objects.requireNonNull(registry.get(combLocation)).getInnerColor() : 0;
+                    return registry.containsKey(combLocation) ? Objects.requireNonNull(registry.get(combLocation)).getInnerColor() : 0xfea02b;
             }
         }
         return 0xFFFFFF;
