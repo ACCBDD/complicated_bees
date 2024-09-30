@@ -48,8 +48,8 @@
       "data": "complicated_bees:unhealthy",
       "dominant": true
     },
-    "complicated_bees:nocturnal": {
-      "data": true,
+    "complicated_bees:active_time": {
+      "data": "cathemeral",
       "dominant": false
     },
     "complicated_bees:cave_dwelling": {

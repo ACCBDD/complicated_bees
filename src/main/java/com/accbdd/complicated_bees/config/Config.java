@@ -40,6 +40,8 @@ public class Config {
         builder.push("misc");
         beeStaff = builder.comment("Enable bee staff").define("staffEnabled", true);
         builder.pop(2);
+
+        //todo: add config option for inheritance? i.e. which genes are tied to species
     }
 
     static {

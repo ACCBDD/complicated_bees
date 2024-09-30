@@ -61,8 +61,8 @@
       "data": "complicated_bees:spectral",
       "dominant": false
     },
-    "complicated_bees:nocturnal": {
-      "data": true,
+    "complicated_bees:active_time": {
+      "data": "cathemeral",
       "dominant": false
     },
     "complicated_bees:cave_dwelling": {

@@ -45,8 +45,8 @@
       "data": "complicated_bees:lush_cave",
       "dominant": true
     },
-    "complicated_bees:nocturnal": {
-      "data": true,
+    "complicated_bees:active_time": {
+      "data": "never_sleeps",
       "dominant": false
     },
     "complicated_bees:cave_dwelling": {

@@ -40,8 +40,8 @@
       "data": "complicated_bees:flower",
       "dominant": true
     },
-    "complicated_bees:nocturnal": {
-      "data": false,
+    "complicated_bees:active_time": {
+      "data": "diurnal",
       "dominant": true
     },
     "complicated_bees:cave_dwelling": {

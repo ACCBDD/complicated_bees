@@ -56,8 +56,8 @@
       "data": "complicated_bees:cursed",
       "dominant": true
     },
-    "complicated_bees:nocturnal": {
-      "data": true,
+    "complicated_bees:active_time": {
+      "data": "cathemeral",
       "dominant": true
     },
     "complicated_bees:cave_dwelling": {
