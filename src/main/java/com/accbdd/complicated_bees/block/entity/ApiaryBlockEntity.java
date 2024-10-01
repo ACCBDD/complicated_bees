@@ -501,8 +501,12 @@ public class ApiaryBlockEntity extends BlockEntity {
             flowerCache.add(getBlockPos());
             return;
         }
+        float rangeModifier = 1f;
+        for (BeeHousingModifier modifier : getFrameModifiers()) {
+            rangeModifier *= modifier.getTerritoryMod();
+        }
         int[] searchRadii = (int[]) GeneticHelper.getGeneValue(bee, GeneTerritory.ID, true);
-        BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), searchRadii[0], searchRadii[1]);
+        BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), Math.round(searchRadii[0] * rangeModifier), Math.round(searchRadii[1] * rangeModifier));
         while (it.hasNext() && this.beeItems.getStackInSlot(0).is(ItemsRegistration.QUEEN)) {
             BlockPos pos = it.next();
             if (flower.isAcceptable(getLevel().getBlockState(pos))) {

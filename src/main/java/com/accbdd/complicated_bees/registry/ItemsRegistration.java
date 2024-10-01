@@ -56,21 +56,21 @@ public class ItemsRegistration {
                     .build()).rarity(Rarity.RARE));
 
     public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1.05f), Config.CONFIG.frame));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier.Builder().productivity(1.05f).build(), Config.CONFIG.frame));
     public static final DeferredItem<FrameItem> THICK_FRAME = ITEMS.registerItem("thick_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1.1f), Config.CONFIG.thickFrame));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier.Builder().productivity(1.1f).build(), Config.CONFIG.thickFrame));
     public static final DeferredItem<FrameItem> COLD_FRAME = ITEMS.registerItem("cold_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.DOWN_1, EnumTolerance.NONE, 0.8f, 1f), Config.CONFIG.coldFrame));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier.Builder().temperature(EnumTolerance.DOWN_1).lifespan(0.8f).build(), Config.CONFIG.coldFrame));
     public static final DeferredItem<FrameItem> HOT_FRAME = ITEMS.registerItem("hot_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.UP_1, EnumTolerance.NONE, 0.8f, 1f), Config.CONFIG.hotFrame));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier.Builder().temperature(EnumTolerance.UP_1).lifespan(0.8f).build(), Config.CONFIG.hotFrame));
     public static final DeferredItem<FrameItem> DRY_FRAME = ITEMS.registerItem("dry_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.DOWN_1, 0.8f, 1f), Config.CONFIG.dryFrame));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier.Builder().humidity(EnumTolerance.DOWN_1).lifespan(0.8f).build(), Config.CONFIG.dryFrame));
     public static final DeferredItem<FrameItem> WET_FRAME = ITEMS.registerItem("wet_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.UP_1, 0.8f, 1f), Config.CONFIG.wetFrame));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier.Builder().humidity(EnumTolerance.UP_1).lifespan(0.8f).build(), Config.CONFIG.wetFrame));
     public static final DeferredItem<FrameItem> DEADLY_FRAME = ITEMS.registerItem("deadly_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 0.1f, 1f), Config.CONFIG.deadlyFrame));
+            (prop) -> new FrameItem(prop.durability(50),new BeeHousingModifier.Builder().lifespan(0.1f).build(), Config.CONFIG.deadlyFrame));
     public static final DeferredItem<FrameItem> RESTRICTIVE_FRAME = ITEMS.registerItem("restrictive_frame",
-            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier(EnumTolerance.NONE, EnumTolerance.NONE, 1f, 1f), Config.CONFIG.restrictiveFrame));
+            (prop) -> new FrameItem(prop.durability(50), new BeeHousingModifier.Builder().territory(0.5f).build(), Config.CONFIG.restrictiveFrame));
 
     public static final DeferredItem<Item> APIARIST_HELMET = ITEMS.registerItem("apiarist_helmet",
             (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.HELMET, new Item.Properties()));

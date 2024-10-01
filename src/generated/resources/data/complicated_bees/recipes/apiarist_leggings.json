@@ -4,14 +4,11 @@
   "key": {
     "M": {
       "item": "complicated_bees:woven_mesh"
-    },
-    "P": {
-      "item": "complicated_bees:pollen"
     }
   },
   "pattern": [
     "MMM",
-    "MPM",
+    "M M",
     "M M"
   ],
   "result": {

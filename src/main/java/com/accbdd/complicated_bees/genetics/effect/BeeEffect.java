@@ -1,5 +1,7 @@
 package com.accbdd.complicated_bees.genetics.effect;
 
+import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
+import com.accbdd.complicated_bees.genetics.BeeHousingModifier;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.gene.GeneTerritory;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
@@ -27,8 +29,14 @@ public abstract class BeeEffect implements IBeeEffect {
     protected List<Entity> getTerritoryEntities(BlockEntity apiary, ItemStack queen) {
         List<Entity> entities = new ArrayList<>();
         Vec3 center = apiary.getBlockPos().getCenter();
+        float rangeModifier = 1f;
+        if (apiary instanceof ApiaryBlockEntity apiaryBlockEntity) {
+            for (BeeHousingModifier modifier : apiaryBlockEntity.getFrameModifiers()) {
+                rangeModifier *= modifier.getTerritoryMod();
+            }
+        }
         int[] radii = (int[]) GeneticHelper.getGeneValue(queen, GeneTerritory.ID, true);
-        Vec3 offset = new Vec3(radii[0], radii[1], radii[0]);
+        Vec3 offset = new Vec3(radii[0] * rangeModifier, radii[1] * rangeModifier, radii[0] * rangeModifier);
         for (Entity entity : Objects.requireNonNull(apiary.getLevel()).getEntities(null, new AABB(center.add(offset), center.subtract(offset)))) {
             if (entity instanceof Player player && hasApiaristArmorEquipped(player))
                 continue;
@@ -43,8 +51,14 @@ public abstract class BeeEffect implements IBeeEffect {
      * @return a BlockPosBoxIterator sized to the queen's territory
      */
     protected BlockPosBoxIterator getBlockIterator(BlockEntity apiary, ItemStack queen) {
+        float rangeModifier = 1f;
+        if (apiary instanceof ApiaryBlockEntity apiaryBlockEntity) {
+            for (BeeHousingModifier modifier : apiaryBlockEntity.getFrameModifiers()) {
+                rangeModifier *= modifier.getTerritoryMod();
+            }
+        }
         int[] radii = (int[]) GeneticHelper.getGeneValue(queen, GeneTerritory.ID, true);
-        return new BlockPosBoxIterator(apiary.getBlockPos(), radii[0], radii[1]);
+        return new BlockPosBoxIterator(apiary.getBlockPos(), Math.round(radii[0] * rangeModifier), Math.round(radii[1] * rangeModifier));
     }
 
     private boolean hasApiaristArmorEquipped(Player player) {

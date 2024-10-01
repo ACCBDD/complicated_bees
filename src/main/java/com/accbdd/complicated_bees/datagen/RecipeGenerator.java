@@ -24,6 +24,7 @@ public class RecipeGenerator extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput output) {
         frameRecipe(output, ItemsRegistration.FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(Tags.Items.RODS_WOODEN));
+        frameRecipe(output, ItemsRegistration.RESTRICTIVE_FRAME, Ingredient.of(Items.CHAIN), Ingredient.of(Tags.Items.RODS_WOODEN));
         frameRecipe(output, ItemsRegistration.THICK_FRAME, Ingredient.of(ItemTags.WOOL), Ingredient.of(Tags.Items.RODS_WOODEN));
         frameRecipe(output, ItemsRegistration.DRY_FRAME, Ingredient.of(ItemTags.SAND), Ingredient.of(Tags.Items.RODS_WOODEN));
         frameRecipe(output, ItemsRegistration.WET_FRAME, Ingredient.of(Items.WATER_BUCKET), Ingredient.of(Tags.Items.RODS_WOODEN));
@@ -121,29 +122,25 @@ public class RecipeGenerator extends RecipeProvider {
                 .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_HELMET)
                 .pattern("MMM")
-                .pattern("MPM")
+                .pattern("M M")
                 .define('M', ItemsRegistration.WOVEN_MESH)
-                .define('P', ItemsRegistration.POLLEN)
                 .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_CHESTPLATE)
-                .pattern("MPM")
+                .pattern("M M")
                 .pattern("MMM")
                 .pattern("MMM")
                 .define('M', ItemsRegistration.WOVEN_MESH)
-                .define('P', ItemsRegistration.POLLEN)
                 .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_LEGGINGS)
                 .pattern("MMM")
-                .pattern("MPM")
+                .pattern("M M")
                 .pattern("M M")
                 .define('M', ItemsRegistration.WOVEN_MESH)
-                .define('P', ItemsRegistration.POLLEN)
                 .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.APIARIST_BOOTS)
-                .pattern("MPM")
+                .pattern("M M")
                 .pattern("M M")
                 .define('M', ItemsRegistration.WOVEN_MESH)
-                .define('P', ItemsRegistration.POLLEN)
                 .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP)).save(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ItemsRegistration.HONEYED_PLANKS, 8)

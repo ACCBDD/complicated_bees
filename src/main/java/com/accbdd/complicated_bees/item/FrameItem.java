@@ -48,6 +48,11 @@ public class FrameItem extends DisableableItem {
                         .append(": ")
                         .append(modifier.getHumidityMod().getTranslationKey())
                         .withStyle(ChatFormatting.GRAY));
+            if (modifier.getTerritoryMod() != 1f)
+                components.add(Component.translatable("gene.complicated_bees.territory_label")
+                        .append(": ")
+                        .append(Component.literal(modifier.getTerritoryMod() + "x"))
+                        .withStyle(ChatFormatting.GRAY));
         }
     }
 }
