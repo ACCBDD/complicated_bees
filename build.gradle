@@ -31,7 +31,7 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    archivesName = mod_id + "-" + minecraft_version
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -100,6 +100,7 @@ dependencies {
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
     runtimeOnly "curse.maven:appleskin-248787:${appleskin_id}"
+    runtimeOnly "curse.maven:patchouli-306770:${patchouli_id}"
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

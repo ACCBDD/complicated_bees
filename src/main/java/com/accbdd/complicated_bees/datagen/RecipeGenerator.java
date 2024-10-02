@@ -24,20 +24,20 @@ public class RecipeGenerator extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput output) {
         frameRecipe(output, ItemsRegistration.FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(Tags.Items.RODS_WOODEN));
-        frameRecipe(output, ItemsRegistration.WAXED_FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(ItemsRegistration.WAXED_STICK));
-        frameRecipe(output, ItemsRegistration.HONEYED_FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(ItemsRegistration.HONEYED_STICK));
-        frameRecipe(output, ItemsRegistration.TWISTING_FRAME, Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL), Ingredient.of(ItemsRegistration.WAXED_STICK));
-        frameRecipe(output, ItemsRegistration.SOOTHING_FRAME, Ingredient.of(ItemsRegistration.ROYAL_JELLY), Ingredient.of(ItemsRegistration.HONEYED_STICK));
-        frameRecipe(output, ItemsRegistration.RESTRICTIVE_FRAME, Ingredient.of(Items.CHAIN), Ingredient.of(ItemsRegistration.WAXED_STICK));
-        frameRecipe(output, ItemsRegistration.DRY_FRAME, Ingredient.of(ItemTags.SAND), Ingredient.of(ItemsRegistration.WAXED_STICK));
-        frameRecipe(output, ItemsRegistration.WET_FRAME, Ingredient.of(Items.WATER_BUCKET), Ingredient.of(ItemsRegistration.WAXED_STICK));
-        frameRecipe(output, ItemsRegistration.HOT_FRAME, Ingredient.of(Items.MAGMA_BLOCK), Ingredient.of(Items.NETHER_BRICK));
-        frameRecipe(output, ItemsRegistration.COLD_FRAME, Ingredient.of(Items.BLUE_ICE), Ingredient.of(ItemsRegistration.WAXED_STICK));
+        frameRecipe(output, ItemsRegistration.WAXED_FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(ItemsRegistration.WAXED_STICK), ItemsRegistration.WAXED_STICK);
+        frameRecipe(output, ItemsRegistration.HONEYED_FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(ItemsRegistration.HONEYED_STICK), ItemsRegistration.HONEYED_STICK);
+        frameRecipe(output, ItemsRegistration.TWISTING_FRAME, Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL), Ingredient.of(ItemsRegistration.WAXED_STICK), ItemsRegistration.WAXED_STICK);
+        frameRecipe(output, ItemsRegistration.SOOTHING_FRAME, Ingredient.of(ItemsRegistration.ROYAL_JELLY), Ingredient.of(ItemsRegistration.HONEYED_STICK), ItemsRegistration.HONEYED_STICK);
+        frameRecipe(output, ItemsRegistration.RESTRICTIVE_FRAME, Ingredient.of(Items.CHAIN), Ingredient.of(ItemsRegistration.WAXED_STICK), ItemsRegistration.WAXED_STICK);
+        frameRecipe(output, ItemsRegistration.DRY_FRAME, Ingredient.of(ItemTags.SAND), Ingredient.of(ItemsRegistration.WAXED_STICK), ItemsRegistration.WAXED_STICK);
+        frameRecipe(output, ItemsRegistration.WET_FRAME, Ingredient.of(Items.WATER_BUCKET), Ingredient.of(ItemsRegistration.WAXED_STICK), ItemsRegistration.WAXED_STICK);
+        frameRecipe(output, ItemsRegistration.HOT_FRAME, Ingredient.of(Items.MAGMA_BLOCK), Ingredient.of(Items.NETHER_BRICK), ItemsRegistration.WAXED_STICK);
+        frameRecipe(output, ItemsRegistration.COLD_FRAME, Ingredient.of(Items.BLUE_ICE), Ingredient.of(ItemsRegistration.WAXED_STICK), ItemsRegistration.WAXED_STICK);
         deadlyFrame(output);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING)
                 .requires(ItemsRegistration.SILK_WISP, 3)
                 .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP))
-                .save(output);
+                .save(output, "complicated_bees:string_from_silk");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemsRegistration.HONEYED_STICK)
                 .pattern("###")
                 .pattern("#H#")
@@ -114,7 +114,7 @@ public class RecipeGenerator extends RecipeProvider {
                 .define('P', ItemTags.PLANKS)
                 .define('I', Items.IRON_INGOT)
                 .define('C', ItemsRegistration.COMB)
-                .unlockedBy(getHasName(ItemsRegistration.COMB), has(ItemsRegistration.COMB)).save(output);
+                .unlockedBy("has_bee", has(ItemsRegistration.PRINCESS)).save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemsRegistration.CENTRIFUGE)
                 .pattern("III")
                 .pattern("ICI")
@@ -200,13 +200,17 @@ public class RecipeGenerator extends RecipeProvider {
     }
 
     protected static void frameRecipe(RecipeOutput output, ItemLike result, Ingredient center, Ingredient outside) {
+     frameRecipe(output, result, center, outside, ItemsRegistration.APIARY);
+    }
+
+    protected static void frameRecipe(RecipeOutput output, ItemLike result, Ingredient center, Ingredient outside, ItemLike unlockedBy) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
                 .pattern("OOO")
                 .pattern("OXO")
                 .pattern("OOO")
                 .define('O', outside)
                 .define('X', center)
-                .unlockedBy("has_apiary", has(ItemsRegistration.APIARY)).save(output.withConditions(new ItemEnabledCondition(BuiltInRegistries.ITEM.getKey(result.asItem()))));
+                .unlockedBy(getHasName(unlockedBy), has(unlockedBy)).save(output.withConditions(new ItemEnabledCondition(BuiltInRegistries.ITEM.getKey(result.asItem()))));
     }
 
     protected static void deadlyFrame(RecipeOutput output) {

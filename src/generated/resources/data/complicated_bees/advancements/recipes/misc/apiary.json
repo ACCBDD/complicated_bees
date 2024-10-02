@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_comb": {
+    "has_bee": {
       "conditions": {
         "items": [
           {
             "items": [
-              "complicated_bees:comb"
+              "complicated_bees:princess"
             ]
           }
         ]
@@ -23,7 +23,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_comb"
+      "has_bee"
     ]
   ],
   "rewards": {

@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "patchouli"
+    }
+  ],
+  "type": "advancement_reward",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "patchouli:guide_book",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{\"patchouli:book\": \"complicated_bees:field_guide\"}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

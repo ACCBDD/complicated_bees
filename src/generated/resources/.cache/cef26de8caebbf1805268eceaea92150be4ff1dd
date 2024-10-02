@@ -1,8 +1,9 @@
-// 1.20.4	2024-10-01T20:11:42.7437804	Item Models: complicated_bees
+// 1.20.4	2024-10-02T11:46:02.821203	Item Models: complicated_bees
 eed162555c50979ffb14f7ef23c98ac3ac9929cd assets/complicated_bees/models/item/ambrosia.json
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 78dc08d43023162f54b70bdb3abb1770f12e72fe assets/complicated_bees/models/item/apiarist_boots.json
 687f9291aa818f819bc22d07b1e1f0689fad8e91 assets/complicated_bees/models/item/apiarist_chestplate.json
+305d3db89019174b9eb06cce2d8709cb22621fc2 assets/complicated_bees/models/item/apiarist_guide.json
 8c078ace95c127e223e80a61f37188f0e51cf411 assets/complicated_bees/models/item/apiarist_helmet.json
 166406cfb2987cbc700b26f3c002b8dbb0abd395 assets/complicated_bees/models/item/apiarist_leggings.json
 6df9d7e396652be82b3c1d200173d889ff220fcc assets/complicated_bees/models/item/apiary.json

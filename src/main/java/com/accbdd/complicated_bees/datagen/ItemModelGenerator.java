@@ -87,6 +87,11 @@ public class ItemModelGenerator extends ItemModelProvider {
         createBeeModel(ItemsRegistration.PRINCESS.getId()).texture("layer2", modLoc("item/princess_crown"));
         createBeeModel(ItemsRegistration.QUEEN.getId()).texture("layer2", modLoc("item/queen_crown"));
         createCombModel();
+
+        //patchouli book model
+        getBuilder("complicated_bees:apiarist_guide")
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", modLoc("item/patchouli/apiarist_guide"));
     }
 
     private ItemModelBuilder createBeeModel(ResourceLocation bee_type) {

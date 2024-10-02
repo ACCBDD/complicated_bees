@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:string"
+        "recipe": "complicated_bees:string_from_silk"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:string"
+      "complicated_bees:string_from_silk"
     ]
   }
 }
