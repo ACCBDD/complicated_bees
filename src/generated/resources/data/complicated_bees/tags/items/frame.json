@@ -7,6 +7,9 @@
     "complicated_bees:cold_frame",
     "complicated_bees:hot_frame",
     "complicated_bees:restrictive_frame",
-    "complicated_bees:thick_frame"
+    "complicated_bees:waxed_frame",
+    "complicated_bees:honeyed_frame",
+    "complicated_bees:twisting_frame",
+    "complicated_bees:soothing_frame"
   ]
 }

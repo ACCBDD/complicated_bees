@@ -42,7 +42,10 @@ public class ItemTagGenerator extends ItemTagsProvider {
                 ItemsRegistration.COLD_FRAME.get(),
                 ItemsRegistration.HOT_FRAME.get(),
                 ItemsRegistration.RESTRICTIVE_FRAME.get(),
-                ItemsRegistration.THICK_FRAME.get()
+                ItemsRegistration.WAXED_FRAME.get(),
+                ItemsRegistration.HONEYED_FRAME.get(),
+                ItemsRegistration.TWISTING_FRAME.get(),
+                ItemsRegistration.SOOTHING_FRAME.get()
         );
         tag(ItemTags.PLANKS).add(ItemsRegistration.HONEYED_PLANKS.get());
     }

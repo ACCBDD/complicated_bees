@@ -24,13 +24,33 @@ public class RecipeGenerator extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput output) {
         frameRecipe(output, ItemsRegistration.FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(Tags.Items.RODS_WOODEN));
-        frameRecipe(output, ItemsRegistration.RESTRICTIVE_FRAME, Ingredient.of(Items.CHAIN), Ingredient.of(Tags.Items.RODS_WOODEN));
-        frameRecipe(output, ItemsRegistration.THICK_FRAME, Ingredient.of(ItemTags.WOOL), Ingredient.of(Tags.Items.RODS_WOODEN));
-        frameRecipe(output, ItemsRegistration.DRY_FRAME, Ingredient.of(ItemTags.SAND), Ingredient.of(Tags.Items.RODS_WOODEN));
-        frameRecipe(output, ItemsRegistration.WET_FRAME, Ingredient.of(Items.WATER_BUCKET), Ingredient.of(Tags.Items.RODS_WOODEN));
+        frameRecipe(output, ItemsRegistration.WAXED_FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(ItemsRegistration.WAXED_STICK));
+        frameRecipe(output, ItemsRegistration.HONEYED_FRAME, Ingredient.of(Tags.Items.STRING), Ingredient.of(ItemsRegistration.HONEYED_STICK));
+        frameRecipe(output, ItemsRegistration.TWISTING_FRAME, Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL), Ingredient.of(ItemsRegistration.WAXED_STICK));
+        frameRecipe(output, ItemsRegistration.SOOTHING_FRAME, Ingredient.of(ItemsRegistration.ROYAL_JELLY), Ingredient.of(ItemsRegistration.HONEYED_STICK));
+        frameRecipe(output, ItemsRegistration.RESTRICTIVE_FRAME, Ingredient.of(Items.CHAIN), Ingredient.of(ItemsRegistration.WAXED_STICK));
+        frameRecipe(output, ItemsRegistration.DRY_FRAME, Ingredient.of(ItemTags.SAND), Ingredient.of(ItemsRegistration.WAXED_STICK));
+        frameRecipe(output, ItemsRegistration.WET_FRAME, Ingredient.of(Items.WATER_BUCKET), Ingredient.of(ItemsRegistration.WAXED_STICK));
         frameRecipe(output, ItemsRegistration.HOT_FRAME, Ingredient.of(Items.MAGMA_BLOCK), Ingredient.of(Items.NETHER_BRICK));
-        frameRecipe(output, ItemsRegistration.COLD_FRAME, Ingredient.of(Items.BLUE_ICE), Ingredient.of(Tags.Items.RODS_WOODEN));
+        frameRecipe(output, ItemsRegistration.COLD_FRAME, Ingredient.of(Items.BLUE_ICE), Ingredient.of(ItemsRegistration.WAXED_STICK));
         deadlyFrame(output);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING)
+                .requires(ItemsRegistration.SILK_WISP, 3)
+                .unlockedBy(getHasName(ItemsRegistration.SILK_WISP), has(ItemsRegistration.SILK_WISP))
+                .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemsRegistration.HONEYED_STICK)
+                .pattern("###")
+                .pattern("#H#")
+                .pattern("###")
+                .define('H', ItemsRegistration.HONEY_DROPLET)
+                .define('#', Tags.Items.RODS_WOODEN)
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET), has(ItemsRegistration.HONEY_DROPLET))
+                .save(output);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemsRegistration.WAXED_STICK)
+                .requires(ItemsRegistration.BEESWAX, 1)
+                .requires(Ingredient.of(Tags.Items.RODS_WOODEN), 1)
+                .unlockedBy(getHasName(ItemsRegistration.BEESWAX), has(ItemsRegistration.BEESWAX))
+                .save(output);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ItemsRegistration.HONEY_BREAD)
                 .requires(Items.BREAD)
                 .requires(ItemsRegistration.HONEY_DROPLET, 4)

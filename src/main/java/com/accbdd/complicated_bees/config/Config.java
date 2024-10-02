@@ -8,7 +8,7 @@ public class Config {
     public static Config CONFIG;
 
     public final ModConfigSpec.ConfigValue<Integer> productionCycleLength, enviroCycleLength, centrifugeEnergy, generatorEnergy;
-    public final ModConfigSpec.ConfigValue<Boolean> frame, thickFrame, coldFrame , hotFrame, dryFrame, wetFrame, deadlyFrame, restrictiveFrame;
+    public final ModConfigSpec.ConfigValue<Boolean> frame, waxedFrame, honeyFrame, twistingFrame, soothingFrame, coldFrame , hotFrame, dryFrame, wetFrame, deadlyFrame, restrictiveFrame;
     public final ModConfigSpec.ConfigValue<Boolean> honeyBread, honeyPorkchop, ambrosia;
     public final ModConfigSpec.ConfigValue<Boolean> beeStaff;
 
@@ -24,7 +24,10 @@ public class Config {
         builder.push("items");
         builder.push("frames");
         frame = builder.comment("Enable the basic frame").define("frameEnabled", true);
-        thickFrame = builder.comment("Enable the thick frame").define("thickFrameEnabled", true);
+        waxedFrame = builder.comment("Enable the waxed frame").define("waxedFrameEnabled", true);
+        honeyFrame = builder.comment("Enable the honeyed frame").define("honeyFrameEnabled", true);
+        twistingFrame = builder.comment("Enable the twisting frame").define("twistingFrameEnabled", true);
+        soothingFrame = builder.comment("Enable the soothing frame").define("soothingFrameEnabled", true);
         coldFrame = builder.comment("Enable the cold frame").define("coldFrameEnabled", true);
         hotFrame = builder.comment("Enable the hot frame").define("hotFrameEnabled", true);
         dryFrame = builder.comment("Enable the dry frame").define("dryFrameEnabled", true);

@@ -8,13 +8,15 @@ public class BeeHousingModifier {
     private final float lifespanMod;
     private final float productivityMod;
     private final float territoryMod;
+    private final float mutationMod;
 
-    public BeeHousingModifier(EnumTolerance temperatureMod, EnumTolerance humidityMod, float lifespanMod, float productivityMod, float territoryMod) {
+    public BeeHousingModifier(EnumTolerance temperatureMod, EnumTolerance humidityMod, float lifespanMod, float productivityMod, float territoryMod, float mutationMod) {
         this.temperatureMod = temperatureMod;
         this.humidityMod = humidityMod;
         this.lifespanMod = lifespanMod;
         this.productivityMod = productivityMod;
         this.territoryMod = territoryMod;
+        this.mutationMod = mutationMod;
     }
 
     public BeeHousingModifier() {
@@ -23,6 +25,7 @@ public class BeeHousingModifier {
         this.lifespanMod = 1;
         this.productivityMod = 1;
         this.territoryMod = 1;
+        this.mutationMod = 1;
     }
 
     public EnumTolerance getTemperatureMod() {
@@ -45,21 +48,20 @@ public class BeeHousingModifier {
         return territoryMod;
     }
 
+    public float getMutationMod() {
+        return mutationMod;
+    }
+
     public static class Builder {
         private EnumTolerance temperatureMod = EnumTolerance.NONE;
         private EnumTolerance humidityMod = EnumTolerance.NONE;
         private float lifespanMod = 1;
         private float productivityMod = 1;
         private float territoryMod = 1;
-
-        private BeeHousingModifier modifier;
-
-        public Builder() {
-            this.modifier = new BeeHousingModifier();
-        }
+        private float mutationMod = 1;
 
         public BeeHousingModifier build() {
-            return new BeeHousingModifier(temperatureMod, humidityMod, lifespanMod, productivityMod, territoryMod);
+            return new BeeHousingModifier(temperatureMod, humidityMod, lifespanMod, productivityMod, territoryMod, mutationMod);
         }
 
         public Builder temperature(EnumTolerance mod) {
@@ -84,6 +86,11 @@ public class BeeHousingModifier {
 
         public Builder territory(float mod) {
             this.territoryMod = mod;
+            return this;
+        }
+
+        public Builder mutation(float mod) {
+            this.mutationMod = mod;
             return this;
         }
     }

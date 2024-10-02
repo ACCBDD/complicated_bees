@@ -2,17 +2,17 @@
   "neoforge:conditions": [
     {
       "type": "complicated_bees:item_enabled",
-      "item": "complicated_bees:thick_frame"
+      "item": "complicated_bees:honeyed_frame"
     }
   ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
     "O": {
-      "tag": "forge:rods/wooden"
+      "item": "complicated_bees:honeyed_stick"
     },
     "X": {
-      "tag": "minecraft:wool"
+      "tag": "forge:string"
     }
   },
   "pattern": [
@@ -21,6 +21,6 @@
     "OOO"
   ],
   "result": {
-    "item": "complicated_bees:thick_frame"
+    "item": "complicated_bees:honeyed_frame"
   }
 }

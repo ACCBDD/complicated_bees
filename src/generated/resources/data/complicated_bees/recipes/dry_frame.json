@@ -9,7 +9,7 @@
   "category": "misc",
   "key": {
     "O": {
-      "tag": "forge:rods/wooden"
+      "item": "complicated_bees:waxed_stick"
     },
     "X": {
       "tag": "minecraft:sand"

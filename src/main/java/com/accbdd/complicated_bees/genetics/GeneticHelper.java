@@ -129,11 +129,15 @@ public class GeneticHelper {
         return getGene(stack, id, primary).get();
     }
 
-    private static Genome mixGenomes(Genome left, Genome right, Level level, BlockPos pos) {
+    private static Genome mixGenomes(Genome left, Genome right, Level level, BlockPos pos, float... mutationModifiers) {
         Chromosome chromosome_a = new Chromosome();
         Chromosome chromosome_b = new Chromosome();
         Chromosome mutated_a = null;
         Chromosome mutated_b = null;
+        float mutationChanceMod = 1;
+        for (float f : mutationModifiers) {
+            mutationChanceMod *= f;
+        }
 
         for (Map.Entry<ResourceLocation, IGene<?>> geneEntry : chromosome_a.getGenes().entrySet()) {
             ResourceLocation key = geneEntry.getKey();
@@ -154,9 +158,9 @@ public class GeneticHelper {
                         for (IMutationCondition condition : mutation.getConditions())
                             canMutate = canMutate && condition.check(level, pos);
                         if (canMutate) {
-                            if (rand.nextFloat() < mutation.getChance())
+                            if (rand.nextFloat() < (mutation.getChance() * mutationChanceMod))
                                 mutated_a = mutation.getResultSpecies().getDefaultChromosome();
-                            if (rand.nextFloat() < mutation.getChance())
+                            if (rand.nextFloat() < (mutation.getChance() * mutationChanceMod))
                                 mutated_b = mutation.getResultSpecies().getDefaultChromosome();
                         }
                     }
@@ -190,22 +194,23 @@ public class GeneticHelper {
     }
 
     /**
-     * Gets an offspring from an ItemStack with a genome. If the ItemStack also has a mate set, the offspring is mutated according to mixGenomes.
+     * Gets an offspring from an ItemStack with a genome. If the ItemStack also has a mate set, the offspring is mutated according to mixGenomes with mutation modifiers mutationModifiers.
      *
-     * @param bee        an ItemStack to get an offspring from
-     * @param resultType the Item an offspring should be
-     * @param level      the level the offspring is generating in (for mutation conditions)
-     * @param pos        the blockpos the offspring is generating in (for mutation conditions)
+     * @param bee               an ItemStack to get an offspring from
+     * @param resultType        the Item an offspring should be
+     * @param level             the level the offspring is generating in (for mutation conditions)
+     * @param pos               the blockpos the offspring is generating in (for mutation conditions)
+     * @param mutationModifiers modifiers to the mutation chance
      * @return an ItemStack of type resultType with a genome set
      */
-    public static ItemStack getOffspring(ItemStack bee, Item resultType, Level level, BlockPos pos) {
+    public static ItemStack getOffspring(ItemStack bee, Item resultType, Level level, BlockPos pos, float... mutationModifiers) {
         ItemStack result = new ItemStack(resultType);
         CompoundTag eggs = bee.getOrCreateTag().getCompound(MATE);
 
         Genome genome = getGenome(bee);
         Genome mate = new Genome(Chromosome.deserialize(eggs.getCompound(CHROMOSOME_A)), Chromosome.deserialize(eggs.getCompound(CHROMOSOME_B)));
         if (!eggs.equals(new CompoundTag())) {
-            setGenome(result, mixGenomes(genome, mate, level, pos));
+            setGenome(result, mixGenomes(genome, mate, level, pos, mutationModifiers));
         } else {
             setGenome(result, genome);
         }
@@ -213,4 +218,5 @@ public class GeneticHelper {
             PrincessItem.setGeneration(result, QueenItem.getGeneration(bee) + 1);
         return result;
     }
+
 }

@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "complicated_bees:item_enabled",
-      "item": "complicated_bees:wet_frame"
+      "item": "complicated_bees:waxed_frame"
     }
   ],
   "type": "minecraft:crafting_shaped",
@@ -12,7 +12,7 @@
       "item": "complicated_bees:waxed_stick"
     },
     "X": {
-      "item": "minecraft:water_bucket"
+      "tag": "forge:string"
     }
   },
   "pattern": [
@@ -21,6 +21,6 @@
     "OOO"
   ],
   "result": {
-    "item": "complicated_bees:wet_frame"
+    "item": "complicated_bees:waxed_frame"
   }
 }

@@ -1,18 +1,12 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "complicated_bees:item_enabled",
-      "item": "complicated_bees:thick_frame"
-    }
-  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_apiary": {
+    "has_honey_droplet": {
       "conditions": {
         "items": [
           {
             "items": [
-              "complicated_bees:apiary"
+              "complicated_bees:honey_droplet"
             ]
           }
         ]
@@ -21,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "complicated_bees:thick_frame"
+        "recipe": "complicated_bees:honeyed_stick"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -29,12 +23,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_apiary"
+      "has_honey_droplet"
     ]
   ],
   "rewards": {
     "recipes": [
-      "complicated_bees:thick_frame"
+      "complicated_bees:honeyed_stick"
     ]
   }
 }

@@ -53,6 +53,11 @@ public class FrameItem extends DisableableItem {
                         .append(": ")
                         .append(Component.literal(modifier.getTerritoryMod() + "x"))
                         .withStyle(ChatFormatting.GRAY));
+            if (modifier.getMutationMod() != 1f)
+                components.add(Component.translatable("gui.complicated_bees.jei.mutations")
+                        .append(": ")
+                        .append(Component.literal(modifier.getMutationMod() + "x"))
+                        .withStyle(ChatFormatting.GRAY));
         }
     }
 }

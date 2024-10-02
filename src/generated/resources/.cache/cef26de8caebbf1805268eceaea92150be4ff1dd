@@ -1,4 +1,4 @@
-// 1.20.4	2024-09-25T23:09:55.6772229	Item Models: complicated_bees
+// 1.20.4	2024-10-01T20:11:42.7437804	Item Models: complicated_bees
 eed162555c50979ffb14f7ef23c98ac3ac9929cd assets/complicated_bees/models/item/ambrosia.json
 913c48d698d66de7b3f67c088df650fa2d538c3f assets/complicated_bees/models/item/analyzer.json
 78dc08d43023162f54b70bdb3abb1770f12e72fe assets/complicated_bees/models/item/apiarist_boots.json
@@ -23,10 +23,12 @@ e1c44dbe71fdf49f92b82194231c9fa4f263be1b assets/complicated_bees/models/item/dro
 785541d0dc78dfd397bdd7399df4914992fe5ce8 assets/complicated_bees/models/item/honeyed_door.json
 053bbfd184a788c523838b83af3b96708a8b3441 assets/complicated_bees/models/item/honeyed_fence.json
 868a27d2e079a81379b195bb9ef81fcecb19894d assets/complicated_bees/models/item/honeyed_fence_gate.json
+2df7e193e3ad561633073e92914e0ced2ea304fa assets/complicated_bees/models/item/honeyed_frame.json
 827ecbec64995ee27b635f874914a299f0afa0dc assets/complicated_bees/models/item/honeyed_planks.json
 a88d01442bc757aff88cda1d8482ac119419937a assets/complicated_bees/models/item/honeyed_pressure_plate.json
 05d213c613e130a6568e2a82a922c6738d87b9b2 assets/complicated_bees/models/item/honeyed_slab.json
 2e847fb24eb8fb98f347d3e7c3706c8cf268ce9f assets/complicated_bees/models/item/honeyed_stairs.json
+e799f6700673d9624ac78aee66e9f4ca889d59fc assets/complicated_bees/models/item/honeyed_stick.json
 1cdac17baed503b51d993113bd7ac7ebd11d5b92 assets/complicated_bees/models/item/honeyed_trapdoor.json
 7f831c72192c985b1f27ed077f6f155f261c72bf assets/complicated_bees/models/item/honey_bread.json
 74ba4d426f10943607a1d0933129337c962eeb4d assets/complicated_bees/models/item/honey_droplet.json
@@ -46,7 +48,10 @@ e687e1a9d5cdfcf6b1717f540917fc409af53e57 assets/complicated_bees/models/item/roy
 2e62cf1adca50cd68c7e1a22d9ae1dc7102000b9 assets/complicated_bees/models/item/smooth_wax_slab.json
 e01283eed40df59e0d0272464c5534a12ed8fc1d assets/complicated_bees/models/item/smooth_wax_stairs.json
 c0773042138c5a604f03d2766c2e42a2e7528194 assets/complicated_bees/models/item/smooth_wax_wall.json
-012ae4df953c674a20bf6647968141694125fb19 assets/complicated_bees/models/item/thick_frame.json
+58dbde3f9f9d0981d85b22331ef7397c6e654cc2 assets/complicated_bees/models/item/soothing_frame.json
+c024c7e7d3ee26a496eef8b7503794c6898b75fe assets/complicated_bees/models/item/twisting_frame.json
+9171194c3a54f37e3a2e4e3934276963cade785c assets/complicated_bees/models/item/waxed_frame.json
+6f195918320863ddb1310e7befe54601dd5b4a27 assets/complicated_bees/models/item/waxed_stick.json
 e053793e02344fe846a69b58afe9c2ed9e653b6b assets/complicated_bees/models/item/wax_block.json
 f79c497c92578ff80084a8dc48b87b4f07ea62b5 assets/complicated_bees/models/item/wax_block_slab.json
 3e6fe83119e620548e44540506aeca264a6a9e93 assets/complicated_bees/models/item/wax_block_stairs.json

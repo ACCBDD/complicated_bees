@@ -1,7 +1,7 @@
-// 1.20.4	2024-09-23T12:37:28.0237514	Tags for minecraft:item mod id complicated_bees
+// 1.20.4	2024-10-01T20:11:42.7427799	Tags for minecraft:item mod id complicated_bees
 cfacc021751613f7b1f430413c2b9161b7c443a9 data/complicated_bees/tags/items/analyzer_fuel.json
 68c58a5d6796606b3381bd0a5a35b5de94ff5f43 data/complicated_bees/tags/items/bee.json
-73f84020d153e0a6969cf99c21e8021783bb663e data/complicated_bees/tags/items/frame.json
+067a42adfee7843c5bc7bfb53ec0da0f856986a2 data/complicated_bees/tags/items/frame.json
 2763547479f130ba05e793ab991f24766fc9caa0 data/complicated_bees/tags/items/royal.json
 c666fb8b76cb617e45a4ba6b6d0bb820f891620f data/complicated_bees/tags/items/scoop_tool.json
 a4fc664dceeb8fedf72ed9e91536358457a64a45 data/minecraft/tags/items/planks.json

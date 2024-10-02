@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "complicated_bees:item_enabled",
-      "item": "complicated_bees:wet_frame"
+      "item": "complicated_bees:twisting_frame"
     }
   ],
   "type": "minecraft:crafting_shaped",
@@ -11,9 +11,14 @@
     "O": {
       "item": "complicated_bees:waxed_stick"
     },
-    "X": {
-      "item": "minecraft:water_bucket"
-    }
+    "X": [
+      {
+        "item": "minecraft:soul_sand"
+      },
+      {
+        "item": "minecraft:soul_soil"
+      }
+    ]
   },
   "pattern": [
     "OOO",
@@ -21,6 +26,6 @@
     "OOO"
   ],
   "result": {
-    "item": "complicated_bees:wet_frame"
+    "item": "complicated_bees:twisting_frame"
   }
 }

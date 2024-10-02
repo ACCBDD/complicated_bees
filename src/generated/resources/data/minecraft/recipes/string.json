@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "complicated_bees:silk_wisp"
+    },
+    {
+      "item": "complicated_bees:silk_wisp"
+    },
+    {
+      "item": "complicated_bees:silk_wisp"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string"
+  }
+}

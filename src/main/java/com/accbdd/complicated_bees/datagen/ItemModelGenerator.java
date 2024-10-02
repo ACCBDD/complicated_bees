@@ -58,7 +58,10 @@ public class ItemModelGenerator extends ItemModelProvider {
         basicItem(ItemsRegistration.METER.get());
         basicItem(ItemsRegistration.ANALYZER.get());
         basicItem(ItemsRegistration.FRAME.get());
-        basicItem(ItemsRegistration.THICK_FRAME.get());
+        basicItem(ItemsRegistration.WAXED_FRAME.get());
+        basicItem(ItemsRegistration.HONEYED_FRAME.get());
+        basicItem(ItemsRegistration.TWISTING_FRAME.get());
+        basicItem(ItemsRegistration.SOOTHING_FRAME.get());
         basicItem(ItemsRegistration.HOT_FRAME.get());
         basicItem(ItemsRegistration.COLD_FRAME.get());
         basicItem(ItemsRegistration.DRY_FRAME.get());
@@ -66,6 +69,8 @@ public class ItemModelGenerator extends ItemModelProvider {
         basicItem(ItemsRegistration.DEADLY_FRAME.get());
         basicItem(ItemsRegistration.RESTRICTIVE_FRAME.get());
         basicItem(ItemsRegistration.PEARL_SHARD.get());
+        basicItem(ItemsRegistration.HONEYED_STICK.get());
+        basicItem(ItemsRegistration.WAXED_STICK.get());
         basicItem(ItemsRegistration.EXP_DROP.get());
         basicItem(ItemsRegistration.SILK_WISP.get());
         basicItem(ItemsRegistration.WOVEN_MESH.get());

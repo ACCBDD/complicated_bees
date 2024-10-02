@@ -97,7 +97,10 @@ public class ComplicatedBees {
                 output.accept(ItemsRegistration.ANALYZER);
                 output.accept(ItemsRegistration.GENERATOR);
                 output.accept(ItemsRegistration.FRAME);
-                output.accept(ItemsRegistration.THICK_FRAME);
+                output.accept(ItemsRegistration.WAXED_FRAME);
+                output.accept(ItemsRegistration.HONEYED_FRAME);
+                output.accept(ItemsRegistration.TWISTING_FRAME);
+                output.accept(ItemsRegistration.SOOTHING_FRAME);
                 output.accept(ItemsRegistration.HOT_FRAME);
                 output.accept(ItemsRegistration.COLD_FRAME);
                 output.accept(ItemsRegistration.DRY_FRAME);
@@ -105,6 +108,8 @@ public class ComplicatedBees {
                 output.accept(ItemsRegistration.DEADLY_FRAME);
                 output.accept(ItemsRegistration.RESTRICTIVE_FRAME);
                 output.accept(ItemsRegistration.PEARL_SHARD);
+                output.accept(ItemsRegistration.WAXED_STICK);
+                output.accept(ItemsRegistration.HONEYED_STICK);
                 output.accept(ItemsRegistration.EXP_DROP);
                 output.accept(ItemsRegistration.SILK_WISP);
                 output.accept(ItemsRegistration.WOVEN_MESH);
