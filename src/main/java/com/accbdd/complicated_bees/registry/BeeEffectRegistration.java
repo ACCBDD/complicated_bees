@@ -1,22 +1,20 @@
 package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.genetics.effect.*;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.RegistryBuilder;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryBuilder;
 
 import java.util.function.Supplier;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class BeeEffectRegistration {
-    public static final ResourceKey<Registry<IBeeEffect>> BEE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MODID, "bee_effect"));
-    public static final Registry<IBeeEffect> BEE_EFFECT_REGISTRY = new RegistryBuilder<>(BEE_REGISTRY_KEY)
-            .create();
+    public static final ResourceLocation BEE_REGISTRY_KEY = new ResourceLocation(MODID, "bee_effect");
+    public static final RegistryBuilder<IBeeEffect> BEE_EFFECT_REGISTRY = RegistryBuilder.of(BEE_REGISTRY_KEY);
+
     public static final DeferredRegister<IBeeEffect> EFFECTS = DeferredRegister.create(BEE_REGISTRY_KEY, MODID);
 
     public static final Supplier<DebugEffect> DEBUG = EFFECTS.register("debug", DebugEffect::new);

@@ -24,14 +24,14 @@ import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.NeoForgeRenderTypes;
-import net.neoforged.neoforge.client.RenderTypeGroup;
-import net.neoforged.neoforge.client.model.CompositeModel;
-import net.neoforged.neoforge.client.model.ExtraFaceData;
-import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
-import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
-import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
-import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
+import net.minecraftforge.client.ForgeRenderTypes;
+import net.minecraftforge.client.RenderTypeGroup;
+import net.minecraftforge.client.model.CompositeModel;
+import net.minecraftforge.client.model.ForgeFaceData;
+import net.minecraftforge.client.model.geometry.IGeometryBakingContext;
+import net.minecraftforge.client.model.geometry.IGeometryLoader;
+import net.minecraftforge.client.model.geometry.IUnbakedGeometry;
+import net.minecraftforge.client.model.geometry.UnbakedGeometryHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -42,14 +42,15 @@ import java.util.function.Function;
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class BeeModel implements IUnbakedGeometry<BeeModel> {
-    public record Variant(BakedModel drone, BakedModel princess, BakedModel queen) {}
+    public record Variant(BakedModel drone, BakedModel princess, BakedModel queen) {
+    }
 
     private final Map<Species, Variant> cacheMap = new HashMap<>();
-    private final Int2ObjectMap<ExtraFaceData> layerData;
+    private final Int2ObjectMap<ForgeFaceData> layerData;
     private final Int2ObjectMap<ResourceLocation> renderTypeNames;
     private ImmutableList<Material> textures = null;
 
-    public BeeModel(Int2ObjectMap<ExtraFaceData> layerData, Int2ObjectMap<ResourceLocation> renderTypeNames) {
+    public BeeModel(Int2ObjectMap<ForgeFaceData> layerData, Int2ObjectMap<ResourceLocation> renderTypeNames) {
         this.layerData = layerData;
         this.renderTypeNames = renderTypeNames;
     }
@@ -82,20 +83,20 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
                     }
                     cacheMap.put(species, new Variant(bakedModels[0], bakedModels[1], bakedModels[2]));
                 }
-                if (pStack.is(ItemsRegistration.QUEEN))
+                if (pStack.is(ItemsRegistration.QUEEN.get()))
                     return cacheMap.get(species).queen;
-                else if (pStack.is(ItemsRegistration.PRINCESS))
+                else if (pStack.is(ItemsRegistration.PRINCESS.get()))
                     return cacheMap.get(species).princess;
                 else
                     return cacheMap.get(species).drone;
             }
         };
 
-        RenderTypeGroup normalRenderTypes = new RenderTypeGroup(RenderType.translucent(), NeoForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get());
+        RenderTypeGroup normalRenderTypes = new RenderTypeGroup(RenderType.translucent(), ForgeRenderTypes.ITEM_UNSORTED_TRANSLUCENT.get());
         CompositeModel.Baked.Builder builder = CompositeModel.Baked.builder(context, particle, nbt_overrides, context.getTransforms());
         for (int i = 0; i < textures.size(); i++) {
             TextureAtlasSprite sprite = spriteGetter.apply(textures.get(i));
-            List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemElements(i, sprite, this.layerData.get(i));
+            List<BlockElement> unbaked = UnbakedGeometryHelper.createUnbakedItemElements(i, sprite.contents(), this.layerData.get(i));
             List<BakedQuad> quads = UnbakedGeometryHelper.bakeElements(unbaked, $ -> sprite, modelState, modelLocation);
             ResourceLocation renderTypeName = renderTypeNames.get(i);
             RenderTypeGroup renderTypes = renderTypeName != null ? context.getRenderType(renderTypeName) : null;
@@ -121,24 +122,26 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
                 }
             }
 
-            var emissiveLayers = new Int2ObjectArrayMap<ExtraFaceData>();
-            if (jsonObject.has("forge_data")) throw new JsonParseException("forge_data should be replaced by neoforge_data");
+            var emissiveLayers = new Int2ObjectArrayMap<ForgeFaceData>();
+            if (jsonObject.has("forge_data"))
+                throw new JsonParseException("forge_data should be replaced by neoforge_data");
             if (jsonObject.has("neoforge_data")) {
                 JsonObject forgeData = jsonObject.get("neoforge_data").getAsJsonObject();
                 readLayerData(forgeData, "layers", renderTypeNames, emissiveLayers, false);
-            };
+            }
+            ;
 
             return new BeeModel(emissiveLayers, renderTypeNames);
         }
 
-        protected void readLayerData(JsonObject jsonObject, String name, Int2ObjectOpenHashMap<ResourceLocation> renderTypeNames, Int2ObjectMap<ExtraFaceData> layerData, boolean logWarning) {
+        protected void readLayerData(JsonObject jsonObject, String name, Int2ObjectOpenHashMap<ResourceLocation> renderTypeNames, Int2ObjectMap<ForgeFaceData> layerData, boolean logWarning) {
             if (!jsonObject.has(name)) {
                 return;
             }
             var fullbrightLayers = jsonObject.getAsJsonObject(name);
             for (var entry : fullbrightLayers.entrySet()) {
                 int layer = Integer.parseInt(entry.getKey());
-                var data = ExtraFaceData.read(entry.getValue(), ExtraFaceData.DEFAULT);
+                var data = ForgeFaceData.read(entry.getValue(), ForgeFaceData.DEFAULT);
                 layerData.put(layer, data);
             }
         }

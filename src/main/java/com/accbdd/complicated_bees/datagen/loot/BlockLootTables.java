@@ -4,7 +4,6 @@ import com.accbdd.complicated_bees.loot.InheritHiveCombFunction;
 import com.accbdd.complicated_bees.loot.InheritHiveSpeciesFunction;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
-import net.minecraft.core.Holder;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -19,6 +18,7 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Collections;
 
@@ -61,7 +61,7 @@ public class BlockLootTables extends BlockLootSubProvider {
     protected Iterable<Block> getKnownBlocks() {
         return BlocksRegistration.BLOCKS.getEntries()
                 .stream()
-                .map(Holder::value)
+                .map(RegistryObject::get)
                 .toList();
     }
 
@@ -80,13 +80,13 @@ public class BlockLootTables extends BlockLootSubProvider {
                         .when(HAS_NO_SILK_TOUCH)
                         .setRolls(ConstantValue.exactly(1.0f))
                         .add(
-                                LootItem.lootTableItem(ItemsRegistration.PRINCESS).apply(InheritHiveSpeciesFunction.set())
+                                LootItem.lootTableItem(ItemsRegistration.PRINCESS.get()).apply(InheritHiveSpeciesFunction.set())
                         ))
                 .withPool(LootPool.lootPool()
                         .when(HAS_NO_SILK_TOUCH)
                         .setRolls(ConstantValue.exactly(1.0f))
                         .add(
-                                LootItem.lootTableItem(ItemsRegistration.DRONE)
+                                LootItem.lootTableItem(ItemsRegistration.DRONE.get())
                                         .apply(InheritHiveSpeciesFunction.set())
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
                                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 1))
@@ -95,7 +95,7 @@ public class BlockLootTables extends BlockLootSubProvider {
                         .when(HAS_NO_SILK_TOUCH)
                         .setRolls(BinomialDistributionGenerator.binomial(1, 0.35f))
                         .add(
-                                LootItem.lootTableItem(ItemsRegistration.COMB)
+                                LootItem.lootTableItem(ItemsRegistration.COMB.get())
                                         .apply(InheritHiveCombFunction.set())
                                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0f)))
                                         .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 1))

@@ -1,23 +1,20 @@
 package com.accbdd.complicated_bees.registry;
 
 import com.accbdd.complicated_bees.genetics.gene.*;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.RegistryBuilder;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryBuilder;
 
 import java.util.function.Supplier;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class GeneRegistration {
-    public static final ResourceKey<Registry<IGene<?>>> GENE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MODID, "gene"));
-    public static final Registry<IGene<?>> GENE_REGISTRY = new RegistryBuilder<>(GENE_REGISTRY_KEY)
-            .create();
+    public static final ResourceLocation GENE_REGISTRY_KEY = new ResourceLocation(MODID, "gene");
+    public static final RegistryBuilder<IGene<?>> GENE_REGISTRY = RegistryBuilder.of(GENE_REGISTRY_KEY);
 
     //every registered gene should be registered as a 'default' value
-    public static final DeferredRegister<IGene<?>> GENES = DeferredRegister.create(GENE_REGISTRY, MODID);
+    public static final DeferredRegister<IGene<?>> GENES = DeferredRegister.create(GENE_REGISTRY_KEY, MODID);
     public static final Supplier<GeneSpecies> SPECIES = GENES.register(GeneSpecies.TAG, GeneSpecies::new);
     public static final Supplier<GeneLifespan> LIFESPAN = GENES.register(GeneLifespan.TAG, GeneLifespan::new);
     public static final Supplier<GeneTemperature> TEMPERATURE = GENES.register(GeneTemperature.TAG, GeneTemperature::new);

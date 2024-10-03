@@ -12,19 +12,18 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.energy.EnergyStorage;
-import net.neoforged.neoforge.energy.IEnergyStorage;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -205,8 +204,8 @@ public class CentrifugeBlockEntity extends BlockEntity {
         }
 
         if (hasRecipe(stack) && energy.getEnergyStored() > 0 && outputBuffer.empty()) {
-            if (!getBlockState().getValue(BlockStateProperties.CRAFTING)) {
-                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.CRAFTING, true));
+            if (!getBlockState().getValue(BlockStateProperties.POWERED)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, true));
             }
             increaseCraftingProgress();
             setChanged();
@@ -215,8 +214,8 @@ public class CentrifugeBlockEntity extends BlockEntity {
                 resetProgress();
             }
         } else {
-            if (getBlockState().getValue(BlockStateProperties.CRAFTING)) {
-                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.CRAFTING, false));
+            if (getBlockState().getValue(BlockStateProperties.POWERED)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, false));
             }
             lowerProgress();
         }
@@ -251,10 +250,10 @@ public class CentrifugeBlockEntity extends BlockEntity {
     }
 
     private boolean hasRecipe(ItemStack stack) {
-        Optional<RecipeHolder<CentrifugeRecipe>> recipeCheck = quickCheck.getRecipeFor(getWrapper(), getLevel());
+        Optional<CentrifugeRecipe> recipeCheck = quickCheck.getRecipeFor(getWrapper(), getLevel());
         if (recipeCheck.isPresent()) {
             ItemStack primary = ItemStack.EMPTY;
-            CentrifugeRecipe recipe = recipeCheck.get().value();
+            CentrifugeRecipe recipe = recipeCheck.get();
             if (!recipe.getOutputs().isEmpty()) {
                 primary = recipe.getOutputs().get(0).getStack();
             }
@@ -268,7 +267,7 @@ public class CentrifugeBlockEntity extends BlockEntity {
     }
 
     private void craftItem(ItemStack stack) {
-        List<Product> products = quickCheck.getRecipeFor(getWrapper(), getLevel()).get().value().getOutputs();
+        List<Product> products = quickCheck.getRecipeFor(getWrapper(), getLevel()).get().getOutputs();
         this.inputItems.extractItem(INPUT_SLOT, 1, false);
 
         for (Product product : products) {

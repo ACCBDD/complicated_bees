@@ -15,14 +15,12 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
-import java.util.List;
-
 public class InheritHiveSpeciesFunction extends LootItemConditionalFunction {
     public static final Codec<InheritHiveSpeciesFunction> CODEC = RecordCodecBuilder.create(
             instance -> commonFields(instance).apply(instance, InheritHiveSpeciesFunction::new)
     );
 
-    public InheritHiveSpeciesFunction(List<LootItemCondition> pPredicates) {
+    public InheritHiveSpeciesFunction(LootItemCondition[] pPredicates) {
         super(pPredicates);
     }
 

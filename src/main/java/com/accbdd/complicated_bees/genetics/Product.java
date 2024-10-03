@@ -3,6 +3,7 @@ package com.accbdd.complicated_bees.genetics;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
@@ -15,8 +16,8 @@ public class Product {
     public static final Codec<Product> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(bp -> bp.getStack().getItem()),
-                    ExtraCodecs.strictOptionalField(ExtraCodecs.POSITIVE_INT, "count", 1).forGetter(bp -> bp.getStack().getCount()),
-                    ExtraCodecs.strictOptionalField(net.neoforged.neoforge.common.crafting.CraftingHelper.TAG_CODEC, "nbt").forGetter(bp -> java.util.Optional.ofNullable(net.neoforged.neoforge.common.crafting.CraftingHelper.getTagForWriting(bp.getStack()))),
+                    ExtraCodecs.POSITIVE_INT.optionalFieldOf("count", 1).forGetter(bp -> bp.getStack().getCount()),
+                    CompoundTag.CODEC.optionalFieldOf("nbt", new CompoundTag()).forGetter(bp -> bp.getStack().getOrCreateTag()),
                     Codec.FLOAT.optionalFieldOf("chance", 1f).forGetter(Product::getChance)
             ).apply(instance, (item, ct, nbt, chance) -> new Product(new ItemStack(item, ct, nbt), chance))
     );

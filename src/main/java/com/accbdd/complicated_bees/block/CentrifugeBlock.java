@@ -2,7 +2,6 @@ package com.accbdd.complicated_bees.block;
 
 import com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity;
 import com.accbdd.complicated_bees.screen.CentrifugeMenu;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -25,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,11 +37,6 @@ public class CentrifugeBlock extends BaseEntityBlock {
                 .noOcclusion()
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.METAL));
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return null;
     }
 
     @Override
@@ -72,7 +66,7 @@ public class CentrifugeBlock extends BaseEntityBlock {
                         return new CentrifugeMenu(windowId, player, pos, ((CentrifugeBlockEntity) be).getData());
                     }
                 };
-                player.openMenu(containerProvider, buf -> buf.writeBlockPos(pos));
+                player.openMenu(containerProvider);
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
@@ -99,13 +93,13 @@ public class CentrifugeBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState()
                 .setValue(BlockStateProperties.FACING, pContext.getHorizontalDirection().getOpposite())
-                .setValue(BlockStateProperties.CRAFTING, false);
+                .setValue(BlockStateProperties.POWERED, false);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(BlockStateProperties.CRAFTING, BlockStateProperties.FACING);
+        pBuilder.add(BlockStateProperties.POWERED, BlockStateProperties.FACING);
     }
 
     @Override

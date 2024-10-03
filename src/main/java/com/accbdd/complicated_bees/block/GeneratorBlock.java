@@ -2,7 +2,6 @@ package com.accbdd.complicated_bees.block;
 
 import com.accbdd.complicated_bees.block.entity.GeneratorBlockEntity;
 import com.accbdd.complicated_bees.screen.GeneratorMenu;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,7 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class GeneratorBlock extends BaseEntityBlock {
@@ -81,7 +80,7 @@ public class GeneratorBlock extends BaseEntityBlock {
                         return new GeneratorMenu(windowId, playerEntity, pos);
                     }
                 };
-                player.openMenu(containerProvider, buf -> buf.writeBlockPos(pos));
+                player.openMenu(containerProvider);
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
@@ -128,11 +127,6 @@ public class GeneratorBlock extends BaseEntityBlock {
             pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0, 0.0, 0.0);
             pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0, 0.0, 0.0);
         }
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return null;
     }
 
     @Override

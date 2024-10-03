@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class PollenicEffect extends BeeEffect {
                 while (iterator.hasNext()) {
                     BlockPos checkPos = iterator.next();
                     BlockState state = level.getBlockState(checkPos);
-                    if ((state.getBlock() instanceof CropBlock || state.getBlock() instanceof CocoaBlock || state.getBlock() instanceof BushBlock) && state.getBlock() instanceof BonemealableBlock mealable && mealable.isValidBonemealTarget(level, checkPos, state)) {
+                    if ((state.getBlock() instanceof CropBlock || state.getBlock() instanceof CocoaBlock || state.getBlock() instanceof BushBlock) && state.getBlock() instanceof BonemealableBlock mealable && mealable.isValidBonemealTarget(level, checkPos, state, level.isClientSide)) {
                         positions.add(checkPos);
                     }
                 }
@@ -36,7 +36,7 @@ public class PollenicEffect extends BeeEffect {
                     BlockPos growPos = positions.get(level.random.nextInt(positions.size()));
                     BlockState state = level.getBlockState(growPos);
                     if (state.getBlock() instanceof BonemealableBlock mealable) {
-                        if (mealable.isValidBonemealTarget(level, growPos, state) && level.random.nextFloat() < 0.25) {
+                        if (mealable.isValidBonemealTarget(level, growPos, state, level.isClientSide) && level.random.nextFloat() < 0.25) {
                             mealable.performBonemeal(level, level.random, growPos, state);
                             level.levelEvent(1505, growPos, 0);
                         }

@@ -63,9 +63,9 @@ public abstract class BeeEffect implements IBeeEffect {
 
     private boolean hasApiaristArmorEquipped(Player player) {
         var inv = player.getInventory();
-        return inv.getArmor(0).is(ItemsRegistration.APIARIST_BOOTS) &&
-                inv.getArmor(1).is(ItemsRegistration.APIARIST_LEGGINGS) &&
-                inv.getArmor(2).is(ItemsRegistration.APIARIST_CHESTPLATE) &&
-                inv.getArmor(3).is(ItemsRegistration.APIARIST_HELMET);
+        return inv.getArmor(0).is(ItemsRegistration.APIARIST_BOOTS.get()) &&
+                inv.getArmor(1).is(ItemsRegistration.APIARIST_LEGGINGS.get()) &&
+                inv.getArmor(2).is(ItemsRegistration.APIARIST_CHESTPLATE.get()) &&
+                inv.getArmor(3).is(ItemsRegistration.APIARIST_HELMET.get());
     }
 }

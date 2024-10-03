@@ -1,18 +1,18 @@
 package com.accbdd.complicated_bees.config;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class Config {
-    public static ModConfigSpec CONFIG_SPEC;
+    public static ForgeConfigSpec CONFIG_SPEC;
     public static Config CONFIG;
 
-    public final ModConfigSpec.ConfigValue<Integer> productionCycleLength, enviroCycleLength, centrifugeEnergy, generatorEnergy;
-    public final ModConfigSpec.ConfigValue<Boolean> frame, waxedFrame, honeyFrame, twistingFrame, soothingFrame, coldFrame , hotFrame, dryFrame, wetFrame, deadlyFrame, restrictiveFrame;
-    public final ModConfigSpec.ConfigValue<Boolean> honeyBread, honeyPorkchop, ambrosia;
-    public final ModConfigSpec.ConfigValue<Boolean> beeStaff;
+    public final ForgeConfigSpec.ConfigValue<Integer> productionCycleLength, enviroCycleLength, centrifugeEnergy, generatorEnergy;
+    public final ForgeConfigSpec.ConfigValue<Boolean> frame, waxedFrame, honeyFrame, twistingFrame, soothingFrame, coldFrame, hotFrame, dryFrame, wetFrame, deadlyFrame, restrictiveFrame;
+    public final ForgeConfigSpec.ConfigValue<Boolean> honeyBread, honeyPorkchop, ambrosia;
+    public final ForgeConfigSpec.ConfigValue<Boolean> beeStaff;
 
-    Config(ModConfigSpec.Builder builder) {
+    Config(ForgeConfigSpec.Builder builder) {
         builder.push("cycle_length");
         productionCycleLength = builder.comment("How long (in ticks) one bee cycle should take.").define("productionCycleLength", 200);
         enviroCycleLength = builder.comment("How long (in ticks) an apiary should wait between re-scanning the environment for appropriate conditions.").define("enviroCycleLength", 200);
@@ -48,7 +48,7 @@ public class Config {
     }
 
     static {
-        Pair<Config, ModConfigSpec> pair = new ModConfigSpec.Builder().configure(Config::new);
+        Pair<Config, ForgeConfigSpec> pair = new ForgeConfigSpec.Builder().configure(Config::new);
 
         CONFIG_SPEC = pair.getRight();
         CONFIG = pair.getLeft();

@@ -2,10 +2,13 @@ package com.accbdd.complicated_bees.recipe;
 
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -16,25 +19,23 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
+
 public class CentrifugeRecipe implements Recipe<Container> {
     private final ItemStack input;
     private final List<Product> outputs;
 
     public static final Codec<CentrifugeRecipe> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("input").forGetter(CentrifugeRecipe::getInput),
+                    ItemStack.CODEC.fieldOf("input").forGetter(CentrifugeRecipe::getInput),
                     Product.CODEC.listOf().fieldOf("outputs").forGetter(CentrifugeRecipe::getOutputs)
             ).apply(instance, CentrifugeRecipe::new)
     );
 
     public static final RecipeSerializer<CentrifugeRecipe> SERIALIZER = new RecipeSerializer<>() {
-        @Override
-        public Codec<CentrifugeRecipe> codec() {
-            return CODEC;
-        }
 
         @Override
-        public CentrifugeRecipe fromNetwork(FriendlyByteBuf pBuffer) {
+        public CentrifugeRecipe fromNetwork(ResourceLocation loc, FriendlyByteBuf pBuffer) {
             ItemStack input = pBuffer.readItem();
             List<Product> outputs = new ArrayList<>();
             int listSize = pBuffer.readInt();
@@ -42,6 +43,12 @@ public class CentrifugeRecipe implements Recipe<Container> {
                 outputs.add(Product.fromNetwork(pBuffer));
             }
             return new CentrifugeRecipe(input, outputs);
+        }
+
+        @Override
+        public CentrifugeRecipe fromJson(ResourceLocation location, JsonObject json) {
+            var decoded = CODEC.decode(JsonOps.INSTANCE, json);
+            return decoded.result().orElseThrow().getFirst();
         }
 
         @Override
@@ -89,6 +96,11 @@ public class CentrifugeRecipe implements Recipe<Container> {
     @Override
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         throw new UnsupportedOperationException("Centrifuge recipes do not use getResultItem! Use getOutputs instead");
+    }
+
+    @Override
+    public ResourceLocation getId() {
+        return new ResourceLocation(MODID, "centrifuge");
     }
 
     @Override

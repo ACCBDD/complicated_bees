@@ -10,10 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class BeeStaffItem extends DisableableItem {
-    public BeeStaffItem(Properties pProperties, ModConfigSpec.ConfigValue<Boolean> configValue) {
+    public BeeStaffItem(Properties pProperties, ForgeConfigSpec.ConfigValue<Boolean> configValue) {
         super(pProperties.rarity(Rarity.UNCOMMON).defaultDurability(100), configValue);
     }
 
@@ -22,7 +22,7 @@ public class BeeStaffItem extends DisableableItem {
         Vec3 vector = pPlayer.getLookAngle().scale(0.1f);
         Vec3 position = pPlayer.position();
         BeeStaffProjectile projectile = new BeeStaffProjectile(pLevel, pPlayer, vector.x, vector.y, vector.z);
-        projectile.moveTo(position.x, position.y+1.5f, position.z);
+        projectile.moveTo(position.x, position.y + 1.5f, position.z);
         pLevel.addFreshEntity(projectile);
         pPlayer.getItemInHand(pUsedHand).hurtAndBreak(1, pPlayer, (player) -> player.broadcastBreakEvent(pUsedHand));
         pPlayer.playSound(SoundEvents.BEE_HURT);
@@ -31,6 +31,6 @@ public class BeeStaffItem extends DisableableItem {
 
     @Override
     public boolean isValidRepairItem(ItemStack pStack, ItemStack pRepairCandidate) {
-        return pRepairCandidate.is(ItemsRegistration.ROYAL_JELLY);
+        return pRepairCandidate.is(ItemsRegistration.ROYAL_JELLY.get());
     }
 }

@@ -3,8 +3,8 @@ package com.accbdd.complicated_bees.screen.slot;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class TagSlot extends SlotItemHandler {
     private final TagKey<Item> tag;

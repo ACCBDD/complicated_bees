@@ -5,10 +5,14 @@ import com.accbdd.complicated_bees.client.BeeModel;
 import com.accbdd.complicated_bees.client.ColorHandlers;
 import com.accbdd.complicated_bees.config.Config;
 import com.accbdd.complicated_bees.datagen.DataGenerators;
+import com.accbdd.complicated_bees.datagen.condition.ItemEnabledCondition;
 import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
+import com.accbdd.complicated_bees.genetics.effect.IBeeEffect;
+import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.genetics.mutation.Mutation;
+import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.particle.BeeParticle;
 import com.accbdd.complicated_bees.registry.*;
@@ -18,34 +22,28 @@ import com.accbdd.complicated_bees.screen.CentrifugeScreen;
 import com.accbdd.complicated_bees.screen.GeneratorScreen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.registries.*;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
 
 import java.util.Map;
@@ -57,70 +55,72 @@ public class ComplicatedBees {
     public static final String MODID = "complicated_bees";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+    public static IForgeRegistry<IGene<?>> GENE_REGISTRY;
+    public static IForgeRegistry<IBeeEffect> BEE_EFFECT_REGISTRY;
+    public static IForgeRegistry<IMutationCondition> MUTATION_CONDITION_REGISTRY;
 
-
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> BEES_TAB = CREATIVE_MODE_TABS.register("complicated_bees", () -> CreativeModeTab.builder()
+    public static final RegistryObject<CreativeModeTab> BEES_TAB = CREATIVE_MODE_TABS.register("complicated_bees", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.complicated_bees"))
             .icon(() -> ItemsRegistration.DRONE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(ItemsRegistration.WAX_BLOCK);
-                output.accept(ItemsRegistration.WAX_BLOCK_STAIRS);
-                output.accept(ItemsRegistration.WAX_BLOCK_SLAB);
-                output.accept(ItemsRegistration.WAX_BLOCK_WALL);
-                output.accept(ItemsRegistration.SMOOTH_WAX);
-                output.accept(ItemsRegistration.SMOOTH_WAX_STAIRS);
-                output.accept(ItemsRegistration.SMOOTH_WAX_SLAB);
-                output.accept(ItemsRegistration.SMOOTH_WAX_WALL);
-                output.accept(ItemsRegistration.WAX_BRICKS);
-                output.accept(ItemsRegistration.WAX_BRICK_STAIRS);
-                output.accept(ItemsRegistration.WAX_BRICK_SLAB);
-                output.accept(ItemsRegistration.WAX_BRICK_WALL);
-                output.accept(ItemsRegistration.CHISELED_WAX);
-                output.accept(ItemsRegistration.HONEYED_PLANKS);
-                output.accept(ItemsRegistration.HONEYED_STAIRS);
-                output.accept(ItemsRegistration.HONEYED_SLAB);
-                output.accept(ItemsRegistration.HONEYED_FENCE);
-                output.accept(ItemsRegistration.HONEYED_FENCE_GATE);
-                output.accept(ItemsRegistration.HONEYED_BUTTON);
-                output.accept(ItemsRegistration.HONEYED_PRESSURE_PLATE);
-                output.accept(ItemsRegistration.HONEYED_DOOR);
-                output.accept(ItemsRegistration.HONEYED_TRAPDOOR);
-                output.accept(ItemsRegistration.APIARY);
-                output.accept(ItemsRegistration.CENTRIFUGE);
-                output.accept(ItemsRegistration.HONEY_DROPLET);
-                output.accept(ItemsRegistration.BEESWAX);
-                output.accept(ItemsRegistration.PROPOLIS);
-                output.accept(ItemsRegistration.ROYAL_JELLY);
-                output.accept(ItemsRegistration.POLLEN);
-                output.accept(ItemsRegistration.SCOOP);
-                output.accept(ItemsRegistration.METER);
-                output.accept(ItemsRegistration.ANALYZER);
-                output.accept(ItemsRegistration.GENERATOR);
-                output.accept(ItemsRegistration.FRAME);
-                output.accept(ItemsRegistration.WAXED_FRAME);
-                output.accept(ItemsRegistration.HONEYED_FRAME);
-                output.accept(ItemsRegistration.TWISTING_FRAME);
-                output.accept(ItemsRegistration.SOOTHING_FRAME);
-                output.accept(ItemsRegistration.HOT_FRAME);
-                output.accept(ItemsRegistration.COLD_FRAME);
-                output.accept(ItemsRegistration.DRY_FRAME);
-                output.accept(ItemsRegistration.WET_FRAME);
-                output.accept(ItemsRegistration.DEADLY_FRAME);
-                output.accept(ItemsRegistration.RESTRICTIVE_FRAME);
-                output.accept(ItemsRegistration.PEARL_SHARD);
-                output.accept(ItemsRegistration.WAXED_STICK);
-                output.accept(ItemsRegistration.HONEYED_STICK);
-                output.accept(ItemsRegistration.EXP_DROP);
-                output.accept(ItemsRegistration.SILK_WISP);
-                output.accept(ItemsRegistration.WOVEN_MESH);
-                output.accept(ItemsRegistration.APIARIST_HELMET);
-                output.accept(ItemsRegistration.APIARIST_CHESTPLATE);
-                output.accept(ItemsRegistration.APIARIST_LEGGINGS);
-                output.accept(ItemsRegistration.APIARIST_BOOTS);
-                output.accept(ItemsRegistration.BEE_STAFF);
-                output.accept(ItemsRegistration.HONEY_BREAD);
-                output.accept(ItemsRegistration.HONEY_PORKCHOP);
-                output.accept(ItemsRegistration.AMBROSIA);
+                output.accept(ItemsRegistration.WAX_BLOCK.get());
+                output.accept(ItemsRegistration.WAX_BLOCK_STAIRS.get());
+                output.accept(ItemsRegistration.WAX_BLOCK_SLAB.get());
+                output.accept(ItemsRegistration.WAX_BLOCK_WALL.get());
+                output.accept(ItemsRegistration.SMOOTH_WAX.get());
+                output.accept(ItemsRegistration.SMOOTH_WAX_STAIRS.get());
+                output.accept(ItemsRegistration.SMOOTH_WAX_SLAB.get());
+                output.accept(ItemsRegistration.SMOOTH_WAX_WALL.get());
+                output.accept(ItemsRegistration.WAX_BRICKS.get());
+                output.accept(ItemsRegistration.WAX_BRICK_STAIRS.get());
+                output.accept(ItemsRegistration.WAX_BRICK_SLAB.get());
+                output.accept(ItemsRegistration.WAX_BRICK_WALL.get());
+                output.accept(ItemsRegistration.CHISELED_WAX.get());
+                output.accept(ItemsRegistration.HONEYED_PLANKS.get());
+                output.accept(ItemsRegistration.HONEYED_STAIRS.get());
+                output.accept(ItemsRegistration.HONEYED_SLAB.get());
+                output.accept(ItemsRegistration.HONEYED_FENCE.get());
+                output.accept(ItemsRegistration.HONEYED_FENCE_GATE.get());
+                output.accept(ItemsRegistration.HONEYED_BUTTON.get());
+                output.accept(ItemsRegistration.HONEYED_PRESSURE_PLATE.get());
+                output.accept(ItemsRegistration.HONEYED_DOOR.get());
+                output.accept(ItemsRegistration.HONEYED_TRAPDOOR.get());
+                output.accept(ItemsRegistration.APIARY.get());
+                output.accept(ItemsRegistration.CENTRIFUGE.get());
+                output.accept(ItemsRegistration.HONEY_DROPLET.get());
+                output.accept(ItemsRegistration.BEESWAX.get());
+                output.accept(ItemsRegistration.PROPOLIS.get());
+                output.accept(ItemsRegistration.ROYAL_JELLY.get());
+                output.accept(ItemsRegistration.POLLEN.get());
+                output.accept(ItemsRegistration.SCOOP.get());
+                output.accept(ItemsRegistration.METER.get());
+                output.accept(ItemsRegistration.ANALYZER.get());
+                output.accept(ItemsRegistration.GENERATOR.get());
+                output.accept(ItemsRegistration.FRAME.get());
+                output.accept(ItemsRegistration.WAXED_FRAME.get());
+                output.accept(ItemsRegistration.HONEYED_FRAME.get());
+                output.accept(ItemsRegistration.TWISTING_FRAME.get());
+                output.accept(ItemsRegistration.SOOTHING_FRAME.get());
+                output.accept(ItemsRegistration.HOT_FRAME.get());
+                output.accept(ItemsRegistration.COLD_FRAME.get());
+                output.accept(ItemsRegistration.DRY_FRAME.get());
+                output.accept(ItemsRegistration.WET_FRAME.get());
+                output.accept(ItemsRegistration.DEADLY_FRAME.get());
+                output.accept(ItemsRegistration.RESTRICTIVE_FRAME.get());
+                output.accept(ItemsRegistration.PEARL_SHARD.get());
+                output.accept(ItemsRegistration.WAXED_STICK.get());
+                output.accept(ItemsRegistration.HONEYED_STICK.get());
+                output.accept(ItemsRegistration.EXP_DROP.get());
+                output.accept(ItemsRegistration.SILK_WISP.get());
+                output.accept(ItemsRegistration.WOVEN_MESH.get());
+                output.accept(ItemsRegistration.APIARIST_HELMET.get());
+                output.accept(ItemsRegistration.APIARIST_CHESTPLATE.get());
+                output.accept(ItemsRegistration.APIARIST_LEGGINGS.get());
+                output.accept(ItemsRegistration.APIARIST_BOOTS.get());
+                output.accept(ItemsRegistration.BEE_STAFF.get());
+                output.accept(ItemsRegistration.HONEY_BREAD.get());
+                output.accept(ItemsRegistration.HONEY_PORKCHOP.get());
+                output.accept(ItemsRegistration.AMBROSIA.get());
                 Set<Map.Entry<ResourceKey<Species>, Species>> speciesSet = Objects.requireNonNull(Minecraft.getInstance().getConnection()).registryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().entrySet();
                 for (Map.Entry<ResourceKey<Species>, Species> entry : speciesSet) {
                     output.accept(GeneticHelper.setBothGenome(ItemsRegistration.DRONE.get().getDefaultInstance(), entry.getValue().getDefaultChromosome()));
@@ -141,9 +141,9 @@ public class ComplicatedBees {
         modEventBus.addListener(ColorHandlers::registerBlockColorHandlers);
         modEventBus.addListener(this::registerRegistries);
         modEventBus.addListener(this::registerDatapackRegistries);
-        modEventBus.addListener(this::registerCapabilities);
+//        modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener(DataGenerators::generate);
-        NeoForge.EVENT_BUS.addListener(this::serverStarted);
+        modEventBus.addListener(this::serverStarted);
 
         ItemsRegistration.ITEMS.register(modEventBus);
         BlocksRegistration.BLOCKS.register(modEventBus);
@@ -158,7 +158,6 @@ public class ComplicatedBees {
         EsotericRegistration.FEATURE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_TYPE_REGISTER.register(modEventBus);
         EsotericRegistration.RECIPE_SERIALIZER_REGISTER.register(modEventBus);
-        EsotericRegistration.CONDITION_SERIALIZERS.register(modEventBus);
         EsotericRegistration.PARTICLE_TYPE.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CONFIG_SPEC);
@@ -195,38 +194,40 @@ public class ComplicatedBees {
 
     @SubscribeEvent
     public void registerRegistries(NewRegistryEvent event) {
-        event.register(GeneRegistration.GENE_REGISTRY);
-        event.register(BeeEffectRegistration.BEE_EFFECT_REGISTRY);
-        event.register(MutationRegistration.MUTATION_CONDITION_REGISTRY);
+        GENE_REGISTRY = event.create(GeneRegistration.GENE_REGISTRY).get();
+        BEE_EFFECT_REGISTRY = event.create(BeeEffectRegistration.BEE_EFFECT_REGISTRY).get();
+        MUTATION_CONDITION_REGISTRY = event.create(MutationRegistration.MUTATION_CONDITION_REGISTRY).get();
     }
 
-    @SubscribeEvent
-    public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.APIARY_ENTITY.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getItemHandler().get();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getOutputItemHandler().get();
-            }
-            return o.getBeeItemHandler().get();
-        });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getItemHandler().get();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getOutputItemHandler().get();
-            }
-            return o.getInputItemHandler().get();
-        });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getItemHandler());
-        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
-        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
-    }
+//    @SubscribeEvent
+//    public void registerCapabilities(RegisterCapabilitiesEvent event) {
+//        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.APIARY_ENTITY.get(), (o, direction) -> {
+//            if (direction == null) {
+//                return o.getItemHandler().get();
+//            }
+//            if (direction == Direction.DOWN) {
+//                return o.getOutputItemHandler().get();
+//            }
+//            return o.getBeeItemHandler().get();
+//        });
+//        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (o, direction) -> {
+//            if (direction == null) {
+//                return o.getItemHandler().get();
+//            }
+//            if (direction == Direction.DOWN) {
+//                return o.getOutputItemHandler().get();
+//            }
+//            return o.getInputItemHandler().get();
+//        });
+//        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getItemHandler());
+//        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
+//        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
+//    }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        //setup code
+        event.enqueueWork(() -> {
+            CraftingHelper.register(ItemEnabledCondition.Serializer.INSTANCE);
+        });
     }
 
     @SubscribeEvent
@@ -242,19 +243,18 @@ public class ComplicatedBees {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(EntitiesRegistration.BEE_STAFF_MOUNT.get(), (context) -> new ThrownItemRenderer<>(context, 1.0f, true));
-        }
 
-        @SubscribeEvent
-        public static void registerMenus(RegisterMenuScreensEvent event) {
-            event.register(MenuRegistration.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
-            event.register(MenuRegistration.APIARY_MENU.get(), ApiaryScreen::new);
-            event.register(MenuRegistration.GENERATOR_MENU.get(), GeneratorScreen::new);
-            event.register(MenuRegistration.ANALYZER_MENU.get(), AnalyzerScreen::new);
+            event.enqueueWork(() -> {
+                MenuScreens.register(MenuRegistration.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
+                MenuScreens.register(MenuRegistration.APIARY_MENU.get(), ApiaryScreen::new);
+                MenuScreens.register(MenuRegistration.GENERATOR_MENU.get(), GeneratorScreen::new);
+                MenuScreens.register(MenuRegistration.ANALYZER_MENU.get(), AnalyzerScreen::new);
+            });
         }
 
         @SubscribeEvent
         public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
-            event.register(BeeModel.Loader.ID, BeeModel.Loader.INSTANCE);
+            event.register(BeeModel.Loader.ID.toString(), BeeModel.Loader.INSTANCE);
         }
 
         @SubscribeEvent

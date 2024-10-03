@@ -2,7 +2,6 @@ package com.accbdd.complicated_bees.block;
 
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.screen.ApiaryMenu;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -21,7 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,11 +33,6 @@ public class ApiaryBlock extends BaseEntityBlock {
                 .requiresCorrectToolForDrops()
                 .strength(5, 6)
                 .sound(SoundType.METAL));
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return null;
     }
 
     @Override
@@ -68,7 +62,7 @@ public class ApiaryBlock extends BaseEntityBlock {
                         return new ApiaryMenu(windowId, player, pos, ((ApiaryBlockEntity) be).getData());
                     }
                 };
-                player.openMenu(containerProvider, buf -> buf.writeBlockPos(pos));
+                player.openMenu(containerProvider);
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }

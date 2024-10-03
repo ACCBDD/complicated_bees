@@ -6,11 +6,11 @@ import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
@@ -46,7 +46,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         withExistingParent(BlocksRegistration.HONEYED_FENCE_GATE.getId().getPath(), modLoc("block/honeyed_fence_gate"));
         buttonItem(BlocksRegistration.HONEYED_BUTTON, BlocksRegistration.HONEYED_PLANKS);
         withExistingParent(BlocksRegistration.HONEYED_PRESSURE_PLATE.getId().getPath(), modLoc("block/honeyed_pressure_plate"));
-        basicItem(BlocksRegistration.HONEYED_DOOR.asItem());
+        basicItem(BlocksRegistration.HONEYED_DOOR.getId());
         withExistingParent(BlocksRegistration.HONEYED_TRAPDOOR.getId().getPath(), modLoc("block/honeyed_trapdoor_bottom"));
 
         basicItem(ItemsRegistration.SCOOP.get());
@@ -115,17 +115,17 @@ public class ItemModelGenerator extends ItemModelProvider {
                 .texture("layer1", comb_inner);
     }
 
-    private void wallItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
+    private void wallItem(RegistryObject<?> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(block.getId().getPath(), mcLoc("block/wall_inventory"))
                 .texture("wall", new ResourceLocation(MODID, "block/" + baseBlock.getId().getPath()));
     }
 
-    private void fenceItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
+    private void fenceItem(RegistryObject<?> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(block.getId().getPath(), mcLoc("block/fence_inventory"))
                 .texture("texture", new ResourceLocation(MODID, "block/" + baseBlock.getId().getPath()));
     }
 
-    private void buttonItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
+    private void buttonItem(RegistryObject<?> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(block.getId().getPath(), mcLoc("block/button_inventory"))
                 .texture("texture", new ResourceLocation(MODID, "block/" + baseBlock.getId().getPath()));
     }

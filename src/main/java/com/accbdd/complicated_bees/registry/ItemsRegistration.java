@@ -3,116 +3,122 @@ package com.accbdd.complicated_bees.registry;
 import com.accbdd.complicated_bees.config.Config;
 import com.accbdd.complicated_bees.genetics.BeeHousingModifier;
 import com.accbdd.complicated_bees.genetics.gene.enums.EnumTolerance;
-import com.accbdd.complicated_bees.item.*;
 import com.accbdd.complicated_bees.item.ArmorMaterials;
+import com.accbdd.complicated_bees.item.*;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class ItemsRegistration {
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-    public static final DeferredItem<DroneItem> DRONE = ITEMS.registerItem("drone", DroneItem::new);
-    public static final DeferredItem<PrincessItem> PRINCESS = ITEMS.registerItem("princess", PrincessItem::new);
-    public static final DeferredItem<QueenItem> QUEEN = ITEMS.registerItem("queen", QueenItem::new);
-    public static final DeferredItem<CombItem> COMB = ITEMS.registerItem("comb", CombItem::new);
-    public static final DeferredItem<ScoopItem> SCOOP = ITEMS.registerItem("scoop", ScoopItem::new);
-    public static final DeferredItem<MeterItem> METER = ITEMS.registerItem("meter", MeterItem::new);
-    public static final DeferredItem<AnalyzerItem> ANALYZER = ITEMS.registerItem("analyzer", AnalyzerItem::new);
-    public static final DeferredItem<ExpDropItem> EXP_DROP = ITEMS.registerItem("exp_drop", ExpDropItem::new);
-    public static final DeferredItem<BeeswaxItem> BEESWAX = ITEMS.registerItem("beeswax", BeeswaxItem::new);
+    public static final RegistryObject<DroneItem> DRONE = ITEMS.register("drone", () -> new DroneItem(new Item.Properties()));
+    public static final RegistryObject<PrincessItem> PRINCESS = ITEMS.register("princess", () -> new PrincessItem(new Item.Properties()));
+    public static final RegistryObject<QueenItem> QUEEN = ITEMS.register("queen", () -> new QueenItem(new Item.Properties()));
+    public static final RegistryObject<CombItem> COMB = ITEMS.register("comb", () -> new CombItem(new Item.Properties()));
+    public static final RegistryObject<ScoopItem> SCOOP = ITEMS.register("scoop", () -> new ScoopItem(new Item.Properties()));
+    public static final RegistryObject<MeterItem> METER = ITEMS.register("meter", () -> new MeterItem(new Item.Properties()));
+    public static final RegistryObject<AnalyzerItem> ANALYZER = ITEMS.register("analyzer", () -> new AnalyzerItem(new Item.Properties()));
+    public static final RegistryObject<ExpDropItem> EXP_DROP = ITEMS.register("exp_drop", () -> new ExpDropItem(new Item.Properties()));
+    public static final RegistryObject<BeeswaxItem> BEESWAX = ITEMS.register("beeswax", () -> new BeeswaxItem(new Item.Properties()));
 
-    public static final DeferredItem<Item> HONEY_DROPLET = ITEMS.registerSimpleItem("honey_droplet");
-    public static final DeferredItem<Item> ROYAL_JELLY = ITEMS.registerSimpleItem("royal_jelly");
-    public static final DeferredItem<Item> POLLEN = ITEMS.registerSimpleItem("pollen");
-    public static final DeferredItem<Item> PROPOLIS = ITEMS.registerSimpleItem("propolis");
-    public static final DeferredItem<Item> SILK_WISP = ITEMS.registerSimpleItem("silk_wisp");
-    public static final DeferredItem<Item> WOVEN_MESH = ITEMS.registerSimpleItem("woven_mesh");
-    public static final DeferredItem<Item> PEARL_SHARD = ITEMS.registerSimpleItem("pearl_shard");
-    public static final DeferredItem<Item> WAXED_STICK = ITEMS.registerSimpleItem("waxed_stick");
-    public static final DeferredItem<Item> HONEYED_STICK = ITEMS.registerSimpleItem("honeyed_stick");
-    public static final DeferredItem<Item> BEE_STAFF = ITEMS.registerItem("bee_staff", prop -> new BeeStaffItem(prop, Config.CONFIG.beeStaff));
+    public static final RegistryObject<Item> HONEY_DROPLET = registerSimpleItem("honey_droplet");
+    public static final RegistryObject<Item> ROYAL_JELLY = registerSimpleItem("royal_jelly");
+    public static final RegistryObject<Item> POLLEN = registerSimpleItem("pollen");
+    public static final RegistryObject<Item> PROPOLIS = registerSimpleItem("propolis");
+    public static final RegistryObject<Item> SILK_WISP = registerSimpleItem("silk_wisp");
+    public static final RegistryObject<Item> WOVEN_MESH = registerSimpleItem("woven_mesh");
+    public static final RegistryObject<Item> PEARL_SHARD = registerSimpleItem("pearl_shard");
+    public static final RegistryObject<Item> WAXED_STICK = registerSimpleItem("waxed_stick");
+    public static final RegistryObject<Item> HONEYED_STICK = registerSimpleItem("honeyed_stick");
+    public static final RegistryObject<Item> BEE_STAFF = ITEMS.register("bee_staff", () -> new BeeStaffItem(new Item.Properties(), Config.CONFIG.beeStaff));
+    public static final RegistryObject<Item> HONEY_BREAD = ITEMS.register("honey_bread", () -> new DisableableItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(0.4f).build()), Config.CONFIG.honeyBread));
+    public static final RegistryObject<Item> HONEY_PORKCHOP = ITEMS.register("honey_porkchop", () -> new DisableableItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(0.5f).build()), Config.CONFIG.honeyPorkchop));
+    public static final RegistryObject<Item> AMBROSIA = ITEMS.register("ambrosia", () -> new DisableableItem(new Item.Properties().food(new FoodProperties.Builder()
+            .nutrition(6)
+            .saturationMod(1.2F)
+            .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 400, 1), 1.0F)
+            .effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200, 2), 1.0F)
+            .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 2400, 1), 1.0F)
+            .alwaysEat()
+            .build()).rarity(Rarity.RARE), Config.CONFIG.ambrosia) {
+        @Override
+        public boolean isFoil(ItemStack pStack) {
+            return true;
+        }
+    });
 
-    public static final DeferredItem<Item> HONEY_BREAD = ITEMS.registerItem("honey_bread", (prop) -> new DisableableItem(prop, Config.CONFIG.honeyBread),
-            new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(0.4f).build()));
-    public static final DeferredItem<Item> HONEY_PORKCHOP = ITEMS.registerItem("honey_porkchop", (prop) -> new DisableableItem(prop, Config.CONFIG.honeyPorkchop),
-            new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(0.5f).build()));
-    public static final DeferredItem<Item> AMBROSIA = ITEMS.registerItem("ambrosia", (prop) -> new DisableableItem(prop, Config.CONFIG.ambrosia) {
-                @Override
-                public boolean isFoil(ItemStack pStack) {
-                    return true;
-                }
-            },
-            new Item.Properties().food(new FoodProperties.Builder()
-                    .nutrition(6)
-                    .saturationMod(1.2F)
-                    .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 400, 1), 1.0F)
-                    .effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200, 2), 1.0F)
-                    .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 2400, 1), 1.0F)
-                    .alwaysEat()
-                    .build()).rarity(Rarity.RARE));
+    public static final RegistryObject<FrameItem> FRAME = ITEMS.register("frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().productivity(1.1f).build(), Config.CONFIG.frame));
+    public static final RegistryObject<FrameItem> WAXED_FRAME = ITEMS.register("waxed_frame",
+            () -> new FrameItem(new Item.Properties().durability(240), new BeeHousingModifier.Builder().productivity(1.25f).build(), Config.CONFIG.waxedFrame));
+    public static final RegistryObject<FrameItem> HONEYED_FRAME = ITEMS.register("honeyed_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().productivity(1.35f).lifespan(0.9f).build(), Config.CONFIG.honeyFrame));
+    public static final RegistryObject<FrameItem> TWISTING_FRAME = ITEMS.register("twisting_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().productivity(0.6f).lifespan(0.75f).mutation(1.5f).build(), Config.CONFIG.twistingFrame));
+    public static final RegistryObject<FrameItem> SOOTHING_FRAME = ITEMS.register("soothing_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().productivity(0.75f).lifespan(1.5f).mutation(0.8f).build(), Config.CONFIG.soothingFrame));
+    public static final RegistryObject<FrameItem> COLD_FRAME = ITEMS.register("cold_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().temperature(EnumTolerance.DOWN_1).lifespan(0.8f).build(), Config.CONFIG.coldFrame));
+    public static final RegistryObject<FrameItem> HOT_FRAME = ITEMS.register("hot_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().temperature(EnumTolerance.UP_1).lifespan(0.8f).build(), Config.CONFIG.hotFrame));
+    public static final RegistryObject<FrameItem> DRY_FRAME = ITEMS.register("dry_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().humidity(EnumTolerance.DOWN_1).lifespan(0.8f).build(), Config.CONFIG.dryFrame));
+    public static final RegistryObject<FrameItem> WET_FRAME = ITEMS.register("wet_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().humidity(EnumTolerance.UP_1).lifespan(0.8f).build(), Config.CONFIG.wetFrame));
+    public static final RegistryObject<FrameItem> DEADLY_FRAME = ITEMS.register("deadly_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().lifespan(0.1f).build(), Config.CONFIG.deadlyFrame));
+    public static final RegistryObject<FrameItem> RESTRICTIVE_FRAME = ITEMS.register("restrictive_frame",
+            () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().territory(0.5f).lifespan(0.75f).productivity(0.75f).build(), Config.CONFIG.restrictiveFrame));
 
-    public static final DeferredItem<FrameItem> FRAME = ITEMS.registerItem("frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().productivity(1.1f).build(), Config.CONFIG.frame));
-    public static final DeferredItem<FrameItem> WAXED_FRAME = ITEMS.registerItem("waxed_frame",
-            (prop) -> new FrameItem(prop.durability(240), new BeeHousingModifier.Builder().productivity(1.25f).build(), Config.CONFIG.waxedFrame));
-    public static final DeferredItem<FrameItem> HONEYED_FRAME = ITEMS.registerItem("honeyed_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().productivity(1.35f).lifespan(0.9f).build(), Config.CONFIG.honeyFrame));
-    public static final DeferredItem<FrameItem> TWISTING_FRAME = ITEMS.registerItem("twisting_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().productivity(0.6f).lifespan(0.75f).mutation(1.5f).build(), Config.CONFIG.twistingFrame));
-    public static final DeferredItem<FrameItem> SOOTHING_FRAME = ITEMS.registerItem("soothing_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().productivity(0.75f).lifespan(1.5f).mutation(0.8f).build(), Config.CONFIG.soothingFrame));
-    public static final DeferredItem<FrameItem> COLD_FRAME = ITEMS.registerItem("cold_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().temperature(EnumTolerance.DOWN_1).lifespan(0.8f).build(), Config.CONFIG.coldFrame));
-    public static final DeferredItem<FrameItem> HOT_FRAME = ITEMS.registerItem("hot_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().temperature(EnumTolerance.UP_1).lifespan(0.8f).build(), Config.CONFIG.hotFrame));
-    public static final DeferredItem<FrameItem> DRY_FRAME = ITEMS.registerItem("dry_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().humidity(EnumTolerance.DOWN_1).lifespan(0.8f).build(), Config.CONFIG.dryFrame));
-    public static final DeferredItem<FrameItem> WET_FRAME = ITEMS.registerItem("wet_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().humidity(EnumTolerance.UP_1).lifespan(0.8f).build(), Config.CONFIG.wetFrame));
-    public static final DeferredItem<FrameItem> DEADLY_FRAME = ITEMS.registerItem("deadly_frame",
-            (prop) -> new FrameItem(prop.durability(80),new BeeHousingModifier.Builder().lifespan(0.1f).build(), Config.CONFIG.deadlyFrame));
-    public static final DeferredItem<FrameItem> RESTRICTIVE_FRAME = ITEMS.registerItem("restrictive_frame",
-            (prop) -> new FrameItem(prop.durability(80), new BeeHousingModifier.Builder().territory(0.5f).lifespan(0.75f).productivity(0.75f).build(), Config.CONFIG.restrictiveFrame));
+    public static final RegistryObject<ArmorItem> APIARIST_HELMET = ITEMS.register("apiarist_helmet",
+            () -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<ArmorItem> APIARIST_CHESTPLATE = ITEMS.register("apiarist_chestplate",
+            () -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<ArmorItem> APIARIST_LEGGINGS = ITEMS.register("apiarist_leggings",
+            () -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<ArmorItem> APIARIST_BOOTS = ITEMS.register("apiarist_boots",
+            () -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final DeferredItem<Item> APIARIST_HELMET = ITEMS.registerItem("apiarist_helmet",
-            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final DeferredItem<Item> APIARIST_CHESTPLATE = ITEMS.registerItem("apiarist_chestplate",
-            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final DeferredItem<Item> APIARIST_LEGGINGS = ITEMS.registerItem("apiarist_leggings",
-            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final DeferredItem<Item> APIARIST_BOOTS = ITEMS.registerItem("apiarist_boots",
-            (prop) -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<BlockItem> BEE_NEST = ITEMS.register("bee_nest", () -> new BeeNestBlockItem(new Item.Properties()));
+    public static final RegistryObject<BlockItem> APIARY = registerSimpleBlockItem("apiary", BlocksRegistration.APIARY.get());
+    public static final RegistryObject<BlockItem> CENTRIFUGE = registerSimpleBlockItem("centrifuge", BlocksRegistration.CENTRIFUGE.get());
+    public static final RegistryObject<BlockItem> GENERATOR = registerSimpleBlockItem("generator", BlocksRegistration.GENERATOR.get());
+    public static final RegistryObject<BlockItem> WAX_BLOCK = registerSimpleBlockItem("wax_block", BlocksRegistration.WAX_BLOCK.get());
+    public static final RegistryObject<BlockItem> WAX_BLOCK_STAIRS = registerSimpleBlockItem("wax_block_stairs", BlocksRegistration.WAX_BLOCK_STAIRS.get());
+    public static final RegistryObject<BlockItem> WAX_BLOCK_SLAB = registerSimpleBlockItem("wax_block_slab", BlocksRegistration.WAX_BLOCK_SLAB.get());
+    public static final RegistryObject<BlockItem> WAX_BLOCK_WALL = registerSimpleBlockItem("wax_block_wall", BlocksRegistration.WAX_BLOCK_WALL.get());
+    public static final RegistryObject<BlockItem> SMOOTH_WAX = registerSimpleBlockItem("smooth_wax", BlocksRegistration.SMOOTH_WAX.get());
+    public static final RegistryObject<BlockItem> SMOOTH_WAX_STAIRS = registerSimpleBlockItem("smooth_wax_stairs", BlocksRegistration.SMOOTH_WAX_STAIRS.get());
+    public static final RegistryObject<BlockItem> SMOOTH_WAX_SLAB = registerSimpleBlockItem("smooth_wax_slab", BlocksRegistration.SMOOTH_WAX_SLAB.get());
+    public static final RegistryObject<BlockItem> SMOOTH_WAX_WALL = registerSimpleBlockItem("smooth_wax_wall", BlocksRegistration.SMOOTH_WAX_WALL.get());
+    public static final RegistryObject<BlockItem> WAX_BRICKS = registerSimpleBlockItem("wax_bricks", BlocksRegistration.WAX_BRICKS.get());
+    public static final RegistryObject<BlockItem> WAX_BRICK_STAIRS = registerSimpleBlockItem("wax_brick_stairs", BlocksRegistration.WAX_BRICK_STAIRS.get());
+    public static final RegistryObject<BlockItem> WAX_BRICK_SLAB = registerSimpleBlockItem("wax_brick_slab", BlocksRegistration.WAX_BRICK_SLAB.get());
+    public static final RegistryObject<BlockItem> WAX_BRICK_WALL = registerSimpleBlockItem("wax_brick_wall", BlocksRegistration.WAX_BRICK_WALL.get());
+    public static final RegistryObject<BlockItem> CHISELED_WAX = registerSimpleBlockItem("chiseled_wax", BlocksRegistration.CHISELED_WAX.get());
+    public static final RegistryObject<BlockItem> HONEYED_PLANKS = registerSimpleBlockItem("honeyed_planks", BlocksRegistration.HONEYED_PLANKS.get());
+    public static final RegistryObject<BlockItem> HONEYED_STAIRS = registerSimpleBlockItem("honeyed_stairs", BlocksRegistration.HONEYED_STAIRS.get());
+    public static final RegistryObject<BlockItem> HONEYED_SLAB = registerSimpleBlockItem("honeyed_slab", BlocksRegistration.HONEYED_SLAB.get());
+    public static final RegistryObject<BlockItem> HONEYED_FENCE = registerSimpleBlockItem("honeyed_fence", BlocksRegistration.HONEYED_FENCE.get());
+    public static final RegistryObject<BlockItem> HONEYED_FENCE_GATE = registerSimpleBlockItem("honeyed_fence_gate", BlocksRegistration.HONEYED_FENCE_GATE.get());
+    public static final RegistryObject<BlockItem> HONEYED_BUTTON = registerSimpleBlockItem("honeyed_button", BlocksRegistration.HONEYED_BUTTON.get());
+    public static final RegistryObject<BlockItem> HONEYED_PRESSURE_PLATE = registerSimpleBlockItem("honeyed_pressure_plate", BlocksRegistration.HONEYED_PRESSURE_PLATE.get());
+    public static final RegistryObject<BlockItem> HONEYED_DOOR = ITEMS.register("honeyed_door", () -> new DoubleHighBlockItem(BlocksRegistration.HONEYED_DOOR.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> HONEYED_TRAPDOOR = registerSimpleBlockItem("honeyed_trapdoor", BlocksRegistration.HONEYED_TRAPDOOR.get());
 
-    public static final DeferredItem<BlockItem> BEE_NEST = ITEMS.registerItem("bee_nest", BeeNestBlockItem::new);
-    public static final DeferredItem<BlockItem> APIARY = ITEMS.registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);
-    public static final DeferredItem<BlockItem> CENTRIFUGE = ITEMS.registerSimpleBlockItem("centrifuge", BlocksRegistration.CENTRIFUGE);
-    public static final DeferredItem<BlockItem> GENERATOR = ITEMS.registerSimpleBlockItem("generator", BlocksRegistration.GENERATOR);
-    public static final DeferredItem<BlockItem> WAX_BLOCK = ITEMS.registerSimpleBlockItem("wax_block", BlocksRegistration.WAX_BLOCK);
-    public static final DeferredItem<BlockItem> WAX_BLOCK_STAIRS = ITEMS.registerSimpleBlockItem("wax_block_stairs", BlocksRegistration.WAX_BLOCK_STAIRS);
-    public static final DeferredItem<BlockItem> WAX_BLOCK_SLAB = ITEMS.registerSimpleBlockItem("wax_block_slab", BlocksRegistration.WAX_BLOCK_SLAB);
-    public static final DeferredItem<BlockItem> WAX_BLOCK_WALL = ITEMS.registerSimpleBlockItem("wax_block_wall", BlocksRegistration.WAX_BLOCK_WALL);
-    public static final DeferredItem<BlockItem> SMOOTH_WAX = ITEMS.registerSimpleBlockItem("smooth_wax", BlocksRegistration.SMOOTH_WAX);
-    public static final DeferredItem<BlockItem> SMOOTH_WAX_STAIRS = ITEMS.registerSimpleBlockItem("smooth_wax_stairs", BlocksRegistration.SMOOTH_WAX_STAIRS);
-    public static final DeferredItem<BlockItem> SMOOTH_WAX_SLAB = ITEMS.registerSimpleBlockItem("smooth_wax_slab", BlocksRegistration.SMOOTH_WAX_SLAB);
-    public static final DeferredItem<BlockItem> SMOOTH_WAX_WALL = ITEMS.registerSimpleBlockItem("smooth_wax_wall", BlocksRegistration.SMOOTH_WAX_WALL);
-    public static final DeferredItem<BlockItem> WAX_BRICKS = ITEMS.registerSimpleBlockItem("wax_bricks", BlocksRegistration.WAX_BRICKS);
-    public static final DeferredItem<BlockItem> WAX_BRICK_STAIRS = ITEMS.registerSimpleBlockItem("wax_brick_stairs", BlocksRegistration.WAX_BRICK_STAIRS);
-    public static final DeferredItem<BlockItem> WAX_BRICK_SLAB = ITEMS.registerSimpleBlockItem("wax_brick_slab", BlocksRegistration.WAX_BRICK_SLAB);
-    public static final DeferredItem<BlockItem> WAX_BRICK_WALL = ITEMS.registerSimpleBlockItem("wax_brick_wall", BlocksRegistration.WAX_BRICK_WALL);
-    public static final DeferredItem<BlockItem> CHISELED_WAX = ITEMS.registerSimpleBlockItem("chiseled_wax", BlocksRegistration.CHISELED_WAX);
-    public static final DeferredItem<BlockItem> HONEYED_PLANKS = ITEMS.registerSimpleBlockItem("honeyed_planks", BlocksRegistration.HONEYED_PLANKS);
-    public static final DeferredItem<BlockItem> HONEYED_STAIRS = ITEMS.registerSimpleBlockItem("honeyed_stairs", BlocksRegistration.HONEYED_STAIRS);
-    public static final DeferredItem<BlockItem> HONEYED_SLAB = ITEMS.registerSimpleBlockItem("honeyed_slab", BlocksRegistration.HONEYED_SLAB);
-    public static final DeferredItem<BlockItem> HONEYED_FENCE = ITEMS.registerSimpleBlockItem("honeyed_fence", BlocksRegistration.HONEYED_FENCE);
-    public static final DeferredItem<BlockItem> HONEYED_FENCE_GATE = ITEMS.registerSimpleBlockItem("honeyed_fence_gate", BlocksRegistration.HONEYED_FENCE_GATE);
-    public static final DeferredItem<BlockItem> HONEYED_BUTTON = ITEMS.registerSimpleBlockItem("honeyed_button", BlocksRegistration.HONEYED_BUTTON);
-    public static final DeferredItem<BlockItem> HONEYED_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem("honeyed_pressure_plate", BlocksRegistration.HONEYED_PRESSURE_PLATE);
-    public static final DeferredItem<BlockItem> HONEYED_DOOR = ITEMS.register("honeyed_door", () -> new DoubleHighBlockItem(BlocksRegistration.HONEYED_DOOR.get(), new Item.Properties()));
-    public static final DeferredItem<BlockItem> HONEYED_TRAPDOOR = ITEMS.registerSimpleBlockItem("honeyed_trapdoor", BlocksRegistration.HONEYED_TRAPDOOR);
+    private static RegistryObject<Item> registerSimpleItem(String name) {
+        return ITEMS.register(name, () -> new Item(new Item.Properties()));
+    }
+
+    private static RegistryObject<BlockItem> registerSimpleBlockItem(String name, Block block) {
+        return ITEMS.register(name, () -> new BlockItem(block, new Item.Properties()));
+    }
 }

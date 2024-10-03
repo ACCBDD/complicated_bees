@@ -17,6 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ScoopItem extends DiggerItem {
+
     public ScoopItem(Properties pProperties) {
         super(0, 0, Tiers.IRON, BlockTagGenerator.SCOOPABLE, pProperties.durability(50));
     }
@@ -26,12 +27,12 @@ public class ScoopItem extends DiggerItem {
         if (!pLevel.isClientSide && !pState.is(BlockTags.FIRE)) {
             pStack.hurtAndBreak(1, pMiningEntity, (entity) -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
-        return pState.is(BlocksRegistration.BEE_NEST);
+        return pState.is(BlocksRegistration.BEE_NEST.get());
     }
 
     @Override
     public boolean isCorrectToolForDrops(ItemStack stack, BlockState pBlock) {
-        if (pBlock.is(BlocksRegistration.BEE_NEST)) {
+        if (pBlock.is(BlocksRegistration.BEE_NEST.get())) {
             return true;
         }
         return super.isCorrectToolForDrops(stack, pBlock);

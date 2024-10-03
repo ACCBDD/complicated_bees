@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.genetics;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.gene.Gene;
 import com.accbdd.complicated_bees.genetics.gene.IGene;
 import com.accbdd.complicated_bees.registry.GeneRegistration;
@@ -16,14 +17,14 @@ public class Chromosome {
 
     public Chromosome() {
         this.genes = new HashMap<>();
-        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistration.GENE_REGISTRY.entrySet()) {
-            genes.put(entry.getKey().location(), GeneRegistration.GENE_REGISTRY.get(entry.getKey()));
+        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : ComplicatedBees.GENE_REGISTRY.getEntries()) {
+            genes.put(entry.getKey().location(), ComplicatedBees.GENE_REGISTRY.getValue(entry.getKey().location()));
         }
     }
 
     public Chromosome(CompoundTag genomeAsTag) {
         this.genes = new HashMap<>();
-        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistration.GENE_REGISTRY.entrySet()) {
+        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : ComplicatedBees.GENE_REGISTRY.getEntries()) {
             ResourceLocation geneLocation = entry.getKey().location();
             if (genomeAsTag.contains(geneLocation.toString())) {
                 CompoundTag serializedGene = genomeAsTag.getCompound(geneLocation.toString());
@@ -31,7 +32,7 @@ public class Chromosome {
                     serializedGene.putBoolean(Gene.DOMINANT, true);
                 genes.put(geneLocation, entry.getValue().deserialize(serializedGene));
             } else {
-                genes.put(entry.getKey().location(), GeneRegistration.GENE_REGISTRY.get(entry.getKey()));
+                genes.put(entry.getKey().location(), ComplicatedBees.GENE_REGISTRY.getValue(entry.getKey().location()));
             }
         }
     }
@@ -58,7 +59,7 @@ public class Chromosome {
     }
 
     public IGene<?> getGene(ResourceLocation id) {
-        return this.genes.getOrDefault(id, GeneRegistration.GENE_REGISTRY.get(id));
+        return this.genes.getOrDefault(id, ComplicatedBees.GENE_REGISTRY.getValue(id));
     }
 
     public Chromosome setGene(ResourceLocation id, IGene<?> gene) {

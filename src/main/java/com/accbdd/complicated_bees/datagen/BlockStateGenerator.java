@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.generators.*;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.client.model.generators.*;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.BiConsumer;
 
@@ -99,7 +99,7 @@ public class BlockStateGenerator extends BlockStateProvider {
         BlockModelBuilder modelOff = models().cube(path, end, end, front, side, side, side).texture("particle", side);
         BlockModelBuilder modelOn = models().cube(path + "_on", end, end, front_on, side, side, side).texture("particle", side);
 
-        directionBlock(BlocksRegistration.CENTRIFUGE.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.CRAFTING) ? modelOn : modelOff));
+        directionBlock(BlocksRegistration.CENTRIFUGE.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.POWERED) ? modelOn : modelOff));
     }
 
     public void registerGenerator() {

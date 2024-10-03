@@ -11,12 +11,12 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.energy.EnergyStorage;
-import net.neoforged.neoforge.energy.IEnergyStorage;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
@@ -109,12 +109,15 @@ public class GeneratorBlockEntity extends BlockEntity {
             if (energy.getEnergyStored() <= 0) {
                 return;
             }
-            IEnergyStorage energy = level.getCapability(Capabilities.EnergyStorage.BLOCK, getBlockPos().relative(direction), null);
-            if (energy != null) {
-                if (energy.canReceive()) {
-                    int received = energy.receiveEnergy(Math.min(this.energy.getEnergyStored(), MAXTRANSFER), false);
-                    this.energy.extractEnergy(received, false);
-                    setChanged();
+            var be = getLevel().getBlockEntity(getBlockPos().relative(direction));
+            if (be != null) {
+                IEnergyStorage energy = be.getCapability(ForgeCapabilities.ENERGY).orElse(null);
+                if (energy != null) {
+                    if (energy.canReceive()) {
+                        int received = energy.receiveEnergy(Math.min(this.energy.getEnergyStored(), MAXTRANSFER), false);
+                        this.energy.extractEnergy(received, false);
+                        setChanged();
+                    }
                 }
             }
         }

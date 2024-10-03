@@ -25,12 +25,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -401,7 +401,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         } else {
             removeError(EnumErrorCodes.UNDERGROUND);
         }
-        if (!((GeneActiveTime)chromosome.getGene(new ResourceLocation(MODID, "active_time"))).isSatisfied(getLevel())) {
+        if (!((GeneActiveTime) chromosome.getGene(new ResourceLocation(MODID, "active_time"))).isSatisfied(getLevel())) {
             addError(EnumErrorCodes.WRONG_TIME);
             queenSatisfied = false;
         } else {
@@ -508,7 +508,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         }
         int[] searchRadii = (int[]) GeneticHelper.getGeneValue(bee, GeneTerritory.ID, true);
         BlockPosBoxIterator it = new BlockPosBoxIterator(this.getBlockPos(), Math.round(searchRadii[0] * rangeModifier), Math.round(searchRadii[1] * rangeModifier));
-        while (it.hasNext() && this.beeItems.getStackInSlot(0).is(ItemsRegistration.QUEEN)) {
+        while (it.hasNext() && this.beeItems.getStackInSlot(0).is(ItemsRegistration.QUEEN.get())) {
             BlockPos pos = it.next();
             if (flower.isAcceptable(getLevel().getBlockState(pos))) {
                 flowerCache.add(pos);

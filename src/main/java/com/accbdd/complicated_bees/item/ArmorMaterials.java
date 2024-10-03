@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public enum ArmorMaterials implements ArmorMaterial {
-    APIARIST("apiarist", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0, 0, () -> Ingredient.of(ItemsRegistration.WOVEN_MESH));
+    APIARIST("apiarist", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0, 0, () -> Ingredient.of(ItemsRegistration.WOVEN_MESH.get()));
 
     private final String name;
     private final int durabilityMult;

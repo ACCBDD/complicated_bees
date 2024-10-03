@@ -6,15 +6,15 @@ import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.item.CombItem;
 import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ColorHandlers {
     @SubscribeEvent
     public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
-        event.register(BeeItem::getItemColor, ItemsRegistration.DRONE, ItemsRegistration.PRINCESS, ItemsRegistration.QUEEN);
-        event.register(CombItem::getItemColor, ItemsRegistration.COMB);
-        event.register(BeeNestBlock::getItemColor, ItemsRegistration.BEE_NEST);
+        event.register(BeeItem::getItemColor, ItemsRegistration.DRONE.get(), ItemsRegistration.PRINCESS.get(), ItemsRegistration.QUEEN.get());
+        event.register(CombItem::getItemColor, ItemsRegistration.COMB.get());
+        event.register(BeeNestBlock::getItemColor, ItemsRegistration.BEE_NEST.get());
     }
 
     @SubscribeEvent

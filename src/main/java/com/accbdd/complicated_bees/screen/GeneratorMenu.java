@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 import static com.accbdd.complicated_bees.block.entity.GeneratorBlockEntity.SLOT;
 import static com.accbdd.complicated_bees.block.entity.GeneratorBlockEntity.SLOT_COUNT;

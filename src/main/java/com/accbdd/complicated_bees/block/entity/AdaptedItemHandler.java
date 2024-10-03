@@ -1,7 +1,7 @@
 package com.accbdd.complicated_bees.block.entity;
 
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 
 public class AdaptedItemHandler implements IItemHandlerModifiable {

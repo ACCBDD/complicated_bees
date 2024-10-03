@@ -10,11 +10,11 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.client.event.RegisterNamedRenderTypesEvent;
-import net.neoforged.neoforge.client.model.ExtraFaceData;
-import net.neoforged.neoforge.client.model.generators.CustomLoaderBuilder;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.client.event.RegisterNamedRenderTypesEvent;
+import net.minecraftforge.client.model.ForgeFaceData;
+import net.minecraftforge.client.model.generators.CustomLoaderBuilder;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,15 +23,16 @@ import java.util.Map;
 
 public class BeeModelBuilder extends CustomLoaderBuilder<ItemModelBuilder> {
     private final Map<ResourceLocation, ResourceLocation> variantMap = new HashMap<>();
-    private final Int2ObjectMap<ExtraFaceData> faceData = new Int2ObjectOpenHashMap<>();
+    private final Int2ObjectMap<ForgeFaceData> faceData = new Int2ObjectOpenHashMap<>();
     private final Map<ResourceLocation, IntSet> renderTypes = new LinkedHashMap<>();
     private final IntSet layersWithRenderTypes = new IntOpenHashSet();
 
     public static BeeModelBuilder begin(ItemModelBuilder parent, ExistingFileHelper existingFileHelper) {
         return new BeeModelBuilder(parent, existingFileHelper);
     }
+
     protected BeeModelBuilder(ItemModelBuilder parent, ExistingFileHelper existingFileHelper) {
-        super(BeeModel.Loader.ID, parent, existingFileHelper, false);
+        super(BeeModel.Loader.ID, parent, existingFileHelper);
     }
 
     public BeeModelBuilder variant(ResourceLocation species, ResourceLocation modelFile) {
@@ -45,8 +46,8 @@ public class BeeModelBuilder extends CustomLoaderBuilder<ItemModelBuilder> {
         Preconditions.checkArgument(Arrays.stream(layers).allMatch(i -> i >= 0), "All layers must be >= 0");
         for (int i : layers) {
             faceData.compute(i, (key, value) -> {
-                ExtraFaceData fallback = value == null ? ExtraFaceData.DEFAULT : value;
-                return new ExtraFaceData(fallback.color(), blockLight, skyLight, fallback.ambientOcclusion());
+                ForgeFaceData fallback = value == null ? ForgeFaceData.DEFAULT : value;
+                return new ForgeFaceData(fallback.color(), blockLight, skyLight, fallback.ambientOcclusion());
             });
         }
         return this;
@@ -68,8 +69,8 @@ public class BeeModelBuilder extends CustomLoaderBuilder<ItemModelBuilder> {
         Preconditions.checkArgument(Arrays.stream(layers).allMatch(i -> i >= 0), "All layers must be >= 0");
         for (int i : layers) {
             faceData.compute(i, (key, value) -> {
-                ExtraFaceData fallback = value == null ? ExtraFaceData.DEFAULT : value;
-                return new ExtraFaceData(color, fallback.blockLight(), fallback.skyLight(), fallback.ambientOcclusion());
+                ForgeFaceData fallback = value == null ? ForgeFaceData.DEFAULT : value;
+                return new ForgeFaceData(color, fallback.blockLight(), fallback.skyLight(), fallback.ambientOcclusion());
             });
         }
         return this;
@@ -139,8 +140,9 @@ public class BeeModelBuilder extends CustomLoaderBuilder<ItemModelBuilder> {
         }
         json.add("variants", variants);
 
-        for (Int2ObjectMap.Entry<ExtraFaceData> entry : this.faceData.int2ObjectEntrySet()) {
-            layerObj.add(String.valueOf(entry.getIntKey()), ExtraFaceData.CODEC.encodeStart(JsonOps.INSTANCE, entry.getValue()).getOrThrow(false, s -> {}));
+        for (Int2ObjectMap.Entry<ForgeFaceData> entry : this.faceData.int2ObjectEntrySet()) {
+            layerObj.add(String.valueOf(entry.getIntKey()), ForgeFaceData.CODEC.encodeStart(JsonOps.INSTANCE, entry.getValue()).getOrThrow(false, s -> {
+            }));
         }
 
         forgeData.add("layers", layerObj);

@@ -3,7 +3,6 @@ package com.accbdd.complicated_bees.genetics.mutation;
 import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.genetics.mutation.condition.IMutationCondition;
-import com.accbdd.complicated_bees.registry.MutationRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -40,7 +39,7 @@ public class Mutation {
         this(first, second, result, chance, new ArrayList<>());
         List<IMutationCondition> list = getConditions();
         for (String key : conditions.getAllKeys()) {
-            IMutationCondition condition = MutationRegistration.MUTATION_CONDITION_REGISTRY.get(ResourceLocation.tryParse(key));
+            IMutationCondition condition = ComplicatedBees.MUTATION_CONDITION_REGISTRY.getValue(ResourceLocation.tryParse(key));
             if (condition != null)
                 list.add(condition.deserialize(conditions.getCompound(key)));
             else
@@ -83,7 +82,7 @@ public class Mutation {
     public static CompoundTag getSerializedConditions(List<IMutationCondition> conditions) {
         CompoundTag tag = new CompoundTag();
         for (IMutationCondition condition : conditions) {
-            ResourceLocation loc = MutationRegistration.MUTATION_CONDITION_REGISTRY.getKey(condition);
+            ResourceLocation loc = ComplicatedBees.MUTATION_CONDITION_REGISTRY.getKey(condition);
             if (loc == null) {
                 ComplicatedBees.LOGGER.error("tried to serialize non-registered mutation condition!");
             } else {

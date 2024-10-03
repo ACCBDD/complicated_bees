@@ -33,7 +33,7 @@ public class AnalyzerItem extends Item {
                     return new AnalyzerMenu(windowId, player, playerInventory.selected);
                 }
             };
-            player.openMenu(containerProvider, (buf -> buf.writeInt(player.getInventory().selected)));
+            player.openMenu(containerProvider);
         }
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(pUsedHand), true);
     }
