@@ -37,7 +37,7 @@ description='''${mod_description}'''
     modId="jei"
     type="optional"
     reason="recipe lookups"
-    versionRange="[17.3,)"
+    versionRange="[15.20,)"
     ordering="AFTER"
     side="CLIENT"
 
@@ -45,7 +45,7 @@ description='''${mod_description}'''
     modId="jade"
     type="optional"
     reason="block lookies"
-    versionRange="[13.3,)"
+    versionRange="[11.12,)"
     ordering="AFTER"
     side="BOTH"
 
@@ -53,6 +53,6 @@ description='''${mod_description}'''
     modId="patchouli"
     type="optional"
     reason="in-game guidebook"
-    versionRange="[1.20.4-85,)"
+    versionRange="[1.20.1-84,)"
     ordering="AFTER"
     side="BOTH"
