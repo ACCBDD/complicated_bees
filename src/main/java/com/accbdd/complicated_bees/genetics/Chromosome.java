@@ -83,13 +83,13 @@ public class Chromosome {
 
     public static Chromosome deserialize(CompoundTag tag) {
         Map<ResourceLocation, IGene<?>> genes = new HashMap<>();
-        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : GeneRegistration.GENE_REGISTRY.entrySet()) {
+        for (Map.Entry<ResourceKey<IGene<?>>, IGene<?>> entry : ComplicatedBees.GENE_REGISTRY.getEntries()) {
             ResourceLocation id = entry.getKey().location();
             CompoundTag geneData = tag.getCompound(id.toString());
             if (!geneData.equals(new CompoundTag())) {
                 if (!geneData.contains(Gene.DOMINANT))
                     geneData.putBoolean(Gene.DOMINANT, true);
-                genes.put(id, Objects.requireNonNull(GeneRegistration.GENE_REGISTRY.get(id)).deserialize(geneData));
+                genes.put(id, Objects.requireNonNull(ComplicatedBees.GENE_REGISTRY.getValue(id)).deserialize(geneData));
 
             }
         }
