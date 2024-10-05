@@ -4,6 +4,7 @@ import com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity;
 import com.accbdd.complicated_bees.screen.CentrifugeMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,10 +65,10 @@ public class CentrifugeBlock extends BaseEntityBlock {
 
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player player) {
-                        return new CentrifugeMenu(windowId, player, ((CentrifugeBlockEntity) be).getData());
+                        return new CentrifugeMenu(windowId, player, pos, ((CentrifugeBlockEntity) be).getData());
                     }
                 };
-                player.openMenu(containerProvider);
+                NetworkHooks.openScreen((ServerPlayer) player, containerProvider, be.getBlockPos());
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
@@ -109,7 +111,7 @@ public class CentrifugeBlock extends BaseEntityBlock {
             while (!centrifuge.outputBuffer.empty()) {
                 Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), centrifuge.outputBuffer.pop());
             }
-            IItemHandler handler = centrifuge.getItemHandler().get();
+            IItemHandler handler = centrifuge.getItemHandler().orElseThrow(() -> new RuntimeException("item handler not found!"));
             for (int i = 0; i < handler.getSlots(); i++) {
                 Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), handler.getStackInSlot(i));
             }

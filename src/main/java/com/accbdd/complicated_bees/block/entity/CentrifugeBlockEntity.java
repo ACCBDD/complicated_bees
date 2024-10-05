@@ -6,6 +6,7 @@ import com.accbdd.complicated_bees.recipe.CentrifugeRecipe;
 import com.accbdd.complicated_bees.registry.BlockEntitiesRegistration;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -16,7 +17,9 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
@@ -25,6 +28,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,14 +60,14 @@ public class CentrifugeBlockEntity extends BlockEntity {
 
     private final ItemStackHandler inputItems = createItemHandler(INPUT_SLOT_COUNT);
     private final ItemStackHandler outputItems = createItemHandler(OUTPUT_SLOT_COUNT);
-    private final Lazy<IItemHandler> itemHandler = Lazy.of(() -> new CombinedInvWrapper(inputItems, outputItems));
-    private final Lazy<IItemHandler> inputItemHandler = Lazy.of(() -> new AdaptedItemHandler(inputItems) {
+    private final LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> new CombinedInvWrapper(inputItems, outputItems));
+    private final LazyOptional<IItemHandler> inputItemHandler = LazyOptional.of(() -> new AdaptedItemHandler(inputItems) {
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
             return ItemStack.EMPTY;
         }
     });
-    private final Lazy<IItemHandler> outputItemHandler = Lazy.of(() -> new AdaptedItemHandler(outputItems) {
+    private final LazyOptional<IItemHandler> outputItemHandler = LazyOptional.of(() -> new AdaptedItemHandler(outputItems) {
         @Override
         public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             return stack;
@@ -74,6 +78,29 @@ public class CentrifugeBlockEntity extends BlockEntity {
             return false;
         }
     });
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        itemHandler.invalidate();
+        inputItemHandler.invalidate();
+        outputItemHandler.invalidate();
+        energyHandler.invalidate();
+    }
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
+            if (side == null)
+                return this.getItemHandler().cast();
+            if (side == Direction.DOWN)
+                return this.getOutputItemHandler().cast();
+            return this.getInputItemHandler().cast();
+        }
+        if (cap == ForgeCapabilities.ENERGY)
+            return this.getEnergyHandler().cast();
+        return super.getCapability(cap, side);
+    }
 
     public CentrifugeBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), pos, blockState);
@@ -111,20 +138,20 @@ public class CentrifugeBlockEntity extends BlockEntity {
         return outputItems;
     }
 
-    public Lazy<IItemHandler> getItemHandler() {
+    public LazyOptional<IItemHandler> getItemHandler() {
         return itemHandler;
     }
 
-    public Lazy<IItemHandler> getInputItemHandler() {
+    public LazyOptional<IItemHandler> getInputItemHandler() {
         return inputItemHandler;
     }
 
-    public Lazy<IItemHandler> getOutputItemHandler() {
+    public LazyOptional<IItemHandler> getOutputItemHandler() {
         return outputItemHandler;
     }
 
     private final EnergyStorage energy = createEnergyStorage();
-    private final Lazy<IEnergyStorage> energyHandler = Lazy.of(() -> new AdaptedEnergyStorage(energy) {
+    private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> new AdaptedEnergyStorage(energy) {
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
             return 0;
@@ -160,8 +187,12 @@ public class CentrifugeBlockEntity extends BlockEntity {
         return new EnergyStorage(CAPACITY, MAXTRANSFER, MAXTRANSFER);
     }
 
-    public IEnergyStorage getEnergyHandler() {
-        return energyHandler.get();
+    public LazyOptional<IEnergyStorage> getEnergyHandler() {
+        return energyHandler;
+    }
+
+    public int getStoredPower() {
+        return energy.getEnergyStored();
     }
 
     @Override

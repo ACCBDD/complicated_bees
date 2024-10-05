@@ -1,5 +1,5 @@
 {
-  "type": "neoforge:add_features",
+  "type": "forge:add_features",
   "biomes": ["minecraft:end_highlands"],
   "features": "complicated_bees:ender_bee_nest",
   "step": "vegetal_decoration"

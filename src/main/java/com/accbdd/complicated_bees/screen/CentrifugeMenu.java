@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity;
+import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -18,14 +19,14 @@ public class CentrifugeMenu extends AbstractContainerMenu {
 
     private int power;
 
-    public CentrifugeMenu(int windowId, Player player) {
-        this(windowId, player, new SimpleContainerData(2));
+    public CentrifugeMenu(int windowId, Player player, BlockPos pos) {
+        this(windowId, player, pos, new SimpleContainerData(2));
     }
 
-    public CentrifugeMenu(int windowId, Player player, ContainerData data) {
+    public CentrifugeMenu(int windowId, Player player, BlockPos pos, ContainerData data) {
         super(MenuRegistration.CENTRIFUGE_MENU.get(), windowId);
         this.data = data;
-        this.pos = player.getOnPos();
+        this.pos = pos;
         if (player.level().getBlockEntity(pos) instanceof CentrifugeBlockEntity centrifuge) {
             addSlot(new SlotItemHandler(centrifuge.getInputItems(), INPUT_SLOT, 34, 35));
             for (int i = 0; i < 9; i++) {
@@ -42,7 +43,7 @@ public class CentrifugeMenu extends AbstractContainerMenu {
             addDataSlot(new DataSlot() {
                 @Override
                 public int get() {
-                    return centrifuge.getEnergyHandler().getEnergyStored() & 0xffff;
+                    return centrifuge.getStoredPower() & 0xffff;
                 }
 
                 @Override
@@ -53,7 +54,7 @@ public class CentrifugeMenu extends AbstractContainerMenu {
             addDataSlot(new DataSlot() {
                 @Override
                 public int get() {
-                    return (centrifuge.getEnergyHandler().getEnergyStored() >> 16) & 0xffff;
+                    return (centrifuge.getStoredPower() >> 16) & 0xffff;
                 }
 
                 @Override
@@ -148,6 +149,6 @@ public class CentrifugeMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return true;
+        return stillValid(ContainerLevelAccess.create(player.level(), pos), player, BlocksRegistration.CENTRIFUGE.get());
     }
 }

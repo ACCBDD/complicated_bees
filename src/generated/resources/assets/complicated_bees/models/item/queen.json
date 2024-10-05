@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:item/generated",
-  "loader": "complicated_bees:bee_model",
-  "neoforge_data": {
+  "forge_data": {
     "layers": {}
   },
+  "loader": "complicated_bees:bee_model",
   "render_types": {},
   "textures": {
     "layer0": "complicated_bees:item/bee_base",

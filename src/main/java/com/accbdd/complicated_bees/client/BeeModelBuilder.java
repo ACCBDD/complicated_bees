@@ -146,7 +146,7 @@ public class BeeModelBuilder extends CustomLoaderBuilder<ItemModelBuilder> {
         }
 
         forgeData.add("layers", layerObj);
-        json.add("neoforge_data", forgeData);
+        json.add("forge_data", forgeData);
 
         JsonObject renderTypes = new JsonObject();
         this.renderTypes.forEach((renderType, layers) -> {

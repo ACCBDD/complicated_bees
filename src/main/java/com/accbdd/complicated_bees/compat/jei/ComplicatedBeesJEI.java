@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.compat.jei;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Comb;
 import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Species;
@@ -53,7 +54,13 @@ public class ComplicatedBeesJEI implements IModPlugin {
     public void registerItemSubtypes(ISubtypeRegistration registration) {
         IIngredientSubtypeInterpreter<ItemStack> speciesInterpreter = (stack, context) -> {
             Lazy<Species> species = Lazy.of(() -> ((GeneSpecies) GeneticHelper.getChromosome(stack, true).getGene(GeneSpecies.ID)).get());
-            return GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species.get()).toString();
+            ResourceLocation key = GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species.get());
+            if (key == null) {
+                ComplicatedBees.LOGGER.debug("failed to find key for species {}", species.get());
+                return "invalid";
+            }
+            String string = key.toString();
+            return string;
         };
 
         IIngredientSubtypeInterpreter<ItemStack> combInterpreter = (stack, context) -> {

@@ -202,31 +202,6 @@ public class ComplicatedBees {
         MUTATION_CONDITION_REGISTRY = event.create(MutationRegistration.MUTATION_CONDITION_REGISTRY);
     }
 
-//    @SubscribeEvent
-//    public void registerCapabilities(RegisterCapabilitiesEvent event) {
-//        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.APIARY_ENTITY.get(), (o, direction) -> {
-//            if (direction == null) {
-//                return o.getItemHandler().get();
-//            }
-//            if (direction == Direction.DOWN) {
-//                return o.getOutputItemHandler().get();
-//            }
-//            return o.getBeeItemHandler().get();
-//        });
-//        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (o, direction) -> {
-//            if (direction == null) {
-//                return o.getItemHandler().get();
-//            }
-//            if (direction == Direction.DOWN) {
-//                return o.getOutputItemHandler().get();
-//            }
-//            return o.getInputItemHandler().get();
-//        });
-//        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getItemHandler());
-//        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
-//        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, BlockEntitiesRegistration.CENTRIFUGE_ENTITY.get(), (be, dir) -> be.getEnergyHandler());
-//    }
-
     @SubscribeEvent
     public void registerSerializers(RegisterEvent event) {
         event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,

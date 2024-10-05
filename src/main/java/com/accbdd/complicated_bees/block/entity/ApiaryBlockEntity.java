@@ -15,6 +15,7 @@ import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.util.BlockPosBoxIterator;
 import com.accbdd.complicated_bees.util.enums.EnumErrorCodes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
@@ -25,7 +26,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
@@ -33,6 +36,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,15 +84,15 @@ public class ApiaryBlockEntity extends BlockEntity {
     private final ItemStackHandler outputItems = createOutputHandler();
     private final ItemStackHandler frameItems = createFrameHandler();
 
-    private final Lazy<IItemHandler> itemHandler = Lazy.of(() -> new CombinedInvWrapper(beeItems, outputItems, frameItems));
-    private final Lazy<IItemHandler> beeItemHandler = Lazy.of(() -> new AdaptedItemHandler(beeItems) {
+    private final LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> new CombinedInvWrapper(beeItems, outputItems, frameItems));
+    private final LazyOptional<IItemHandler> beeItemHandler = LazyOptional.of(() -> new AdaptedItemHandler(beeItems) {
         @Override
         public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             return ItemStack.EMPTY;
         }
     });
 
-    private final Lazy<IItemHandler> outputItemHandler = Lazy.of(() -> new AdaptedItemHandler(outputItems) {
+    private final LazyOptional<IItemHandler> outputItemHandler = LazyOptional.of(() -> new AdaptedItemHandler(outputItems) {
         @Override
         public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             return stack;
@@ -99,12 +103,35 @@ public class ApiaryBlockEntity extends BlockEntity {
             return false;
         }
     });
-    private final Lazy<IItemHandler> frameItemHandler = Lazy.of(() -> new AdaptedItemHandler(frameItems) {
+    private final LazyOptional<IItemHandler> frameItemHandler = LazyOptional.of(() -> new AdaptedItemHandler(frameItems) {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return stack.getItem() instanceof FrameItem;
         }
     });
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        itemHandler.invalidate();
+        beeItemHandler.invalidate();
+        outputItemHandler.invalidate();
+        frameItemHandler.invalidate();
+    }
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap== ForgeCapabilities.ITEM_HANDLER) {
+            if (side == null) {
+                return this.getItemHandler().cast();
+            }
+            if (side == Direction.DOWN) {
+                return this.getOutputItemHandler().cast();
+            }
+            return this.getBeeItemHandler().cast();
+        }
+        return super.getCapability(cap, side);
+    }
 
     public ApiaryBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntitiesRegistration.APIARY_ENTITY.get(), pPos, pBlockState);
@@ -147,19 +174,19 @@ public class ApiaryBlockEntity extends BlockEntity {
         return frameItems;
     }
 
-    public Lazy<IItemHandler> getItemHandler() {
+    public LazyOptional<IItemHandler> getItemHandler() {
         return itemHandler;
     }
 
-    public Lazy<IItemHandler> getBeeItemHandler() {
+    public LazyOptional<IItemHandler> getBeeItemHandler() {
         return beeItemHandler;
     }
 
-    public Lazy<IItemHandler> getOutputItemHandler() {
+    public LazyOptional<IItemHandler> getOutputItemHandler() {
         return outputItemHandler;
     }
 
-    public Lazy<IItemHandler> getFrameItemHandler() {
+    public LazyOptional<IItemHandler> getFrameItemHandler() {
         return frameItemHandler;
     }
 

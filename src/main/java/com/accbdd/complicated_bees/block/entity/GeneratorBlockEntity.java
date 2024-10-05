@@ -11,12 +11,15 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -33,10 +36,10 @@ public class GeneratorBlockEntity extends BlockEntity {
     public static final int SLOT = 0;
 
     private final ItemStackHandler items = createItemHandler();
-    private final Lazy<IItemHandler> itemHandler = Lazy.of(() -> items);
+    private final LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> items);
 
     private final EnergyStorage energy = createEnergyStorage();
-    private final Lazy<IEnergyStorage> energyHandler = Lazy.of(() -> new AdaptedEnergyStorage(energy) {
+    private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> new AdaptedEnergyStorage(energy) {
         @Override
         public int receiveEnergy(int maxReceive, boolean simulate) {
             return 0;
@@ -61,6 +64,22 @@ public class GeneratorBlockEntity extends BlockEntity {
     private int burnTime;
     private int maxBurnTime;
 
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        itemHandler.invalidate();
+        energyHandler.invalidate();
+    }
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER)
+            return getItemHandler().cast();
+        if (cap == ForgeCapabilities.ENERGY)
+            return getEnergyHandler().cast();
+        return super.getCapability(cap);
+    }
+
     public GeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntitiesRegistration.GENERATOR_BLOCK_ENTITY.get(), pos, state);
     }
@@ -77,7 +96,7 @@ public class GeneratorBlockEntity extends BlockEntity {
                 if (fuel.isEmpty()) {
                     return;
                 }
-                int burnTime = fuel.getBurnTime(RecipeType.SMELTING);
+                int burnTime = ForgeHooks.getBurnTime(fuel, RecipeType.SMELTING);
                 maxBurnTime = burnTime;
                 setBurnTime(burnTime);
                 if (burnTime <= 0) {
@@ -173,12 +192,12 @@ public class GeneratorBlockEntity extends BlockEntity {
         return new EnergyStorage(CAPACITY, MAXTRANSFER, MAXTRANSFER);
     }
 
-    public IItemHandler getItemHandler() {
-        return itemHandler.get();
+    public LazyOptional<IItemHandler> getItemHandler() {
+        return itemHandler;
     }
 
-    public IEnergyStorage getEnergyHandler() {
-        return energyHandler.get();
+    public LazyOptional<IEnergyStorage> getEnergyHandler() {
+        return energyHandler;
     }
 
     public int getMaxBurnTime() {

@@ -123,13 +123,10 @@ public class BeeModel implements IUnbakedGeometry<BeeModel> {
             }
 
             var emissiveLayers = new Int2ObjectArrayMap<ForgeFaceData>();
-            if (jsonObject.has("forge_data"))
-                throw new JsonParseException("forge_data should be replaced by neoforge_data");
-            if (jsonObject.has("neoforge_data")) {
-                JsonObject forgeData = jsonObject.get("neoforge_data").getAsJsonObject();
+            if (jsonObject.has("forge_data")) {
+                JsonObject forgeData = jsonObject.get("forge_data").getAsJsonObject();
                 readLayerData(forgeData, "layers", renderTypeNames, emissiveLayers, false);
             }
-            ;
 
             return new BeeModel(emissiveLayers, renderTypeNames);
         }
