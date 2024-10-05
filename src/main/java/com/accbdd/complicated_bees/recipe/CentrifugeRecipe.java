@@ -56,7 +56,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
             JsonObject inputJson = json.getAsJsonObject("input");
             ResourceLocation inputItemLocation = ResourceLocation.tryParse(inputJson.get("item").getAsString());
             Item inputItem = ForgeRegistries.ITEMS.getValue(inputItemLocation);
-            if (inputItem == null) throw new JsonParseException("could not parse input for " + location.toString());
+            if (inputItem == null) throw new JsonParseException("could not parse input for " + location);
             ItemStack input = new ItemStack(inputItem);
             if (inputJson.has("nbt"))
                 input.setTag(CraftingHelper.getNBT(inputJson.getAsJsonObject("nbt")));
