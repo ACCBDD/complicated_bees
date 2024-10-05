@@ -5,7 +5,7 @@
   "chance": 0.08,
   "conditions": {
     "complicated_bees:block_under": {
-      "block": "minecraft:lapis_block"
+      "block": "minecraft:emerald_block"
     }
   }
 }

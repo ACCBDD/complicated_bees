@@ -1,7 +1,7 @@
 {
   "first": "complicated_bees:lapic",
   "second": "complicated_bees:amethyst",
-  "result": "complicated_bees:amethyst",
+  "result": "complicated_bees:dimantic",
   "chance": 0.06,
   "conditions": {
     "complicated_bees:block_under": {
