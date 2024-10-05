@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_bee"
+      "has_bee",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "complicated_bees:meter"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

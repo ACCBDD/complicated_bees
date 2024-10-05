@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "complicated_bees:apiarist_leggings"
-  }
+  },
+  "show_notification": true
 }

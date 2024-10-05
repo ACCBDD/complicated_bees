@@ -25,5 +25,6 @@
   ],
   "result": {
     "item": "complicated_bees:analyzer"
-  }
+  },
+  "show_notification": true
 }

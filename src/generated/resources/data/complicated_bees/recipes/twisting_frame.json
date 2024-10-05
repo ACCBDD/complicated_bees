@@ -1,31 +1,39 @@
 {
-  "neoforge:conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "complicated_bees:item_enabled",
-      "item": "complicated_bees:twisting_frame"
-    }
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "O": {
-      "item": "complicated_bees:waxed_stick"
-    },
-    "X": [
-      {
-        "item": "minecraft:soul_sand"
-      },
-      {
-        "item": "minecraft:soul_soil"
+      "conditions": [
+        {
+          "type": "complicated_bees:item_enabled",
+          "item": "complicated_bees:twisting_frame"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "O": {
+            "item": "complicated_bees:waxed_stick"
+          },
+          "X": [
+            {
+              "item": "minecraft:soul_sand"
+            },
+            {
+              "item": "minecraft:soul_soil"
+            }
+          ]
+        },
+        "pattern": [
+          "OOO",
+          "OXO",
+          "OOO"
+        ],
+        "result": {
+          "item": "complicated_bees:twisting_frame"
+        },
+        "show_notification": true
       }
-    ]
-  },
-  "pattern": [
-    "OOO",
-    "OXO",
-    "OOO"
-  ],
-  "result": {
-    "item": "complicated_bees:twisting_frame"
-  }
+    }
+  ]
 }

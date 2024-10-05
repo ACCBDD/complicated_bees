@@ -13,5 +13,6 @@
   "result": {
     "count": 6,
     "item": "complicated_bees:smooth_wax_wall"
-  }
+  },
+  "show_notification": true
 }

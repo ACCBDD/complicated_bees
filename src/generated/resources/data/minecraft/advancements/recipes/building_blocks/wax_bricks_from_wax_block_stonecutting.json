@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_wax_block"
+      "has_wax_block",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:wax_bricks_from_wax_block_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

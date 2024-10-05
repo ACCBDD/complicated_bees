@@ -1,6 +1,7 @@
 package com.accbdd.complicated_bees.datagen.condition;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -57,7 +58,8 @@ public class ItemEnabledCondition implements ICondition {
 
         @Override
         public void write(JsonObject json, ItemEnabledCondition value) {
-            ItemEnabledCondition.CODEC.encode(value, JsonOps.INSTANCE, json);
+            json.add("type", new JsonPrimitive(getID().toString()));
+            json.add("item", new JsonPrimitive(value.item.toString()));
         }
 
         @Override

@@ -63,7 +63,7 @@ public class CentrifugeBlock extends BaseEntityBlock {
 
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player player) {
-                        return new CentrifugeMenu(windowId, player, pos, ((CentrifugeBlockEntity) be).getData());
+                        return new CentrifugeMenu(windowId, player, ((CentrifugeBlockEntity) be).getData());
                     }
                 };
                 player.openMenu(containerProvider);

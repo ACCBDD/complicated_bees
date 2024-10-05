@@ -39,7 +39,7 @@ public class Mutation {
         this(first, second, result, chance, new ArrayList<>());
         List<IMutationCondition> list = getConditions();
         for (String key : conditions.getAllKeys()) {
-            IMutationCondition condition = ComplicatedBees.MUTATION_CONDITION_REGISTRY.getValue(ResourceLocation.tryParse(key));
+            IMutationCondition condition = ComplicatedBees.MUTATION_CONDITION_REGISTRY.get().getValue(ResourceLocation.tryParse(key));
             if (condition != null)
                 list.add(condition.deserialize(conditions.getCompound(key)));
             else
@@ -82,7 +82,7 @@ public class Mutation {
     public static CompoundTag getSerializedConditions(List<IMutationCondition> conditions) {
         CompoundTag tag = new CompoundTag();
         for (IMutationCondition condition : conditions) {
-            ResourceLocation loc = ComplicatedBees.MUTATION_CONDITION_REGISTRY.getKey(condition);
+            ResourceLocation loc = ComplicatedBees.MUTATION_CONDITION_REGISTRY.get().getKey(condition);
             if (loc == null) {
                 ComplicatedBees.LOGGER.error("tried to serialize non-registered mutation condition!");
             } else {

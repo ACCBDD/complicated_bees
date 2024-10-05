@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_smooth_wax"
+      "has_smooth_wax",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:chiseled_wax_from_smooth_wax_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

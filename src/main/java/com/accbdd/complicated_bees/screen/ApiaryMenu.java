@@ -2,7 +2,6 @@ package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity;
 import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
-import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.ItemsRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import com.accbdd.complicated_bees.screen.slot.ItemSlot;
@@ -13,7 +12,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 import static com.accbdd.complicated_bees.block.entity.ApiaryBlockEntity.*;
@@ -22,14 +24,14 @@ public class ApiaryMenu extends AbstractContainerMenu {
     private final BlockPos pos;
     private final ContainerData data;
 
-    public ApiaryMenu(int windowId, Player player, BlockPos pos) {
-        this(windowId, player, pos, new SimpleContainerData(3));
+    public ApiaryMenu(int windowId, Player player) {
+        this(windowId, player, new SimpleContainerData(3));
     }
 
-    public ApiaryMenu(int windowId, Player player, BlockPos pos, ContainerData data) {
+    public ApiaryMenu(int windowId, Player player,ContainerData data) {
         super(MenuRegistration.APIARY_MENU.get(), windowId);
         this.data = data;
-        this.pos = pos;
+        this.pos = player.getOnPos();
         if (player.level().getBlockEntity(pos) instanceof ApiaryBlockEntity apiary) {
             addSlot(new TagSlot(apiary.getBeeItems(), BEE_SLOT, 29, 38, ItemTagGenerator.ROYAL));
             addSlot(new ItemSlot(apiary.getBeeItems(), BEE_SLOT + 1, 29, 63, ItemsRegistration.DRONE.get()));
@@ -119,7 +121,7 @@ public class ApiaryMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(player.level(), pos), player, BlocksRegistration.APIARY.get());
+        return true;
     }
 
     public boolean hasQueen() {

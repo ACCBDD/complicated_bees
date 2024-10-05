@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
-  "loader": "neoforge:item_layers",
-  "neoforge_data": {
+  "loader": "forge:item_layers",
+  "forge_data": {
     "layers": {}
   },
   "render_types": {},

@@ -77,7 +77,7 @@ public class GeneratorBlock extends BaseEntityBlock {
 
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-                        return new GeneratorMenu(windowId, playerEntity, pos);
+                        return new GeneratorMenu(windowId, playerEntity);
                     }
                 };
                 player.openMenu(containerProvider);

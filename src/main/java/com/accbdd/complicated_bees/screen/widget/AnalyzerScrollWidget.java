@@ -184,8 +184,8 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     }
 
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene) {
-        IGene<?> active = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), true);
-        IGene<?> inactive = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), false);
+        IGene<?> active = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), true);
+        IGene<?> inactive = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), false);
         drawText(graphics, label, PADDING, nextLine, 0xFFFFFF);
         drawText(graphics, active.getTranslationKey(), ACTIVE_COL, nextLine, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTranslationKey(), INACTIVE_COL, nextLine, inactive.isDominant() ? 0xE63225 : 0x257FE6);
@@ -201,16 +201,16 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
     }
 
     private void drawGeneValues(GuiGraphics graphics, Component label, ItemStack bee, IGene<?> gene, int y) {
-        IGene<?> active = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), true);
-        IGene<?> inactive = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), false);
+        IGene<?> active = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), true);
+        IGene<?> inactive = GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), false);
         drawText(graphics, label, PADDING, y, 0xFFFFFF);
         drawText(graphics, active.getTranslationKey(), ACTIVE_COL, y, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTranslationKey(), INACTIVE_COL, y, inactive.isDominant() ? 0xE63225 : 0x257FE6);
     }
 
     private void drawGeneTolerance(GuiGraphics graphics, ItemStack bee, GeneTolerant<?> gene, int x, int x2, int y) {
-        GeneTolerant<?> active = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), true);
-        GeneTolerant<?> inactive = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), false);
+        GeneTolerant<?> active = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), true);
+        GeneTolerant<?> inactive = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), false);
         drawText(graphics, active.getTolerance().getTranslationKey(), x, y, active.isDominant() ? 0xE63225 : 0x257FE6);
         drawText(graphics, inactive.getTolerance().getTranslationKey(), x2, y, inactive.isDominant() ? 0xE63225 : 0x257FE6);
     }
@@ -219,8 +219,8 @@ public class AnalyzerScrollWidget extends AbstractScrollWidget {
         x += getX();
         x2 += getX();
         y += getY() - 2;
-        GeneTolerant<?> active = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), true);
-        GeneTolerant<?> inactive = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.getKey(gene), false);
+        GeneTolerant<?> active = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), true);
+        GeneTolerant<?> inactive = (GeneTolerant<?>) GeneticHelper.getGene(bee, ComplicatedBees.GENE_REGISTRY.get().getKey(gene), false);
         if (active.getTolerance().down != 0 && active.getTolerance().up != 0) {
             graphics.blit(GUI, x, y, 14, 246, 7, 10);
         } else if (active.getTolerance().down != 0) {

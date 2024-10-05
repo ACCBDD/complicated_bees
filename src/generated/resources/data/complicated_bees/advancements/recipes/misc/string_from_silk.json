@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_silk_wisp"
+      "has_silk_wisp",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "complicated_bees:string_from_silk"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

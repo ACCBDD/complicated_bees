@@ -28,7 +28,7 @@ public class GeneEffect extends Gene<IBeeEffect> {
     @Override
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
-        ResourceLocation effectKey = ComplicatedBees.BEE_EFFECT_REGISTRY.getKey(get());
+        ResourceLocation effectKey = ComplicatedBees.BEE_EFFECT_REGISTRY.get().getKey(get());
         tag.put(DATA, StringTag.valueOf(effectKey == null ? "INVALID" : effectKey.toString()));
         tag.put(DOMINANT, ByteTag.valueOf(isDominant()));
         return tag;
@@ -37,20 +37,20 @@ public class GeneEffect extends Gene<IBeeEffect> {
     @Override
     public GeneEffect deserialize(CompoundTag tag) {
         String effectKeyString = tag.getString(DATA);
-        return new GeneEffect(effectKeyString.equals("INVALID") ? null : ComplicatedBees.BEE_EFFECT_REGISTRY.getValue(ResourceLocation.tryParse(effectKeyString)), tag.getBoolean(DOMINANT));
+        return new GeneEffect(effectKeyString.equals("INVALID") ? null : ComplicatedBees.BEE_EFFECT_REGISTRY.get().getValue(ResourceLocation.tryParse(effectKeyString)), tag.getBoolean(DOMINANT));
     }
 
     @Override
     public MutableComponent getTranslationKey() {
         return this.geneData == null
                 ? Component.translatable("effect.complicated_bees.complicated_bees:none")
-                : Component.translatable("effect.complicated_bees." + ComplicatedBees.BEE_EFFECT_REGISTRY.getKey(geneData));
+                : Component.translatable("effect.complicated_bees." + ComplicatedBees.BEE_EFFECT_REGISTRY.get().getKey(geneData));
     }
 
     @Nullable
     public MutableComponent getDescriptionKey() {
         return this.geneData == null
                 ? null
-                : Component.translatable("effect.complicated_bees." + ComplicatedBees.BEE_EFFECT_REGISTRY.getKey(geneData) + ".desc");
+                : Component.translatable("effect.complicated_bees." + ComplicatedBees.BEE_EFFECT_REGISTRY.get().getKey(geneData) + ".desc");
     }
 }

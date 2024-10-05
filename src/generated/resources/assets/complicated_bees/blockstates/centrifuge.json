@@ -1,48 +1,48 @@
 {
   "variants": {
-    "crafting=false,facing=down": {
+    "facing=down,powered=false": {
       "model": "complicated_bees:block/centrifuge",
       "x": 90
     },
-    "crafting=false,facing=east": {
+    "facing=down,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "x": 90
+    },
+    "facing=east,powered=false": {
       "model": "complicated_bees:block/centrifuge",
       "y": 90
     },
-    "crafting=false,facing=north": {
+    "facing=east,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "y": 90
+    },
+    "facing=north,powered=false": {
       "model": "complicated_bees:block/centrifuge"
     },
-    "crafting=false,facing=south": {
+    "facing=north,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on"
+    },
+    "facing=south,powered=false": {
       "model": "complicated_bees:block/centrifuge",
       "y": 180
     },
-    "crafting=false,facing=up": {
+    "facing=south,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "y": 180
+    },
+    "facing=up,powered=false": {
       "model": "complicated_bees:block/centrifuge",
       "x": -90
     },
-    "crafting=false,facing=west": {
+    "facing=up,powered=true": {
+      "model": "complicated_bees:block/centrifuge_on",
+      "x": -90
+    },
+    "facing=west,powered=false": {
       "model": "complicated_bees:block/centrifuge",
       "y": 270
     },
-    "crafting=true,facing=down": {
-      "model": "complicated_bees:block/centrifuge_on",
-      "x": 90
-    },
-    "crafting=true,facing=east": {
-      "model": "complicated_bees:block/centrifuge_on",
-      "y": 90
-    },
-    "crafting=true,facing=north": {
-      "model": "complicated_bees:block/centrifuge_on"
-    },
-    "crafting=true,facing=south": {
-      "model": "complicated_bees:block/centrifuge_on",
-      "y": 180
-    },
-    "crafting=true,facing=up": {
-      "model": "complicated_bees:block/centrifuge_on",
-      "x": -90
-    },
-    "crafting=true,facing=west": {
+    "facing=west,powered=true": {
       "model": "complicated_bees:block/centrifuge_on",
       "y": 270
     }

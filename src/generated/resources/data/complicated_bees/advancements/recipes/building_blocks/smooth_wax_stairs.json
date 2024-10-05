@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_smooth_wax"
+      "has_smooth_wax",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "complicated_bees:smooth_wax_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

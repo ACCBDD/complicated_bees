@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_honey_droplet"
+      "has_honey_droplet",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "complicated_bees:honeyed_stick"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

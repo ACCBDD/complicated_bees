@@ -13,5 +13,6 @@
   "result": {
     "count": 6,
     "item": "complicated_bees:wax_block_wall"
-  }
+  },
+  "show_notification": true
 }

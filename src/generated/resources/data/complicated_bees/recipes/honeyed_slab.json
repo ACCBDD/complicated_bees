@@ -12,5 +12,6 @@
   "result": {
     "count": 6,
     "item": "complicated_bees:honeyed_slab"
-  }
+  },
+  "show_notification": true
 }

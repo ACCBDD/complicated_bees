@@ -87,38 +87,38 @@ public class ItemsRegistration {
     public static final RegistryObject<ArmorItem> APIARIST_BOOTS = ITEMS.register("apiarist_boots",
             () -> new ArmorItem(ArmorMaterials.APIARIST, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final RegistryObject<BlockItem> BEE_NEST = ITEMS.register("bee_nest", () -> new BeeNestBlockItem(new Item.Properties()));
-    public static final RegistryObject<BlockItem> APIARY = registerSimpleBlockItem("apiary", BlocksRegistration.APIARY.get());
-    public static final RegistryObject<BlockItem> CENTRIFUGE = registerSimpleBlockItem("centrifuge", BlocksRegistration.CENTRIFUGE.get());
-    public static final RegistryObject<BlockItem> GENERATOR = registerSimpleBlockItem("generator", BlocksRegistration.GENERATOR.get());
-    public static final RegistryObject<BlockItem> WAX_BLOCK = registerSimpleBlockItem("wax_block", BlocksRegistration.WAX_BLOCK.get());
-    public static final RegistryObject<BlockItem> WAX_BLOCK_STAIRS = registerSimpleBlockItem("wax_block_stairs", BlocksRegistration.WAX_BLOCK_STAIRS.get());
-    public static final RegistryObject<BlockItem> WAX_BLOCK_SLAB = registerSimpleBlockItem("wax_block_slab", BlocksRegistration.WAX_BLOCK_SLAB.get());
-    public static final RegistryObject<BlockItem> WAX_BLOCK_WALL = registerSimpleBlockItem("wax_block_wall", BlocksRegistration.WAX_BLOCK_WALL.get());
-    public static final RegistryObject<BlockItem> SMOOTH_WAX = registerSimpleBlockItem("smooth_wax", BlocksRegistration.SMOOTH_WAX.get());
-    public static final RegistryObject<BlockItem> SMOOTH_WAX_STAIRS = registerSimpleBlockItem("smooth_wax_stairs", BlocksRegistration.SMOOTH_WAX_STAIRS.get());
-    public static final RegistryObject<BlockItem> SMOOTH_WAX_SLAB = registerSimpleBlockItem("smooth_wax_slab", BlocksRegistration.SMOOTH_WAX_SLAB.get());
-    public static final RegistryObject<BlockItem> SMOOTH_WAX_WALL = registerSimpleBlockItem("smooth_wax_wall", BlocksRegistration.SMOOTH_WAX_WALL.get());
-    public static final RegistryObject<BlockItem> WAX_BRICKS = registerSimpleBlockItem("wax_bricks", BlocksRegistration.WAX_BRICKS.get());
-    public static final RegistryObject<BlockItem> WAX_BRICK_STAIRS = registerSimpleBlockItem("wax_brick_stairs", BlocksRegistration.WAX_BRICK_STAIRS.get());
-    public static final RegistryObject<BlockItem> WAX_BRICK_SLAB = registerSimpleBlockItem("wax_brick_slab", BlocksRegistration.WAX_BRICK_SLAB.get());
-    public static final RegistryObject<BlockItem> WAX_BRICK_WALL = registerSimpleBlockItem("wax_brick_wall", BlocksRegistration.WAX_BRICK_WALL.get());
-    public static final RegistryObject<BlockItem> CHISELED_WAX = registerSimpleBlockItem("chiseled_wax", BlocksRegistration.CHISELED_WAX.get());
-    public static final RegistryObject<BlockItem> HONEYED_PLANKS = registerSimpleBlockItem("honeyed_planks", BlocksRegistration.HONEYED_PLANKS.get());
-    public static final RegistryObject<BlockItem> HONEYED_STAIRS = registerSimpleBlockItem("honeyed_stairs", BlocksRegistration.HONEYED_STAIRS.get());
-    public static final RegistryObject<BlockItem> HONEYED_SLAB = registerSimpleBlockItem("honeyed_slab", BlocksRegistration.HONEYED_SLAB.get());
-    public static final RegistryObject<BlockItem> HONEYED_FENCE = registerSimpleBlockItem("honeyed_fence", BlocksRegistration.HONEYED_FENCE.get());
-    public static final RegistryObject<BlockItem> HONEYED_FENCE_GATE = registerSimpleBlockItem("honeyed_fence_gate", BlocksRegistration.HONEYED_FENCE_GATE.get());
-    public static final RegistryObject<BlockItem> HONEYED_BUTTON = registerSimpleBlockItem("honeyed_button", BlocksRegistration.HONEYED_BUTTON.get());
-    public static final RegistryObject<BlockItem> HONEYED_PRESSURE_PLATE = registerSimpleBlockItem("honeyed_pressure_plate", BlocksRegistration.HONEYED_PRESSURE_PLATE.get());
+    public static final RegistryObject<Item> BEE_NEST = ITEMS.register("bee_nest", () -> new BeeNestBlockItem(new Item.Properties()));
+    public static final RegistryObject<Item> APIARY = registerSimpleBlockItem("apiary", BlocksRegistration.APIARY);
+    public static final RegistryObject<Item> CENTRIFUGE = registerSimpleBlockItem("centrifuge", BlocksRegistration.CENTRIFUGE);
+    public static final RegistryObject<Item> GENERATOR = registerSimpleBlockItem("generator", BlocksRegistration.GENERATOR);
+    public static final RegistryObject<Item> WAX_BLOCK = registerSimpleBlockItem("wax_block", BlocksRegistration.WAX_BLOCK);
+    public static final RegistryObject<Item> WAX_BLOCK_STAIRS = registerSimpleBlockItem("wax_block_stairs", BlocksRegistration.WAX_BLOCK_STAIRS);
+    public static final RegistryObject<Item> WAX_BLOCK_SLAB = registerSimpleBlockItem("wax_block_slab", BlocksRegistration.WAX_BLOCK_SLAB);
+    public static final RegistryObject<Item> WAX_BLOCK_WALL = registerSimpleBlockItem("wax_block_wall", BlocksRegistration.WAX_BLOCK_WALL);
+    public static final RegistryObject<Item> SMOOTH_WAX = registerSimpleBlockItem("smooth_wax", BlocksRegistration.SMOOTH_WAX);
+    public static final RegistryObject<Item> SMOOTH_WAX_STAIRS = registerSimpleBlockItem("smooth_wax_stairs", BlocksRegistration.SMOOTH_WAX_STAIRS);
+    public static final RegistryObject<Item> SMOOTH_WAX_SLAB = registerSimpleBlockItem("smooth_wax_slab", BlocksRegistration.SMOOTH_WAX_SLAB);
+    public static final RegistryObject<Item> SMOOTH_WAX_WALL = registerSimpleBlockItem("smooth_wax_wall", BlocksRegistration.SMOOTH_WAX_WALL);
+    public static final RegistryObject<Item> WAX_BRICKS = registerSimpleBlockItem("wax_bricks", BlocksRegistration.WAX_BRICKS);
+    public static final RegistryObject<Item> WAX_BRICK_STAIRS = registerSimpleBlockItem("wax_brick_stairs", BlocksRegistration.WAX_BRICK_STAIRS);
+    public static final RegistryObject<Item> WAX_BRICK_SLAB = registerSimpleBlockItem("wax_brick_slab", BlocksRegistration.WAX_BRICK_SLAB);
+    public static final RegistryObject<Item> WAX_BRICK_WALL = registerSimpleBlockItem("wax_brick_wall", BlocksRegistration.WAX_BRICK_WALL);
+    public static final RegistryObject<Item> CHISELED_WAX = registerSimpleBlockItem("chiseled_wax", BlocksRegistration.CHISELED_WAX);
+    public static final RegistryObject<Item> HONEYED_PLANKS = registerSimpleBlockItem("honeyed_planks", BlocksRegistration.HONEYED_PLANKS);
+    public static final RegistryObject<Item> HONEYED_STAIRS = registerSimpleBlockItem("honeyed_stairs", BlocksRegistration.HONEYED_STAIRS);
+    public static final RegistryObject<Item> HONEYED_SLAB = registerSimpleBlockItem("honeyed_slab", BlocksRegistration.HONEYED_SLAB);
+    public static final RegistryObject<Item> HONEYED_FENCE = registerSimpleBlockItem("honeyed_fence", BlocksRegistration.HONEYED_FENCE);
+    public static final RegistryObject<Item> HONEYED_FENCE_GATE = registerSimpleBlockItem("honeyed_fence_gate", BlocksRegistration.HONEYED_FENCE_GATE);
+    public static final RegistryObject<Item> HONEYED_BUTTON = registerSimpleBlockItem("honeyed_button", BlocksRegistration.HONEYED_BUTTON);
+    public static final RegistryObject<Item> HONEYED_PRESSURE_PLATE = registerSimpleBlockItem("honeyed_pressure_plate", BlocksRegistration.HONEYED_PRESSURE_PLATE);
     public static final RegistryObject<BlockItem> HONEYED_DOOR = ITEMS.register("honeyed_door", () -> new DoubleHighBlockItem(BlocksRegistration.HONEYED_DOOR.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> HONEYED_TRAPDOOR = registerSimpleBlockItem("honeyed_trapdoor", BlocksRegistration.HONEYED_TRAPDOOR.get());
+    public static final RegistryObject<Item> HONEYED_TRAPDOOR = registerSimpleBlockItem("honeyed_trapdoor", BlocksRegistration.HONEYED_TRAPDOOR);
 
     private static RegistryObject<Item> registerSimpleItem(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties()));
     }
 
-    private static RegistryObject<BlockItem> registerSimpleBlockItem(String name, Block block) {
-        return ITEMS.register(name, () -> new BlockItem(block, new Item.Properties()));
+    private static <T extends Block>RegistryObject<Item> registerSimpleBlockItem(String name, RegistryObject<T> block) {
+        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 }

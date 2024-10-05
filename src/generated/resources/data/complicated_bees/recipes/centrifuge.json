@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "complicated_bees:centrifuge"
-  }
+  },
+  "show_notification": true
 }

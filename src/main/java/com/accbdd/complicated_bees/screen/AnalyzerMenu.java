@@ -4,7 +4,6 @@ import com.accbdd.complicated_bees.datagen.ItemTagGenerator;
 import com.accbdd.complicated_bees.item.BeeItem;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import com.accbdd.complicated_bees.screen.slot.TagSlot;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -51,9 +50,8 @@ public class AnalyzerMenu extends AbstractContainerMenu {
         super.removed(pPlayer);
     }
 
-    public static AnalyzerMenu fromNetwork(int windowId, Inventory playerInv, FriendlyByteBuf data) {
-        int slot = data.readInt();
-        return new AnalyzerMenu(windowId, playerInv.player, slot);
+    public static AnalyzerMenu fromNetwork(int windowId, Inventory playerInv) {
+        return new AnalyzerMenu(windowId, playerInv.player, playerInv.selected);
     }
 
     public boolean isBeeAnalyzed() {

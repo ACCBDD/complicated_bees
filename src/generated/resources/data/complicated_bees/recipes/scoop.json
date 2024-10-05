@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "complicated_bees:scoop"
-  }
+  },
+  "show_notification": true
 }

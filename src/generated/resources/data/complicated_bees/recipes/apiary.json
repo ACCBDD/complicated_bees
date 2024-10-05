@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "complicated_bees:apiary"
-  }
+  },
+  "show_notification": true
 }

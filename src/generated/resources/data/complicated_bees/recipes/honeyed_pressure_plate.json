@@ -11,5 +11,6 @@
   ],
   "result": {
     "item": "complicated_bees:honeyed_pressure_plate"
-  }
+  },
+  "show_notification": true
 }

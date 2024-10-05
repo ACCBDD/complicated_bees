@@ -1,0 +1,47 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "complicated_bees:hot_frame"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
+          "has_waxed_stick": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "complicated_bees:waxed_stick"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "has_waxed_stick",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "complicated_bees:hot_frame"
+          ]
+        },
+        "sends_telemetry_event": false
+      },
+      "conditions": [
+        {
+          "type": "complicated_bees:item_enabled",
+          "item": "complicated_bees:hot_frame"
+        }
+      ]
+    }
+  ]
+}

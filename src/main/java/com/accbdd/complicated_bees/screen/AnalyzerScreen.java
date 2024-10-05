@@ -32,6 +32,7 @@ public class AnalyzerScreen extends AbstractContainerScreen<AnalyzerMenu> {
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+        renderBackground(graphics);
         graphics.blit(GUI, leftPos, topPos, 0, 0, this.imageWidth, this.imageHeight);
     }
 

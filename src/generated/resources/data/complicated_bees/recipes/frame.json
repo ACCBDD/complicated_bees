@@ -1,26 +1,34 @@
 {
-  "neoforge:conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "complicated_bees:item_enabled",
-      "item": "complicated_bees:frame"
+      "conditions": [
+        {
+          "type": "complicated_bees:item_enabled",
+          "item": "complicated_bees:frame"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "O": {
+            "tag": "forge:rods/wooden"
+          },
+          "X": {
+            "tag": "forge:string"
+          }
+        },
+        "pattern": [
+          "OOO",
+          "OXO",
+          "OOO"
+        ],
+        "result": {
+          "item": "complicated_bees:frame"
+        },
+        "show_notification": true
+      }
     }
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "O": {
-      "tag": "forge:rods/wooden"
-    },
-    "X": {
-      "tag": "forge:string"
-    }
-  },
-  "pattern": [
-    "OOO",
-    "OXO",
-    "OOO"
-  ],
-  "result": {
-    "item": "complicated_bees:frame"
-  }
+  ]
 }

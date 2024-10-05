@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_beeswax"
+      "has_beeswax",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "complicated_bees:waxed_stick"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

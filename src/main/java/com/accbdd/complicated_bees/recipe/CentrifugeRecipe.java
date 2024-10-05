@@ -2,7 +2,10 @@ package com.accbdd.complicated_bees.recipe;
 
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -10,11 +13,14 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +53,23 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
         @Override
         public CentrifugeRecipe fromJson(ResourceLocation location, JsonObject json) {
-            var decoded = CODEC.decode(JsonOps.INSTANCE, json);
-            return decoded.result().orElseThrow().getFirst();
+            JsonObject inputJson = json.getAsJsonObject("input");
+            ResourceLocation inputItemLocation = ResourceLocation.tryParse(inputJson.get("item").getAsString());
+            Item inputItem = ForgeRegistries.ITEMS.getValue(inputItemLocation);
+            if (inputItem == null) throw new JsonParseException("could not parse input for " + location.toString());
+            ItemStack input = new ItemStack(inputItem);
+            if (inputJson.has("nbt"))
+                input.setTag(CraftingHelper.getNBT(inputJson.getAsJsonObject("nbt")));
+
+            List<Product> outputs = new ArrayList<>();
+            if (json.has("outputs")) {
+                JsonArray outputsJson = json.getAsJsonArray("outputs");
+                for (JsonElement element : outputsJson.asList()) {
+                    var result = Product.CODEC.decode(JsonOps.INSTANCE, element);
+                    outputs.add(result.result().get().getFirst());
+                }
+            }
+            return new CentrifugeRecipe(input, outputs);
         }
 
         @Override

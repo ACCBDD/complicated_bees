@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "complicated_bees:woven_mesh"
-  }
+  },
+  "show_notification": true
 }

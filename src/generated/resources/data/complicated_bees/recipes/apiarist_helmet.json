@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "complicated_bees:apiarist_helmet"
-  }
+  },
+  "show_notification": true
 }

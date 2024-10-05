@@ -34,9 +34,9 @@ public class EsotericRegistration {
             () -> new SimpleParticleType(true));
 
     public static final Supplier<LootItemFunctionType> INHERIT_HIVE = LOOT_ITEM_FUNCTION_REGISTER.register("inherit_hive_species",
-            () -> new LootItemFunctionType(InheritHiveSpeciesFunction.CODEC));
+            () -> new LootItemFunctionType(InheritHiveSpeciesFunction.Serializer.INSTANCE));
     public static final Supplier<LootItemFunctionType> INHERIT_COMB = LOOT_ITEM_FUNCTION_REGISTER.register("inherit_hive_comb",
-            () -> new LootItemFunctionType(InheritHiveCombFunction.CODEC));
+            () -> new LootItemFunctionType(InheritHiveCombFunction.Serializer.INSTANCE));
 
     public static final Supplier<TreeDecoratorType<ComplicatedBeenestDecorator>> COMPLICATED_BEENEST_DECORATOR = TREE_DECORATOR_REGISTER.register("bee_nest_decorator",
             () -> new TreeDecoratorType<>(ComplicatedBeenestDecorator.CODEC));

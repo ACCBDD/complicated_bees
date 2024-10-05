@@ -1,14 +1,12 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.GeneratorBlockEntity;
-import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -24,9 +22,9 @@ public class GeneratorMenu extends AbstractContainerMenu {
     private int burnTime;
     private int maxBurnTime;
 
-    public GeneratorMenu(int windowId, Player player, BlockPos pos) {
+    public GeneratorMenu(int windowId, Player player) {
         super(MenuRegistration.GENERATOR_MENU.get(), windowId);
-        this.pos = pos;
+        this.pos = player.getOnPos();
         if (player.level().getBlockEntity(pos) instanceof GeneratorBlockEntity generator) {
             addSlot(new SlotItemHandler(generator.getItems(), SLOT, 80, 31));
             addDataSlot(new DataSlot() {
@@ -154,6 +152,6 @@ public class GeneratorMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(player.level(), pos), player, BlocksRegistration.GENERATOR.get());
+        return true;
     }
 }

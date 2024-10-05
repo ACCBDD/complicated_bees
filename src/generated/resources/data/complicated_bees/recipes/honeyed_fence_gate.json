@@ -15,5 +15,6 @@
   ],
   "result": {
     "item": "complicated_bees:honeyed_fence_gate"
-  }
+  },
+  "show_notification": true
 }

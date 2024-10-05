@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_honeyed_planks"
+      "has_honeyed_planks",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "complicated_bees:honeyed_trapdoor"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -5,8 +5,10 @@ import com.accbdd.complicated_bees.genetics.GeneticHelper;
 import com.accbdd.complicated_bees.genetics.Genome;
 import com.accbdd.complicated_bees.genetics.Species;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -14,11 +16,9 @@ import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunct
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class InheritHiveSpeciesFunction extends LootItemConditionalFunction {
-    public static final Codec<InheritHiveSpeciesFunction> CODEC = RecordCodecBuilder.create(
-            instance -> commonFields(instance).apply(instance, InheritHiveSpeciesFunction::new)
-    );
 
     public InheritHiveSpeciesFunction(LootItemCondition[] pPredicates) {
         super(pPredicates);
@@ -41,5 +41,22 @@ public class InheritHiveSpeciesFunction extends LootItemConditionalFunction {
 
     public static LootItemConditionalFunction.Builder<?> set() {
         return simpleBuilder(InheritHiveSpeciesFunction::new);
+    }
+
+    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<InheritHiveSpeciesFunction> {
+        public static InheritHiveSpeciesFunction.Serializer INSTANCE = new Serializer();
+
+        @Override
+        public void serialize(JsonObject json, InheritHiveSpeciesFunction function, JsonSerializationContext context) {
+            if (!ArrayUtils.isEmpty(function.predicates)) {
+                json.add("conditions", context.serialize(function.predicates));
+            }
+        }
+
+        @Override
+        public final InheritHiveSpeciesFunction deserialize(JsonObject p_80719_, JsonDeserializationContext p_80720_) {
+            LootItemCondition[] alootitemcondition = GsonHelper.getAsObject(p_80719_, "conditions", new LootItemCondition[0], p_80720_, LootItemCondition[].class);
+            return new InheritHiveSpeciesFunction(alootitemcondition);
+        }
     }
 }

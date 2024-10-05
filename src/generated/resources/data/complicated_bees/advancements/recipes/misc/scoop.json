@@ -20,13 +20,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_wool"
+      "has_wool",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "complicated_bees:scoop"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

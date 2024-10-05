@@ -1,0 +1,47 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_honey_droplet": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "complicated_bees:honey_droplet"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          },
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "complicated_bees:honey_porkchop"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          }
+        },
+        "requirements": [
+          [
+            "has_honey_droplet",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "complicated_bees:honey_porkchop"
+          ]
+        },
+        "sends_telemetry_event": false
+      },
+      "conditions": [
+        {
+          "type": "complicated_bees:item_enabled",
+          "item": "complicated_bees:honey_porkchop"
+        }
+      ]
+    }
+  ]
+}

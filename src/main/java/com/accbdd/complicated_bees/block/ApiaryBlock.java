@@ -59,7 +59,7 @@ public class ApiaryBlock extends BaseEntityBlock {
 
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player player) {
-                        return new ApiaryMenu(windowId, player, pos, ((ApiaryBlockEntity) be).getData());
+                        return new ApiaryMenu(windowId, player, ((ApiaryBlockEntity) be).getData());
                     }
                 };
                 player.openMenu(containerProvider);

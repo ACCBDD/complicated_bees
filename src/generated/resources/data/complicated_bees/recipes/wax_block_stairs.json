@@ -14,5 +14,6 @@
   "result": {
     "count": 4,
     "item": "complicated_bees:wax_block_stairs"
-  }
+  },
+  "show_notification": true
 }

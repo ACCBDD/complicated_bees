@@ -1,7 +1,6 @@
 package com.accbdd.complicated_bees.screen;
 
 import com.accbdd.complicated_bees.block.entity.CentrifugeBlockEntity;
-import com.accbdd.complicated_bees.registry.BlocksRegistration;
 import com.accbdd.complicated_bees.registry.MenuRegistration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -19,14 +18,14 @@ public class CentrifugeMenu extends AbstractContainerMenu {
 
     private int power;
 
-    public CentrifugeMenu(int windowId, Player player, BlockPos pos) {
-        this(windowId, player, pos, new SimpleContainerData(2));
+    public CentrifugeMenu(int windowId, Player player) {
+        this(windowId, player, new SimpleContainerData(2));
     }
 
-    public CentrifugeMenu(int windowId, Player player, BlockPos pos, ContainerData data) {
+    public CentrifugeMenu(int windowId, Player player, ContainerData data) {
         super(MenuRegistration.CENTRIFUGE_MENU.get(), windowId);
         this.data = data;
-        this.pos = pos;
+        this.pos = player.getOnPos();
         if (player.level().getBlockEntity(pos) instanceof CentrifugeBlockEntity centrifuge) {
             addSlot(new SlotItemHandler(centrifuge.getInputItems(), INPUT_SLOT, 34, 35));
             for (int i = 0; i < 9; i++) {
@@ -149,6 +148,6 @@ public class CentrifugeMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(player.level(), pos), player, BlocksRegistration.CENTRIFUGE.get());
+        return true;
     }
 }

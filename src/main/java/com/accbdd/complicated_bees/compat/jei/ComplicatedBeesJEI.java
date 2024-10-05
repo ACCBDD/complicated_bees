@@ -53,7 +53,7 @@ public class ComplicatedBeesJEI implements IModPlugin {
     public void registerItemSubtypes(ISubtypeRegistration registration) {
         IIngredientSubtypeInterpreter<ItemStack> speciesInterpreter = (stack, context) -> {
             Lazy<Species> species = Lazy.of(() -> ((GeneSpecies) GeneticHelper.getChromosome(stack, true).getGene(GeneSpecies.ID)).get());
-            return Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species.get()).toString();
+            return GeneticHelper.getRegistryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().getKey(species.get()).toString();
         };
 
         IIngredientSubtypeInterpreter<ItemStack> combInterpreter = (stack, context) -> {
