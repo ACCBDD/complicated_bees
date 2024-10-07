@@ -1,0 +1,37 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "complicated_bees:item_enabled",
+          "item": "complicated_bees:ambrosia"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "H": {
+            "item": "complicated_bees:honey_droplet"
+          },
+          "P": {
+            "item": "complicated_bees:pollen"
+          },
+          "R": {
+            "item": "complicated_bees:royal_jelly"
+          }
+        },
+        "pattern": [
+          "HHH",
+          "PRP",
+          "HHH"
+        ],
+        "result": {
+          "item": "complicated_bees:ambrosia"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

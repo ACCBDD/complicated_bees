@@ -62,14 +62,14 @@ public class RecipeGenerator extends RecipeProvider {
                 .requires(Items.COOKED_PORKCHOP)
                 .requires(ItemsRegistration.HONEY_DROPLET.get(), 4)
                 .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET.get()), has(ItemsRegistration.HONEY_DROPLET.get())), output);
-        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ItemsRegistration.AMBROSIA.get())
+        enabledRecipe(ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ItemsRegistration.AMBROSIA.get())
                 .pattern("HHH")
                 .pattern("PRP")
                 .pattern("HHH")
                 .define('H', ItemsRegistration.HONEY_DROPLET.get())
                 .define('P', ItemsRegistration.POLLEN.get())
                 .define('R', ItemsRegistration.ROYAL_JELLY.get())
-                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET.get()), has(ItemsRegistration.HONEY_DROPLET.get()));
+                .unlockedBy(getHasName(ItemsRegistration.HONEY_DROPLET.get()), has(ItemsRegistration.HONEY_DROPLET.get())), output);
         enabledRecipe(ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemsRegistration.BEE_STAFF.get())
                 .pattern(" LJ")
                 .pattern("PZL")

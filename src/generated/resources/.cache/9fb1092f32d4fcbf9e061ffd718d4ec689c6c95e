@@ -1,4 +1,5 @@
-// 1.20.1	2024-10-04T16:54:17.1897292	Recipes
+// 1.20.1	2024-10-06T22:51:05.4631488	Recipes
+758d50f218e4a466d56109b8d634254cd7b4b704 data/complicated_bees/advancements/recipes/ambrosia.json
 47c99fcd8a6aeaefdfb604aea21f6235208b01b2 data/complicated_bees/advancements/recipes/bee_staff.json
 f90a6f172761e07e3e562e55a0973883aecfde98 data/complicated_bees/advancements/recipes/building_blocks/chiseled_wax.json
 611bf17f1408e53b02c052a37317d3316138cf4e data/complicated_bees/advancements/recipes/building_blocks/honeyed_planks.json
@@ -49,6 +50,7 @@ ed3817bd9029cf33814e5def829c5ddaccd4bada data/complicated_bees/advancements/reci
 88670f435661e4c2dc2616d57858b7f8b0ca4eca data/complicated_bees/advancements/recipes/twisting_frame.json
 81677e90c34e9626405cbf381c07648edf47400e data/complicated_bees/advancements/recipes/waxed_frame.json
 562a78727446e248362abdd883a592558ea46b1f data/complicated_bees/advancements/recipes/wet_frame.json
+4fbec684b208415d3f44353af550b202c044bcd5 data/complicated_bees/recipes/ambrosia.json
 88605e1ee43bd48cf97cb8b83cb778b631937788 data/complicated_bees/recipes/analyzer.json
 f1d6cdc8adcf0edc9a918a63794f18f8c96cd385 data/complicated_bees/recipes/apiarist_boots.json
 d407f5d675b2d76936d46e6a8bdb82d7e9685cfa data/complicated_bees/recipes/apiarist_chestplate.json
