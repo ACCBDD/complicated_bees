@@ -67,10 +67,14 @@ public class ComplicatedBeesJEI implements IModPlugin {
             Lazy<Comb> comb = Lazy.of(() -> CombItem.getComb(stack));
             return comb.get() == null ? Comb.NULL.toString() : comb.get().toString();
         };
+
+        IIngredientSubtypeInterpreter<ItemStack> nestInterpreter = (stack, context) -> stack.getOrCreateTag().getCompound("BlockEntityTag").getString("species");
+
         registration.registerSubtypeInterpreter(ItemsRegistration.DRONE.get(), speciesInterpreter);
         registration.registerSubtypeInterpreter(ItemsRegistration.QUEEN.get(), speciesInterpreter);
         registration.registerSubtypeInterpreter(ItemsRegistration.PRINCESS.get(), speciesInterpreter);
         registration.registerSubtypeInterpreter(ItemsRegistration.COMB.get(), combInterpreter);
+        registration.registerSubtypeInterpreter(ItemsRegistration.BEE_NEST.get(), nestInterpreter);
     }
 
     @Override
