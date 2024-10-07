@@ -19,7 +19,11 @@ public class Product {
                     ExtraCodecs.POSITIVE_INT.optionalFieldOf("count", 1).forGetter(bp -> bp.getStack().getCount()),
                     CompoundTag.CODEC.optionalFieldOf("nbt", new CompoundTag()).forGetter(bp -> bp.getStack().getOrCreateTag()),
                     Codec.FLOAT.optionalFieldOf("chance", 1f).forGetter(Product::getChance)
-            ).apply(instance, (item, ct, nbt, chance) -> new Product(new ItemStack(item, ct, nbt), chance))
+            ).apply(instance, (item, ct, nbt, chance) -> {
+                ItemStack stack = new ItemStack(item, ct);
+                stack.setTag(nbt);
+                return new Product(stack, chance);
+            })
     );
 
     public static final List<Product> EMPTY = List.of(new Product(Items.AIR.getDefaultInstance(), 0));
