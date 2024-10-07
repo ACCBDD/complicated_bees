@@ -23,5 +23,5 @@ public class MenuRegistration {
     public static final Supplier<MenuType<GeneratorMenu>> GENERATOR_MENU = MENU_TYPES.register("generator",
             () -> IForgeMenuType.create(((windowId, inv, data) -> new GeneratorMenu(windowId, inv.player, data.readBlockPos()))));
     public static final Supplier<MenuType<AnalyzerMenu>> ANALYZER_MENU = MENU_TYPES.register("analyzer",
-            () -> IForgeMenuType.create(AnalyzerMenu::fromNetwork));
+            () -> IForgeMenuType.create((windowId, playerInv, data) -> AnalyzerMenu.fromNetwork(windowId, playerInv)));
 }
