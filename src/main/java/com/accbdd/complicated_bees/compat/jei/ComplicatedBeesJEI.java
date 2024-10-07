@@ -45,6 +45,7 @@ public class ComplicatedBeesJEI implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager manager = Minecraft.getInstance().getConnection().getRecipeManager();
+        ComplicatedBees.LOGGER.debug("registering recipes for JEI");
         registration.addRecipes(CentrifugeRecipeCategory.TYPE, manager.getAllRecipesFor(EsotericRegistration.CENTRIFUGE_RECIPE.get()).stream().toList());
         registration.addRecipes(BeeProduceRecipeCategory.TYPE, Minecraft.getInstance().getConnection().registryAccess().registry(SpeciesRegistration.SPECIES_REGISTRY_KEY).get().stream().toList());
         registration.addRecipes(MutationRecipeCategory.TYPE, Minecraft.getInstance().getConnection().registryAccess().registry(MutationRegistration.MUTATION_REGISTRY_KEY).get().stream().toList());
@@ -59,8 +60,7 @@ public class ComplicatedBeesJEI implements IModPlugin {
                 ComplicatedBees.LOGGER.debug("failed to find key for species {}", species.get());
                 return "invalid";
             }
-            String string = key.toString();
-            return string;
+            return key.toString();
         };
 
         IIngredientSubtypeInterpreter<ItemStack> combInterpreter = (stack, context) -> {

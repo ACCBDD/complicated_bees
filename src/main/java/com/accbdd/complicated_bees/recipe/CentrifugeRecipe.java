@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.recipe;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;
 import com.google.gson.JsonArray;
@@ -30,13 +31,7 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 public class CentrifugeRecipe implements Recipe<Container> {
     private final ItemStack input;
     private final List<Product> outputs;
-
-    public static final Codec<CentrifugeRecipe> CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    ItemStack.CODEC.fieldOf("input").forGetter(CentrifugeRecipe::getInput),
-                    Product.CODEC.listOf().fieldOf("outputs").forGetter(CentrifugeRecipe::getOutputs)
-            ).apply(instance, CentrifugeRecipe::new)
-    );
+    private final ResourceLocation id;
 
     public static final RecipeSerializer<CentrifugeRecipe> SERIALIZER = new RecipeSerializer<>() {
 
@@ -48,7 +43,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
             for (int i = 0; i < listSize; i++) {
                 outputs.add(Product.fromNetwork(pBuffer));
             }
-            return new CentrifugeRecipe(input, outputs);
+            return new CentrifugeRecipe(loc, input, outputs);
         }
 
         @Override
@@ -69,7 +64,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
                     outputs.add(result.result().get().getFirst());
                 }
             }
-            return new CentrifugeRecipe(input, outputs);
+            return new CentrifugeRecipe(location, input, outputs);
         }
 
         @Override
@@ -82,7 +77,8 @@ public class CentrifugeRecipe implements Recipe<Container> {
         }
     };
 
-    public CentrifugeRecipe(ItemStack input, List<Product> outputs) {
+    public CentrifugeRecipe(ResourceLocation id, ItemStack input, List<Product> outputs) {
+        this.id = id;
         this.input = input;
         this.outputs = outputs;
     }
@@ -121,7 +117,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
     @Override
     public ResourceLocation getId() {
-        return new ResourceLocation(MODID, "centrifuge");
+        return id;
     }
 
     @Override
