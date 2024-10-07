@@ -36,7 +36,12 @@ public class GeneratorBlockEntity extends BlockEntity {
     public static final int SLOT = 0;
 
     private final ItemStackHandler items = createItemHandler();
-    private final LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> items);
+    private final LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> new AdaptedItemHandler(items) {
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return ItemStack.EMPTY;
+        }
+    });
 
     private final EnergyStorage energy = createEnergyStorage();
     private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> new AdaptedEnergyStorage(energy) {
@@ -72,12 +77,13 @@ public class GeneratorBlockEntity extends BlockEntity {
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
         if (cap == ForgeCapabilities.ITEM_HANDLER)
             return getItemHandler().cast();
         if (cap == ForgeCapabilities.ENERGY)
             return getEnergyHandler().cast();
-        return super.getCapability(cap);
+
+        return super.getCapability(cap, side);
     }
 
     public GeneratorBlockEntity(BlockPos pos, BlockState state) {
