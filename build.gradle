@@ -104,15 +104,15 @@ dependencies {
 
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
-    compileOnly "me.shedaniel:RoughlyEnoughItems-api-forge:${rei_version}"
-    compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-forge:${rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${rei_version}"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
 
     // We add the full version to localRuntime so that we do not publish a dependency on it
-    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    //localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
-    //runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
+    //runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
     runtimeOnly "curse.maven:appleskin-248787:${appleskin_id}"
     runtimeOnly "curse.maven:patchouli-306770:${patchouli_id}"
 
