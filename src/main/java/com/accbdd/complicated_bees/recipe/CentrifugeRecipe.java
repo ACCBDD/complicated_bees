@@ -1,5 +1,6 @@
 package com.accbdd.complicated_bees.recipe;
 
+import com.accbdd.complicated_bees.ComplicatedBees;
 import com.accbdd.complicated_bees.genetics.Product;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;
 import com.mojang.serialization.Codec;
@@ -70,7 +71,8 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
-        throw new UnsupportedOperationException("Centrifuge recipes do not use assemble! Use getOutputs instead");
+        ComplicatedBees.LOGGER.error("Centrifuge recipe tried to use assemble! Use getOutputs instead");
+        return ItemStack.EMPTY;
     }
 
     public List<Product> getOutputs() {
@@ -88,7 +90,8 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-        throw new UnsupportedOperationException("Centrifuge recipes do not use getResultItem! Use getOutputs instead");
+        ComplicatedBees.LOGGER.error("Centrifuge recipe tried to use getResultItem! Use getOutputs instead");
+        return ItemStack.EMPTY;
     }
 
     @Override
