@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -86,5 +87,10 @@ public class MutationRecipeCategory implements IRecipeCategory<Mutation> {
         builder.addSlot(RecipeIngredientRole.OUTPUT, 115, 12)
                 .setSlotName("output_species")
                 .addIngredients(VanillaTypes.ITEM_STACK, mutation.getResultSpecies().toMembers());
+    }
+
+    @Override
+    public @Nullable ResourceLocation getRegistryName(Mutation recipe) {
+        return new ResourceLocation(MODID, recipe.getResultSpecies().toString());
     }
 }
