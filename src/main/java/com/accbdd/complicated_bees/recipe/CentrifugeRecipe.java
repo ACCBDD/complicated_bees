@@ -94,7 +94,8 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
-        throw new UnsupportedOperationException("Centrifuge recipes do not use assemble! Use getOutputs instead");
+        ComplicatedBees.LOGGER.error("Centrifuge recipe tried to use assemble! Use getOutputs instead");
+        return ItemStack.EMPTY;
     }
 
     public List<Product> getOutputs() {
@@ -112,7 +113,8 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-        throw new UnsupportedOperationException("Centrifuge recipes do not use getResultItem! Use getOutputs instead");
+        ComplicatedBees.LOGGER.error("Centrifuge recipe tried to use getResultItem! Use getOutputs instead");
+        return ItemStack.EMPTY;
     }
 
     @Override
