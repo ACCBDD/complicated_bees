@@ -109,10 +109,14 @@ dependencies {
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
 
     // We add the full version to localRuntime so that we do not publish a dependency on it
-    //localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    if (runtime_recipe_viewer == "jei") {
+        localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    } else if (runtime_recipe_viewer == "rei") {
+        localRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
+    } else if (runtime_recipe_viewer == "emi") {
+        localRuntime "dev.emi:emi-neoforge:${emi_version}"
+    }
 
-    runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
-    //runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
     runtimeOnly "curse.maven:appleskin-248787:${appleskin_id}"
     runtimeOnly "curse.maven:patchouli-306770:${patchouli_id}"
 
