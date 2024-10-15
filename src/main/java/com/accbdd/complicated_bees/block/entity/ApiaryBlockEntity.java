@@ -23,6 +23,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -312,7 +313,7 @@ public class ApiaryBlockEntity extends BlockEntity {
         //check if queen is satisfied
         if (satisfyCycleProgress >= SATISFY_CYCLE_LENGTH) {
             if (top_stack.getItem() instanceof QueenItem) {
-                rebuildFlowerCache(top_stack);
+                checkFlowerCache(top_stack);
                 queenSatisfied = checkQueenSatisfied();
                 satisfyCycleProgress = 0;
             }
@@ -517,6 +518,27 @@ public class ApiaryBlockEntity extends BlockEntity {
         }
 
         return this.temperatureCache;
+    }
+
+    private void checkFlowerCache(ItemStack bee) {
+        Flower flower = ServerLifecycleHooks.getCurrentServer().registryAccess().registry(FlowerRegistration.FLOWER_REGISTRY_KEY).get()
+                .get(((GeneFlower) GeneticHelper.getGene(bee, GeneFlower.ID, true)).get());
+        Level level = getLevel();
+        if (flower == null || level == null) {
+            //no valid flower gene or the level isn't loaded
+            flowerCache.add(getBlockPos());
+            return;
+        }
+        for (int i = 0; i < flowerCache.size(); i++) {
+            if (flower.isAcceptable(level.getBlockState(flowerCache.get(i)))) {
+                return;
+            } else {
+                flowerCache.remove(i);
+                i--;
+            }
+        }
+        //if we get here, there are no valid flowers in the flowerCache, rebuild
+        rebuildFlowerCache(bee);
     }
 
     private void rebuildFlowerCache(ItemStack bee) {
