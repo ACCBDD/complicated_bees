@@ -1,12 +1,12 @@
 # Complicated Bees
 A bee genetic mod inspired by forestry bees for modern versions of minecraft.
 
-For datapack and resourcepack stuff, please check the [Wiki](https://github.com/ACCBDD/complicated_bees/wiki)
+For datapack and resourcepack stuff, please check the [wiki.](https://github.com/ACCBDD/complicated_bees/wiki)
 
 Features:
 * data-driven species 
 * data-driven combs
-* jei/emi support
+* jei/emi support - thank you to @Abbie5 for the EMI plugin!
 * jade support
 
 Planned:
