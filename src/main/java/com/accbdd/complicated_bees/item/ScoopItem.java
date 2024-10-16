@@ -12,14 +12,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.SimpleTier;
+import net.minecraftforge.common.ForgeTier;
 
 public class ScoopItem extends DiggerItem {
 
     public ScoopItem(Properties pProperties) {
         super(0,
                 0,
-                new SimpleTier(1, 50, 4, 0, 15, null, () -> Ingredient.of(ItemTags.WOOL)),
+                new ForgeTier(1, 50, 4, 0, 15, null, () -> Ingredient.of(ItemTags.WOOL)),
                 BlockTagGenerator.SCOOPABLE,
                 pProperties.durability(50));
     }
