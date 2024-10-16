@@ -569,5 +569,11 @@
   "effect.complicated_bees.complicated_bees:resurrection": "Resurr.",
   "effect.complicated_bees.complicated_bees:resurrection.desc": "Resurrects mob drops into mobs.",
   "effect.complicated_bees.complicated_bees:ends": "Ends",
-  "effect.complicated_bees.complicated_bees:ends.desc": "Deals a large amount of damage to nearby players."
+  "effect.complicated_bees.complicated_bees:ends.desc": "Deals a large amount of damage to nearby players.",
+
+  "tag.item.complicated_bees.analyzer_fuel": "Analyzer Fuels",
+  "tag.item.complicated_bees.bee": "Bees",
+  "tag.item.complicated_bees.frame": "Frames",
+  "tag.item.complicated_bees.royal": "Royal Bees",
+  "tag.item.complicated_bees.scoop_tool": "Scoop Tools"
 }
