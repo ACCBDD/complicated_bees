@@ -8,7 +8,6 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -20,10 +19,9 @@ public class CentrifugeEmiRecipe implements EmiRecipe {
     private final EmiIngredient input;
     private final List<EmiStack> outputs;
 
-    public CentrifugeEmiRecipe(RecipeHolder<CentrifugeRecipe> holder) {
-        this.id = holder.id();
+    public CentrifugeEmiRecipe(CentrifugeRecipe recipe) {
+        this.id = recipe.getId();
 
-        CentrifugeRecipe recipe = holder.value();
         this.input = EmiStack.of(recipe.getInput());
         this.outputs = recipe.getOutputs()
                 .stream()

@@ -94,19 +94,20 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation fg.deobf("curse.maven:jade-324717:${jade_id}")
-    // We add the full version to localRuntime so that we do not publish a dependency on it
-    if (runtime_recipe_viewer == "jei") {
-        localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
-    } else if (runtime_recipe_viewer == "rei") {
-        localRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
-    } else if (runtime_recipe_viewer == "emi") {
-        localRuntime "dev.emi:emi-neoforge:${emi_version}"
-    }
-
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly "curse.maven:appleskin-248787:${appleskin_id}"
-    runtimeOnly "curse.maven:patchouli-306770:${patchouli_id}"
+    compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
+
+    runtimeOnly fg.deobf("curse.maven:appleskin-248787:${appleskin_id}")
+    runtimeOnly fg.deobf("curse.maven:patchouli-306770:${patchouli_id}")
+    // We add the full version to localRuntime so that we do not publish a dependency on it
+    if (runtime_recipe_viewer == "jei") {
+        localRuntime fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    } else if (runtime_recipe_viewer == "rei") {
+        localRuntime fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
+    } else if (runtime_recipe_viewer == "emi") {
+        localRuntime fg.deobf("dev.emi:emi-forge:${emi_version}")
+    }
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

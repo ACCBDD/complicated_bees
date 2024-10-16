@@ -27,8 +27,8 @@ import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 @EmiEntrypoint
 public class ComplicatedBeesEMI implements EmiPlugin {
-    public static final EmiStack CENTRIFUGE = EmiStack.of(ItemsRegistration.CENTRIFUGE);
-    public static final EmiStack APIARY = EmiStack.of(ItemsRegistration.APIARY);
+    public static final EmiStack CENTRIFUGE = EmiStack.of(ItemsRegistration.CENTRIFUGE.get());
+    public static final EmiStack APIARY = EmiStack.of(ItemsRegistration.APIARY.get());
     public static final EmiRecipeCategory CENTRIFUGE_CATEGORY = new ComplicatedBeesRecipeCategory("centrifuge", CENTRIFUGE, Component.translatable("gui.complicated_bees.jei.centrifuge"));
     public static final EmiRecipeCategory BEE_PRODUCE_CATEGORY = new ComplicatedBeesRecipeCategory("bee_produce", APIARY, Component.translatable("gui.complicated_bees.jei.bee_products"));
     public static final EmiRecipeCategory MUTATION_CATEGORY = new ComplicatedBeesRecipeCategory("mutation", APIARY, Component.translatable("gui.complicated_bees.jei.mutations"));

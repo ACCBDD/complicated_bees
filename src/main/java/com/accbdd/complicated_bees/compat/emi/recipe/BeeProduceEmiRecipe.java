@@ -29,7 +29,7 @@ public class BeeProduceEmiRecipe implements EmiRecipe {
         ResourceLocation speciesId = Minecraft.getInstance().level.registryAccess().registryOrThrow(SpeciesRegistration.SPECIES_REGISTRY_KEY).getKey(species);
         this.id = new ResourceLocation(ComplicatedBees.MODID, "/bee_produce/" + speciesId.toString().replace(":", "/"));
 
-        this.beeInput = EmiStack.of(species.toStack(ItemsRegistration.QUEEN));
+        this.beeInput = EmiStack.of(species.toStack(ItemsRegistration.QUEEN.get()));
 
         this.products = species.getProducts().stream().map(p -> EmiStack.of(p.getStack()).setChance(p.getChance())).toList();
         this.specialtyProducts = species.getSpecialtyProducts().stream().map(p -> EmiStack.of(p.getStack()).setChance(p.getChance())).toList();
