@@ -42,6 +42,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.registries.*;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
@@ -139,11 +140,14 @@ public class ComplicatedBees {
     public ComplicatedBees(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::registerSerializers);
-        modEventBus.addListener(ColorHandlers::registerItemColorHandlers);
-        modEventBus.addListener(ColorHandlers::registerBlockColorHandlers);
         modEventBus.addListener(this::registerRegistries);
         modEventBus.addListener(this::registerDatapackRegistries);
         modEventBus.addListener(DataGenerators::generate);
+
+        if(FMLLoader.getDist().isClient()) {
+            modEventBus.addListener(ColorHandlers::registerItemColorHandlers);
+            modEventBus.addListener(ColorHandlers::registerBlockColorHandlers);
+        }
 
         BlocksRegistration.BLOCKS.register(modEventBus);
         ItemsRegistration.ITEMS.register(modEventBus);
