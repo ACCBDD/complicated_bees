@@ -25,3 +25,6 @@ If applicable, add screenshots to help explain your problem.
 
 **Mod Version**
 What version of the mod you are running (do not say 'latest')
+
+**Logs**
+Make sure you submit logs!
