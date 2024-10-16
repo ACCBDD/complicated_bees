@@ -69,12 +69,14 @@ public class GeneticHelper {
     }
 
     public static RegistryAccess getRegistryAccess() {
-        if (Minecraft.getInstance().getConnection() == null) {
-            if (ServerLifecycleHooks.getCurrentServer() == null)
+        if (ServerLifecycleHooks.getCurrentServer() == null) {
+            if (Minecraft.getInstance().getConnection() == null) {
                 return null;
+            }
+            return Minecraft.getInstance().getConnection().registryAccess();
+        } else {
             return ServerLifecycleHooks.getCurrentServer().registryAccess();
         }
-        return Minecraft.getInstance().getConnection().registryAccess();
     }
 
     public static MutableComponent getTranslationKey(Species species) {
