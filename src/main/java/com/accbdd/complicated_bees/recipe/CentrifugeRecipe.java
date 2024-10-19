@@ -7,9 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -25,8 +23,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.accbdd.complicated_bees.ComplicatedBees.MODID;
 
 public class CentrifugeRecipe implements Recipe<Container> {
     private final ItemStack input;
@@ -94,7 +90,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
-        ComplicatedBees.LOGGER.error("Centrifuge recipe tried to use assemble! Use getOutputs instead");
+        ComplicatedBees.LOGGER.debug("tried to use assemble on a CentrifugeRecipe! Use getOutputs instead");
         return ItemStack.EMPTY;
     }
 
@@ -113,7 +109,7 @@ public class CentrifugeRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-        ComplicatedBees.LOGGER.error("Centrifuge recipe tried to use getResultItem! Use getOutputs instead");
+        ComplicatedBees.LOGGER.debug("tried to use getResultItem on a CentrifugeRecipe! Use getOutputs instead");
         return ItemStack.EMPTY;
     }
 
