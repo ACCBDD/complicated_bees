@@ -25,10 +25,13 @@ public class MutationEmiRecipe implements EmiRecipe {
     private final EmiIngredient first;
     private final EmiIngredient second;
     private final EmiStack result;
+    private final List<EmiStack> extraResults;
+    private final List<EmiIngredient> catalysts;
 
     public MutationEmiRecipe(Mutation mutation) {
         this.mutation = mutation;
-        this.id = new ResourceLocation(MODID,
+
+        id = new ResourceLocation(MODID,
                 "/mutation/first/" +
                 mutation.getFirst().toString().replace(":", "/") +
                 "/second/" +
@@ -39,6 +42,12 @@ public class MutationEmiRecipe implements EmiRecipe {
         first = EmiStack.of(mutation.getFirstSpecies().toStack(ItemsRegistration.QUEEN.get()));
         second = EmiStack.of(mutation.getSecondSpecies().toStack(ItemsRegistration.QUEEN.get()));
         result = EmiStack.of(mutation.getResultSpecies().toStack(ItemsRegistration.QUEEN.get())).setChance(mutation.getChance());
+        extraResults = new ArrayList<>(List.of(result));
+        extraResults.add(EmiStack.of(mutation.getResultSpecies().toStack(ItemsRegistration.PRINCESS.get())));
+        extraResults.add(EmiStack.of(mutation.getResultSpecies().toStack(ItemsRegistration.DRONE.get())));
+        catalysts = new ArrayList<>(List.of(ComplicatedBeesEMI.APIARY));
+        catalysts.addAll(mutation.getFirstSpecies().toMembers().stream().map(EmiStack::of).toList());
+        catalysts.addAll(mutation.getSecondSpecies().toMembers().stream().map(EmiStack::of).toList());
     }
 
     @Override
@@ -58,12 +67,14 @@ public class MutationEmiRecipe implements EmiRecipe {
 
     @Override
     public List<EmiIngredient> getCatalysts() {
-        return List.of(ComplicatedBeesEMI.APIARY);
+        return catalysts;
     }
 
     @Override
     public List<EmiStack> getOutputs() {
-        return List.of(result);
+        ArrayList<EmiStack> emiStacks = new ArrayList<>(extraResults);
+        emiStacks.add(result);
+        return emiStacks;
     }
 
     @Override

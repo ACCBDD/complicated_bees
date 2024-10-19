@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -24,6 +25,7 @@ public class BeeProduceEmiRecipe implements EmiRecipe {
     private final EmiIngredient beeInput;
     private final List<EmiStack> products;
     private final List<EmiStack> specialtyProducts;
+    private final List<EmiIngredient> catalysts;
 
     public BeeProduceEmiRecipe(Species species) {
         ResourceLocation speciesId = Minecraft.getInstance().level.registryAccess().registryOrThrow(SpeciesRegistration.SPECIES_REGISTRY_KEY).getKey(species);
@@ -33,6 +35,8 @@ public class BeeProduceEmiRecipe implements EmiRecipe {
 
         this.products = species.getProducts().stream().map(p -> EmiStack.of(p.getStack()).setChance(p.getChance())).toList();
         this.specialtyProducts = species.getSpecialtyProducts().stream().map(p -> EmiStack.of(p.getStack()).setChance(p.getChance())).toList();
+        catalysts = new ArrayList<>(List.of(ComplicatedBeesEMI.APIARY));
+        catalysts.addAll(species.toMembers().stream().map(EmiStack::of).toList());
     }
 
     @Override
@@ -53,6 +57,11 @@ public class BeeProduceEmiRecipe implements EmiRecipe {
     @Override
     public List<EmiStack> getOutputs() {
         return Stream.concat(products.stream(), specialtyProducts.stream()).toList();
+    }
+
+    @Override
+    public List<EmiIngredient> getCatalysts() {
+        return catalysts;
     }
 
     @Override
