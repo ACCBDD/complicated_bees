@@ -91,6 +91,6 @@ public class MutationRecipeCategory implements IRecipeCategory<Mutation> {
 
     @Override
     public @Nullable ResourceLocation getRegistryName(Mutation recipe) {
-        return new ResourceLocation(MODID, recipe.getResultSpecies().toString());
+        return new ResourceLocation(MODID, Integer.toHexString(recipe.hashCode()));
     }
 }
