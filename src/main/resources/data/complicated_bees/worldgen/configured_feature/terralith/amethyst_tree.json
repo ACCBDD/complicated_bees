@@ -1,4 +1,10 @@
 {
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "terralith"
+    }
+  ],
   "type": "minecraft:tree",
   "config": {
     "decorators": [
@@ -6,31 +12,25 @@
         "type": "complicated_bees:bee_nest_decorator",
         "probability": 1,
         "species": "complicated_bees:jungle"
-      },
-      {
-        "type": "minecraft:trunk_vine"
-      },
-      {
-        "type": "minecraft:leave_vine",
-        "probability": 0.25
       }
     ],
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:dirt"
+        "Name": "minecraft:rooted_dirt"
       }
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 3,
+      "type": "minecraft:random_spread_foliage_placer",
+      "foliage_height": 3,
+      "leaf_placement_attempts": 85,
       "offset": 0,
-      "radius": 2
+      "radius": 3
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:jungle_leaves",
+        "Name": "minecraft:azalea_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -38,8 +38,8 @@
         }
       }
     },
-    "force_dirt": false,
-    "ignore_vines": true,
+    "force_dirt": true,
+    "ignore_vines": false,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
       "limit": 1,
@@ -47,15 +47,23 @@
       "upper_size": 1
     },
     "trunk_placer": {
-      "type": "minecraft:straight_trunk_placer",
-      "base_height": 4,
-      "height_rand_a": 8,
-      "height_rand_b": 0
+      "type": "minecraft:bending_trunk_placer",
+      "base_height": 6,
+      "bend_length": {
+        "type": "minecraft:uniform",
+        "value": {
+          "min_inclusive": 1,
+          "max_inclusive": 3
+        }
+      },
+      "height_rand_a": 4,
+      "height_rand_b": 0,
+      "min_height_for_leaves": 30
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:jungle_log",
+        "Name": "minecraft:acacia_log",
         "Properties": {
           "axis": "y"
         }

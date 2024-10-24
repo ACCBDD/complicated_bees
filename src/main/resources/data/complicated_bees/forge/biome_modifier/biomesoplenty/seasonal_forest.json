@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["biomesoplenty:seasonal_forest"],
+  "features": "complicated_bees:biomesoplenty/orange_maple_tree",
+  "step": "vegetal_decoration"
+}

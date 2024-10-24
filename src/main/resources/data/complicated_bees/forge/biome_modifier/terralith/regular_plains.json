@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "terralith"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["terralith:blooming_plateau"],
+  "features": "complicated_bees:plains_bee_nest",
+  "step": "vegetal_decoration"
+}

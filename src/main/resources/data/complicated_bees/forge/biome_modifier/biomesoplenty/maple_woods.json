@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["biomesoplenty:maple_woods"],
+  "features": "complicated_bees:biomesoplenty/tall_spruce_tree",
+  "step": "vegetal_decoration"
+}

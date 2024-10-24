@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "terralith"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["terralith:skylands_autumn"],
+  "features": "complicated_bees:terralith/big_birch",
+  "step": "vegetal_decoration"
+}

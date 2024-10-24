@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "terralith"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["terralith:brushland", "terralith:bryce_canyon", "terralith:desert_canyon", "terralith:desert_oasis", "terralith:desert_spires", "terralith:lush_desert", "terralith:warped_mesa", "terralith:red_oasis", "terralith:sandstone_valley"],
+  "features": "complicated_bees:desert_bee_nest",
+  "step": "vegetal_decoration"
+}

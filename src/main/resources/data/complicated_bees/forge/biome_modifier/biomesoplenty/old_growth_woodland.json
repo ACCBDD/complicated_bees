@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["biomesoplenty:old_growth_woodland"],
+  "features": "complicated_bees:biomesoplenty/big_oak_tree",
+  "step": "vegetal_decoration"
+}

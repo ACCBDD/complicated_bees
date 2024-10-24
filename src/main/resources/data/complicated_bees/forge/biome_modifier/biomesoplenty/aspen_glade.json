@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["biomesoplenty:aspen_glade"],
+  "features": "complicated_bees:biomesoplenty/aspen_tree",
+  "step": "vegetal_decoration"
+}

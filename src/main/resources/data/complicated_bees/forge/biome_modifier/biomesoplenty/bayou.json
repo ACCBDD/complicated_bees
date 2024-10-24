@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["biomesoplenty:bayou"],
+  "features": "complicated_bees:biomesoplenty/bayou_tree",
+  "step": "vegetal_decoration"
+}

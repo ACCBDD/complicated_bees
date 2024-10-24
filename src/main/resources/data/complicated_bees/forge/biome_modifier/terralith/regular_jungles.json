@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "terralith"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["terralith:jungle_mountains", "terralith:rocky_jungle", "terralith:tropical_jungle"],
+  "features": "complicated_bees:jungle_bee_nest",
+  "step": "vegetal_decoration"
+}
