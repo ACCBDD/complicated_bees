@@ -106,6 +106,14 @@ dependencies {
         runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
     }
 
+    if (runtime_biome_test == "bop") {
+        runtimeOnly fg.deobf("curse.maven:biomes-o-plenty-220318:${bop_id}")
+        runtimeOnly fg.deobf("curse.maven:glitchcore-955399:${glitchcore_id}")
+        runtimeOnly fg.deobf("curse.maven:terrablender-563928:${terrablender_id}")
+    } else if (runtime_biome_test == "tl") {
+        runtimeOnly fg.deobf("curse.maven:terralith-513688:${terralith_id}")
+    }
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

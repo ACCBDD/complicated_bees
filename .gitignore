@@ -21,7 +21,7 @@ build
 eclipse
 run
 runs
-run_data_forge
+runs_data_forge
 runs_forge
 
 # Files from Forge MDK

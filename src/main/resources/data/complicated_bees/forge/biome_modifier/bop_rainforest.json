@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["biomesoplenty:rainforest"],
+  "features": "complicated_bees:bop_mahogany_tree",
+  "step": "vegetal_decoration"
+}

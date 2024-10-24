@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": ["biomesoplenty:field", "biomesoplenty:grassland", "biomesoplenty:highland", "biomesoplenty:lavender_field", "biomesoplenty:moor"],
+  "features": "complicated_bees:plains_bee_nest",
+  "step": "vegetal_decoration"
+}
