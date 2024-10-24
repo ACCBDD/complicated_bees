@@ -366,7 +366,11 @@ public class ApiaryBlockEntity extends BlockEntity {
         GeneticHelper.setGenome(queen, GeneticHelper.getGenome(princess));
         GeneticHelper.setMate(queen, GeneticHelper.getGenome(drone));
         QueenItem.setGeneration(queen, PrincessItem.getGeneration(princess));
-
+        if (princess.getTag().contains(BeeItem.ANALYZED_TAG)) {
+            if (princess.getTag().getBoolean(BeeItem.ANALYZED_TAG)) {
+                queen.getOrCreateTag().putBoolean(BeeItem.ANALYZED_TAG, true);
+            }
+        }
         return queen;
     }
 
