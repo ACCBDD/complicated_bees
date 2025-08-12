@@ -1,9 +1,9 @@
 {
   "blocks": [
-    "minecraft:flowering_azalea",
-    "minecraft:spore_blossom",
     "minecraft:flowering_azalea_leaves",
-    "minecraft:small_dripleaf"
+    "minecraft:spore_blossom",
+    "minecraft:small_dripleaf",
+    "minecraft:flowering_azalea"
   ],
   "tags": [
     "minecraft:cave_vines"

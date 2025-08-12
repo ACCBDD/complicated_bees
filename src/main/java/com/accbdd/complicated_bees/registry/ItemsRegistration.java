@@ -72,6 +72,7 @@ public class ItemsRegistration {
             return true;
         }
     });
+    public static final RegistryObject<Item> RESEARCH_NOTE = register("research_note", ResearchNoteItem::new);
 
     public static final RegistryObject<FrameItem> FRAME = register("frame",
             () -> new FrameItem(new Item.Properties().durability(80), new BeeHousingModifier.Builder().productivity(1.25f).build(), CommonConfig.COMMON_CONFIG.frame));

@@ -1,6 +1,6 @@
 {
   "blocks": [
-    "minecraft:note_block",
-    "minecraft:jukebox"
+    "minecraft:jukebox",
+    "minecraft:note_block"
   ]
 }

@@ -1,4 +1,4 @@
-# Complicated Bees 3.0.0 - the Engaging Production update
+# Complicated Bees 3.0.0
 
 ## The Indust-bee-al Revolution 2 - Electric Boogaloo
  

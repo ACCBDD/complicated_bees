@@ -119,6 +119,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         basicItem(ItemsRegistration.ROYAL_UPGRADE.get());
         basicItem(ItemsRegistration.ENDENIC_UPGRADE.get());
         basicItem(ItemsRegistration.WITHERED_UPGRADE.get());
+        basicItem(ItemsRegistration.RESEARCH_NOTE.get());
 
         createCombModel();
         beeModel("base", "bee_base");

@@ -70,6 +70,7 @@
   "item.complicated_bees.royal_upgrade": "Royal Upgrade",
   "item.complicated_bees.endenic_upgrade": "Endenic Upgrade",
   "item.complicated_bees.withered_upgrade": "Withered Upgrade",
+  "item.complicated_bees.research_note": "Research Notes",
 
   "block.complicated_bees.bee_nest": "Bee Nest",
   "block.complicated_bees.apiary": "Apiary",
@@ -174,6 +175,8 @@
   "gui.complicated_bees.jade.cycle_ticks": "Ticks left in cycle: %s",
   "gui.complicated_bees.invalid_mellarium": "Not a valid mellarium!",
   "gui.complicated_bees.invalid_gyrofuge": "Not a valid gyrofuge!",
+  "gui.complicated_bees.already_researched": "You have already researched this mutation!",
+  "gui.complicated_bees.research_note_tooltip": "%s + %s = %s",
 
   "gui.complicated_bees.error.no_flower": "No flowers: needs %s",
   "gui.complicated_bees.error.wrong_temp": "Wrong temperature: needs %s",
