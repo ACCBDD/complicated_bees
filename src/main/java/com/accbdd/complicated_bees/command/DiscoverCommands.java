@@ -12,7 +12,6 @@ import com.accbdd.complicated_bees.recipe.mutation.MutationRecipe;
 import com.accbdd.complicated_bees.registry.EsotericRegistration;
 import com.accbdd.complicated_bees.registry.GeneRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -40,7 +39,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-public class DiscoverCommands implements Command<CommandSourceStack> {
+public class DiscoverCommands {
     public static void register(LiteralArgumentBuilder<CommandSourceStack> root, CommandDispatcher<CommandSourceStack> pDispatcher, CommandBuildContext buildContext) {
         pDispatcher.register(root
                 .then(Commands.literal("tracking").requires(context -> context.hasPermission(2))
@@ -229,10 +228,5 @@ public class DiscoverCommands implements Command<CommandSourceStack> {
             source.sendSuccess(() -> Component.translatable("command.complicated_bees.discover.species", GeneticHelper.getTranslationKey(species), finalI), true);
         }
         return i;
-    }
-
-    @Override
-    public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        return 0;
     }
 }

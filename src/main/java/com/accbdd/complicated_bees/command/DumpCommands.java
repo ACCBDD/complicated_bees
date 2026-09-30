@@ -9,11 +9,9 @@ import com.accbdd.complicated_bees.bees.gene.enums.EnumHumidity;
 import com.accbdd.complicated_bees.bees.gene.enums.EnumTemperature;
 import com.accbdd.complicated_bees.registry.GeneRegistration;
 import com.accbdd.complicated_bees.registry.SpeciesRegistration;
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -30,13 +28,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public class DumpCommands implements Command<CommandSourceStack> {
+public class DumpCommands {
     public static void register(LiteralArgumentBuilder<CommandSourceStack> root, CommandDispatcher<CommandSourceStack> pDispatcher, CommandBuildContext buildContext) {
         pDispatcher.register(root
                 .then(Commands.literal("dump")
                         .then(Commands.literal("biomes").executes(DumpCommands::dumpBiomes))
                         .then(Commands.literal("effects").executes(DumpCommands::dumpEffects))
-                        .then(Commands.literal("species").executes(DumpCommands::dumpGenes)))
+                        .then(Commands.literal("species").executes(DumpCommands::dumpSpecies)))
         );
     }
 
@@ -47,8 +45,8 @@ public class DumpCommands implements Command<CommandSourceStack> {
             return 0;
 
         Registry<Biome> biomes = registryAccess.registryOrThrow(Registries.BIOME);
-        biomes.stream().forEach(entry ->
-                player.sendSystemMessage(Component.literal(biomes.getKey(entry) + ": " + EnumTemperature.getFromValue(entry.getModifiedClimateSettings().temperature()) + ", " + EnumHumidity.getFromValue(entry.getModifiedClimateSettings().downfall()))));
+        biomes.holders().forEach(holder ->
+                player.sendSystemMessage(Component.literal(holder.getKey().location() + ": " + EnumTemperature.getFromBiome(holder) + ", " + EnumHumidity.getFromBiome(holder))));
         return 1;
     }
 
@@ -62,7 +60,7 @@ public class DumpCommands implements Command<CommandSourceStack> {
         return 1;
     }
 
-    private static int dumpGenes(CommandContext<CommandSourceStack> context) {
+    private static int dumpSpecies(CommandContext<CommandSourceStack> context) {
         ServerPlayer player = context.getSource().getPlayer();
         RegistryAccess registryAccess = GeneticHelper.getRegistryAccess();
         if (player == null || registryAccess == null)
@@ -127,12 +125,7 @@ public class DumpCommands implements Command<CommandSourceStack> {
         return 1;
     }
 
-    private static Component geneValue(Chromosome chromosome, IGene gene) {
+    private static Component geneValue(Chromosome chromosome, IGene<?> gene) {
         return chromosome.getGene(ComplicatedBees.GENE_REGISTRY.get().getKey(gene)).getTranslationKey();
-    }
-
-    @Override
-    public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        return 0;
     }
 }
