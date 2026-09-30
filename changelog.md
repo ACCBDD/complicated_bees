@@ -1,5 +1,9 @@
-# Complicated Bees 3.6.1
+# Complicated Bees 3.6.2
 
-## Fixed
+## Changed
 
-* Apiarist armor having no texture when put on a player - #135
+* Small fixes to debug commands (thank you @unilock)
+
+## Updated
+
+* zh_cn translation (thank you @ChuijkYahus)
